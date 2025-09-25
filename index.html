@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эндокринолог - Диагностика щитовидной железы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 Эндокринолог онлайн</h1>
+        <p>Диагностика заболеваний щитовидной железы по КР РФ</p>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label>ТТГ (мМЕ/л)</label>
+                <input type="number" step="0.01" id="tsh" placeholder="0.4">
+                <small>Норма: 0.4 - 4.0</small>
+            </div>
+            
+            <div class="input-group">
+                <label>св. Т4 (пмоль/л)</label>
+                <input type="number" step="0.1" id="t4" placeholder="11.0">
+                <small>Норма: 11.0 - 22.0</small>
+            </div>
+            
+            <div class="input-group">
+                <label>Анти-ТПО (МЕ/мл)</label>
+                <input type="number" id="atpo" placeholder="0">
+                <small>Норма: до 34</small>
+            </div>
+            
+            <button onclick="analyze()">Анализировать</button>
+            <button onclick="clearForm()" class="secondary">Очистить</button>
+        </div>
+        
+        <div id="result" class="result"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
