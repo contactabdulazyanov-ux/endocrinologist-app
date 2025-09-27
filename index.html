@@ -3,230 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Эндокринолог PRO</title>
+    <title>Эндокринолог PRO - Диагностика щитовидной железы</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
-        
+
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
+
         .header h1 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .header p {
+            font-size: 1.2em;
             opacity: 0.9;
-            font-size: 1.1em;
         }
-        
-        .content {
-            padding: 30px;
+
+        .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
+            padding: 30px;
         }
-        
-        @media (max-width: 768px) {
-            .content {
+
+        @media (max-width: 968px) {
+            .main-content {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         .input-section {
             background: #f8f9fa;
             padding: 25px;
             border-radius: 10px;
-            border-left: 4px solid #3498db;
+            border-left: 5px solid #3498db;
         }
-        
+
         .result-section {
             background: #f8f9fa;
             padding: 25px;
             border-radius: 10px;
+            border-left: 5px solid #27ae60;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            font-size: 1.4em;
+        }
+
+        .form-group {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
             border-left: 4px solid #27ae60;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
+
+        .form-group label {
             display: block;
-            margin-bottom: 8px;
             font-weight: 600;
             color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
         }
-        
-        input {
+
+        .form-group input {
             width: 100%;
             padding: 12px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 16px;
             transition: border-color 0.3s;
         }
-        
-        input:focus {
+
+        .form-group input:focus {
             outline: none;
             border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
         }
-        
+
         .range-info {
             font-size: 0.9em;
             color: #7f8c8d;
             margin-top: 5px;
         }
-        
-        .button-group {
-            display: flex;
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            flex-wrap: wrap;
             margin-top: 25px;
         }
-        
-        button {
-            padding: 12px 25px;
+
+        @media (max-width: 768px) {
+            .buttons-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            padding: 15px 20px;
             border: none;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            flex: 1;
-            min-width: 120px;
+            text-align: center;
         }
-        
+
         .btn-primary {
             background: #3498db;
             color: white;
         }
-        
+
         .btn-primary:hover {
             background: #2980b9;
             transform: translateY(-2px);
         }
-        
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        
+
         .btn-success {
             background: #27ae60;
             color: white;
         }
-        
+
         .btn-success:hover {
             background: #219a52;
+            transform: translateY(-2px);
         }
-        
+
         .btn-info {
             background: #17a2b8;
             color: white;
         }
-        
+
         .btn-info:hover {
             background: #138496;
+            transform: translateY(-2px);
         }
-        
+
         .btn-warning {
             background: #6f42c1;
             color: white;
         }
-        
+
         .btn-warning:hover {
             background: #5a2d91;
+            transform: translateY(-2px);
         }
-        
-        .result-box {
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result-container {
             display: none;
             animation: fadeIn 0.5s;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .status-indicator {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .status-normal {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-        
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-            border-left: 4px solid #ffc107;
-        }
-        
-        .status-danger {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-        
-        .recommendation-box {
+
+        .diagnosis-card {
             background: white;
+            border-radius: 10px;
             padding: 20px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            border-left: 5px solid;
         }
-        
-        .parameter-row {
+
+        .diagnosis-danger {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fdf2f2 0%, #fce8e8 100%);
+        }
+
+        .diagnosis-warning {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fef9f2 0%, #fdf6e3 100%);
+        }
+
+        .diagnosis-success {
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #f2fdf2 0%, #e8f5e8 100%);
+        }
+
+        .parameters-grid {
+            display: grid;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .parameter-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #ecf0f1;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
         }
-        
+
         .parameter-name {
             font-weight: 600;
             color: #2c3e50;
         }
-        
+
         .parameter-value {
-            color: #34495e;
+            font-weight: 600;
         }
-        
+
+        .value-normal {
+            color: #27ae60;
+        }
+
+        .value-high {
+            color: #e74c3c;
+        }
+
+        .value-low {
+            color: #3498db;
+        }
+
+        .recommendation-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .treatment-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
         .disclaimer {
             background: #fff3cd;
             padding: 15px;
@@ -234,29 +307,9 @@
             margin-top: 20px;
             font-size: 0.9em;
             color: #856404;
+            border-left: 4px solid #ffc107;
         }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
+
         .modal {
             display: none;
             position: fixed;
@@ -266,8 +319,9 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
-        
+
         .modal-content {
             background-color: white;
             margin: 2% auto;
@@ -277,22 +331,25 @@
             max-width: 900px;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
         }
-        
+
         .close {
             color: #aaa;
             float: right;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
-            line-height: 1;
+            position: absolute;
+            right: 20px;
+            top: 15px;
         }
-        
+
         .close:hover {
             color: #000;
         }
-        
+
         .info-section {
             background: #f8f9fa;
             padding: 20px;
@@ -300,7 +357,7 @@
             border-radius: 10px;
             border-left: 4px solid #3498db;
         }
-        
+
         .info-section h3 {
             color: #2c3e50;
             margin-bottom: 15px;
@@ -308,7 +365,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -316,95 +373,124 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
+
         th, td {
             border: 1px solid #dee2e6;
             padding: 12px;
             text-align: left;
         }
-        
+
         th {
             background: #3498db;
             color: white;
             font-weight: 600;
         }
-        
+
         tr:nth-child(even) {
             background: #f8f9fa;
+        }
+
+        .treatment-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .treatment-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧬 ЭНДОКРИНОЛОГ ОНЛАЙН</h1>
-            <p>Диагностика заболеваний щитовидной железы на основе клинических рекомендаций РФ</p>
+            <h1>🧬 ЭНДОКРИНОЛОГ PRO</h1>
+            <p>Диагностика заболеваний щитовидной железы по клиническим рекомендациям РФ</p>
         </div>
-        
-        <div class="content">
+
+        <div class="main-content">
             <div class="input-section">
-                <h2>Введите данные пациента</h2>
+                <h2 class="section-title">📊 Ввод лабораторных данных</h2>
                 
                 <div class="form-group">
                     <label for="tsh">ТТГ (тиреотропный гормон)</label>
-                    <input type="number" step="0.01" id="tsh" placeholder="0.4 - 4.0 мМЕ/л" value="8.5">
-                    <div class="range-info">Референс: 0.4 - 4.0 мМЕ/л</div>
+                    <input type="number" step="0.01" id="tsh" placeholder="0.4" value="8.5">
+                    <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="freeT4">св. Т4 (свободный тироксин)</label>
-                    <input type="number" step="0.1" id="freeT4" placeholder="11.0 - 22.0 пмоль/л" value="9.0">
-                    <div class="range-info">Референс: 11.0 - 22.0 пмоль/л</div>
+                    <input type="number" step="0.1" id="freeT4" placeholder="11.0" value="9.0">
+                    <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="freeT3">св. Т3 (свободный трийодтиронин)</label>
-                    <input type="number" step="0.1" id="freeT3" placeholder="3.5 - 8.0 пмоль/л">
-                    <div class="range-info">Референс: 3.5 - 8.0 пмоль/л (опционально)</div>
+                    <input type="number" step="0.1" id="freeT3" placeholder="3.5">
+                    <div class="range-info">Норма: 3.5 - 8.0 пмоль/л</div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="antiTPO">Анти-ТПО (антитела к тиреопероксидазе)</label>
-                    <input type="number" id="antiTPO" placeholder="до 34 МЕ/мл" value="250">
-                    <div class="range-info">Референс: до 34 МЕ/мл</div>
+                    <input type="number" id="antiTPO" placeholder="0" value="250">
+                    <div class="range-info">Норма: до 34 МЕ/мл</div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="antiTG">Анти-ТГ (антитела к тиреоглобулину)</label>
-                    <input type="number" id="antiTG" placeholder="до 115 МЕ/мл">
-                    <div class="range-info">Референс: до 115 МЕ/мл (опционально)</div>
+                    <input type="number" id="antiTG" placeholder="0">
+                    <div class="range-info">Норма: до 115 МЕ/мл</div>
                 </div>
-                
-                <div class="button-group">
-                    <button class="btn-success" onclick="analyzeComplete()">🔍 Полный анализ по КР РФ</button>
-                    <button class="btn-primary" onclick="analyzeBasic()">🩺 Быстрый анализ</button>
-                    <button class="btn-info" onclick="showParameterInfo()">📚 Справка по показателям</button>
-                    <button class="btn-warning" onclick="showLipidProfile()">🧪 Липидный профиль</button>
-                    <button class="btn-secondary" onclick="clearForm()">🗑️ Очистить форму</button>
+
+                <div class="buttons-container">
+                    <button class="btn btn-success" onclick="analyzeComplete()">
+                        🔍 Полный анализ по КР РФ
+                    </button>
+                    <button class="btn btn-primary" onclick="analyzeBasic()">
+                        🩺 Быстрый анализ
+                    </button>
+                    <button class="btn btn-info" onclick="showParameterInfo()">
+                        📚 Справка по показателям
+                    </button>
+                    <button class="btn btn-warning" onclick="showLipidProfile()">
+                        🧪 Липидный профиль
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearForm()">
+                        🗑️ Очистить форму
+                    </button>
                 </div>
             </div>
-            
+
             <div class="result-section">
-                <h2>Результаты анализа</h2>
+                <h2 class="section-title">📋 Результаты диагностики</h2>
                 
                 <div class="loading" id="loading">
                     <div class="spinner"></div>
                     <p>Анализируем данные...</p>
                 </div>
-                
-                <div class="result-box" id="resultBox">
-                    <div id="statusIndicator" class="status-indicator"></div>
-                    
-                    <div class="parameter-list" id="parameterList"></div>
-                    
-                    <div id="diagnosis" class="recommendation-box"></div>
-                    
-                    <div id="recommendations" class="recommendation-box"></div>
-                    
-                    <div id="treatment" class="recommendation-box"></div>
+
+                <div class="result-container" id="resultContainer">
+                    <div id="diagnosisCard" class="diagnosis-card">
+                        <div id="diagnosisContent"></div>
+                    </div>
+
+                    <div class="parameters-grid" id="parametersGrid"></div>
+
+                    <div id="treatmentBox" class="treatment-box"></div>
+
+                    <div id="recommendationBox" class="recommendation-box"></div>
                 </div>
-                
+
                 <div class="disclaimer">
                     ⚠️ <strong>Внимание:</strong> Данная система является вспомогательным инструментом. 
                     Окончательный диагноз и лечение должен устанавливать врач на основе комплексного обследования пациента.
@@ -418,49 +504,43 @@
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('infoModal')">&times;</span>
-            <h2>📚 Подробная справка по показателям щитовидной железы</h2>
+            <h2>📚 Справка по показателям щитовидной железы</h2>
             
             <div class="info-section">
                 <h3>🧪 ТТГ (Тиреотропный гормон)</h3>
                 <p><strong>Норма:</strong> 0.4 - 4.0 мМЕ/л</p>
-                <p><strong>Клиническое значение:</strong> Наиболее чувствительный маркер функции щитовидной железы. Синтезируется в гипофизе.</p>
-                <p><strong>Повышен (> 4.0 мМЕ/л):</strong> Первичный гипотиреоз, субклинический гипотиреоз, аутоиммунный тиреоидит</p>
-                <p><strong>Понижен (< 0.4 мМЕ/л):</strong> Тиреотоксикоз, субклинический тиреотоксикоз, прием тиреоидных гормонов</p>
-                <p><strong>Особенности:</strong> Имеет суточные колебания (максимум в 2-4 часа ночи)</p>
+                <p><strong>Клиническое значение:</strong> Наиболее чувствительный маркер функции щитовидной железы</p>
+                <p><strong>Повышен (> 4.0 мМЕ/л):</strong> Гипотиреоз, субклинический гипотиреоз</p>
+                <p><strong>Понижен (< 0.4 мМЕ/л):</strong> Тиреотоксикоз, субклинический тиреотоксикоз</p>
             </div>
 
             <div class="info-section">
                 <h3>🧪 св. Т4 (Свободный тироксин)</h3>
                 <p><strong>Норма:</strong> 11.0 - 22.0 пмоль/л</p>
-                <p><strong>Клиническое значение:</strong> Основной гормон щитовидной железы, прогормон для Т3</p>
-                <p><strong>Повышен (> 22.0 пмоль/л):</strong> Манифестный тиреотоксикоз, тиреотоксическая фаза тиреоидитов</p>
-                <p><strong>Понижен (< 11.0 пмоль/л):</strong> Манифестный гипотиреоз, тяжелый йодный дефицит</p>
-                <p><strong>Особенности:</strong> Не зависит от уровня белков крови в отличие от общего Т4</p>
+                <p><strong>Клиническое значение:</strong> Основной гормон щитовидной железы</p>
+                <p><strong>Повышен (> 22.0 пмоль/л):</strong> Тиреотоксикоз</p>
+                <p><strong>Понижен (< 11.0 пмоль/л):</strong> Гипотиреоз</p>
             </div>
 
             <div class="info-section">
                 <h3>🧪 св. Т3 (Свободный трийодтиронин)</h3>
                 <p><strong>Норма:</strong> 3.5 - 8.0 пмоль/л</p>
                 <p><strong>Клиническое значение:</strong> Биологически активная форма гормона</p>
-                <p><strong>Повышен (> 8.0 пмоль/л):</strong> Т3-токсикоз, болезнь Грейвса в дебюте, функциональная автономия</p>
-                <p><strong>Важно:</strong> Не используется для диагностики гипотиреоза!</p>
-                <p><strong>Особенности:</strong> 80% образуется путем конверсии Т4→Т3 в периферических тканях</p>
+                <p><strong>Повышен (> 8.0 пмоль/л):</strong> Т3-токсикоз, болезнь Грейвса</p>
             </div>
 
             <div class="info-section">
                 <h3>🔬 Анти-ТПО (Антитела к тиреопероксидазе)</h3>
                 <p><strong>Норма:</strong> до 34 МЕ/мл</p>
-                <p><strong>Клиническое значение:</strong> Наиболее специфичный маркер аутоиммунной патологии</p>
-                <p><strong>Повышен (> 34 МЕ/мл):</strong> Аутоиммунный тиреоидит (90-95%), болезнь Грейвса (50-80%)</p>
-                <p><strong>Прогностическое значение:</strong> Повышает риск развития гипотиреоза в 15-20 раз</p>
+                <p><strong>Клиническое значение:</strong> Маркер аутоиммунного тиреоидита</p>
+                <p><strong>Повышен (> 34 МЕ/мл):</strong> Аутоиммунный тиреоидит, болезнь Грейвса</p>
             </div>
 
             <div class="info-section">
                 <h3>🔬 Анти-ТГ (Антитела к тиреоглобулину)</h3>
                 <p><strong>Норма:</strong> до 115 МЕ/мл</p>
                 <p><strong>Клиническое значение:</strong> Дополнительный маркер аутоиммунного процесса</p>
-                <p><strong>Повышен (> 115 МЕ/мл):</strong> Аутоиммунный тиреоидит, болезнь Грейвса</p>
-                <p><strong>Особенности:</strong> Менее специфичны, чем Анти-ТПО</p>
+                <p><strong>Повышен (> 115 МЕ/мл):</strong> Аутоиммунный тиреоидит</p>
             </div>
         </div>
     </div>
@@ -469,34 +549,71 @@
     <div id="lipidModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('lipidModal')">&times;</span>
-            <h2>🧪 Липидный профиль: целевые значения и терапия</h2>
+            <h2>🧪 Липидный профиль и статины</h2>
             
             <table>
                 <tr>
                     <th>Группа риска</th>
                     <th>Целевой ЛПНП</th>
                     <th>Препараты выбора</th>
-                    <th>Альтернативы</th>
                 </tr>
                 <tr>
-                    <td><strong>Очень высокий риск</strong><br>(инфаркт, инсульт, диабет с осложнениями)</td>
+                    <td><strong>Очень высокий риск</strong></td>
                     <td>&lt; 1,4 ммоль/л</td>
-                    <td>Аторвастатин 40-80 мг/сут<br>Розувастатин 20-40 мг/сут</td>
-                    <td>Эзетимиб + статин</td>
+                    <td>Аторвастатин 40-80 мг/сут</td>
                 </tr>
                 <tr>
-                    <td><strong>Высокий риск</strong><br>(гипертензия, диабет, курение)</td>
+                    <td><strong>Высокий риск</strong></td>
                     <td>&lt; 1,8 ммоль/л</td>
-                    <td>Аторвастатин 10-20 мг/сут<br>Розувастатин 5-10 мг/сут</td>
-                    <td>Эзетимиб, комбинация статин+эзетимиб</td>
+                    <td>Аторвастатин 10-20 мг/сут</td>
                 </tr>
                 <tr>
                     <td><strong>Умеренный риск</strong></td>
                     <td>&lt; 2,6 ммоль/л</td>
-                    <td>Розувастатин 5-10 мг/сут<br>Аторвастатин 10 мг/сут</td>
-                    <td>Эзетимиб (монотерапия)</td>
+                    <td>Розувастатин 5-10 мг/сут</td>
                 </tr>
             </table>
+        </div>
+    </div>
+
+    <!-- Модальное окно для лечения гипотиреоза -->
+    <div id="hypothyroidismModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('hypothyroidismModal')">&times;</span>
+            <h2>💊 Лечение гипотиреоза заместительной терапией L-тироксином (L-T4)</h2>
+            
+            <div class="info-section">
+                <h3>1. Показания к началу терапии</h3>
+                <p><strong>Явный (манифестный) гипотиреоз:</strong> Лечение обязательно.</p>
+                <p><strong>Субклинический гипотиреоз:</strong> Решение принимается индивидуально.</p>
+            </div>
+
+            <div class="info-section">
+                <h3>2. Расчет стартовой дозы L-T4</h3>
+                <table>
+                    <tr>
+                        <th>Группа пациентов</th>
+                        <th>Стартовая доза</th>
+                    </tr>
+                    <tr>
+                        <td><strong>&lt; 60 лет БЕЗ патологии сердца</strong></td>
+                        <td>1.2 - 1.6 мкг/кг/сут</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&gt; 60 лет ИЛИ пациенты с ССЗ</strong></td>
+                        <td>1.0 - 1.2 мкг/кг/сут</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="info-section">
+                <h3>3. Правила приема препарата</h3>
+                <ul>
+                    <li><strong>Время приема:</strong> Утром, натощак</li>
+                    <li><strong>Интервал до еды:</strong> За 30-60 минут</li>
+                    <li><strong>Интервал с другими лекарствами:</strong> Не менее 4 часов</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -517,68 +634,72 @@
                 let diagnosis = "";
                 let treatment = "";
                 let recommendations = [];
+                let severity = "success";
                 let autoimmuneNote = "";
 
                 // Проверяем аутоиммунный процесс
                 if (atpo > 34 || atg > 115) {
                     autoimmuneNote = " (аутоиммунный процесс)";
-                    
-                    if (atpo > 34) {
-                        recommendations.push("Анти-ТПО повышены - маркер аутоиммунного тиреоидита");
-                    }
-                    if (atg > 115) {
-                        recommendations.push("Анти-ТГ повышены - подтверждает аутоиммунный генез");
-                    }
+                    recommendations.push("Анти-ТПО повышены - маркер аутоиммунного тиреоидита");
                 }
 
                 // Диагностика по КР РФ
                 if (tsh > 4.0 && t4 < 11.0) {
                     diagnosis = "🔴 Первичный манифестный гипотиреоз" + autoimmuneNote;
                     treatment = "Заместительная терапия левотироксином 1.6 мкг/кг/сут";
-                    recommendations.push("УЗИ щитовидной железы", "Контроль ТТГ через 6-8 недель", "Липидный профиль");
+                    recommendations.push("УЗИ щитовидной железы", "Контроль ТТГ через 6-8 недель");
+                    severity = "danger";
                 }
                 else if (tsh < 0.4 && (t4 > 22.0 || (t3 && t3 > 8.0))) {
                     diagnosis = "🔴 Манифестный тиреотоксикоз" + autoimmuneNote;
                     treatment = "Тиреостатики, радиойодтерапия или хирургическое лечение";
-                    recommendations.push("АТ-рТТГ для дифференциальной диагностики", "УЗИ с ЦДК", "Сцинтиграфия по показаниям");
+                    recommendations.push("АТ-рТТГ для дифференциальной диагностики", "УЗИ с ЦДК");
+                    severity = "danger";
                 }
                 else if (tsh > 4.0 && (!t4 || t4 >= 11.0)) {
                     diagnosis = "🟡 Субклинический гипотиреоз" + autoimmuneNote;
-                    
-                    if (atpo > 34 || tsh > 10.0) {
-                        treatment = "Рекомендуется терапия левотироксином";
-                    } else {
-                        treatment = "Наблюдение, контроль через 3-6 месяцев";
-                    }
-                    
-                    recommendations.push("Повторный контроль ТТГ и св.Т4", "Оценка клинической симптоматики");
+                    treatment = atpo > 34 ? "Рекомендуется терапия левотироксином" : "Наблюдение";
+                    recommendations.push("Повторный контроль через 3-6 месяцев");
+                    severity = "warning";
                 }
                 else if (tsh < 0.4 && (!t4 || t4 <= 22.0) && (!t3 || t3 <= 8.0)) {
                     diagnosis = "🟡 Субклинический тиреотоксикоз" + autoimmuneNote;
                     treatment = "Обследование для выявления причины";
-                    recommendations.push("Исключить прием тиреоидных гормонов", "Повторное исследование через 3-6 месяцев");
+                    recommendations.push("Исключить прием тиреоидных гормонов");
+                    severity = "warning";
                 }
                 else {
                     diagnosis = "🟢 Эутиреоз (норма)";
                     treatment = "Плановое наблюдение";
-                    
-                    if (atpo > 34 || atg > 115) {
-                        diagnosis += autoimmuneNote;
-                        recommendations.push("Носительство антител - динамическое наблюдение 1 раз в год");
-                    } else {
-                        recommendations.push("Контроль по показаниям");
-                    }
+                    recommendations.push("Контроль по показаниям");
+                    severity = "success";
                 }
 
                 return {
                     diagnosis: diagnosis,
                     treatment: treatment,
-                    recommendations: recommendations
+                    recommendations: recommendations,
+                    severity: severity
                 };
+            },
+
+            getParameterStatus: function(value, paramName) {
+                const ref = this.references[paramName];
+                if (!value || isNaN(value)) return { status: 'unknown', text: 'Не введено' };
+                
+                if (paramName === 'ANTI_TPO' || paramName === 'ANTI_TG') {
+                    return value > ref.max ? 
+                        { status: 'high', text: 'ПОВЫШЕН' } : 
+                        { status: 'normal', text: 'норма' };
+                } else {
+                    if (value < ref.min) return { status: 'low', text: 'ПОНИЖЕН' };
+                    if (value > ref.max) return { status: 'high', text: 'ПОВЫШЕН' };
+                    return { status: 'normal', text: 'норма' };
+                }
             }
         };
 
-        // Функции приложения
+        // Основные функции приложения
         function analyzeComplete() {
             const tsh = parseFloat(document.getElementById('tsh').value);
             const t4 = parseFloat(document.getElementById('freeT4').value);
@@ -624,10 +745,56 @@
                 result += "🟢 Норма";
             }
             
-            document.getElementById('statusIndicator').innerHTML = result;
-            document.getElementById('statusIndicator').className = 'status-indicator ' + 
-                (tsh >= 0.4 && tsh <= 4.0 ? 'status-normal' : 'status-warning');
-            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('diagnosisContent').innerHTML = result;
+            document.getElementById('diagnosisCard').className = 'diagnosis-card ' + 
+                (tsh >= 0.4 && tsh <= 4.0 ? 'diagnosis-success' : 'diagnosis-warning');
+            document.getElementById('resultContainer').style.display = 'block';
+        }
+
+        function displayResults(tsh, t4, t3, atpo, atg, result) {
+            const diagnosisCard = document.getElementById('diagnosisCard');
+            let diagnosisHTML = `<h3>${result.diagnosis}</h3>`;
+            
+            // Добавляем кнопку лечения для гипотиреоза
+            if (result.diagnosis.includes('гипотиреоз')) {
+                diagnosisHTML += `<button class="treatment-btn" onclick="showHypothyroidismTreatment()">💊 Подробнее о лечении гипотиреоза</button>`;
+            }
+            
+            document.getElementById('diagnosisContent').innerHTML = diagnosisHTML;
+            diagnosisCard.className = 'diagnosis-card diagnosis-' + result.severity;
+
+            // Отображаем параметры
+            let parametersHTML = '';
+            const parameters = [
+                { name: 'ТТГ', value: tsh, param: 'TSH' },
+                { name: 'св.Т4', value: t4, param: 'FREE_T4' },
+                { name: 'св.Т3', value: t3, param: 'FREE_T3' },
+                { name: 'Анти-ТПО', value: atpo, param: 'ANTI_TPO' },
+                { name: 'Анти-ТГ', value: atg, param: 'ANTI_TG' }
+            ];
+
+            parameters.forEach(param => {
+                if (param.value && !isNaN(param.value)) {
+                    const status = THYROID_KNOWLEDGE.getParameterStatus(param.value, param.param);
+                    parametersHTML += `
+                        <div class="parameter-item">
+                            <span class="parameter-name">${param.name}:</span>
+                            <span class="parameter-value value-${status.status}">
+                                ${param.value} ${THYROID_KNOWLEDGE.references[param.param].unit} (${status.text})
+                            </span>
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('parametersGrid').innerHTML = parametersHTML;
+            document.getElementById('treatmentBox').innerHTML = `<h4>💊 Тактика лечения:</h4><p>${result.treatment}</p>`;
+            document.getElementById('recommendationBox').innerHTML = `
+                <h4>📋 Рекомендации:</h4>
+                <ul>${result.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+            `;
+            
+            document.getElementById('resultContainer').style.display = 'block';
         }
 
         function showParameterInfo() {
@@ -636,6 +803,10 @@
 
         function showLipidProfile() {
             document.getElementById('lipidModal').style.display = 'block';
+        }
+
+        function showHypothyroidismTreatment() {
+            document.getElementById('hypothyroidismModal').style.display = 'block';
         }
 
         function closeModal(modalId) {
@@ -648,32 +819,12 @@
             document.getElementById('freeT3').value = '';
             document.getElementById('antiTPO').value = '';
             document.getElementById('antiTG').value = '';
-            document.getElementById('resultBox').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'none';
         }
 
         function showLoading(show) {
             document.getElementById('loading').style.display = show ? 'block' : 'none';
-            document.getElementById('resultBox').style.display = show ? 'none' : 'block';
-        }
-
-        function displayResults(tsh, t4, t3, atpo, atg, result) {
-            const statusIndicator = document.getElementById('statusIndicator');
-            statusIndicator.innerHTML = `<h3>${result.diagnosis}</h3>`;
-            statusIndicator.className = 'status-indicator ' + 
-                (result.diagnosis.includes('🟢') ? 'status-normal' : 
-                 result.diagnosis.includes('🟡') ? 'status-warning' : 'status-danger');
-
-            // Параметры
-            let parametersHTML = '<h4>Параметры:</h4>';
-            parametersHTML += `<div class="parameter-row"><span class="parameter-name">ТТГ:</span><span class="parameter-value">${tsh} мМЕ/л</span></div>`;
-            if (t4) parametersHTML += `<div class="parameter-row"><span class="parameter-name">св.Т4:</span><span class="parameter-value">${t4} пмоль/л</span></div>`;
-            if (t3) parametersHTML += `<div class="parameter-row"><span class="parameter-name">св.Т3:</span><span class="parameter-value">${t3} пмоль/л</span></div>`;
-            if (atpo) parametersHTML += `<div class="parameter-row"><span class="parameter-name">Анти-ТПО:</span><span class="parameter-value">${atpo} МЕ/мл</span></div>`;
-            if (atg) parametersHTML += `<div class="parameter-row"><span class="parameter-name">Анти-ТГ:</span><span class="parameter-value">${atg} МЕ/мл</span></div>`;
-            
-            document.getElementById('parameterList').innerHTML = parametersHTML;
-            document.getElementById('treatment').innerHTML = `<h4>💊 Тактика лечения:</h4><p>${result.treatment}</p>`;
-            document.getElementById('recommendations').innerHTML = `<h4>📋 Рекомендации:</h4><ul>${result.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>`;
+            document.getElementById('resultContainer').style.display = show ? 'none' : 'block';
         }
 
         // Закрытие модальных окон при клике вне их
