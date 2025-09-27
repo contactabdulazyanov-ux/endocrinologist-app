@@ -67,31 +67,10 @@ const THYROID_KNOWLEDGE = {
             }
         }
 
-        // Добавляем информацию об антителах в детали
-        if (atpo > 34) {
-            if (!autoimmuneNote) {
-                diagnosis += " (Анти-ТПО повышены)";
-            }
-        }
-
         return {
             diagnosis: diagnosis,
             treatment: treatment,
             recommendations: recommendations
         };
-    },
-
-    // Функция для отображения значений параметров
-    getParameterStatus: function(value, paramName) {
-        const ref = this.references[paramName];
-        if (!value || isNaN(value)) return "не введено";
-        
-        if (paramName === 'ANTI_TPO' || paramName === 'ANTI_TG') {
-            return value > ref.max ? `ПОВЫШЕН (${value} ${ref.unit})` : `норма (${value} ${ref.unit})`;
-        } else {
-            if (value < ref.min) return `ПОНИЖЕН (${value} ${ref.unit})`;
-            if (value > ref.max) return `ПОВЫШЕН (${value} ${ref.unit})`;
-            return `норма (${value} ${ref.unit})`;
-        }
     }
 };
