@@ -50,6 +50,9 @@
         .btn-info {
             background: #17a2b8;
         }
+        .btn-lipid {
+            background: #6f42c1;
+        }
         .result {
             margin-top: 20px;
             padding: 15px;
@@ -67,6 +70,49 @@
         small {
             color: #666;
             font-size: 12px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -110,6 +156,7 @@
         <!-- Кнопки -->
         <button onclick="analyze()">🩺 Базовый анализ</button>
         <button onclick="analyzeComplete()" class="btn-advanced">🔍 Расширенный анализ по КР РФ</button>
+        <button onclick="showLipidProfile()" class="btn-lipid">🧪 Липидный профиль и статины</button>
         <button onclick="showInfo()" class="btn-info">📚 Справка по показателям</button>
         <button onclick="clearForm()" style="background: #6c757d;">🗑️ Очистить</button>
         
@@ -122,6 +169,60 @@
             <div id="detailedDiagnosis"></div>
             <div id="treatmentPlan"></div>
             <div id="recommendations"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для липидного профиля -->
+    <div id="lipidModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLipidModal()">&times;</span>
+            <h2>🧪 Липидный профиль: целевые значения и терапия</h2>
+            
+            <table>
+                <tr>
+                    <th>Группа риска</th>
+                    <th>Целевой ЛПНП</th>
+                    <th>Препараты выбора</th>
+                    <th>Альтернативы</th>
+                </tr>
+                <tr>
+                    <td><strong>Очень высокий риск</strong><br>(инфаркт, инсульт, диабет с осложнениями)</td>
+                    <td>&lt; 1,4 ммоль/л</td>
+                    <td>Аторвастатин 40-80 мг/сут<br>Розувастатин 20-40 мг/сут</td>
+                    <td>Эзетимиб + статин</td>
+                </tr>
+                <tr>
+                    <td><strong>Высокий риск</strong><br>(гипертензия, диабет, курение)</td>
+                    <td>&lt; 1,8 ммоль/л</td>
+                    <td>Аторвастатин 10-20 мг/сут<br>Розувастатин 5-10 мг/сут</td>
+                    <td>Эзетимиб, комбинация статин+эзетимиб</td>
+                </tr>
+                <tr>
+                    <td><strong>Умеренный риск</strong></td>
+                    <td>&lt; 2,6 ммоль/л</td>
+                    <td>Розувастатин 5-10 мг/сут<br>Аторвастатин 10 мг/сут</td>
+                    <td>Эзетимиб (монотерапия)</td>
+                </tr>
+                <tr>
+                    <td><strong>Повышенные триглицериды</strong></td>
+                    <td>ТГ &lt; 1,7 ммоль/л</td>
+                    <td>Диета, снижение веса</td>
+                    <td>Фибраты (фенофибрат)</td>
+                </tr>
+            </table>
+
+            <h3>💊 Описание препаратов</h3>
+            <p><strong>Статины:</strong> Блокируют синтез холестерина в печени</p>
+            <p><strong>Эзетимиб:</strong> Блокирует всасывание холестерина в кишечнике</p>
+            <p><strong>Фибраты:</strong> Снижают триглицериды, повышают ЛПВП</p>
+
+            <h3>🌱 Немедикаментозная терапия</h3>
+            <ul>
+                <li>Диета: ограничение насыщенных жиров</li>
+                <li>Физнагрузки: 150 мин/неделю</li>
+                <li>Нормализация веса</li>
+                <li>Отказ от курения</li>
+            </ul>
         </div>
     </div>
 
@@ -168,6 +269,20 @@
         
         function showInfo() {
             alert('Расширенный анализ использует клинические рекомендации РФ для точной диагностики');
+        }
+
+        function showLipidProfile() {
+            document.getElementById('lipidModal').style.display = 'block';
+        }
+
+        function closeLipidModal() {
+            document.getElementById('lipidModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('lipidModal')) {
+                closeLipidModal();
+            }
         }
     </script>
 
