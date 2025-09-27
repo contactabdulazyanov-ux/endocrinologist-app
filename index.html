@@ -3,41 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Эндокринолог - Диагностика щитовидной железы</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Эндокринолог PRO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        .btn-advanced {
+            background: #28a745;
+        }
+        .btn-info {
+            background: #17a2b8;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .normal { background: #d4edda; color: #155724; }
+        .abnormal { background: #f8d7da; color: #721c24; }
+        .advanced-result {
+            background: #fff3cd;
+            color: #856404;
+            margin-top: 10px;
+            padding: 10px;
+            display: none;
+        }
+        small {
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>🧬 Эндокринолог онлайн</h1>
-        <p>Диагностика заболеваний щитовидной железы по КР РФ</p>
+        <h1>🧬 Эндокринолог PRO</h1>
+        <p>Диагностика щитовидной железы с расширенными возможностями</p>
         
-        <div class="input-section">
-            <div class="input-group">
-                <label>ТТГ (мМЕ/л)</label>
-                <input type="number" step="0.01" id="tsh" placeholder="0.4">
-                <small>Норма: 0.4 - 4.0</small>
-            </div>
-            
-            <div class="input-group">
-                <label>св. Т4 (пмоль/л)</label>
-                <input type="number" step="0.1" id="t4" placeholder="11.0">
-                <small>Норма: 11.0 - 22.0</small>
-            </div>
-            
-            <div class="input-group">
-                <label>Анти-ТПО (МЕ/мл)</label>
-                <input type="number" id="atpo" placeholder="0">
-                <small>Норма: до 34</small>
-            </div>
-            
-            <button onclick="analyze()">Анализировать</button>
-            <button onclick="clearForm()" class="secondary">Очистить</button>
+        <!-- Основные поля -->
+        <div class="input-group">
+            <label>ТТГ (мМЕ/л):</label>
+            <input type="number" step="0.01" id="tsh" placeholder="0.4" value="8.5">
+            <small>Норма: 0.4 - 4.0</small>
         </div>
         
+        <div class="input-group">
+            <label>св. Т4 (пмоль/л):</label>
+            <input type="number" step="0.1" id="freeT4" placeholder="11.0" value="9.0">
+            <small>Норма: 11.0 - 22.0</small>
+        </div>
+        
+        <!-- Новые дополнительные поля -->
+        <div class="input-group">
+            <label>св. Т3 (пмоль/л):</label>
+            <input type="number" step="0.1" id="freeT3" placeholder="3.5">
+            <small>Норма: 3.5 - 8.0</small>
+        </div>
+        
+        <div class="input-group">
+            <label>Анти-ТПО (МЕ/мл):</label>
+            <input type="number" id="antiTPO" placeholder="0" value="250">
+            <small>Норма: до 34</small>
+        </div>
+        
+        <div class="input-group">
+            <label>Анти-ТГ (МЕ/мл):</label>
+            <input type="number" id="antiTG" placeholder="0">
+            <small>Норма: до 115</small>
+        </div>
+        
+        <!-- Кнопки -->
+        <button onclick="analyze()">🩺 Базовый анализ</button>
+        <button onclick="analyzeComplete()" class="btn-advanced">🔍 Расширенный анализ по КР РФ</button>
+        <button onclick="showInfo()" class="btn-info">📚 Справка по показателям</button>
+        <button onclick="clearForm()" style="background: #6c757d;">🗑️ Очистить</button>
+        
+        <!-- Старые результаты -->
         <div id="result" class="result"></div>
+        
+        <!-- Новые расширенные результаты -->
+        <div id="advancedResult" class="advanced-result">
+            <h3>📋 Расширенная диагностика по КР РФ</h3>
+            <div id="detailedDiagnosis"></div>
+            <div id="treatmentPlan"></div>
+            <div id="recommendations"></div>
+        </div>
     </div>
-    
+
+    <!-- Старый скрипт -->
+    <script>
+        function analyze() {
+            const tsh = parseFloat(document.getElementById('tsh').value);
+            const t4 = parseFloat(document.getElementById('freeT4').value);
+            
+            if (!tsh) {
+                alert('Введите значение ТТГ');
+                return;
+            }
+            
+            let result = "<strong>Базовый анализ:</strong><br>";
+            result += `ТТГ: ${tsh} мМЕ/л - `;
+            
+            if (tsh > 4.0 && t4 < 11.0) {
+                result += "🔴 Возможен гипотиреоз";
+            } else if (tsh < 0.4 && t4 > 22.0) {
+                result += "🔴 Возможен тиреотоксикоз";
+            } else if (tsh > 4.0) {
+                result += "🟡 Субклинический гипотиреоз";
+            } else if (tsh < 0.4) {
+                result += "🟡 Субклинический тиреотоксикоз";
+            } else {
+                result += "🟢 Норма";
+            }
+            
+            document.getElementById('result').innerHTML = result;
+            document.getElementById('result').className = 'result ' + (tsh >= 0.4 && tsh <= 4.0 ? 'normal' : 'abnormal');
+            document.getElementById('advancedResult').style.display = 'none';
+        }
+        
+        function clearForm() {
+            document.getElementById('tsh').value = '';
+            document.getElementById('freeT4').value = '';
+            document.getElementById('freeT3').value = '';
+            document.getElementById('antiTPO').value = '';
+            document.getElementById('antiTG').value = '';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('advancedResult').style.display = 'none';
+        }
+        
+        function showInfo() {
+            alert('Расширенный анализ использует клинические рекомендации РФ для точной диагностики');
+        }
+    </script>
+
+    <!-- Новые скрипты -->
     <script src="knowledge-base.js"></script>
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
