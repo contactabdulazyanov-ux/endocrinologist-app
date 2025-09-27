@@ -12,17 +12,27 @@ function analyzeComplete() {
     }
     
     const result = THYROID_KNOWLEDGE.analyzeComplete(tsh, t4, t3, atpo, atg);
+    const autoimmune = THYROID_KNOWLEDGE.analyzeAutoimmune(atpo, atg, tsh, t4);
     
     if (result) {
-        document.getElementById('detailedDiagnosis').innerHTML = 
-            `<strong>Диагноз:</strong> ${result.diagnosis}`;
+        let diagnosisHTML = `<strong>Диагноз:</strong> ${result.diagnosis}`;
+        
+        // Добавляем аутоиммунную информацию
+        if (autoimmune.info) {
+            diagnosisHTML += autoimmune.info;
+        }
+        
+        document.getElementById('detailedDiagnosis').innerHTML = diagnosisHTML;
         
         document.getElementById('treatmentPlan').innerHTML = 
             `<strong>Тактика лечения:</strong> ${result.treatment}`;
         
+        // Объединяем рекомендации
+        const allRecommendations = [...result.recommendations, ...autoimmune.tests];
+        
         document.getElementById('recommendations').innerHTML = 
             `<strong>Рекомендации:</strong><ul>${
-                result.recommendations.map(r => `<li>${r}</li>`).join('')
+                allRecommendations.map(r => `<li>${r}</li>`).join('')
             }</ul>`;
         
         document.getElementById('advancedResult').style.display = 'block';
