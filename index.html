@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -427,6 +426,92 @@
             margin-bottom: 8px;
             line-height: 1.5;
         }
+
+        /* Стили для калькулятора */
+        .calculator-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #6f42c1;
+        }
+
+        .calculator-result {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+            display: none;
+        }
+
+        .dose-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .dose-range {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3498db;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #e9ecef;
+            color: #495057;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -438,54 +523,90 @@
 
         <div class="main-content">
             <div class="input-section">
-                <h2 class="section-title">📊 Ввод лабораторных данных</h2>
-                
-                <div class="form-group">
-                    <label for="tsh">ТТГ (тиреотропный гормон)</label>
-                    <input type="number" step="0.01" id="tsh" placeholder="0.4" value="8.5">
-                    <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('diagnostics')">📊 Диагностика</button>
+                    <button class="tab-btn" onclick="switchTab('calculator')">💊 Калькулятор L-T4</button>
                 </div>
 
-                <div class="form-group">
-                    <label for="freeT4">св. Т4 (свободный тироксин)</label>
-                    <input type="number" step="0.1" id="freeT4" placeholder="11.0" value="9.0">
-                    <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
+                <div id="diagnostics" class="tab-content active">
+                    <h2 class="section-title">📊 Ввод лабораторных данных</h2>
+                    
+                    <div class="form-group">
+                        <label for="tsh">ТТГ (тиреотропный гормон)</label>
+                        <input type="number" step="0.01" id="tsh" placeholder="0.4" value="8.5">
+                        <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="freeT4">св. Т4 (свободный тироксин)</label>
+                        <input type="number" step="0.1" id="freeT4" placeholder="11.0" value="9.0">
+                        <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="freeT3">св. Т3 (свободный трийодтиронин)</label>
+                        <input type="number" step="0.1" id="freeT3" placeholder="3.5">
+                        <div class="range-info">Норма: 3.5 - 8.0 пмоль/л</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="antiTPO">Анти-ТПО (антитела к тиреопероксидазе)</label>
+                        <input type="number" id="antiTPO" placeholder="0" value="250">
+                        <div class="range-info">Норма: до 34 МЕ/мл</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="antiTG">Анти-ТГ (антитела к тиреоглобулину)</label>
+                        <input type="number" id="antiTG" placeholder="0">
+                        <div class="range-info">Норма: до 115 МЕ/мл</div>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button class="btn btn-success" onclick="analyzeComplete()">
+                            🔍 Полный анализ по КР РФ
+                        </button>
+                        <button class="btn btn-primary" onclick="analyzeBasic()">
+                            🩺 Быстрый анализ
+                        </button>
+                        <button class="btn btn-info" onclick="showParameterInfo()">
+                            📚 Справка по показателям
+                        </button>
+                        <button class="btn btn-warning" onclick="showLipidProfile()">
+                            🧪 Липидный профиль
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearForm()">
+                            🗑️ Очистить форму
+                        </button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="freeT3">св. Т3 (свободный трийодтиронин)</label>
-                    <input type="number" step="0.1" id="freeT3" placeholder="3.5">
-                    <div class="range-info">Норма: 3.5 - 8.0 пмоль/л</div>
-                </div>
+                <div id="calculator" class="tab-content">
+                    <h2 class="section-title">💊 Калькулятор дозы L-T4</h2>
+                    <p style="text-align: left; color: #666; margin-bottom: 20px;">Рассчитайте стартовую дозу левотироксина по клиническим рекомендациям</p>
+                    
+                    <div class="form-group">
+                        <label for="weight">Вес пациента (кг)</label>
+                        <input type="number" id="weight" placeholder="Например: 70" value="70">
+                    </div>
 
-                <div class="form-group">
-                    <label for="antiTPO">Анти-ТПО (антитела к тиреопероксидазе)</label>
-                    <input type="number" id="antiTPO" placeholder="0" value="250">
-                    <div class="range-info">Норма: до 34 МЕ/мл</div>
-                </div>
+                    <div class="form-group">
+                        <label for="age">Возраст пациента (лет)</label>
+                        <input type="number" id="age" placeholder="Например: 45" value="45">
+                    </div>
 
-                <div class="form-group">
-                    <label for="antiTG">Анти-ТГ (антитела к тиреоглобулину)</label>
-                    <input type="number" id="antiTG" placeholder="0">
-                    <div class="range-info">Норма: до 115 МЕ/мл</div>
-                </div>
+                    <div class="checkbox-group">
+                        <label for="heartDisease">Сердечно-сосудистые заболевания</label>
+                        <input type="checkbox" id="heartDisease">
+                    </div>
 
-                <div class="buttons-container">
-                    <button class="btn btn-success" onclick="analyzeComplete()">
-                        🔍 Полный анализ по КР РФ
+                    <button class="btn btn-warning" onclick="calculateDose()" style="width: 100%;">
+                        🧮 Рассчитать дозу L-T4
                     </button>
-                    <button class="btn btn-primary" onclick="analyzeBasic()">
-                        🩺 Быстрый анализ
+                    <button class="btn btn-secondary" onclick="clearCalculator()">
+                        🗑️ Очистить калькулятор
                     </button>
-                    <button class="btn btn-info" onclick="showParameterInfo()">
-                        📚 Справка по показателям
-                    </button>
-                    <button class="btn btn-warning" onclick="showLipidProfile()">
-                        🧪 Липидный профиль
-                    </button>
-                    <button class="btn btn-secondary" onclick="clearForm()">
-                        🗑️ Очистить форму
-                    </button>
+
+                    <div id="doseResult" class="calculator-result"></div>
                 </div>
             </div>
 
@@ -676,7 +797,99 @@
             }
         };
 
-        // Основные функции приложения
+        // Функции для переключения вкладок
+        function switchTab(tabName) {
+            // Скрываем все табы
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Показываем выбранный таб
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Функции калькулятора дозы L-T4
+        function calculateDose() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const hasHeartDisease = document.getElementById('heartDisease').checked;
+            
+            if (!weight || !age) {
+                alert('Пожалуйста, введите вес и возраст пациента');
+                return;
+            }
+            
+            if (weight <= 0 || age <= 0) {
+                alert('Вес и возраст должны быть положительными числами');
+                return;
+            }
+            
+            let minDosePerKg, maxDosePerKg;
+            let patientCategory = '';
+            
+            if (age >= 60 || hasHeartDisease) {
+                minDosePerKg = 1.0;
+                maxDosePerKg = 1.2;
+                patientCategory = age >= 60 ? 'старше 60 лет' : 'с сердечно-сосудистыми заболеваниями';
+            } else {
+                minDosePerKg = 1.2;
+                maxDosePerKg = 1.6;
+                patientCategory = 'моложе 60 лет без патологии сердца';
+            }
+            
+            const minDose = weight * minDosePerKg;
+            const maxDose = weight * maxDosePerKg;
+            const recommendedDose = Math.round((minDose + maxDose) / 2);
+            
+            let resultHTML = `
+                <div style="text-align: center;">
+                    <div class="dose-value">${recommendedDose} мкг/сут</div>
+                    <div class="dose-range">Диапазон: ${Math.round(minDose)} - ${Math.round(maxDose)} мкг/сут</div>
+                </div>
+                
+                <div class="parameter-item">
+                    <span class="parameter-name">Категория пациента:</span>
+                    <span class="parameter-value">${patientCategory}</span>
+                </div>
+                
+                <div class="parameter-item">
+                    <span class="parameter-name">Расчетная доза:</span>
+                    <span class="parameter-value">${minDosePerKg} - ${maxDosePerKg} мкг/кг/сут</span>
+                </div>
+                
+                <div class="recommendation-box">
+                    <h4>💡 Рекомендации по приему:</h4>
+                    <ul>
+                        <li>Принимайте утром натощак, за 30-60 мин до еды</li>
+                        <li>Контроль ТТГ через 6-8 недель после начала терапии</li>
+                        <li>${hasHeartDisease ? 'Начните с меньшей дозы и увеличивайте постепенно' : 'Можно начинать с полной расчетной дозы'}</li>
+                        <li>Проконсультируйтесь с врачом перед началом терапии</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h4>📋 Клинические рекомендации:</h4>
+                    <p><strong>Пациенты < 60 лет без ССЗ:</strong> 1.2-1.6 мкг/кг/сут</p>
+                    <p><strong>Пациенты > 60 лет или с ССЗ:</strong> 1.0-1.2 мкг/кг/сут</p>
+                </div>
+            `;
+            
+            document.getElementById('doseResult').innerHTML = resultHTML;
+            document.getElementById('doseResult').style.display = 'block';
+        }
+
+        function clearCalculator() {
+            document.getElementById('weight').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('heartDisease').checked = false;
+            document.getElementById('doseResult').style.display = 'none';
+        }
+
+        // Остальные функции вашего приложения
         function analyzeComplete() {
             const tsh = parseFloat(document.getElementById('tsh').value);
             const t4 = parseFloat(document.getElementById('freeT4').value);
@@ -907,6 +1120,3 @@
     </script>
 </body>
 </html>
-```
-
-Это полный код с исправлениями для правильного отображения всей информации о лечении гипотиреоза. Теперь весь текст будет отображаться корректно с правильными разрывами строк и форматированием.
