@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -45,6 +45,96 @@
             opacity: 0.9;
         }
 
+        /* НАВИГАЦИЯ ПО ЗАБОЛЕВАНИЯМ */
+        .diseases-nav {
+            background: #f8f9fa;
+            padding: 25px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .disease-category {
+            margin-bottom: 25px;
+        }
+
+        .disease-category h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            font-size: 1.3em;
+        }
+
+        .disease-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .disease-link {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .disease-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #e3f2fd;
+        }
+
+        .disease-icon {
+            font-size: 1.5em;
+            margin-right: 12px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .disease-info h3 {
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .disease-info p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #7f8c8d;
+            line-height: 1.3;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: #2c3e50;
+            padding: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-menu a:hover,
+        .main-menu a.active {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* ВАШ ОРИГИНАЛЬНЫЙ CSS КОД */
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -427,7 +517,6 @@
             line-height: 1.5;
         }
 
-        /* Стили для калькулятора */
         .calculator-result {
             background: #f0f7ff;
             padding: 20px;
@@ -513,6 +602,127 @@
             <p>Диагностика заболеваний щитовидной железы по клиническим рекомендациям РФ</p>
         </div>
 
+        <!-- НАВИГАЦИЯ ПО ВСЕМ ЗАБОЛЕВАНИЯМ -->
+        <div class="diseases-nav">
+            <div class="disease-category">
+                <h2>🦋 Заболевания щитовидной железы</h2>
+                <div class="disease-links">
+                    <a href="#thyroid" class="disease-link">
+                        <div class="disease-icon">📊</div>
+                        <div class="disease-info">
+                            <h3>Диагностика щитовидной железы</h3>
+                            <p>ТТГ, Т4, Т3, антитела, УЗИ</p>
+                        </div>
+                    </a>
+                    <a href="pages/thyroid/hypothyroidism.html" class="disease-link">
+                        <div class="disease-icon">🐢</div>
+                        <div class="disease-info">
+                            <h3>Гипотиреоз</h3>
+                            <p>Снижение функции, лечение L-T4</p>
+                        </div>
+                    </a>
+                    <a href="pages/thyroid/hyperthyroidism.html" class="disease-link">
+                        <div class="disease-icon">⚡</div>
+                        <div class="disease-info">
+                            <h3>Гипертиреоз</h3>
+                            <p>Повышенная функция, тиреостатики</p>
+                        </div>
+                    </a>
+                    <a href="pages/thyroid/thyroiditis.html" class="disease-link">
+                        <div class="disease-icon">🔥</div>
+                        <div class="disease-info">
+                            <h3>Тиреоидит</h3>
+                            <p>Аутоиммунный, подострый</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="disease-category">
+                <h2>💉 Сахарный диабет</h2>
+                <div class="disease-links">
+                    <a href="pages/diabetes/type1.html" class="disease-link">
+                        <div class="disease-icon">🔬</div>
+                        <div class="disease-info">
+                            <h3>Диабет 1 типа</h3>
+                            <p>Аутоиммунный, инсулинотерапия</p>
+                        </div>
+                    </a>
+                    <a href="pages/diabetes/type2.html" class="disease-link">
+                        <div class="disease-icon">⚖️</div>
+                        <div class="disease-info">
+                            <h3>Диабет 2 типа</h3>
+                            <p>Инсулинорезистентность, метформин</p>
+                        </div>
+                    </a>
+                    <a href="pages/diabetes/gestational.html" class="disease-link">
+                        <div class="disease-icon">🤰</div>
+                        <div class="disease-info">
+                            <h3>Гестационный диабет</h3>
+                            <p>Диабет беременных</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="disease-category">
+                <h2>⚖️ Нарушения обмена веществ</h2>
+                <div class="disease-links">
+                    <a href="pages/metabolic/obesity.html" class="disease-link">
+                        <div class="disease-icon">🍎</div>
+                        <div class="disease-info">
+                            <h3>Ожирение</h3>
+                            <p>ИМТ, диета, физическая активность</p>
+                        </div>
+                    </a>
+                    <a href="pages/metabolic/syndrome.html" class="disease-link">
+                        <div class="disease-icon">🔄</div>
+                        <div class="disease-info">
+                            <h3>Метаболический синдром</h3>
+                            <p>Комплекс нарушений обмена</p>
+                        </div>
+                    </a>
+                    <a href="pages/metabolic/dyslipidemia.html" class="disease-link">
+                        <div class="disease-icon">🩸</div>
+                        <div class="disease-info">
+                            <h3>Дислипидемия</h3>
+                            <p>Нарушения липидного профиля</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="disease-category">
+                <h2>🧠 Заболевания надпочечников</h2>
+                <div class="disease-links">
+                    <a href="pages/adrenal/cushing.html" class="disease-link">
+                        <div class="disease-icon">🌕</div>
+                        <div class="disease-info">
+                            <h3>Синдром Кушинга</h3>
+                            <p>Избыток кортизола</p>
+                        </div>
+                    </a>
+                    <a href="pages/adrenal/addison.html" class="disease-link">
+                        <div class="disease-icon">🌑</div>
+                        <div class="disease-info">
+                            <h3>Болезнь Аддисона</h3>
+                            <p>Недостаточность надпочечников</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-menu">
+            <a href="index.html" class="active">🏠 Главная</a>
+            <a href="pages/thyroid.html">🦋 Щитовидная железа</a>
+            <a href="pages/diabetes.html">💉 Сахарный диабет</a>
+            <a href="pages/metabolic.html">⚖️ Обмен веществ</a>
+            <a href="pages/adrenal.html">🧠 Надпочечники</a>
+            <a href="pages/about.html">📚 О проекте</a>
+        </nav>
+
+        <!-- ВАШ ОРИГИНАЛЬНЫЙ КОД ДИАГНОСТИКИ -->
         <div class="main-content">
             <div class="input-section">
                 <div class="tab-buttons">
@@ -631,7 +841,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно для справки по показателям -->
+    <!-- Модальные окна -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('infoModal')">&times;</span>
@@ -676,7 +886,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно для липидного профиля -->
     <div id="lipidModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('lipidModal')">&times;</span>
@@ -1111,4 +1320,4 @@
         }
     </script>
 </body>
-</html>        index.html
+</html>
