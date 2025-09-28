@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Эндокринолог PRO - Все эндокринные заболевания</title>
+    <title>Эндокринолог PRO - Диагностика щитовидной железы</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -45,96 +45,6 @@
             opacity: 0.9;
         }
 
-        /* НАВИГАЦИЯ ПО ЗАБОЛЕВАНИЯМ */
-        .diseases-nav {
-            background: #f8f9fa;
-            padding: 20px;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .disease-category {
-            margin-bottom: 25px;
-        }
-
-        .disease-category h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-            font-size: 1.3em;
-        }
-
-        .disease-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-        }
-
-        .disease-link {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #34495e;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .disease-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            background: #e3f2fd;
-        }
-
-        .disease-icon {
-            font-size: 1.5em;
-            margin-right: 12px;
-            width: 40px;
-            text-align: center;
-        }
-
-        .disease-info h3 {
-            margin-bottom: 5px;
-            color: #2c3e50;
-            font-size: 1.1em;
-        }
-
-        .disease-info p {
-            margin: 0;
-            font-size: 0.85em;
-            color: #7f8c8d;
-            line-height: 1.3;
-        }
-
-        .main-menu {
-            display: flex;
-            justify-content: center;
-            background: #2c3e50;
-            padding: 15px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .main-menu a {
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .main-menu a:hover,
-        .main-menu a.active {
-            background: #3498db;
-            transform: translateY(-2px);
-        }
-
-        /* ОСНОВНОЙ КОНТЕНТ (ваш оригинальный код) */
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -600,130 +510,9 @@
     <div class="container">
         <div class="header">
             <h1>🧬 ЭНДОКРИНОЛОГ PRO</h1>
-            <p>Комплексная диагностика всех эндокринных заболеваний по клиническим рекомендациям РФ</p>
+            <p>Диагностика заболеваний щитовидной железы по клиническим рекомендациям РФ</p>
         </div>
 
-        <!-- НАВИГАЦИЯ ПО ВСЕМ ЗАБОЛЕВАНИЯМ -->
-        <div class="diseases-nav">
-            <div class="disease-category">
-                <h2>🦋 Заболевания щитовидной железы</h2>
-                <div class="disease-links">
-                    <a href="#thyroid" class="disease-link">
-                        <div class="disease-icon">📊</div>
-                        <div class="disease-info">
-                            <h3>Диагностика щитовидной железы</h3>
-                            <p>ТТГ, Т4, Т3, антитела, УЗИ</p>
-                        </div>
-                    </a>
-                    <a href="pages/thyroid/hypothyroidism.html" class="disease-link">
-                        <div class="disease-icon">🐢</div>
-                        <div class="disease-info">
-                            <h3>Гипотиреоз</h3>
-                            <p>Снижение функции, лечение L-T4</p>
-                        </div>
-                    </a>
-                    <a href="pages/thyroid/hyperthyroidism.html" class="disease-link">
-                        <div class="disease-icon">⚡</div>
-                        <div class="disease-info">
-                            <h3>Гипертиреоз</h3>
-                            <p>Повышенная функция, тиреостатики</p>
-                        </div>
-                    </a>
-                    <a href="pages/thyroid/thyroiditis.html" class="disease-link">
-                        <div class="disease-icon">🔥</div>
-                        <div class="disease-info">
-                            <h3>Тиреоидит</h3>
-                            <p>Аутоиммунный, подострый</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="disease-category">
-                <h2>💉 Сахарный диабет</h2>
-                <div class="disease-links">
-                    <a href="pages/diabetes/type1.html" class="disease-link">
-                        <div class="disease-icon">🔬</div>
-                        <div class="disease-info">
-                            <h3>Диабет 1 типа</h3>
-                            <p>Аутоиммунный, инсулинотерапия</p>
-                        </div>
-                    </a>
-                    <a href="pages/diabetes/type2.html" class="disease-link">
-                        <div class="disease-icon">⚖️</div>
-                        <div class="disease-info">
-                            <h3>Диабет 2 типа</h3>
-                            <p>Инсулинорезистентность, метформин</p>
-                        </div>
-                    </a>
-                    <a href="pages/diabetes/gestational.html" class="disease-link">
-                        <div class="disease-icon">🤰</div>
-                        <div class="disease-info">
-                            <h3>Гестационный диабет</h3>
-                            <p>Диабет беременных</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="disease-category">
-                <h2>⚖️ Нарушения обмена веществ</h2>
-                <div class="disease-links">
-                    <a href="pages/metabolic/obesity.html" class="disease-link">
-                        <div class="disease-icon">🍎</div>
-                        <div class="disease-info">
-                            <h3>Ожирение</h3>
-                            <p>ИМТ, диета, физическая активность</p>
-                        </div>
-                    </a>
-                    <a href="pages/metabolic/syndrome.html" class="disease-link">
-                        <div class="disease-icon">🔄</div>
-                        <div class="disease-info">
-                            <h3>Метаболический синдром</h3>
-                            <p>Комплекс нарушений обмена</p>
-                        </div>
-                    </a>
-                    <a href="pages/metabolic/dyslipidemia.html" class="disease-link">
-                        <div class="disease-icon">🩸</div>
-                        <div class="disease-info">
-                            <h3>Дислипидемия</h3>
-                            <p>Нарушения липидного профиля</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="disease-category">
-                <h2>🧠 Заболевания надпочечников</h2>
-                <div class="disease-links">
-                    <a href="pages/adrenal/cushing.html" class="disease-link">
-                        <div class="disease-icon">🌕</div>
-                        <div class="disease-info">
-                            <h3>Синдром Кушинга</h3>
-                            <p>Избыток кортизола</p>
-                        </div>
-                    </a>
-                    <a href="pages/adrenal/addison.html" class="disease-link">
-                        <div class="disease-icon">🌑</div>
-                        <div class="disease-info">
-                            <h3>Болезнь Аддисона</h3>
-                            <p>Недостаточность надпочечников</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <nav class="main-menu">
-            <a href="index.html" class="active">🏠 Главная</a>
-            <a href="pages/thyroid.html">🦋 Щитовидная железа</a>
-            <a href="pages/diabetes.html">💉 Сахарный диабет</a>
-            <a href="pages/metabolic.html">⚖️ Обмен веществ</a>
-            <a href="pages/adrenal.html">🧠 Надпочечники</a>
-            <a href="pages/about.html">📚 О проекте</a>
-        </nav>
-
-        <!-- ВАШ ОРИГИНАЛЬНЫЙ КОД ДИАГНОСТИКИ ЩИТОВИДНОЙ ЖЕЛЕЗЫ -->
         <div class="main-content">
             <div class="input-section">
                 <div class="tab-buttons">
@@ -842,82 +631,484 @@
         </div>
     </div>
 
-    <!-- Модальные окна (ваш оригинальный код) -->
+    <!-- Модальное окно для справки по показателям -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('infoModal')">&times;</span>
             <h2>📚 Справка по показателям щитовидной железы</h2>
             
-            <!-- ... ваш код модальных окон ... -->
+            <div class="info-section">
+                <h3>🧪 ТТГ (Тиреотропный гормон)</h3>
+                <p><strong>Норма:</strong> 0.4 - 4.0 мМЕ/л</p>
+                <p><strong>Клиническое значение:</strong> Наиболее чувствительный маркер функции щитовидной железы</p>
+                <p><strong>Повышен (> 4.0 мМЕ/л):</strong> Гипотиреоз, субклинический гипотиреоз</p>
+                <p><strong>Понижен (< 0.4 мМЕ/л):</strong> Тиреотоксикоз, субклинический тиреотоксикоз</p>
+            </div>
+
+            <div class="info-section">
+                <h3>🧪 св. Т4 (Свободный тироксин)</h3>
+                <p><strong>Норма:</strong> 11.0 - 22.0 пмоль/л</p>
+                <p><strong>Клиническое значение:</strong> Основной гормон щитовидной железы</p>
+                <p><strong>Повышен (> 22.0 пмоль/л):</strong> Тиреотоксикоз</p>
+                <p><strong>Понижен (< 11.0 пмоль/л):</strong> Гипотиреоз</p>
+            </div>
+
+            <div class="info-section">
+                <h3>🧪 св. Т3 (Свободный трийодтиронин)</h3>
+                <p><strong>Норма:</strong> 3.5 - 8.0 пмоль/л</p>
+                <p><strong>Клиническое значение:</strong> Биологически активная форма гормона</p>
+                <p><strong>Повышен (> 8.0 пмоль/л):</strong> Т3-токсикоз, болезнь Грейвса</p>
+            </div>
+
+            <div class="info-section">
+                <h3>🔬 Анти-ТПО (Антитела к тиреопероксидазе)</h3>
+                <p><strong>Норма:</strong> до 34 МЕ/мл</p>
+                <p><strong>Клиническое значение:</strong> Маркер аутоиммунного тиреоидита</p>
+                <p><strong>Повышен (> 34 МЕ/мл):</strong> Аутоиммунный тиреоидит, болезнь Грейвса</p>
+            </div>
+
+            <div class="info-section">
+                <h3>🔬 Анти-ТГ (Антитела к тиреоглобулину)</h3>
+                <p><strong>Норма:</strong> до 115 МЕ/мл</p>
+                <p><strong>Клиническое значение:</strong> Дополнительный маркер аутоиммунного процесса</p>
+                <p><strong>Повышен (> 115 МЕ/мл):</strong> Аутоиммунный тиреоидит</p>
+            </div>
         </div>
     </div>
 
+    <!-- Модальное окно для липидного профиля -->
     <div id="lipidModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('lipidModal')">&times;</span>
             <h2>🧪 Липидный профиль и статины</h2>
             
-            <!-- ... ваш код модальных окон ... -->
+            <table>
+                <tr>
+                    <th>Группа риска</th>
+                    <th>Целевой ЛПНП</th>
+                    <th>Препараты выбора</th>
+                </tr>
+                <tr>
+                    <td><strong>Очень высокий риск</strong></td>
+                    <td>&lt; 1,4 ммоль/л</td>
+                    <td>Аторвастатин 40-80 мг/сут</td>
+                </tr>
+                <tr>
+                    <td><strong>Высокий риск</strong></td>
+                    <td>&lt; 1,8 ммоль/л</td>
+                    <td>Аторвастатин 10-20 мг/сут</td>
+                </tr>
+                <tr>
+                    <td><strong>Умеренный риск</strong></td>
+                    <td>&lt; 2,6 ммоль/л</td>
+                    <td>Розувастатин 5-10 мг/сут</td>
+                </tr>
+            </table>
         </div>
     </div>
 
     <script>
-        // ВАШ ОРИГИНАЛЬНЫЙ JavaScript КОД
+        // База знаний по щитовидной железе (КР РФ)
         const THYROID_KNOWLEDGE = {
-            // ... ваш код ...
+            references: {
+                TSH: { min: 0.4, max: 4.0, unit: "мМЕ/л" },
+                FREE_T4: { min: 11.0, max: 22.0, unit: "пмоль/л" },
+                FREE_T3: { min: 3.5, max: 8.0, unit: "пмоль/л" },
+                ANTI_TPO: { max: 34.0, unit: "МЕ/мл" },
+                ANTI_TG: { max: 115.0, unit: "МЕ/мл" }
+            },
+
+            analyzeComplete: function(tsh, t4, t3, atpo, atg) {
+                if (!tsh) return null;
+
+                let diagnosis = "";
+                let treatment = "";
+                let recommendations = [];
+                let severity = "success";
+                let autoimmuneNote = "";
+
+                // Проверяем аутоиммунный процесс
+                if (atpo > 34 || atg > 115) {
+                    autoimmuneNote = " (аутоиммунный процесс)";
+                    recommendations.push("Анти-ТПО повышены - маркер аутоиммунного тиреоидита");
+                }
+
+                // Диагностика по КР РФ
+                if (tsh > 4.0 && t4 < 11.0) {
+                    diagnosis = "🔴 Первичный манифестный гипотиреоз" + autoimmuneNote;
+                    treatment = "Заместительная терапия левотироксином 1.6 мкг/кг/сут";
+                    recommendations.push("УЗИ щитовидной железы", "Контроль ТТГ через 6-8 недель");
+                    severity = "danger";
+                }
+                else if (tsh < 0.4 && (t4 > 22.0 || (t3 && t3 > 8.0))) {
+                    diagnosis = "🔴 Манифестный тиреотоксикоз" + autoimmuneNote;
+                    treatment = "Тиреостатики, радиойодтерапия или хирургическое лечение";
+                    recommendations.push("АТ-рТТГ для дифференциальной диагностики", "УЗИ с ЦДК");
+                    severity = "danger";
+                }
+                else if (tsh > 4.0 && (!t4 || t4 >= 11.0)) {
+                    diagnosis = "🟡 Субклинический гипотиреоз" + autoimmuneNote;
+                    treatment = atpo > 34 ? "Рекомендуется терапия левотироксином" : "Наблюдение";
+                    recommendations.push("Повторный контроль через 3-6 месяцев");
+                    severity = "warning";
+                }
+                else if (tsh < 0.4 && (!t4 || t4 <= 22.0) && (!t3 || t3 <= 8.0)) {
+                    diagnosis = "🟡 Субклинический тиреотоксикоз" + autoimmuneNote;
+                    treatment = "Обследование для выявления причины";
+                    recommendations.push("Исключить прием тиреоидных гормонов");
+                    severity = "warning";
+                }
+                else {
+                    diagnosis = "🟢 Эутиреоз (норма)";
+                    treatment = "Плановое наблюдение";
+                    recommendations.push("Контроль по показаниям");
+                    severity = "success";
+                }
+
+                return {
+                    diagnosis: diagnosis,
+                    treatment: treatment,
+                    recommendations: recommendations,
+                    severity: severity
+                };
+            },
+
+            getParameterStatus: function(value, paramName) {
+                const ref = this.references[paramName];
+                if (!value || isNaN(value)) return { status: 'unknown', text: 'Не введено' };
+                
+                if (paramName === 'ANTI_TPO' || paramName === 'ANTI_TG') {
+                    return value > ref.max ? 
+                        { status: 'high', text: 'ПОВЫШЕН' } : 
+                        { status: 'normal', text: 'норма' };
+                } else {
+                    if (value < ref.min) return { status: 'low', text: 'ПОНИЖЕН' };
+                    if (value > ref.max) return { status: 'high', text: 'ПОВЫШЕН' };
+                    return { status: 'normal', text: 'норма' };
+                }
+            }
         };
 
+        // Функции для переключения вкладок
         function switchTab(tabName) {
-            // ... ваш код ...
+            // Скрываем все табы
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Показываем выбранный таб
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
         }
 
+        // Функции калькулятора дозы L-T4
         function calculateDose() {
-            // ... ваш код ...
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const hasHeartDisease = document.getElementById('heartDisease').checked;
+            
+            if (!weight || !age) {
+                alert('Пожалуйста, введите вес и возраст пациента');
+                return;
+            }
+            
+            if (weight <= 0 || age <= 0) {
+                alert('Вес и возраст должны быть положительными числами');
+                return;
+            }
+            
+            let minDosePerKg, maxDosePerKg;
+            let patientCategory = '';
+            
+            if (age >= 60 || hasHeartDisease) {
+                minDosePerKg = 1.0;
+                maxDosePerKg = 1.2;
+                patientCategory = age >= 60 ? 'старше 60 лет' : 'с сердечно-сосудистыми заболеваниями';
+            } else {
+                minDosePerKg = 1.2;
+                maxDosePerKg = 1.6;
+                patientCategory = 'моложе 60 лет без патологии сердца';
+            }
+            
+            const minDose = weight * minDosePerKg;
+            const maxDose = weight * maxDosePerKg;
+            const recommendedDose = Math.round((minDose + maxDose) / 2);
+            
+            let resultHTML = `
+                <div style="text-align: center;">
+                    <div class="dose-value">${recommendedDose} мкг/сут</div>
+                    <div class="dose-range">Диапазон: ${Math.round(minDose)} - ${Math.round(maxDose)} мкг/сут</div>
+                </div>
+                
+                <div class="parameter-item">
+                    <span class="parameter-name">Категория пациента:</span>
+                    <span class="parameter-value">${patientCategory}</span>
+                </div>
+                
+                <div class="parameter-item">
+                    <span class="parameter-name">Расчетная доза:</span>
+                    <span class="parameter-value">${minDosePerKg} - ${maxDosePerKg} мкг/кг/сут</span>
+                </div>
+                
+                <div class="recommendation-box">
+                    <h4>💡 Рекомендации по приему:</h4>
+                    <ul>
+                        <li>Принимайте утром натощак, за 30-60 мин до еды</li>
+                        <li>Контроль ТТГ через 6-8 недель после начала терапии</li>
+                        <li>${hasHeartDisease ? 'Начните с меньшей дозы и увеличивайте постепенно' : 'Можно начинать с полной расчетной дозы'}</li>
+                        <li>Проконсультируйтесь с врачом перед началом терапии</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h4>📋 Клинические рекомендации:</h4>
+                    <p><strong>Пациенты < 60 лет без ССЗ:</strong> 1.2-1.6 мкг/кг/сут</p>
+                    <p><strong>Пациенты > 60 лет или с ССЗ:</strong> 1.0-1.2 мкг/кг/сут</p>
+                </div>
+            `;
+            
+            document.getElementById('doseResult').innerHTML = resultHTML;
+            document.getElementById('doseResult').style.display = 'block';
         }
 
         function clearCalculator() {
-            // ... ваш код ...
+            document.getElementById('weight').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('heartDisease').checked = false;
+            document.getElementById('doseResult').style.display = 'none';
         }
 
+        // Остальные функции приложения
         function analyzeComplete() {
-            // ... ваш код ...
+            const tsh = parseFloat(document.getElementById('tsh').value);
+            const t4 = parseFloat(document.getElementById('freeT4').value);
+            const t3 = parseFloat(document.getElementById('freeT3').value);
+            const atpo = parseFloat(document.getElementById('antiTPO').value);
+            const atg = parseFloat(document.getElementById('antiTG').value);
+            
+            if (!tsh) {
+                alert('Введите значение ТТГ для анализа');
+                return;
+            }
+            
+            showLoading(true);
+            
+            setTimeout(() => {
+                const result = THYROID_KNOWLEDGE.analyzeComplete(tsh, t4, t3, atpo, atg);
+                displayResults(tsh, t4, t3, atpo, atg, result);
+                showLoading(false);
+            }, 800);
         }
 
         function analyzeBasic() {
-            // ... ваш код ...
+            const tsh = parseFloat(document.getElementById('tsh').value);
+            const t4 = parseFloat(document.getElementById('freeT4').value);
+            
+            if (!tsh) {
+                alert('Введите значение ТТГ');
+                return;
+            }
+            
+            let result = "<strong>Быстрый анализ:</strong><br>";
+            result += `ТТГ: ${tsh} мМЕ/л - `;
+            
+            if (tsh > 4.0 && t4 < 11.0) {
+                result += "🔴 Возможен гипотиреоз";
+            } else if (tsh < 0.4 && t4 > 22.0) {
+                result += "🔴 Возможен тиреотоксикоз";
+            } else if (tsh > 4.0) {
+                result += "🟡 Субклинический гипотиреоз";
+            } else if (tsh < 0.4) {
+                result += "🟡 Субклинический тиреотоксикоз";
+            } else {
+                result += "🟢 Норма";
+            }
+            
+            document.getElementById('diagnosisContent').innerHTML = result;
+            document.getElementById('diagnosisCard').className = 'diagnosis-card ' + 
+                (tsh >= 0.4 && tsh <= 4.0 ? 'diagnosis-success' : 'diagnosis-warning');
+            document.getElementById('resultContainer').style.display = 'block';
         }
 
         function displayResults(tsh, t4, t3, atpo, atg, result) {
-            // ... ваш код ...
+            const diagnosisCard = document.getElementById('diagnosisCard');
+            let diagnosisHTML = `<h3>${result.diagnosis}</h3>`;
+            
+            // Добавляем кнопку лечения для гипотиреоза
+            if (result.diagnosis.includes('гипотиреоз')) {
+                diagnosisHTML += `
+                    <button class="treatment-btn" onclick="showHypothyroidismTreatment()">
+                        💊 Подробнее о лечении гипотиреоза
+                    </button>
+                `;
+            }
+            
+            document.getElementById('diagnosisContent').innerHTML = diagnosisHTML;
+            diagnosisCard.className = 'diagnosis-card diagnosis-' + result.severity;
+
+            // Отображаем параметры
+            let parametersHTML = '';
+            const parameters = [
+                { name: 'ТТГ', value: tsh, param: 'TSH' },
+                { name: 'св.Т4', value: t4, param: 'FREE_T4' },
+                { name: 'св.Т3', value: t3, param: 'FREE_T3' },
+                { name: 'Анти-ТПО', value: atpo, param: 'ANTI_TPO' },
+                { name: 'Анти-ТГ', value: atg, param: 'ANTI_TG' }
+            ];
+
+            parameters.forEach(param => {
+                if (param.value && !isNaN(param.value)) {
+                    const status = THYROID_KNOWLEDGE.getParameterStatus(param.value, param.param);
+                    parametersHTML += `
+                        <div class="parameter-item">
+                            <span class="parameter-name">${param.name}:</span>
+                            <span class="parameter-value value-${status.status}">
+                                ${param.value} ${THYROID_KNOWLEDGE.references[param.param].unit} (${status.text})
+                            </span>
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('parametersGrid').innerHTML = parametersHTML;
+            document.getElementById('treatmentBox').innerHTML = `<h4>💊 Тактика лечения:</h4><p>${result.treatment}</p>`;
+            document.getElementById('recommendationBox').innerHTML = `
+                <h4>📋 Рекомендации:</h4>
+                <ul>${result.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+            `;
+            
+            document.getElementById('resultContainer').style.display = 'block';
         }
 
         function showHypothyroidismTreatment() {
-            // ... ваш код ...
+            const modalContent = `
+                <h2>💊 Лечение гипотиреоза заместительной терапией L-тироксином (L-T4)</h2>
+                
+                <div class="info-section">
+                    <h3>1. Показания к началу терапии</h3>
+                    <p><strong>Явный (манифестный) гипотиреоз:</strong> Лечение обязательно.</p>
+                    <p><strong>Субклинический гипотиреоз:</strong> Решение принимается индивидуально, особенно при:</p>
+                    <ul>
+                        <li>Беременности или планировании беременности</li>
+                        <li>Высоком уровне ТТГ (обычно >10 мЕд/л)</li>
+                        <li>Наличии выраженных симптомов гипотиреоза</li>
+                        <li>Наличии антител к щитовидной железе (высокий риск перехода в манифестную форму)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>2. Расчет стартовой дозы L-T4</h3>
+                    <p>Доза зависит от возраста пациента и состояния сердечно-сосудистой системы (ССС).</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Группа пациентов</th>
+                            <th>Рекомендуемая стартовая доза</th>
+                            <th>Тактика назначения</th>
+                        </tr>
+                        <tr>
+                            <td><strong>&lt; 60 лет БЕЗ патологии сердца</strong></td>
+                            <td>1.2 - 1.6 мкг/кг/сут</td>
+                            <td>Можно начинать с полной расчетной дозы</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&gt; 60 лет ИЛИ пациенты с ССЗ</strong><br>(вне зависимости от возраста)</td>
+                            <td>1.0 - 1.2 мкг/кг/сут</td>
+                            <td>Начинать с малой дозы с последующим постепенным увеличением под контролем самочувствия и ЭКГ</td>
+                        </tr>
+                    </table>
+                    
+                    <p><strong>Особый случай: Вторичный гипотиреоз</strong> (проблема с гипофизом)</p>
+                    <p>Лечение также проводится L-T4, но стартовые дозы обычно ниже.</p>
+                    <p>Критерий адекватности лечения — уровень свТ4 (см. ниже).</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>3. Правила приема препарата</h3>
+                    <ul>
+                        <li><strong>Время приема:</strong> Утром, натощак</li>
+                        <li><strong>Интервал до еды/питья:</strong> За 30-60 минут до завтрака, кофе или чая</li>
+                        <li><strong>Интервал с другими лекарствами:</strong> При одновременном приеме препаратов, нарушающих всасывание L-T4 (железо, кальций, антациды), необходим интервал не менее 4 часов</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>4. Контроль эффективности и коррекция дозы</h3>
+                    <p><strong>Сроки контроля:</strong> Оценка адекватности дозы проводится через 6-8 недель после начала терапии или изменения дозировки.</p>
+                    
+                    <p><strong>Ключевой показатель для контроля:</strong></p>
+                    <ul>
+                        <li><strong>При первичном гипотиреозе:</strong> Основной маркер — ТТГ (целевой уровень 0.5-2.5 мЕд/л для большинства пациентов)</li>
+                        <li><strong>При вторичном гипотиреозе:</strong> Основной маркер — свободный Т4 (свТ4). Цель — достижение середины референсного диапазона лаборатории. ТТГ в этом случае неинформативен</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>5. Важные замечания</h3>
+                    <ul>
+                        <li><strong>Смена препарата:</strong> Разные торговые марки L-T4 имеют разную биодоступность. При смене производителя препарата обязателен контроль ТТГ через 6-8 недель</li>
+                        <li><strong>Беременность:</strong> Доза L-T4 часто требует увеличения (на 25-50%). Контроль ТТГ каждые 4-6 недель в течение беременности</li>
+                    </ul>
+                </div>
+            `;
+            
+            // Создаем модальное окно
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                    ${modalContent}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Закрытие при клике вне окна
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.removeChild(modal);
+                }
+            }
         }
 
         function showParameterInfo() {
-            // ... ваш код ...
+            document.getElementById('infoModal').style.display = 'block';
         }
 
         function showLipidProfile() {
-            // ... ваш код ...
+            document.getElementById('lipidModal').style.display = 'block';
         }
 
         function closeModal(modalId) {
-            // ... ваш код ...
+            document.getElementById(modalId).style.display = 'none';
         }
 
         function clearForm() {
-            // ... ваш код ...
+            document.getElementById('tsh').value = '';
+            document.getElementById('freeT4').value = '';
+            document.getElementById('freeT3').value = '';
+            document.getElementById('antiTPO').value = '';
+            document.getElementById('antiTG').value = '';
+            document.getElementById('resultContainer').style.display = 'none';
         }
 
         function showLoading(show) {
-            // ... ваш код ...
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('resultContainer').style.display = show ? 'none' : 'block';
         }
 
+        // Закрытие модальных окон при клике вне их
         window.onclick = function(event) {
-            // ... ваш код ...
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
         }
     </script>
 </body>
-</html>
+</html>        index.html
