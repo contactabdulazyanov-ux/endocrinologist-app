@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заболевания щитовидной железы - Эндокринолог PRO</title>
+    <style>
+        /* Все стили из главной страницы */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: #2c3e50;
+            padding: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-menu a:hover,
+        .main-menu a.active {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .disease-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .disease-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .disease-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .disease-card ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .disease-card li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .calculator-section {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .form-group {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+            display: none;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦋 ЩИТОВИДНАЯ ЖЕЛЕЗА</h1>
+            <p>Полная диагностика и лечение заболеваний щитовидной железы</p>
+        </div>
+
+        <nav class="main-menu">
+            <a href="../../index.html">🏠 Главная</a>
+            <a href="index.html" class="active">🦋 Щитовидная железа</a>
+            <a href="../diabetes/index.html">💉 Сахарный диабет</a>
+            <a href="../metabolic/index.html">⚖️ Обмен веществ</a>
+            <a href="../adrenal/index.html">🧠 Надпочечники</a>
+        </nav>
+
+        <div class="content">
+            <h2>Заболевания щитовидной железы</h2>
+            <p>Комплексная диагностика и лечение по клиническим рекомендациям РФ</p>
+
+            <div class="disease-grid">
+                <div class="disease-card">
+                    <h3>📊 Диагностика</h3>
+                    <p>Полный анализ показателей щитовидной железы:</p>
+                    <ul>
+                        <li>ТТГ, св. Т4, св. Т3</li>
+                        <li>Анти-ТПО, Анти-ТГ</li>
+                        <li>АТ-рТТГ</li>
+                        <li>УЗИ щитовидной железы</li>
+                    </ul>
+                    <a href="../../index.html" class="btn">Перейти к диагностике</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3>🐢 Гипотиреоз</h3>
+                    <p>Снижение функции щитовидной железы:</p>
+                    <ul>
+                        <li>Первичный и вторичный гипотиреоз</li>
+                        <li>Субклинический гипотиреоз</li>
+                        <li>Заместительная терапия L-T4</li>
+                        <li>Контроль эффективности лечения</li>
+                    </ul>
+                    <a href="hypothyroidism.html" class="btn">Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3>⚡ Гипертиреоз</h3>
+                    <p>Повышенная функция щитовидной железы:</p>
+                    <ul>
+                        <li>Болезнь Грейвса</li>
+                        <li>Токсический узловой зоб</li>
+                        <li>Тиреостатическая терапия</li>
+                        <li>Радиойодтерапия</li>
+                    </ul>
+                    <a href="hyperthyroidism.html" class="btn">Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3>🔥 Тиреоидиты</h3>
+                    <p>Воспалительные заболевания:</p>
+                    <ul>
+                        <li>Аутоиммунный тиреоидит</li>
+                        <li>Подострый тиреоидит</li>
+                        <li>Послеродовой тиреоидит</li>
+                        <li>Безболевой тиреоидит</li>
+                    </ul>
+                    <a href="thyroiditis.html" class="btn">Подробнее</a>
+                </div>
+            </div>
+
+            <!-- Калькулятор дозы L-T4 -->
+            <div class="calculator-section">
+                <h2>💊 Калькулятор дозы L-тироксина</h2>
+                <p>Рассчитайте стартовую дозу левотироксина для лечения гипотиреоза</p>
+                
+                <div class="form-group">
+                    <label for="thyroidWeight">Вес пациента (кг)</label>
+                    <input type="number" id="thyroidWeight" placeholder="Например: 70" value="70">
+                </div>
+
+                <div class="form-group">
+                    <label for="thyroidAge">Возраст пациента (лет)</label>
+                    <input type="number" id="thyroidAge" placeholder="Например: 45" value="45">
+                </div>
+
+                <div class="form-group">
+                    <label for="thyroidTSH">ТТГ (мМЕ/л)</label>
+                    <input type="number" step="0.01" id="thyroidTSH" placeholder="Например: 15.0" value="15.0">
+                </div>
+
+                <button class="btn" onclick="calculateThyroidDose()" style="background: #e74c3c;">
+                    🧮 Рассчитать дозу L-T4
+                </button>
+
+                <div id="thyroidDoseResult" class="result-box"></div>
+            </div>
+
+            <!-- Справочная информация -->
+            <div class="info-section">
+                <h3>📈 Референсные значения</h3>
+                <table>
+                    <tr>
+                        <th>Показатель</th>
+                        <th>Норма</th>
+                        <th>Клиническое значение</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ТТГ</strong></td>
+                        <td>0.4 - 4.0 мМЕ/л</td>
+                        <td>Основной маркер функции щитовидной железы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>св. Т4</strong></td>
+                        <td>11.0 - 22.0 пмоль/л</td>
+                        <td>Основной гормон щитовидной железы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>св. Т3</strong></td>
+                        <td>3.5 - 8.0 пмоль/л</td>
+                        <td>Биологически активная форма гормона</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Анти-ТПО</strong></td>
+                        <td>до 34 МЕ/мл</td>
+                        <td>Маркер аутоиммунного тиреоидита</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="info-section">
+                <h3>🎯 Целевые значения ТТГ при лечении</h3>
+                <table>
+                    <tr>
+                        <th>Состояние</th>
+                        <th>Целевой ТТГ</th>
+                        <th>Примечания</th>
+                    </tr>
+                    <tr>
+                        <td>Первичный гипотиреоз</td>
+                        <td>0.5 - 2.5 мМЕ/л</td>
+                        <td>Оптимальный диапазон для большинства пациентов</td>
+                    </tr>
+                    <tr>
+                        <td>Беременность</td>
+                        <td>0.5 - 2.5 мМЕ/л</td>
+                        <td>Более строгий контроль, особенно в 1 триместре</td>
+                    </tr>
+                    <tr>
+                        <td>Пожилые пациенты</td>
+                        <td>1.0 - 5.0 мМЕ/л</td>
+                        <td>Менее агрессивная коррекция</td>
+                    </tr>
+                    <tr>
+                        <td>Кардиологические пациенты</td>
+                        <td>1.0 - 4.0 мМЕ/л</td>
+                        <td>Осторожная титрация дозы</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateThyroidDose() {
+            const weight = parseFloat(document.getElementById('thyroidWeight').value);
+            const age = parseInt(document.getElementById('thyroidAge').value);
+            const tsh = parseFloat(document.getElementById('thyroidTSH').value);
+            
+            if (!weight || !age || !tsh) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            let dosePerKg;
+            let recommendations = [];
+            
+            if (age >= 60 || tsh > 20) {
+                dosePerKg = 1.0;
+                recommendations.push("Начните с 25-50 мкг/сут из-за возраста или высокого ТТГ");
+                recommendations.push("Увеличивайте дозу постепенно каждые 4-6 недель");
+            } else if (age >= 40) {
+                dosePerKg = 1.2;
+                recommendations.push("Стандартная стартовая доза");
+            } else {
+                dosePerKg = 1.6;
+                recommendations.push("Полная заместительная доза");
+            }
+            
+            const calculatedDose = Math.round(weight * dosePerKg);
+            const roundedDose = Math.round(calculatedDose / 25) * 25; // Округление до ближайших 25 мкг
+            
+            let resultHTML = `
+                <h3>💊 Рекомендуемая доза: ${roundedDose} мкг/сут</h3>
+                <p><strong>Расчет:</strong> ${weight} кг × ${dosePerKg} мкг/кг = ${calculatedDose} мкг/сут</p>
+                <p><strong>Округленная доза:</strong> ${roundedDose} мкг/сут</p>
+                
+                <div style="margin-top: 15px;">
+                    <h4>📋 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        <li>Контроль ТТГ через 6-8 недель</li>
+                        <li>Принимать утром натощак за 30-60 мин до еды</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 15px; background: #e8f5e8; border-radius: 5px;">
+                    <h4>🎯 Дальнейшая коррекция:</h4>
+                    <p>После контроля ТТГ через 6-8 недель:</p>
+                    <ul>
+                        <li>ТТГ > 4.0: Увеличить дозу на 25 мкг/сут</li>
+                        <li>ТТГ 0.5-2.5: Поддерживать текущую дозу</li>
+                        <li>ТТГ < 0.1: Уменьшить дозу на 25 мкг/сут</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('thyroidDoseResult').innerHTML = resultHTML;
+            document.getElementById('thyroidDoseResult').style.display = 'block';
+        }
+
+        // Автозаполнение для тестирования
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница щитовидной железы загружена');
+        });
+    </script>
+</body>
+</html>
