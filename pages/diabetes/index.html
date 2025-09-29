@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сахарный диабет - Эндокринолог PRO</title>
+    <style>
+        /* Все основные стили как в thyroid/index.html */
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #e74c3c;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .diabetes-type {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid;
+        }
+
+        .type1 { border-left-color: #3498db; }
+        .type2 { border-left-color: #e74c3c; }
+        .gestational { border-left-color: #9b59b6; }
+
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .bolus-calculator {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💉 САХАРНЫЙ ДИАБЕТ</h1>
+            <p>Диагностика, лечение и мониторинг сахарного диабета</p>
+        </div>
+
+        <nav class="main-menu">
+            <a href="../../index.html">🏠 Главная</a>
+            <a href="../thyroid/index.html">🦋 Щитовидная железа</a>
+            <a href="index.html" class="active">💉 Сахарный диабет</a>
+            <a href="../metabolic/index.html">⚖️ Обмен веществ</a>
+            <a href="../adrenal/index.html">🧠 Надпочечники</a>
+        </nav>
+
+        <div class="content">
+            <h2>Сахарный диабет: диагностика и лечение</h2>
+            
+            <div class="disease-grid">
+                <div class="disease-card">
+                    <h3>🔬 Диабет 1 типа</h3>
+                    <p>Аутоиммунное заболевание:</p>
+                    <ul>
+                        <li>Абсолютный дефицит инсулина</li>
+                        <li>Антитела к GAD, IA-2</li>
+                        <li>Инсулинотерапия</li>
+                        <li>Кетоацидоз</li>
+                    </ul>
+                    <a href="type1.html" class="btn">Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3>⚖️ Диабет 2 типа</h3>
+                    <p>Инсулинорезистентность:</p>
+                    <ul>
+                        <li>Относительный дефицит инсулина</li>
+                        <li>Метформин, СГТ2</li>
+                        <li>АГПП-1</li>
+                        <li>Инсулин на поздних стадиях</li>
+                    </ul>
+                    <a href="type2.html" class="btn">Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3>🤰 Гестационный диабет</h3>
+                    <p>Диабет беременных:</p>
+                    <ul>
+                        <li>Скрининг на 24-28 неделе</li>
+                        <li>Диетотерапия</li>
+                        <li>Инсулин при необходимости</li>
+                        <li>Контроль после родов</li>
+                    </ul>
+                    <a href="gestational.html" class="btn">Подробнее</a>
+                </div>
+            </div>
+
+            <!-- Калькуляторы для диабета -->
+            <div class="calculator-section">
+                <h2>🧮 Калькуляторы для диабета</h2>
+                
+                <div class="calculator-grid">
+                    <!-- Калькулятор ХЕ -->
+                    <div class="calculator-card">
+                        <h3>🍞 Калькулятор хлебных единиц (ХЕ)</h3>
+                        <div class="form-group">
+                            <label for="carbAmount">Углеводы в продукте (г)</label>
+                            <input type="number" id="carbAmount" placeholder="Например: 30">
+                        </div>
+                        <button class="btn" onclick="calculateXE()">Рассчитать ХЕ</button>
+                        <div id="xeResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор болюсного инсулина -->
+                    <div class="calculator-card">
+                        <h3>💉 Калькулятор болюсного инсулина</h3>
+                        <div class="form-group">
+                            <label for="currentGlucose">Текущий сахар крови (ммоль/л)</label>
+                            <input type="number" step="0.1" id="currentGlucose" placeholder="Например: 12.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetGlucose">Целевой сахар (ммоль/л)</label>
+                            <input type="number" step="0.1" id="targetGlucose" placeholder="Например: 6.0" value="6.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="isf">Фактор чувствительности (ммоль/л на 1 ЕД)</label>
+                            <input type="number" step="0.1" id="isf" placeholder="Например: 2.5" value="2.5">
+                        </div>
+                        <button class="btn" onclick="calculateBolus()">Рассчитать болюс</button>
+                        <div id="bolusResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Диагностические критерии -->
+            <div class="info-section">
+                <h3>📊 Диагностические критерии диабета</h3>
+                <table>
+                    <tr>
+                        <th>Показатель</th>
+                        <th>Норма</th>
+                        <th>Предиабет</th>
+                        <th>Диабет</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Глюкоза натощак</strong></td>
+                        <td>&lt; 6.1 ммоль/л</td>
+                        <td>6.1 - 6.9 ммоль/л</td>
+                        <td>≥ 7.0 ммоль/л</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Глюкоза через 2 ч ПГТТ</strong></td>
+                        <td>&lt; 7.8 ммоль/л</td>
+                        <td>7.8 - 11.0 ммоль/л</td>
+                        <td>≥ 11.1 ммоль/л</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Гликированный гемоглобин</strong></td>
+                        <td>&lt; 6.0%</td>
+                        <td>6.0 - 6.4%</td>
+                        <td>≥ 6.5%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateXE() {
+            const carbs = parseFloat(document.getElementById('carbAmount').value);
+            
+            if (!carbs) {
+                alert('Введите количество углеводов');
+                return;
+            }
+            
+            const xe = (carbs / 12).toFixed(1);
+            
+            let resultHTML = `
+                <h3>🍞 Результат: ${xe} ХЕ</h3>
+                <p><strong>Расчет:</strong> ${carbs} г углеводов ÷ 12 = ${xe} ХЕ</p>
+                
+                <div style="margin-top: 15px;">
+                    <h4>💡 Информация о ХЕ:</h4>
+                    <ul>
+                        <li>1 ХЕ = 12 г углеводов</li>
+                        <li>На 1 ХЕ обычно требуется 1-2 ЕД инсулина</li>
+                        <li>Учитывайте индивидуальную чувствительность</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('xeResult').innerHTML = resultHTML;
+            document.getElementById('xeResult').style.display = 'block';
+        }
+
+        function calculateBolus() {
+            const current = parseFloat(document.getElementById('currentGlucose').value);
+            const target = parseFloat(document.getElementById('targetGlucose').value);
+            const isf = parseFloat(document.getElementById('isf').value);
+            
+            if (!current || !target || !isf) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            const correction = (current - target) / isf;
+            const bolus = Math.max(0, correction).toFixed(1);
+            
+            let resultHTML = `
+                <h3>💉 Коррекционный болюс: ${bolus} ЕД</h3>
+                <p><strong>Расчет:</strong> (${current} - ${target}) ÷ ${isf} = ${bolus} ЕД</p>
+                
+                <div style="margin-top: 15px; padding: 15px; background: ${current > 10 ? '#f8d7da' : '#d1ecf1'}; border-radius: 5px;">
+                    <h4>${current > 10 ? '⚠️ Высокий сахар' : '✅ Сахар в пределах'} </h4>
+                    <p>Текущий уровень: ${current} ммоль/л</p>
+                    <p>Целевой уровень: ${target} ммоль/л</p>
+                    ${current > 15 ? '<p><strong>Рекомендация:</strong> Проверить кетоны в моче</p>' : ''}
+                </div>
+            `;
+            
+            document.getElementById('bolusResult').innerHTML = resultHTML;
+            document.getElementById('bolusResult').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница диабета загружена');
+        });
+    </script>
+</body>
+</html>
