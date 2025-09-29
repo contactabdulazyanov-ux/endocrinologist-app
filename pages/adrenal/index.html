@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заболевания надпочечников - Эндокринолог PRO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --secondary: #8b5cf6;
+            --accent: #a78bfa;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #faf5ff;
+            --dark: #1e293b;
+            --text: #374151;
+            --text-light: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: var(--dark);
+            padding: 20px;
+            gap: 8px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-menu a {
+            padding: 12px 24px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95em;
+        }
+
+        .main-menu a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .main-menu a.active {
+            background: var(--primary);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .page-title {
+            font-size: 2.2em;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            font-size: 1.2em;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .disease-card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #ddd6fe;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .disease-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .disease-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.25);
+            border-color: var(--primary);
+        }
+
+        .disease-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .disease-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .disease-card ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .disease-card li {
+            margin-bottom: 10px;
+            color: var(--text);
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .disease-card li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.95em;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .calculator-card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #ddd6fe;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.15);
+        }
+
+        .calculator-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd6fe;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .form-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.15);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd6fe;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #faf5ff;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid #bae6fd;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%);
+            padding: 35px;
+            border-radius: 16px;
+            margin: 35px 0;
+            border: 1px solid #ddd6fe;
+        }
+
+        .info-section h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd6fe;
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        tr:nth-child(even) {
+            background: #faf5ff;
+        }
+
+        tr:hover {
+            background: #ede9fe;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #ddd6fe;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .calculator-value {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin: 15px 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .symptom-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .symptom-checkbox:hover {
+            background: #f1f5f9;
+        }
+
+        .symptom-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .disease-grid, .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .main-menu a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 НАДПОЧЕЧНИКИ</h1>
+            <p>Диагностика и лечение заболеваний коры и мозгового вещества надпочечников</p>
+        </div>
+
+        <nav class="main-menu">
+            <a href="../../index.html">🏠 Главная</a>
+            <a href="../thyroid/index.html">🦋 Щитовидная железа</a>
+            <a href="../diabetes/index.html">💉 Сахарный диабет</a>
+            <a href="../metabolic/index.html">⚖️ Обмен веществ</a>
+            <a href="index.html" class="active">🧠 Надпочечники</a>
+        </nav>
+
+        <div class="content">
+            <h1 class="page-title">Заболевания надпочечников</h1>
+            <p class="page-subtitle">Комплексная диагностика нарушений гормональной функции надпочечников</p>
+
+            <!-- Быстрый доступ -->
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌕</div>
+                    <h3>Синдром Кушинга</h3>
+                    <p>Избыток кортизола</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌑</div>
+                    <h3>Болезнь Аддисона</h3>
+                    <p>Недостаточность коры</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Феохромоцитома</h3>
+                    <p>Катехоламиновые кризы</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Гормональные тесты</h3>
+                    <p>Лабораторная диагностика</p>
+                </div>
+            </div>
+
+            <div class="disease-grid">
+                <div class="disease-card">
+                    <h3><div class="disease-icon">🌕</div> Синдром Кушинга</h3>
+                    <p>Гиперкортицизм - избыточная продукция кортизола:</p>
+                    <ul>
+                        <li>Центральное и периферическое ожирение</li>
+                        <li>Лунообразное лицо, багровые стрии</li>
+                        <li>Артериальная гипертензия</li>
+                        <li>Нарушение толерантности к глюкозе</li>
+                    </ul>
+                    <a href="cushing.html" class="btn">📖 Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3><div class="disease-icon">🌑</div> Болезнь Аддисона</h3>
+                    <p>Первичная надпочечниковая недостаточность:</p>
+                    <ul>
+                        <li>Гиперпигментация кожи и слизистых</li>
+                        <li>Артериальная гипотензия, астения</li>
+                        <li>Потеря веса, анорексия</li>
+                        <li>Надпочечниковый криз</li>
+                    </ul>
+                    <a href="addison.html" class="btn">📖 Подробнее</a>
+                </div>
+
+                <div class="disease-card">
+                    <h3><div class="disease-icon">⚡</div> Феохромоцитома</h3>
+                    <p>Катехоламин-продуцирующая опухоль:</p>
+                    <ul>
+                        <li>Пароксизмальная артериальная гипертензия</li>
+                        <li>Головная боль, потливость, тахикардия</li>
+                        <li>Тревожность, панические атаки</li>
+                        <li>Метанефрины и норметанефрины в моче</li>
+                    </ul>
+                    <a href="pheochromocytoma.html" class="btn">📖 Подробнее</a>
+                </div>
+            </div>
+
+            <!-- Калькуляторы для надпочечников -->
+            <div class="info-section">
+                <h3>🧮 Диагностические калькуляторы</h3>
+                <p class="section-subtitle">Инструменты для оценки функции надпочечников и диагностики заболеваний</p>
+                
+                <div class="calculator-grid">
+                    <!-- Калькулятор супрессии дексаметазоном -->
+                    <div class="calculator-card">
+                        <h3>🔬 Малая дексаметазоновая проба</h3>
+                        <div class="form-group">
+                            <label for="cortisolBasal">Кортизол исходный (нмоль/л)</label>
+                            <input type="number" id="cortisolBasal" placeholder="Например: 650">
+                        </div>
+                        <div class="form-group">
+                            <label for="cortisolAfterDex">Кортизол после дексаметазона (нмоль/л)</label>
+                            <input type="number" id="cortisolAfterDex" placeholder="Например: 120">
+                        </div>
+                        <button class="btn" onclick="calculateDexamethasoneTest()">📊 Оценить пробу</button>
+                        <div id="dexamethasoneResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Оценка симптомов Кушинга -->
+                    <div class="calculator-card">
+                        <h3>🌕 Оценка симптомов Кушинга</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-light);">Отметьте присутствующие симптомы:</p>
+                        
+                        <div class="form-group">
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom1">
+                                <label for="symptom1">Центральное ожирение</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom2">
+                                <label for="symptom2">Лунообразное лицо</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom3">
+                                <label for="symptom3">Багровые стрии</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom4">
+                                <label for="symptom4">Артериальная гипертензия</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom5">
+                                <label for="symptom5">Нарушение толерантности к глюкозе</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom6">
+                                <label for="symptom6">Мышечная слабость</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom7">
+                                <label for="symptom7">Остеопороз</label>
+                            </div>
+                            <div class="symptom-checkbox">
+                                <input type="checkbox" id="symptom8">
+                                <label for="symptom8">Нарушение менструального цикла</label>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="calculateCushingScore()">🌕 Оценить симптомы</button>
+                        <div id="cushingResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор заместительной терапии -->
+                    <div class="calculator-card">
+                        <h3>💊 Заместительная терапия</h3>
+                        <div class="form-group">
+                            <label for="patientWeight">Вес пациента (кг)</label>
+                            <input type="number" id="patientWeight" placeholder="Например: 70">
+                        </div>
+                        <div class="form-group">
+                            <label for="adrenalCondition">Состояние</label>
+                            <select id="adrenalCondition">
+                                <option value="addison">Болезнь Аддисона</option>
+                                <option value="afterAdrenalectomy">После адреналэктомии</option>
+                                <option value="secondary">Вторичная недостаточность</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stressLevel">Уровень стресса/нагрузки</label>
+                            <select id="stressLevel">
+                                <option value="routine">Обычный режим</option>
+                                <option value="minor">Легкое заболевание/стресс</option>
+                                <option value="moderate">Умеренное заболевание</option>
+                                <option value="severe">Тяжелое заболевание/операция</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="calculateReplacementTherapy()">💊 Рассчитать дозу</button>
+                        <div id="replacementResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Оценка надпочечникового криза -->
+                    <div class="calculator-card">
+                        <h3>⚠️ Оценка надпочечникового криза</h3>
+                        <div class="form-group">
+                            <label for="bloodPressure">Артериальное давление (мм рт.ст.)</label>
+                            <input type="text" id="bloodPressure" placeholder="Например: 80/50">
+                        </div>
+                        <div class="form-group">
+                            <label for="sodium">Натрий сыворотки (ммоль/л)</label>
+                            <input type="number" id="sodium" placeholder="Например: 125">
+                        </div>
+                        <div class="form-group">
+                            <label for="potassium">Калий сыворотки (ммоль/л)</label>
+                            <input type="number" step="0.1" id="potassium" placeholder="Например: 5.8">
+                        </div>
+                        <div class="form-group">
+                            <label for="glucose">Глюкоза крови (ммоль/л)</label>
+                            <input type="number" step="0.1" id="glucose" placeholder="Например: 3.2">
+                        </div>
+                        <button class="btn" onclick="assessAdrenalCrisis()">⚠️ Оценить риск</button>
+                        <div id="crisisResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Референсные значения гормонов -->
+            <div class="info-section">
+                <h3>📊 Референсные значения гормонов надпочечников</h3>
+                <table>
+                    <tr>
+                        <th>Гормон</th>
+                        <th>Нормальные значения</th>
+                        <th>Время забора</th>
+                        <th>Клиническое значение</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Кортизол</strong></td>
+                        <td>138 - 690 нмоль/л</td>
+                        <td>8:00 - 10:00</td>
+                        <td>Основной глюкокортикоид</td>
+                    </tr>
+                    <tr>
+                        <td><strong>АКТГ</strong></td>
+                        <td>2.2 - 13.3 пмоль/л</td>
+                        <td>8:00 - 10:00</td>
+                        <td>Стимулятор коры надпочечников</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Альдостерон</strong></td>
+                        <td>30 - 355 пг/мл</td>
+                        <td>8:00, лежа</td>
+                        <td>Минералокортикоид</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ренин</strong></td>
+                        <td>2.8 - 39.9 мкМЕ/мл</td>
+                        <td>8:00, лежа</td>
+                        <td>Регулятор альдостерона</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Метанефрины свободные</strong></td>
+                        <td>до 320 пг/мл</td>
+                        <td>Любое время</td>
+                        <td>Маркер феохромоцитомы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ДГЭА-S</strong></td>
+                        <td>80 - 560 мкг/дл (муж)<br>35 - 430 мкг/дл (жен)</td>
+                        <td>Любое время</td>
+                        <td>Андроген надпочечников</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Диагностические алгоритмы -->
+            <div class="info-section">
+                <h3>🔍 Диагностические алгоритмы</h3>
+                <table>
+                    <tr>
+                        <th>Заболевание</th>
+                        <th>Первичный скрининг</th>
+                        <th>Подтверждающие тесты</th>
+                        <th>Визуализация</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Синдром Кушинга</strong></td>
+                        <td>Кортизол суточной мочи<br>Малая дексаметазоновая проба</td>
+                        <td>Большая дексаметазоновая проба<br>Кортизол в слюне в 23:00</td>
+                        <td>МРТ гипофиза<br>КТ надпочечников</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Болезнь Аддисона</strong></td>
+                        <td>Кортизол утренний<br>АКТГ</td>
+                        <td>Проба с АКТГ (синактеном)<br>Антитела к 21-гидроксилазе</td>
+                        <td>КТ надпочечников<br>МРТ гипофиза</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Феохромоцитома</strong></td>
+                        <td>Метанефрины плазмы<br>Метанефрины суточной мочи</td>
+                        <td>КТ/МРТ надпочечников<br>Сцинтиграфия с MIBG</td>
+                        <td>КТ брюшной полости<br>МРТ надпочечников</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Первичный альдостеронизм</strong></td>
+                        <td>Соотношение альдостерон/ренин</td>
+                        <td>Солевая нагрузка<br>Каптоприловый тест</td>
+                        <td>КТ надпочечников<br>Селективная венозная катетеризация</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateDexamethasoneTest() {
+            const basalCortisol = parseFloat(document.getElementById('cortisolBasal').value);
+            const afterDexCortisol = parseFloat(document.getElementById('cortisolAfterDex').value);
+            
+            if (!basalCortisol || !afterDexCortisol) {
+                alert('Введите значения кортизола');
+                return;
+            }
+            
+            const suppression = ((basalCortisol - afterDexCortisol) / basalCortisol * 100).toFixed(1);
+            const isSuppressed = afterDexCortisol < 50;
+            
+            let resultHTML = '';
+            
+            if (isSuppressed) {
+                resultHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 2em; font-weight: 800; color: #059669;">✅ Проба положительная</div>
+                        <div style="color: var(--text-light);">Супрессия кортизола достигнута</div>
+                    </div>
+                    
+                    <div style="background: #dcfce7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📊 Результаты пробы:</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Кортизол исходный:</span>
+                                <strong>${basalCortisol} нмоль/л</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Кортизол после дексаметазона:</span>
+                                <strong>${afterDexCortisol} нмоль/л</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Степень супрессии:</span>
+                                <strong>${suppression}%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                        <h4>💡 Интерпретация:</h4>
+                        <ul>
+                            <li>Кортизол после дексаметазона &lt; 50 нмоль/л - нормальная супрессия</li>
+                            <li>Исключен синдром Кушинга</li>
+                            <li>Функция гипоталамо-гипофизарно-надпочечниковой системы сохранена</li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                resultHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 2em; font-weight: 800; color: #dc2626;">❌ Проба отрицательная</div>
+                        <div style="color: var(--text-light);">Супрессия кортизола не достигнута</div>
+                    </div>
+                    
+                    <div style="background: #fecaca; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📊 Результаты пробы:</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Кортизол исходный:</span>
+                                <strong>${basalCortisol} нмоль/л</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Кортизол после дексаметазона:</span>
+                                <strong>${afterDexCortisol} нмоль/л</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Степень супрессии:</span>
+                                <strong>${suppression}%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
+                        <h4>💡 Дальнейшие действия:</h4>
+                        <ul>
+                            <li>Необходимо исключить синдром Кушинга</li>
+                            <li>Провести большую дексаметазоновую пробу</li>
+                            <li>Определить АКТГ для дифференциальной диагностики</li>
+                            <li>КТ/МРТ надпочечников и гипофиза</li>
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('dexamethasoneResult').innerHTML = resultHTML;
+            document.getElementById('dexamethasoneResult').style.display = 'block';
+        }
+
+        function calculateCushingScore() {
+            const symptoms = [
+                document.getElementById('symptom1').checked,
+                document.getElementById('symptom2').checked,
+                document.getElementById('symptom3').checked,
+                document.getElementById('symptom4').checked,
+                document.getElementById('symptom5').checked,
+                document.getElementById('symptom6').checked,
+                document.getElementById('symptom7').checked,
+                document.getElementById('symptom8').checked
+            ];
+            
+            const score = symptoms.filter(symptom => symptom).length;
+            
+            let riskLevel, riskColor, recommendations = [];
+            
+            if (score >= 6) {
+                riskLevel = "Высокий риск синдрома Кушинга";
+                riskColor = "#fecaca";
+                recommendations.push("Срочная консультация эндокринолога");
+                recommendations.push("Кортизол суточной мочи");
+                recommendations.push("Малая дексаметазоновая проба");
+                recommendations.push("КТ/МРТ надпочечников и гипофиза");
+            } else if (score >= 4) {
+                riskLevel = "Умеренный риск";
+                riskColor = "#fef3c7";
+                recommendations.push("Консультация эндокринолога");
+                recommendations.push("Скрининговые тесты на гиперкортицизм");
+                recommendations.push("Динамическое наблюдение");
+            } else if (score >= 2) {
+                riskLevel = "Низкий риск";
+                riskColor = "#fef3c7";
+                recommendations.push("Наблюдение в динамике");
+                recommendations.push("Повторная оценка через 3-6 месяцев");
+            } else {
+                riskLevel = "Риск минимальный";
+                riskColor = "#dcfce7";
+                recommendations.push("Профилактические мероприятия");
+                recommendations.push("Здоровый образ жизни");
+            }
+            
+            let resultHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 2em; font-weight: 800; color: ${score >= 6 ? '#dc2626' : score >= 4 ? '#d97706' : '#059669'};">${score} из 8 симптомов</div>
+                    <div style="color: var(--text-light);">симптомов синдрома Кушинга</div>
+                </div>
+                
+                <div style="background: ${riskColor}; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>${riskLevel}</h4>
+                    <p style="margin-top: 10px;">Выявленные симптомы требуют ${score >= 6 ? 'немедленного' : score >= 4 ? 'планового' : 'динамического'} обследования</p>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
+                    <h4>📋 Критерии синдрома Кушинга:</h4>
+                    <ul>
+                        <li>Прогрессирующее ожирение с преимущественным отложением жира на туловище</li>
+                        <li>Лунообразное лицо, багрово-цианотичный румянец</li>
+                        <li>Багровые стрии на коже живота, бедер, молочных желез</li>
+                        <li>Артериальная гипертензия</li>
+                        <li>Нарушение толерантности к глюкозе или сахарный диабет</li>
+                        <li>Мышечная слабость преимущественно в проксимальных отделах</li>
+                        <li>Остеопороз с патологическими переломами</li>
+                        <li>Нарушение менструального цикла у женщин</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('cushingResult').innerHTML = resultHTML;
+            document.getElementById('cushingResult').style.display = 'block';
+        }
+
+        function calculateReplacementTherapy() {
+            const weight = parseFloat(document.getElementById('patientWeight').value);
+            const condition = document.getElementById('adrenalCondition').value;
+            const stressLevel = document.getElementById('stressLevel').value;
+            
+            if (!weight) {
+                alert('Введите вес пациента');
+                return;
+            }
+            
+            let hydrocortisoneDose, fludrocortisoneDose, recommendations = [];
+            
+            // Базовые дозы гидрокортизона
+            switch(condition) {
+                case 'addison':
+                    hydrocortisoneDose = weight * 0.3;
+                    fludrocortisoneDose = 0.1;
+                    recommendations.push("Гидрокортизон разделить на 2-3 приема (2/3 утром, 1/3 днем)");
+                    recommendations.push("Флудрокортизон принимать утром");
+                    break;
+                case 'afterAdrenalectomy':
+                    hydrocortisoneDose = weight * 0.4;
+                    fludrocortisoneDose = 0.1;
+                    recommendations.push("После двусторонней адреналэктомии - пожизненная заместительная терапия");
+                    recommendations.push("Контроль электролитов и АД");
+                    break;
+                case 'secondary':
+                    hydrocortisoneDose = weight * 0.25;
+                    fludrocortisoneDose = 0;
+                    recommendations.push("При вторичной недостаточности минералокортикоиды обычно не требуются");
+                    break;
+            }
+            
+            // Коррекция дозы при стрессе
+            let stressMultiplier = 1;
+            let stressRecommendations = [];
+            
+            switch(stressLevel) {
+                case 'minor':
+                    stressMultiplier = 2;
+                    stressRecommendations.push("Удвоить дозу гидрокортизона на 2-3 дня");
+                    break;
+                case 'moderate':
+                    stressMultiplier = 3;
+                    stressRecommendations.push("Утроить дозу гидрокортизона");
+                    stressRecommendations.push("При лихорадке >38°C - дополнительно 10 мг каждые 6 часов");
+                    break;
+                case 'severe':
+                    stressMultiplier = 5;
+                    stressRecommendations.push("Гидрокортизон 100 мг в/в болюсно, затем 200 мг/сут в/в капельно");
+                    stressRecommendations.push("Немедленная госпитализация");
+                    break;
+            }
+            
+            const adjustedDose = Math.round(hydrocortisoneDose * stressMultiplier);
+            
+            let resultHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div class="calculator-value">${adjustedDose} мг</div>
+                    <div style="color: var(--text-light);">Суточная доза гидрокортизона</div>
+                </div>
+                
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Расчет дозы:</h4>
+                    <div style="display: grid; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Базовая доза:</span>
+                            <strong>${Math.round(hydrocortisoneDose)} мг/сут</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Коэффициент стресса:</span>
+                            <strong>× ${stressMultiplier}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Флудрокортизон:</span>
+                            <strong>${fludrocortisoneDose > 0 ? fludrocortisoneDose + ' мг/сут' : 'не требуется'}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации по терапии:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        <li>Контроль веса, АД, электролитов</li>
+                        <li>Обучение пациента правилам стрессовой дозировки</li>
+                    </ul>
+                </div>
+                
+                ${stressRecommendations.length > 0 ? `
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4>⚠️ Коррекция при стрессе:</h4>
+                    <ul>
+                        ${stressRecommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('replacementResult').innerHTML = resultHTML;
+            document.getElementById('replacementResult').style.display = 'block';
+        }
+
+        function assessAdrenalCrisis() {
+            const bpInput = document.getElementById('bloodPressure').value;
+            const sodium = parseFloat(document.getElementById('sodium').value);
+            const potassium = parseFloat(document.getElementById('potassium').value);
+            const glucose = parseFloat(document.getElementById('glucose').value);
+            
+            if (!bpInput || !sodium || !potassium || !glucose) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            // Парсим артериальное давление
+            const bpParts = bpInput.split('/');
+            const systolic = parseFloat(bpParts[0]);
+            const diastolic = parseFloat(bpParts[1]);
+            
+            let crisisScore = 0;
+            let criticalFindings = [];
+            
+            // Оценка артериального давления
+            if (systolic < 90 || diastolic < 60) {
+                crisisScore += 3;
+                criticalFindings.push("Выраженная артериальная гипотензия");
+            } else if (systolic < 100) {
+                crisisScore += 1;
+            }
+            
+            // Оценка натрия
+            if (sodium < 120) {
+                crisisScore += 3;
+                criticalFindings.push("Выраженная гипонатриемия");
+            } else if (sodium < 130) {
+                crisisScore += 1;
+            }
+            
+            // Оценка калия
+            if (potassium > 6.0) {
+                crisisScore += 2;
+                criticalFindings.push("Гиперкалиемия");
+            } else if (potassium > 5.5) {
+                crisisScore += 1;
+            }
+            
+            // Оценка глюкозы
+            if (glucose < 2.5) {
+                crisisScore += 2;
+                criticalFindings.push("Выраженная гипогликемия");
+            } else if (glucose < 3.5) {
+                crisisScore += 1;
+            }
+            
+            let riskLevel, riskColor, recommendations = [];
+            
+            if (crisisScore >= 6 || criticalFindings.length >= 2) {
+                riskLevel = "⚠️ ВЕРОЯТЕН НАДПОЧЕЧНИКОВЫЙ КРИЗ";
+                riskColor = "#fecaca";
+                recommendations.push("НЕМЕДЛЕННАЯ ГОСПИТАЛИЗАЦИЯ");
+                recommendations.push("Гидрокортизон 100 мг в/в болюсно");
+                recommendations.push("0.9% NaCl в/в капельно");
+                recommendations.push("Коррекция гипогликемии");
+            } else if (crisisScore >= 3) {
+                riskLevel = "Высокий риск криза";
+                riskColor = "#fed7aa";
+                recommendations.push("Срочная консультация эндокринолога");
+                recommendations.push("Увеличить дозу гидрокортизона в 2-3 раза");
+                recommendations.push("Контроль АД и электролитов каждые 4 часа");
+            } else {
+                riskLevel = "Риск криза низкий";
+                riskColor = "#dcfce7";
+                recommendations.push("Продолжить обычную заместительную терапию");
+                recommendations.push("Контроль состояния в динамике");
+            }
+            
+            let resultHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: ${crisisScore >= 6 ? '1.8em' : '1.5em'}; font-weight: 800; color: ${crisisScore >= 6 ? '#dc2626' : crisisScore >= 3 ? '#d97706' : '#059669'};">${riskLevel}</div>
+                    <div style="color: var(--text-light);">Оценка риска надпочечникового криза</div>
+                </div>
+                
+                <div style="background: ${riskColor}; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Оценочные баллы: ${crisisScore}/10</h4>
+                    <div style="display: grid; gap: 8px; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Артериальное давление:</span>
+                            <strong>${systolic}/${diastolic} мм рт.ст.</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Натрий:</span>
+                            <strong>${sodium} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Калий:</span>
+                            <strong>${potassium} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Глюкоза:</span>
+                            <strong>${glucose} ммоль/л</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                ${criticalFindings.length > 0 ? `
+                <div style="background: #fecaca; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>🚨 Критические показатели:</h4>
+                    <ul>
+                        ${criticalFindings.map(finding => `<li>${finding}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Неотложные мероприятия:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('crisisResult').innerHTML = resultHTML;
+            document.getElementById('crisisResult').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница надпочечников загружена');
+        });
+    </script>
+</body>
+</html>
