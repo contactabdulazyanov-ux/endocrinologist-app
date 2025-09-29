@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заболевания щитовидной железы - Эндокринолог PRO</title>
+    <title>Сахарный диабет - Эндокринолог PRO</title>
     <style>
         * {
             margin: 0;
@@ -12,14 +12,14 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #7e22ce;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --light: #f8fafc;
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --secondary: #ea580c;
+            --accent: #e11d48;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --light: #fef2f2;
             --dark: #1e293b;
             --text: #374151;
             --text-light: #6b7280;
@@ -27,7 +27,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #fda4af 0%, #f97316 100%);
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
@@ -103,12 +103,12 @@
         .main-menu a:hover {
             background: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
         }
 
         .main-menu a.active {
             background: var(--primary);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
         }
 
         .content {
@@ -136,10 +136,10 @@
         }
 
         .disease-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
             border-radius: 16px;
             padding: 30px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fecaca;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             position: relative;
@@ -158,7 +158,7 @@
 
         .disease-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25);
             border-color: var(--primary);
         }
 
@@ -219,114 +219,91 @@
             cursor: pointer;
             margin-top: 15px;
             font-size: 0.95em;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            box-shadow: none;
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
         }
 
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
+        .calculator-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #fecaca;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .calculator-section {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 50px 0;
-            border: 1px solid #bae6fd;
-            position: relative;
-            overflow: hidden;
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.15);
         }
 
-        .calculator-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
-            border-radius: 50%;
-            transform: translate(50px, -50px);
-        }
-
-        .section-title {
-            font-size: 1.8em;
+        .calculator-card h3 {
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.3em;
             font-weight: 700;
-        }
-
-        .section-subtitle {
-            font-size: 1.1em;
-            color: var(--text-light);
-            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-group {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fecaca;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
         .form-group:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.15);
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
             color: var(--dark);
-            margin-bottom: 12px;
-            font-size: 1.05em;
+            margin-bottom: 10px;
+            font-size: 1em;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
+            padding: 12px;
+            border: 2px solid #fecaca;
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background: #f8fafc;
+            background: #fef2f2;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary);
             background: white;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .range-info {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-top: 8px;
-            font-style: italic;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
         }
 
         .result-box {
             background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
             padding: 25px;
             border-radius: 12px;
-            margin-top: 25px;
+            margin-top: 20px;
             border: 1px solid #bbf7d0;
             display: none;
             animation: slideUp 0.5s ease;
@@ -344,11 +321,11 @@
         }
 
         .info-section {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
             padding: 35px;
             border-radius: 16px;
             margin: 35px 0;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fecaca;
         }
 
         .info-section h3 {
@@ -372,7 +349,7 @@
         }
 
         th, td {
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fecaca;
             padding: 16px;
             text-align: left;
         }
@@ -385,30 +362,11 @@
         }
 
         tr:nth-child(even) {
-            background: #f8fafc;
+            background: #fef2f2;
         }
 
         tr:hover {
-            background: #f0f9ff;
-        }
-
-        .dose-value {
-            font-size: 3em;
-            font-weight: 800;
-            color: var(--primary);
-            text-align: center;
-            margin: 15px 0;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .dose-range {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            background: #fecaca;
         }
 
         .feature-grid {
@@ -423,13 +381,13 @@
             padding: 25px;
             background: white;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #fecaca;
             transition: all 0.3s ease;
         }
 
         .feature-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.1);
         }
 
         .feature-icon {
@@ -437,12 +395,24 @@
             margin-bottom: 15px;
         }
 
+        .calculator-value {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin: 15px 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 30px 20px;
             }
             
-            .disease-grid {
+            .disease-grid, .calculator-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -465,183 +435,225 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🦋 ЩИТОВИДНАЯ ЖЕЛЕЗА</h1>
-            <p>Современная диагностика и персонализированное лечение заболеваний щитовидной железы</p>
+            <h1>💉 САХАРНЫЙ ДИАБЕТ</h1>
+            <p>Комплексное управление диабетом с персонализированным подходом к лечению</p>
         </div>
 
         <nav class="main-menu">
             <a href="../../index.html">🏠 Главная</a>
-            <a href="index.html" class="active">🦋 Щитовидная железа</a>
-            <a href="../diabetes/index.html">💉 Сахарный диабет</a>
+            <a href="../thyroid/index.html">🦋 Щитовидная железа</a>
+            <a href="index.html" class="active">💉 Сахарный диабет</a>
             <a href="../metabolic/index.html">⚖️ Обмен веществ</a>
             <a href="../adrenal/index.html">🧠 Надпочечники</a>
         </nav>
 
         <div class="content">
-            <h1 class="page-title">Заболевания щитовидной железы</h1>
-            <p class="page-subtitle">Комплексная диагностика и лечение по последним клиническим рекомендациям</p>
+            <h1 class="page-title">Сахарный диабет</h1>
+            <p class="page-subtitle">Современная диагностика, лечение и мониторинг всех типов диабета</p>
 
             <!-- Быстрый доступ -->
             <div class="feature-grid">
                 <div class="feature-item">
                     <div class="feature-icon">📊</div>
                     <h3>Диагностика</h3>
-                    <p>Полный анализ гормонального профиля</p>
+                    <p>Определение типа диабета и стадии</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">💊</div>
-                    <h3>Лечение</h3>
-                    <p>Индивидуальный подбор терапии</p>
+                    <h3>Инсулинотерапия</h3>
+                    <p>Расчет доз и коррекция лечения</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Контроль</h3>
-                    <p>Мониторинг эффективности лечения</p>
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Диетотерапия</h3>
+                    <p>Подбор питания и ХЕ</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">📈</div>
-                    <h3>Аналитика</h3>
-                    <p>Отслеживание динамики показателей</p>
+                    <h3>Мониторинг</h3>
+                    <p>Контроль гликемии и HbA1c</p>
                 </div>
             </div>
 
             <div class="disease-grid">
                 <div class="disease-card">
-                    <h3><div class="disease-icon">📊</div> Диагностика</h3>
-                    <p>Полный анализ показателей щитовидной железы:</p>
+                    <h3><div class="disease-icon">🔬</div> Диабет 1 типа</h3>
+                    <p>Аутоиммунное заболевание с абсолютным дефицитом инсулина:</p>
                     <ul>
-                        <li>ТТГ, св. Т4, св. Т3</li>
-                        <li>Анти-ТПО, Анти-ТГ, АТ-рТТГ</li>
-                        <li>УЗИ щитовидной железы</li>
-                        <li>Сцинтиграфия по показаниям</li>
+                        <li>Антитела к GAD, IA-2, инсулину</li>
+                        <li>Абсолютный дефицит инсулина</li>
+                        <li>Инсулинотерапия с момента диагностики</li>
+                        <li>Риск кетоацидоза</li>
                     </ul>
-                    <a href="../../index.html" class="btn">🚀 Перейти к диагностике</a>
+                    <a href="type1.html" class="btn">📖 Подробнее</a>
                 </div>
 
                 <div class="disease-card">
-                    <h3><div class="disease-icon">🐢</div> Гипотиреоз</h3>
-                    <p>Снижение функции щитовидной железы:</p>
+                    <h3><div class="disease-icon">⚖️</div> Диабет 2 типа</h3>
+                    <p>Инсулинорезистентность и относительный дефицит инсулина:</p>
                     <ul>
-                        <li>Первичный и вторичный гипотиреоз</li>
-                        <li>Субклинический гипотиреоз</li>
-                        <li>Заместительная терапия L-T4</li>
-                        <li>Контроль эффективности лечения</li>
+                        <li>Метформин как препарат первой линии</li>
+                        <li>iSGLT2, аГПП-1, производные сульфонилмочевины</li>
+                        <li>Инсулинотерапия на поздних стадиях</li>
+                        <li>Коррекция факторов риска</li>
                     </ul>
-                    <a href="hypothyroidism.html" class="btn">📖 Подробнее</a>
+                    <a href="type2.html" class="btn">📖 Подробнее</a>
                 </div>
 
                 <div class="disease-card">
-                    <h3><div class="disease-icon">⚡</div> Гипертиреоз</h3>
-                    <p>Повышенная функция щитовидной железы:</p>
+                    <h3><div class="disease-icon">🤰</div> Гестационный диабет</h3>
+                    <p>Диабет беременных с особыми подходами к лечению:</p>
                     <ul>
-                        <li>Болезнь Грейвса</li>
-                        <li>Токсический узловой зоб</li>
-                        <li>Тиреостатическая терапия</li>
-                        <li>Радиойодтерапия и хирургия</li>
+                        <li>Скрининг на 24-28 неделе беременности</li>
+                        <li>Диетотерапия как основа лечения</li>
+                        <li>Инсулин при неэффективности диеты</li>
+                        <li>Контроль после родов</li>
                     </ul>
-                    <a href="hyperthyroidism.html" class="btn">📖 Подробнее</a>
-                </div>
-
-                <div class="disease-card">
-                    <h3><div class="disease-icon">🔥</div> Тиреоидиты</h3>
-                    <p>Воспалительные заболевания щитовидной железы:</p>
-                    <ul>
-                        <li>Аутоиммунный тиреоидит</li>
-                        <li>Подострый тиреоидит</li>
-                        <li>Послеродовой тиреоидит</li>
-                        <li>Безболевой тиреоидит</li>
-                    </ul>
-                    <a href="thyroiditis.html" class="btn">📖 Подробнее</a>
+                    <a href="gestational.html" class="btn">📖 Подробнее</a>
                 </div>
             </div>
 
-            <!-- Калькулятор дозы L-T4 -->
-            <div class="calculator-section">
-                <h2 class="section-title">💊 Калькулятор дозы L-тироксина</h2>
-                <p class="section-subtitle">Рассчитайте стартовую дозу левотироксина для персонализированного лечения гипотиреоза</p>
-                
-                <div class="form-group">
-                    <label for="thyroidWeight">📊 Вес пациента (кг)</label>
-                    <input type="number" id="thyroidWeight" placeholder="Например: 70" value="70">
-                </div>
-
-                <div class="form-group">
-                    <label for="thyroidAge">👤 Возраст пациента (лет)</label>
-                    <input type="number" id="thyroidAge" placeholder="Например: 45" value="45">
-                </div>
-
-                <div class="form-group">
-                    <label for="thyroidTSH">🔬 ТТГ (мМЕ/л)</label>
-                    <input type="number" step="0.01" id="thyroidTSH" placeholder="Например: 15.0" value="15.0">
-                    <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
-                </div>
-
-                <button class="btn" onclick="calculateThyroidDose()" style="background: linear-gradient(135deg, var(--accent), var(--primary));">
-                    🧮 Рассчитать дозу L-T4
-                </button>
-
-                <div id="thyroidDoseResult" class="result-box"></div>
-            </div>
-
-            <!-- Справочная информация -->
+            <!-- Калькуляторы для диабета -->
             <div class="info-section">
-                <h3>📈 Референсные значения гормонов</h3>
+                <h3>🧮 Калькуляторы для управления диабетом</h3>
+                <p class="section-subtitle">Инструменты для точного расчета терапии и мониторинга</p>
+                
+                <div class="calculator-grid">
+                    <!-- Калькулятор ХЕ -->
+                    <div class="calculator-card">
+                        <h3>🍞 Калькулятор хлебных единиц</h3>
+                        <div class="form-group">
+                            <label for="carbAmount">Углеводы в продукте (граммы)</label>
+                            <input type="number" id="carbAmount" placeholder="Например: 30">
+                        </div>
+                        <button class="btn" onclick="calculateXE()">📊 Рассчитать ХЕ</button>
+                        <div id="xeResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор болюсного инсулина -->
+                    <div class="calculator-card">
+                        <h3>💉 Коррекционный болюс</h3>
+                        <div class="form-group">
+                            <label for="currentGlucose">Текущая гликемия (ммоль/л)</label>
+                            <input type="number" step="0.1" id="currentGlucose" placeholder="Например: 12.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetGlucose">Целевая гликемия (ммоль/л)</label>
+                            <input type="number" step="0.1" id="targetGlucose" placeholder="Например: 6.0" value="6.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="isf">Фактор чувствительности</label>
+                            <input type="number" step="0.1" id="isf" placeholder="ммоль/л на 1 ЕД" value="2.5">
+                        </div>
+                        <button class="btn" onclick="calculateBolus()">🧮 Рассчитать болюс</button>
+                        <div id="bolusResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор базального инсулина -->
+                    <div class="calculator-card">
+                        <h3>📊 Базальная доза инсулина</h3>
+                        <div class="form-group">
+                            <label for="weight">Вес пациента (кг)</label>
+                            <input type="number" id="weight" placeholder="Например: 70">
+                        </div>
+                        <div class="form-group">
+                            <label for="diabetesType">Тип диабета</label>
+                            <select id="diabetesType">
+                                <option value="type1">Диабет 1 типа</option>
+                                <option value="type2">Диабет 2 типа</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="calculateBasal()">📈 Рассчитать базал</button>
+                        <div id="basalResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор ИМТ -->
+                    <div class="calculator-card">
+                        <h3>⚖️ Индекс массы тела</h3>
+                        <div class="form-group">
+                            <label for="height">Рост (см)</label>
+                            <input type="number" id="height" placeholder="Например: 175">
+                        </div>
+                        <div class="form-group">
+                            <label for="bmiWeight">Вес (кг)</label>
+                            <input type="number" id="bmiWeight" placeholder="Например: 70">
+                        </div>
+                        <button class="btn" onclick="calculateBMI()">📊 Рассчитать ИМТ</button>
+                        <div id="bmiResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Диагностические критерии -->
+            <div class="info-section">
+                <h3>📊 Диагностические критерии сахарного диабета</h3>
                 <table>
                     <tr>
                         <th>Показатель</th>
-                        <th>Нормальные значения</th>
-                        <th>Клиническое значение</th>
+                        <th>Норма</th>
+                        <th>Предиабет</th>
+                        <th>Сахарный диабет</th>
                     </tr>
                     <tr>
-                        <td><strong>ТТГ</strong></td>
-                        <td>0.4 - 4.0 мМЕ/л</td>
-                        <td>Основной маркер функции щитовидной железы</td>
+                        <td><strong>Глюкоза натощак</strong></td>
+                        <td>&lt; 6.1 ммоль/л</td>
+                        <td>6.1 - 6.9 ммоль/л</td>
+                        <td>≥ 7.0 ммоль/л</td>
                     </tr>
                     <tr>
-                        <td><strong>св. Т4</strong></td>
-                        <td>11.0 - 22.0 пмоль/л</td>
-                        <td>Основной гормон щитовидной железы</td>
+                        <td><strong>Глюкоза через 2 ч ПГТТ</strong></td>
+                        <td>&lt; 7.8 ммоль/л</td>
+                        <td>7.8 - 11.0 ммоль/л</td>
+                        <td>≥ 11.1 ммоль/л</td>
                     </tr>
                     <tr>
-                        <td><strong>св. Т3</strong></td>
-                        <td>3.5 - 8.0 пмоль/л</td>
-                        <td>Биологически активная форма гормона</td>
+                        <td><strong>Гликированный гемоглобин (HbA1c)</strong></td>
+                        <td>&lt; 6.0%</td>
+                        <td>6.0 - 6.4%</td>
+                        <td>≥ 6.5%</td>
                     </tr>
                     <tr>
-                        <td><strong>Анти-ТПО</strong></td>
-                        <td>до 34 МЕ/мл</td>
-                        <td>Маркер аутоиммунного тиреоидита</td>
+                        <td><strong>Случайная гликемия</strong></td>
+                        <td>&lt; 11.1 ммоль/л</td>
+                        <td>-</td>
+                        <td>≥ 11.1 ммоль/л + симптомы</td>
                     </tr>
                 </table>
             </div>
 
+            <!-- Целевые значения -->
             <div class="info-section">
-                <h3>🎯 Целевые значения ТТГ при лечении</h3>
+                <h3>🎯 Целевые значения гликемии</h3>
                 <table>
                     <tr>
-                        <th>Клиническая ситуация</th>
-                        <th>Целевой диапазон ТТГ</th>
-                        <th>Особенности коррекции</th>
+                        <th>Время измерения</th>
+                        <th>Диабет 1 типа</th>
+                        <th>Диабет 2 типа</th>
+                        <th>Гестационный диабет</th>
                     </tr>
                     <tr>
-                        <td>Первичный гипотиреоз</td>
-                        <td>0.5 - 2.5 мМЕ/л</td>
-                        <td>Оптимальный диапазон для большинства пациентов</td>
+                        <td><strong>Натощак</strong></td>
+                        <td>5.0 - 7.2 ммоль/л</td>
+                        <td>4.5 - 6.5 ммоль/л</td>
+                        <td>3.3 - 5.3 ммоль/л</td>
                     </tr>
                     <tr>
-                        <td>Беременность</td>
-                        <td>0.5 - 2.5 мМЕ/л</td>
-                        <td>Более строгий контроль, особенно в 1 триместре</td>
+                        <td><strong>Через 2 ч после еды</strong></td>
+                        <td>5.0 - 10.0 ммоль/л</td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>6.0 - 7.0 ммоль/л</td>
                     </tr>
                     <tr>
-                        <td>Пожилые пациенты</td>
-                        <td>1.0 - 5.0 мМЕ/л</td>
-                        <td>Менее агрессивная коррекция дозы</td>
+                        <td><strong>Перед сном</strong></td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>5.0 - 6.0 ммоль/л</td>
                     </tr>
                     <tr>
-                        <td>Кардиологические пациенты</td>
-                        <td>1.0 - 4.0 мМЕ/л</td>
-                        <td>Осторожная титрация дозы под контролем ЭКГ</td>
+                        <td><strong>HbA1c</strong></td>
+                        <td>&lt; 7.0%</td>
+                        <td>&lt; 6.5%</td>
+                        <td>&lt; 6.0%</td>
                     </tr>
                 </table>
             </div>
@@ -649,94 +661,292 @@
     </div>
 
     <script>
-        function calculateThyroidDose() {
-            const weight = parseFloat(document.getElementById('thyroidWeight').value);
-            const age = parseInt(document.getElementById('thyroidAge').value);
-            const tsh = parseFloat(document.getElementById('thyroidTSH').value);
+        function calculateXE() {
+            const carbs = parseFloat(document.getElementById('carbAmount').value);
             
-            if (!weight || !age || !tsh) {
-                alert('Пожалуйста, заполните все поля');
+            if (!carbs) {
+                alert('Введите количество углеводов');
                 return;
             }
             
-            let dosePerKg;
-            let recommendations = [];
-            let patientCategory = '';
-            
-            if (age >= 60 || tsh > 20) {
-                dosePerKg = 1.0;
-                patientCategory = age >= 60 ? 'пациенты старше 60 лет' : 'пациенты с ТТГ > 20 мМЕ/л';
-                recommendations.push("Начните с 25-50 мкг/сут из-за возраста или высокого ТТГ");
-                recommendations.push("Увеличивайте дозу постепенно каждые 4-6 недель");
-                recommendations.push("Контроль ЭКГ перед началом терапии");
-            } else if (age >= 40) {
-                dosePerKg = 1.2;
-                patientCategory = 'пациенты 40-59 лет';
-                recommendations.push("Стандартная стартовая доза");
-                recommendations.push("Контроль ТТГ через 6-8 недель");
-            } else {
-                dosePerKg = 1.6;
-                patientCategory = 'пациенты младше 40 лет';
-                recommendations.push("Полная заместительная доза");
-                recommendations.push("Можно начинать с полной расчетной дозы");
-            }
-            
-            const calculatedDose = Math.round(weight * dosePerKg);
-            const roundedDose = Math.round(calculatedDose / 25) * 25; // Округление до ближайших 25 мкг
+            const xe = (carbs / 12).toFixed(1);
             
             let resultHTML = `
-                <div class="dose-value">${roundedDose} мкг/сут</div>
-                <div class="dose-range">Рекомендуемая стартовая доза</div>
+                <div class="calculator-value">${xe} ХЕ</div>
+                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                    Хлебных единиц в продукте
+                </div>
                 
-                <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <h4>📋 Детали расчета:</h4>
-                    <div style="display: grid; gap: 10px;">
+                    <div style="display: grid; gap: 8px;">
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Категория пациента:</span>
-                            <strong>${patientCategory}</strong>
+                            <span>Углеводы:</span>
+                            <strong>${carbs} г</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Расчетная формула:</span>
-                            <strong>${weight} кг × ${dosePerKg} мкг/кг</strong>
+                            <span>Формула:</span>
+                            <strong>${carbs} ÷ 12</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Результат расчета:</span>
-                            <strong>${calculatedDose} мкг/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Округленная доза:</span>
-                            <strong>${roundedDose} мкг/сут</strong>
+                            <span>Результат:</span>
+                            <strong>${xe} ХЕ</strong>
                         </div>
                     </div>
                 </div>
                 
-                <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <h4>💡 Рекомендации по лечению:</h4>
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Практические рекомендации:</h4>
                     <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Принимать утром натощак за 30-60 мин до еды</li>
-                        <li>Избегать одновременного приема с кальцием и железом</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #fffbeb; padding: 20px; border-radius: 10px;">
-                    <h4>🎯 Дальнейшая коррекция дозы:</h4>
-                    <p>После контроля ТТГ через 6-8 недель:</p>
-                    <ul>
-                        <li><strong>ТТГ > 4.0:</strong> Увеличить дозу на 25 мкг/сут</li>
-                        <li><strong>ТТГ 0.5-2.5:</strong> Поддерживать текущую дозу</li>
-                        <li><strong>ТТГ < 0.1:</strong> Уменьшить дозу на 25 мкг/сут</li>
+                        <li>1 ХЕ = 12 г углеводов</li>
+                        <li>На 1 ХЕ обычно требуется 1-2 ЕД инсулина</li>
+                        <li>Учитывайте индивидуальную чувствительность к инсулину</li>
+                        <li>Корректируйте дозу в зависимости от физической активности</li>
                     </ul>
                 </div>
             `;
             
-            document.getElementById('thyroidDoseResult').innerHTML = resultHTML;
-            document.getElementById('thyroidDoseResult').style.display = 'block';
+            document.getElementById('xeResult').innerHTML = resultHTML;
+            document.getElementById('xeResult').style.display = 'block';
         }
 
-        // Автозаполнение для тестирования
+        function calculateBolus() {
+            const current = parseFloat(document.getElementById('currentGlucose').value);
+            const target = parseFloat(document.getElementById('targetGlucose').value);
+            const isf = parseFloat(document.getElementById('isf').value);
+            
+            if (!current || !target || !isf) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            const correction = (current - target) / isf;
+            const bolus = Math.max(0, correction).toFixed(1);
+            
+            let status, statusColor, recommendations = [];
+            
+            if (current > 15) {
+                status = "⚠️ Высокий уровень гликемии";
+                statusColor = "#fef2f2";
+                recommendations.push("Проверить кетоны в моче");
+                recommendations.push("Увеличить потребление воды");
+                recommendations.push("Проконсультироваться с врачом");
+            } else if (current > 10) {
+                status = "🟡 Повышенный уровень";
+                statusColor = "#fffbeb";
+                recommendations.push("Корректировать дозу инсулина");
+            } else {
+                status = "✅ Уровень в пределах";
+                statusColor = "#f0fdf4";
+            }
+            
+            let resultHTML = `
+                <div class="calculator-value">${bolus} ЕД</div>
+                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                    Коррекционная доза инсулина
+                </div>
+                
+                <div style="background: ${statusColor}; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>${status}</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий уровень:</span>
+                            <strong>${current} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Целевой уровень:</span>
+                            <strong>${target} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Фактор чувствительности:</span>
+                            <strong>${isf} ммоль/л на 1 ЕД</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                ${recommendations.length > 0 ? `
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
+                    <h4>📋 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('bolusResult').innerHTML = resultHTML;
+            document.getElementById('bolusResult').style.display = 'block';
+        }
+
+        function calculateBasal() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const type = document.getElementById('diabetesType').value;
+            
+            if (!weight) {
+                alert('Введите вес пациента');
+                return;
+            }
+            
+            let basalDose, totalDose;
+            let recommendations = [];
+            
+            if (type === 'type1') {
+                basalDose = weight * 0.3;
+                totalDose = weight * 0.6;
+                recommendations.push("Базальный инсулин составляет 30-50% от общей суточной дозы");
+                recommendations.push("Корректировать по уровню глюкозы натощак");
+                recommendations.push("Разделить дозу на 2 введения (утро/вечер) при использовании НПХ-инсулина");
+            } else {
+                basalDose = weight * 0.2;
+                totalDose = weight * 0.4;
+                recommendations.push("При диабете 2 типа начать с 10 ЕД/сут");
+                recommendations.push("Увеличивать на 2 ЕД каждые 3 дня до целевых значений");
+                recommendations.push("Комбинировать с пероральными сахароснижающими препаратами");
+            }
+            
+            const roundedBasal = Math.round(basalDose);
+            const roundedTotal = Math.round(totalDose);
+            
+            let resultHTML = `
+                <div class="calculator-value">${roundedBasal} ЕД</div>
+                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                    Суточная базальная доза
+                </div>
+                
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Детали расчета:</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Вес пациента:</span>
+                            <strong>${weight} кг</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Тип диабета:</span>
+                            <strong>${type === 'type1' ? '1 тип' : '2 тип'}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Формула базала:</span>
+                            <strong>${weight} × ${type === 'type1' ? '0.3' : '0.2'}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Общая суточная доза:</span>
+                            <strong>${roundedTotal} ЕД/сут</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации по терапии:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        <li>Контроль глюкозы натощак для коррекции дозы</li>
+                        <li>При гипогликемиях снизить дозу на 10-20%</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('basalResult').innerHTML = resultHTML;
+            document.getElementById('basalResult').style.display = 'block';
+        }
+
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('bmiWeight').value);
+            
+            if (!height || !weight) {
+                alert('Введите рост и вес');
+                return;
+            }
+            
+            const heightM = height / 100;
+            const bmi = (weight / (heightM * heightM)).toFixed(1);
+            
+            let category, color, recommendations = [];
+            
+            if (bmi < 18.5) {
+                category = "Дефицит массы тела";
+                color = "#dbeafe";
+                recommendations.push("Повысить калорийность питания");
+                recommendations.push("Консультация диетолога");
+            } else if (bmi < 25) {
+                category = "Нормальная масса тела";
+                color = "#dcfce7";
+                recommendations.push("Поддерживать текущий вес");
+                recommendations.push("Регулярная физическая активность");
+            } else if (bmi < 30) {
+                category = "Избыточная масса тела";
+                color = "#fef3c7";
+                recommendations.push("Снизить вес на 5-10% от текущего");
+                recommendations.push("Увеличить физическую активность");
+            } else if (bmi < 35) {
+                category = "Ожирение I степени";
+                color = "#fed7aa";
+                recommendations.push("Снизить вес на 10-15% от текущего");
+                recommendations.push("Консультация эндокринолога");
+            } else if (bmi < 40) {
+                category = "Ожирение II степени";
+                color = "#fecaca";
+                recommendations.push("Снизить вес на 15-20% от текущего");
+                recommendations.push("Медикаментозная терапия ожирения");
+            } else {
+                category = "Ожирение III степени";
+                color = "#fca5a5";
+                recommendations.push("Снизить вес на 20-25% от текущего");
+                recommendations.push("Рассмотреть бариатрическую хирургию");
+            }
+            
+            let resultHTML = `
+                <div class="calculator-value">${bmi}</div>
+                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                    Индекс массы тела
+                </div>
+                
+                <div style="background: ${color}; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>${category}</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Рост:</span>
+                            <strong>${height} см</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Вес:</span>
+                            <strong>${weight} кг</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Формула:</span>
+                            <strong>${weight} ÷ (${heightM} × ${heightM})</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
+                    <h4>📊 Классификация ИМТ:</h4>
+                    <ul>
+                        <li>Менее 18.5 - Дефицит массы тела</li>
+                        <li>18.5 - 24.9 - Нормальная масса тела</li>
+                        <li>25.0 - 29.9 - Избыточная масса тела</li>
+                        <li>30.0 - 34.9 - Ожирение I степени</li>
+                        <li>35.0 - 39.9 - Ожирение II степени</li>
+                        <li>40.0 и более - Ожирение III степени</li>
+                    </ul>
+                </div>
+                
+                ${recommendations.length > 0 ? `
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('bmiResult').innerHTML = resultHTML;
+            document.getElementById('bmiResult').style.display = 'block';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница щитовидной железы загружена');
+            console.log('Страница диабета загружена');
         });
     </script>
 </body>
