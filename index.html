@@ -593,6 +593,38 @@
         .tab-content.active {
             display: block;
         }
+
+        /* Стили для простой диагностики */
+        .simple-result {
+            display: none;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .simple-diagnosis {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .simple-parameter {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .simple-recommendation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+        }
     </style>
 </head>
 <body>
@@ -715,10 +747,10 @@
 
         <nav class="main-menu">
             <a href="index.html" class="active">🏠 Главная</a>
-            <a href="pages/shchitovidnaya.html">🦋 Щитовидная железа</a>
-            <a href="pages/diabetes.html">💉 Сахарный диабет</a>
-            <a href="pages/metabolic.html">⚖️ Обмен веществ</a>
-            <a href="pages/adrenal.html">🧠 Надпочечники</a>
+            <a href="pages/thyroid/index.html">🦋 Щитовидная железа</a>
+            <a href="pages/diabetes/index.html">💉 Сахарный диабет</a>
+            <a href="pages/metabolic/index.html">⚖️ Обмен веществ</a>
+            <a href="pages/adrenal/index.html">🧠 Надпочечники</a>
             <a href="pages/about.html">📚 О проекте</a>
         </nav>
 
@@ -728,6 +760,7 @@
                 <div class="tab-buttons">
                     <button class="tab-btn active" onclick="switchTab('diagnostics')">📊 Диагностика</button>
                     <button class="tab-btn" onclick="switchTab('calculator')">💊 Калькулятор L-T4</button>
+                    <button class="tab-btn" onclick="switchTab('simple')">🩺 Простая диагностика</button>
                 </div>
 
                 <div id="diagnostics" class="tab-content active">
@@ -809,6 +842,38 @@
                     </button>
 
                     <div id="doseResult" class="calculator-result"></div>
+                </div>
+
+                <div id="simple" class="tab-content">
+                    <h2 class="section-title">🩺 Простая диагностика</h2>
+                    <p style="text-align: left; color: #666; margin-bottom: 20px;">Быстрая оценка по основным показателям</p>
+                    
+                    <div class="form-group">
+                        <label for="simpleTsh">ТТГ (тиреотропный гормон)</label>
+                        <input type="number" step="0.01" id="simpleTsh" placeholder="0.4" value="8.5">
+                        <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="simpleT4">св. Т4 (свободный тироксин)</label>
+                        <input type="number" step="0.1" id="simpleT4" placeholder="11.0" value="9.0">
+                        <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="simpleAtpo">Анти-ТПО (антитела)</label>
+                        <input type="number" id="simpleAtpo" placeholder="0" value="250">
+                        <div class="range-info">Норма: до 34 МЕ/мл</div>
+                    </div>
+
+                    <button class="btn btn-success" onclick="analyzeSimple()" style="width: 100%;">
+                        🔍 Простой анализ
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearSimpleForm()">
+                        🗑️ Очистить форму
+                    </button>
+
+                    <div id="simpleResult" class="simple-result"></div>
                 </div>
             </div>
 
@@ -917,7 +982,7 @@
     </div>
 
     <script>
-        // База знаний по щитовидной железе (КР РФ)
+        // ОБЪЕДИНЕННАЯ БАЗА ЗНАНИЙ
         const THYROID_KNOWLEDGE = {
             references: {
                 TSH: { min: 0.4, max: 4.0, unit: "мМЕ/л" },
@@ -939,38 +1004,55 @@
                 // Проверяем аутоиммунный процесс
                 if (atpo > 34 || atg > 115) {
                     autoimmuneNote = " (аутоиммунный процесс)";
-                    recommendations.push("Анти-ТПО повышены - маркер аутоиммунного тиреоидита");
+                    if (atpo > 34) {
+                        recommendations.push("Анти-ТПО повышены - маркер аутоиммунного тиреоидита");
+                    }
+                    if (atg > 115) {
+                        recommendations.push("Анти-ТГ повышены - подтверждает аутоиммунный генез");
+                    }
                 }
 
                 // Диагностика по КР РФ
                 if (tsh > 4.0 && t4 < 11.0) {
                     diagnosis = "🔴 Первичный манифестный гипотиреоз" + autoimmuneNote;
                     treatment = "Заместительная терапия левотироксином 1.6 мкг/кг/сут";
-                    recommendations.push("УЗИ щитовидной железы", "Контроль ТТГ через 6-8 недель");
+                    recommendations.push("УЗИ щитовидной железы", "Контроль ТТГ через 6-8 недель", "Липидный профиль");
                     severity = "danger";
                 }
                 else if (tsh < 0.4 && (t4 > 22.0 || (t3 && t3 > 8.0))) {
                     diagnosis = "🔴 Манифестный тиреотоксикоз" + autoimmuneNote;
                     treatment = "Тиреостатики, радиойодтерапия или хирургическое лечение";
-                    recommendations.push("АТ-рТТГ для дифференциальной диагностики", "УЗИ с ЦДК");
+                    recommendations.push("АТ-рТТГ для дифференциальной диагностики", "УЗИ с ЦДК", "Сцинтиграфия по показаниям");
                     severity = "danger";
                 }
                 else if (tsh > 4.0 && (!t4 || t4 >= 11.0)) {
                     diagnosis = "🟡 Субклинический гипотиреоз" + autoimmuneNote;
-                    treatment = atpo > 34 ? "Рекомендуется терапия левотироксином" : "Наблюдение";
-                    recommendations.push("Повторный контроль через 3-6 месяцев");
+                    
+                    if (atpo > 34 || tsh > 10.0) {
+                        treatment = "Рекомендуется терапия левотироксином";
+                    } else {
+                        treatment = "Наблюдение, контроль через 3-6 месяцев";
+                    }
+                    
+                    recommendations.push("Повторный контроль ТТГ и св.Т4", "Оценка клинической симптоматики");
                     severity = "warning";
                 }
                 else if (tsh < 0.4 && (!t4 || t4 <= 22.0) && (!t3 || t3 <= 8.0)) {
                     diagnosis = "🟡 Субклинический тиреотоксикоз" + autoimmuneNote;
                     treatment = "Обследование для выявления причины";
-                    recommendations.push("Исключить прием тиреоидных гормонов");
+                    recommendations.push("Исключить прием тиреоидных гормонов", "Повторное исследование через 3-6 месяцев");
                     severity = "warning";
                 }
                 else {
                     diagnosis = "🟢 Эутиреоз (норма)";
                     treatment = "Плановое наблюдение";
-                    recommendations.push("Контроль по показаниям");
+                    
+                    if (atpo > 34 || atg > 115) {
+                        diagnosis += autoimmuneNote;
+                        recommendations.push("Носительство антител - динамическое наблюдение 1 раз в год");
+                    } else {
+                        recommendations.push("Контроль по показаниям");
+                    }
                     severity = "success";
                 }
 
@@ -998,9 +1080,8 @@
             }
         };
 
-        // Функции для переключения вкладок
+        // ФУНКЦИИ ДЛЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК
         function switchTab(tabName) {
-            // Скрываем все табы
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -1008,12 +1089,11 @@
                 btn.classList.remove('active');
             });
             
-            // Показываем выбранный таб
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
         }
 
-        // Функции калькулятора дозы L-T4
+        // ФУНКЦИИ КАЛЬКУЛЯТОРА ДОЗЫ L-T4
         function calculateDose() {
             const weight = parseFloat(document.getElementById('weight').value);
             const age = parseInt(document.getElementById('age').value);
@@ -1090,7 +1170,7 @@
             document.getElementById('doseResult').style.display = 'none';
         }
 
-        // Остальные функции приложения
+        // ОСНОВНЫЕ ФУНКЦИИ ДИАГНОСТИКИ
         function analyzeComplete() {
             const tsh = parseFloat(document.getElementById('tsh').value);
             const t4 = parseFloat(document.getElementById('freeT4').value);
@@ -1146,7 +1226,6 @@
             const diagnosisCard = document.getElementById('diagnosisCard');
             let diagnosisHTML = `<h3>${result.diagnosis}</h3>`;
             
-            // Добавляем кнопку лечения для гипотиреоза
             if (result.diagnosis.includes('гипотиреоз')) {
                 diagnosisHTML += `
                     <button class="treatment-btn" onclick="showHypothyroidismTreatment()">
@@ -1158,7 +1237,6 @@
             document.getElementById('diagnosisContent').innerHTML = diagnosisHTML;
             diagnosisCard.className = 'diagnosis-card diagnosis-' + result.severity;
 
-            // Отображаем параметры
             let parametersHTML = '';
             const parameters = [
                 { name: 'ТТГ', value: tsh, param: 'TSH' },
@@ -1192,6 +1270,73 @@
             document.getElementById('resultContainer').style.display = 'block';
         }
 
+        // ПРОСТАЯ ДИАГНОСТИКА
+        function analyzeSimple() {
+            const tsh = parseFloat(document.getElementById('simpleTsh').value);
+            const t4 = parseFloat(document.getElementById('simpleT4').value);
+            const atpo = parseFloat(document.getElementById('simpleAtpo').value);
+            
+            if (!tsh) {
+                alert('Введите значение ТТГ для анализа');
+                return;
+            }
+            
+            const result = THYROID_KNOWLEDGE.analyzeComplete(tsh, t4, null, atpo, null);
+            
+            if (result) {
+                let resultHTML = `
+                    <div class="simple-diagnosis">${result.diagnosis}</div>
+                    <div class="simple-parameter">
+                        <span>ТТГ:</span>
+                        <span class="${getStatusClass(tsh, 0.4, 4.0)}">${tsh} ${getStatusText(tsh, 0.4, 4.0)}</span>
+                    </div>
+                `;
+                
+                if (t4) {
+                    resultHTML += `
+                        <div class="simple-parameter">
+                            <span>св.Т4:</span>
+                            <span class="${getStatusClass(t4, 11.0, 22.0)}">${t4} ${getStatusText(t4, 11.0, 22.0)}</span>
+                        </div>
+                    `;
+                }
+                
+                if (atpo) {
+                    resultHTML += `
+                        <div class="simple-parameter">
+                            <span>Анти-ТПО:</span>
+                            <span class="${atpo > 34 ? 'high' : 'normal'}">${atpo} ${atpo > 34 ? 'Повышены' : 'Норма'}</span>
+                        </div>
+                    `;
+                }
+                
+                resultHTML += `<div class="simple-recommendation">${result.treatment}<br>${result.recommendations.join(', ')}</div>`;
+                
+                document.getElementById('simpleResult').innerHTML = resultHTML;
+                document.getElementById('simpleResult').style.display = 'block';
+            }
+        }
+
+        function getStatusClass(value, min, max) {
+            if (value < min) return 'low';
+            if (value > max) return 'high';
+            return 'normal';
+        }
+
+        function getStatusText(value, min, max) {
+            if (value < min) return '(Понижен)';
+            if (value > max) return '(Повышен)';
+            return '(Норма)';
+        }
+
+        function clearSimpleForm() {
+            document.getElementById('simpleTsh').value = '';
+            document.getElementById('simpleT4').value = '';
+            document.getElementById('simpleAtpo').value = '';
+            document.getElementById('simpleResult').style.display = 'none';
+        }
+
+        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
         function showHypothyroidismTreatment() {
             const modalContent = `
                 <h2>💊 Лечение гипотиреоза заместительной терапией L-тироксином (L-T4)</h2>
@@ -1229,10 +1374,6 @@
                             <td>Начинать с малой дозы с последующим постепенным увеличением под контролем самочувствия и ЭКГ</td>
                         </tr>
                     </table>
-                    
-                    <p><strong>Особый случай: Вторичный гипотиреоз</strong> (проблема с гипофизом)</p>
-                    <p>Лечение также проводится L-T4, но стартовые дозы обычно ниже.</p>
-                    <p>Критерий адекватности лечения — уровень свТ4 (см. ниже).</p>
                 </div>
 
                 <div class="info-section">
@@ -1243,28 +1384,8 @@
                         <li><strong>Интервал с другими лекарствами:</strong> При одновременном приеме препаратов, нарушающих всасывание L-T4 (железо, кальций, антациды), необходим интервал не менее 4 часов</li>
                     </ul>
                 </div>
-
-                <div class="info-section">
-                    <h3>4. Контроль эффективности и коррекция дозы</h3>
-                    <p><strong>Сроки контроля:</strong> Оценка адекватности дозы проводится через 6-8 недель после начала терапии или изменения дозировки.</p>
-                    
-                    <p><strong>Ключевой показатель для контроля:</strong></p>
-                    <ul>
-                        <li><strong>При первичном гипотиреозе:</strong> Основной маркер — ТТГ (целевой уровень 0.5-2.5 мЕд/л для большинства пациентов)</li>
-                        <li><strong>При вторичном гипотиреозе:</strong> Основной маркер — свободный Т4 (свТ4). Цель — достижение середины референсного диапазона лаборатории. ТТГ в этом случае неинформативен</li>
-                    </ul>
-                </div>
-
-                <div class="info-section">
-                    <h3>5. Важные замечания</h3>
-                    <ul>
-                        <li><strong>Смена препарата:</strong> Разные торговые марки L-T4 имеют разную биодоступность. При смене производителя препарата обязателен контроль ТТГ через 6-8 недель</li>
-                        <li><strong>Беременность:</strong> Доза L-T4 часто требует увеличения (на 25-50%). Контроль ТТГ каждые 4-6 недель в течение беременности</li>
-                    </ul>
-                </div>
             `;
             
-            // Создаем модальное окно
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.style.display = 'block';
@@ -1277,7 +1398,6 @@
             
             document.body.appendChild(modal);
             
-            // Закрытие при клике вне окна
             modal.onclick = function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
@@ -1311,6 +1431,15 @@
             document.getElementById('loading').style.display = show ? 'block' : 'none';
             document.getElementById('resultContainer').style.display = show ? 'none' : 'block';
         }
+
+        // Автозаполнение для тестирования
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!document.getElementById('tsh').value) {
+                document.getElementById('tsh').value = '8.5';
+                document.getElementById('freeT4').value = '9.0';
+                document.getElementById('antiTPO').value = '250';
+            }
+        });
 
         // Закрытие модальных окон при клике вне их
         window.onclick = function(event) {
