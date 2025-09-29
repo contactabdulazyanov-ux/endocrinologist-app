@@ -6,7 +6,134 @@
     <title>Сахарный диабет - Эндокринолог PRO</title>
     <style>
         /* Все основные стили как в thyroid/index.html */
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: #2c3e50;
+            padding: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .main-menu a:hover,
+        .main-menu a.active {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .disease-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .disease-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .disease-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .disease-card ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .disease-card li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
         .calculator-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -22,17 +149,86 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .diabetes-type {
-            background: #f8f9fa;
+        .form-group {
+            background: white;
             padding: 20px;
             border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid;
+            margin-bottom: 20px;
+            border-left: 4px solid #4caf50;
         }
 
-        .type1 { border-left-color: #3498db; }
-        .type2 { border-left-color: #e74c3c; }
-        .gestational { border-left-color: #9b59b6; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+            display: none;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
 
         .param-row {
             display: flex;
@@ -51,6 +247,18 @@
             margin: 15px 0;
             border-left: 4px solid #ffc107;
         }
+
+        .diabetes-type {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid;
+        }
+
+        .type1 { border-left-color: #3498db; }
+        .type2 { border-left-color: #e74c3c; }
+        .gestational { border-left-color: #9b59b6; }
     </style>
 </head>
 <body>
@@ -110,7 +318,7 @@
             </div>
 
             <!-- Калькуляторы для диабета -->
-            <div class="calculator-section">
+            <div class="info-section">
                 <h2>🧮 Калькуляторы для диабета</h2>
                 
                 <div class="calculator-grid">
@@ -143,6 +351,39 @@
                         <button class="btn" onclick="calculateBolus()">Рассчитать болюс</button>
                         <div id="bolusResult" class="result-box"></div>
                     </div>
+
+                    <!-- Калькулятор базального инсулина -->
+                    <div class="calculator-card">
+                        <h3>📊 Калькулятор базального инсулина</h3>
+                        <div class="form-group">
+                            <label for="weight">Вес пациента (кг)</label>
+                            <input type="number" id="weight" placeholder="Например: 70">
+                        </div>
+                        <div class="form-group">
+                            <label for="diabetesType">Тип диабета</label>
+                            <select id="diabetesType">
+                                <option value="type1">Диабет 1 типа</option>
+                                <option value="type2">Диабет 2 типа</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="calculateBasal()">Рассчитать базал</button>
+                        <div id="basalResult" class="result-box"></div>
+                    </div>
+
+                    <!-- Калькулятор ИМТ -->
+                    <div class="calculator-card">
+                        <h3>⚖️ Калькулятор ИМТ</h3>
+                        <div class="form-group">
+                            <label for="height">Рост (см)</label>
+                            <input type="number" id="height" placeholder="Например: 175">
+                        </div>
+                        <div class="form-group">
+                            <label for="bmiWeight">Вес (кг)</label>
+                            <input type="number" id="bmiWeight" placeholder="Например: 70">
+                        </div>
+                        <button class="btn" onclick="calculateBMI()">Рассчитать ИМТ</button>
+                        <div id="bmiResult" class="result-box"></div>
+                    </div>
                 </div>
             </div>
 
@@ -173,6 +414,37 @@
                         <td>&lt; 6.0%</td>
                         <td>6.0 - 6.4%</td>
                         <td>≥ 6.5%</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Целевые значения -->
+            <div class="info-section">
+                <h3>🎯 Целевые значения гликемии</h3>
+                <table>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Диабет 1 типа</th>
+                        <th>Диабет 2 типа</th>
+                        <th>Беременные</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Натощак</strong></td>
+                        <td>5.0 - 7.2 ммоль/л</td>
+                        <td>4.5 - 6.5 ммоль/л</td>
+                        <td>3.3 - 5.3 ммоль/л</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Через 2 ч после еды</strong></td>
+                        <td>5.0 - 10.0 ммоль/л</td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>6.0 - 7.0 ммоль/л</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Перед сном</strong></td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>6.0 - 8.0 ммоль/л</td>
+                        <td>5.0 - 6.0 ммоль/л</td>
                     </tr>
                 </table>
             </div>
@@ -235,6 +507,101 @@
             
             document.getElementById('bolusResult').innerHTML = resultHTML;
             document.getElementById('bolusResult').style.display = 'block';
+        }
+
+        function calculateBasal() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const type = document.getElementById('diabetesType').value;
+            
+            if (!weight) {
+                alert('Введите вес пациента');
+                return;
+            }
+            
+            let basalDose;
+            let recommendations = [];
+            
+            if (type === 'type1') {
+                basalDose = weight * 0.3;
+                recommendations.push("Базальный инсулин составляет 30-50% от общей суточной дозы");
+                recommendations.push("Корректировать по уровню глюкозы натощак");
+            } else {
+                basalDose = weight * 0.2;
+                recommendations.push("При диабете 2 типа начать с 10 ЕД/сут");
+                recommendations.push("Увеличивать на 2 ЕД каждые 3 дня до целевых значений");
+            }
+            
+            const roundedDose = Math.round(basalDose);
+            
+            let resultHTML = `
+                <h3>📊 Рекомендуемая базальная доза: ${roundedDose} ЕД/сут</h3>
+                <p><strong>Расчет:</strong> ${weight} кг × ${type === 'type1' ? '0.3' : '0.2'} = ${roundedDose} ЕД/сут</p>
+                
+                <div style="margin-top: 15px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        <li>Контроль глюкозы натощак для коррекции дозы</li>
+                        <li>При гипогликемиях снизить дозу на 10-20%</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('basalResult').innerHTML = resultHTML;
+            document.getElementById('basalResult').style.display = 'block';
+        }
+
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('bmiWeight').value);
+            
+            if (!height || !weight) {
+                alert('Введите рост и вес');
+                return;
+            }
+            
+            const heightM = height / 100;
+            const bmi = (weight / (heightM * heightM)).toFixed(1);
+            
+            let category, color;
+            if (bmi < 18.5) {
+                category = "Дефицит массы тела";
+                color = "#3498db";
+            } else if (bmi < 25) {
+                category = "Нормальная масса тела";
+                color = "#27ae60";
+            } else if (bmi < 30) {
+                category = "Избыточная масса тела";
+                color = "#f39c12";
+            } else if (bmi < 35) {
+                category = "Ожирение I степени";
+                color = "#e67e22";
+            } else if (bmi < 40) {
+                category = "Ожирение II степени";
+                color = "#e74c3c";
+            } else {
+                category = "Ожирение III степени";
+                color = "#c0392b";
+            }
+            
+            let resultHTML = `
+                <h3>⚖️ Индекс массы тела: ${bmi}</h3>
+                <p style="color: ${color}; font-weight: bold;">${category}</p>
+                <p><strong>Расчет:</strong> ${weight} кг ÷ (${heightM} м × ${heightM} м) = ${bmi}</p>
+                
+                <div style="margin-top: 15px;">
+                    <h4>📊 Классификация ИМТ:</h4>
+                    <ul>
+                        <li>Менее 18.5 - Дефицит массы</li>
+                        <li>18.5 - 24.9 - Норма</li>
+                        <li>25.0 - 29.9 - Избыточная масса</li>
+                        <li>30.0 и более - Ожирение</li>
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('bmiResult').innerHTML = resultHTML;
+            document.getElementById('bmiResult').style.display = 'block';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
