@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заболевания щитовидной железы - Эндокринолог PRO</title>
     <style>
+        /* Все ваши оригинальные стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -398,138 +399,38 @@
                 </div>
             </div>
 
-            <!-- КАЛЬКУЛЯТОРЫ ТЕРАПИИ -->
+            <!-- ИНФОРМАЦИОННЫЕ БЛОКИ О ЗАБОЛЕВАНИЯХ -->
             <div class="diagnostic-section">
-                <h2 class="section-title">💊 Калькуляторы терапии</h2>
-                <p class="section-subtitle">Точный расчет доз препаратов для лечения заболеваний щитовидной железы</p>
+                <h2 class="section-title">🦋 Основные заболевания щитовидной железы</h2>
+                <p class="section-subtitle">Краткий обзор патологий и их характеристик</p>
                 
                 <div class="calculators-grid">
                     <div class="calculator-card">
-                        <h3>💊 Доза L-тироксина</h3>
+                        <h3>📉 Гипотиреоз</h3>
                         <div class="form-group">
-                            <label for="weight">Вес пациента (кг)</label>
-                            <input type="number" id="weight" placeholder="Например: 70" value="70">
+                            <p><strong>Сниженная функция щитовидной железы</strong></p>
+                            <ul>
+                                <li>Недостаток гормонов Т3 и Т4</li>
+                                <li>Замедление обмена веществ</li>
+                                <li>Повышенная утомляемость</li>
+                                <li>Набор веса</li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <label for="age">Возраст пациента (лет)</label>
-                            <input type="number" id="age" placeholder="Например: 45" value="45">
-                        </div>
-                        <div class="form-group">
-                            <label for="tshLevel">ТТГ (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="tshLevel" placeholder="Например: 15.0" value="15.0">
-                        </div>
-                        <div class="form-group">
-                            <label for="heartDisease">Сердечно-сосудистые заболевания</label>
-                            <input type="checkbox" id="heartDisease">
-                        </div>
-                        <button class="btn" onclick="calculateThyroidDose()">🧮 Рассчитать дозу L-T4</button>
-                        <div id="doseResult" class="result-box"></div>
+                        <a href="hypothyroidism.html" class="btn">📉 Перейти к калькуляторам</a>
                     </div>
 
                     <div class="calculator-card">
-                        <h3>📈 Коррекция дозы L-T4</h3>
+                        <h3>📈 Гипертиреоз</h3>
                         <div class="form-group">
-                            <label for="currentDose">Текущая доза L-T4 (мкг/сут)</label>
-                            <input type="number" id="currentDose" placeholder="Например: 75">
+                            <p><strong>Повышенная функция щитовидной железы</strong></p>
+                            <ul>
+                                <li>Избыток гормонов Т3 и Т4</li>
+                                <li>Ускорение обмена веществ</li>
+                                <li>Снижение веса</li>
+                                <li>Тахикардия</li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <label for="currentTsh">Текущий ТТГ (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="currentTsh" placeholder="Например: 8.5">
-                        </div>
-                        <div class="form-group">
-                            <label for="targetTsh">Целевой ТТГ (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="targetTsh" placeholder="Например: 2.5" value="2.5">
-                        </div>
-                        <button class="btn" onclick="calculateDoseAdjustment()">📊 Рассчитать коррекцию</button>
-                        <div id="adjustmentResult" class="result-box"></div>
-                    </div>
-
-                    <div class="calculator-card">
-                        <h3>⚡ Доза тиреостатиков</h3>
-                        <div class="form-group">
-                            <label for="thyroidCondition">Состояние</label>
-                            <select id="thyroidCondition">
-                                <option value="mild">Легкий тиреотоксикоз</option>
-                                <option value="moderate">Умеренный тиреотоксикоз</option>
-                                <option value="severe">Тяжелый тиреотоксикоз</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="patientWeight">Вес пациента (кг)</label>
-                            <input type="number" id="patientWeight" placeholder="Например: 70">
-                        </div>
-                        <div class="form-group">
-                            <label for="freeT4Level">св. Т4 (пмоль/л)</label>
-                            <input type="number" step="0.1" id="freeT4Level" placeholder="Например: 35.0">
-                        </div>
-                        <button class="btn" onclick="calculateThionamideDose()">⚡ Рассчитать дозу</button>
-                        <div id="thionamideResult" class="result-box"></div>
-                    </div>
-
-                    <div class="calculator-card">
-                        <h3>🔄 Режим "блокада и замещение"</h3>
-                        <div class="form-group">
-                            <label for="blockWeight">Вес пациента (кг)</label>
-                            <input type="number" id="blockWeight" placeholder="Например: 70">
-                        </div>
-                        <div class="form-group">
-                            <label for="blockT4">св. Т4 (пмоль/л)</label>
-                            <input type="number" step="0.1" id="blockT4" placeholder="Например: 35.0">
-                        </div>
-                        <div class="form-group">
-                            <label for="blockDuration">Планируемая длительность (мес)</label>
-                            <input type="number" id="blockDuration" placeholder="Например: 18" value="18">
-                        </div>
-                        <button class="btn" onclick="calculateBlockReplace()">🔄 Рассчитать режим</button>
-                        <div id="blockReplaceResult" class="result-box"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- МОНИТОРИНГ ЛЕЧЕНИЯ -->
-            <div class="diagnostic-section">
-                <h2 class="section-title">📈 Мониторинг лечения</h2>
-                <p class="section-subtitle">Контроль эффективности терапии и коррекция доз препаратов</p>
-                
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <h3>🎯 Контроль эффективности L-T4</h3>
-                        <div class="form-group">
-                            <label for="monitorDose">Текущая доза L-T4 (мкг/сут)</label>
-                            <input type="number" id="monitorDose" placeholder="Например: 100">
-                        </div>
-                        <div class="form-group">
-                            <label for="monitorTsh">ТТГ через 6-8 недель (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="monitorTsh" placeholder="Например: 3.5">
-                        </div>
-                        <div class="form-group">
-                            <label for="monitorT4">св. Т4 через 6-8 недель (пмоль/л)</label>
-                            <input type="number" step="0.1" id="monitorT4" placeholder="Например: 16.5">
-                        </div>
-                        <button class="btn" onclick="monitorLt4Effectiveness()">📊 Оценить эффективность</button>
-                        <div id="monitorResult" class="result-box"></div>
-                    </div>
-
-                    <div class="calculator-card">
-                        <h3>⚠️ Оценка передозировки L-T4</h3>
-                        <div class="form-group">
-                            <label for="overdoseTsh">ТТГ (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="overdoseTsh" placeholder="Например: 0.1">
-                        </div>
-                        <div class="form-group">
-                            <label for="overdoseT4">св. Т4 (пмоль/л)</label>
-                            <input type="number" step="0.1" id="overdoseT4" placeholder="Например: 25.0">
-                        </div>
-                        <div class="form-group">
-                            <label for="overdoseSymptoms">Симптомы передозировки</label>
-                            <select id="overdoseSymptoms">
-                                <option value="none">Нет симптомов</option>
-                                <option value="mild">Легкие симптомы</option>
-                                <option value="moderate">Умеренные симптомы</option>
-                            </select>
-                        </div>
-                        <button class="btn" onclick="assessLt4Overdose()">⚠️ Оценить передозировку</button>
-                        <div id="overdoseResult" class="result-box"></div>
+                        <a href="hyperthyroidism.html" class="btn">📈 Перейти к калькуляторам</a>
                     </div>
                 </div>
             </div>
@@ -628,100 +529,6 @@
                     recommendations: recommendations,
                     severity: severity
                 };
-            },
-
-            calculateLThyroxineDose: function(weight, age, tsh, hasHeartDisease = false) {
-                let dosePerKg;
-                
-                if (age >= 60 || hasHeartDisease || tsh > 20) {
-                    dosePerKg = 1.0;
-                } else if (age >= 40) {
-                    dosePerKg = 1.2;
-                } else {
-                    dosePerKg = 1.6;
-                }
-                
-                const calculatedDose = Math.round(weight * dosePerKg);
-                return Math.round(calculatedDose / 25) * 25;
-            },
-
-            calculateDoseAdjustment: function(currentDose, currentTsh, targetTsh = 2.5) {
-                if (currentTsh > 4.0) {
-                    return { adjustment: 25, direction: 'increase', recommendation: `Увеличить дозу на 25 мкг/сут (до ${currentDose + 25} мкг/сут)` };
-                } else if (currentTsh < 0.1) {
-                    return { adjustment: -25, direction: 'decrease', recommendation: `Уменьшить дозу на 25 мкг/сут (до ${currentDose - 25} мкг/сут)` };
-                } else if (currentTsh >= 0.5 && currentTsh <= 2.5) {
-                    return { adjustment: 0, direction: 'maintain', recommendation: "Доза адекватна, продолжить текущую терапию" };
-                } else {
-                    return { adjustment: 12.5, direction: 'adjust', recommendation: "Рассмотреть коррекцию дозы на 12.5 мкг/сут" };
-                }
-            },
-
-            calculateThionamideDose: function(condition, weight, freeT4) {
-                let initialDose, maintenanceDose, duration, recommendations = [];
-                
-                switch(condition) {
-                    case 'mild':
-                        initialDose = "10-20 мг/сут";
-                        maintenanceDose = "5-10 мг/сут";
-                        duration = "12-18 месяцев";
-                        recommendations.push("Контроль ТТГ, св.Т4 каждые 4-6 недель");
-                        break;
-                    case 'moderate':
-                        initialDose = "20-30 мг/сут";
-                        maintenanceDose = "5-15 мг/сут";
-                        duration = "12-18 месяцев";
-                        recommendations.push("Разделить дозу на 2 приема в начале лечения");
-                        break;
-                    case 'severe':
-                        initialDose = "30-40 мг/сут";
-                        maintenanceDose = "10-20 мг/сут";
-                        duration = "18-24 месяцев";
-                        recommendations.push("Обязательное разделение дозы на 2-3 приема");
-                        break;
-                }
-                
-                recommendations.push("Контроль общего анализа крови каждые 2 недели в первые 2 месяца");
-                recommendations.push("Обучение пациента симптомам агранулоцитоза");
-                
-                return {
-                    initialDose: initialDose,
-                    maintenanceDose: maintenanceDose,
-                    duration: duration,
-                    recommendations: recommendations,
-                    drugChoice: "Тиамазол (Тирозол)"
-                };
-            },
-
-            monitorLt4Effectiveness: function(currentDose, currentTsh, currentT4 = null) {
-                let assessment = "";
-                let recommendation = "";
-                let color = "";
-                let nextSteps = [];
-                
-                if (currentTsh >= 0.5 && currentTsh <= 2.5) {
-                    assessment = "🟢 ОПТИМАЛЬНЫЙ КОНТРОЛЬ";
-                    recommendation = "Текущая доза адекватна";
-                    color = "#059669";
-                    nextSteps = ["Продолжать текущую дозу", "Контроль ТТГ через 6-12 месяцев"];
-                } else if (currentTsh > 2.5 && currentTsh <= 4.0) {
-                    assessment = "🟡 СУБОПТИМАЛЬНЫЙ КОНТРОЛЬ";
-                    recommendation = "Рассмотреть увеличение дозы на 12.5-25 мкг/сут";
-                    color = "#d97706";
-                    nextSteps = ["Увеличить дозу на 12.5-25 мкг/сут", "Контроль ТТГ через 6-8 недель"];
-                } else if (currentTsh > 4.0) {
-                    assessment = "🔴 НЕДОСТАТОЧНЫЙ КОНТРОЛЬ";
-                    recommendation = `Увеличить дозу на 25-50 мкг/сут`;
-                    color = "#dc2626";
-                    nextSteps = [`Увеличить дозу до ${currentDose + 25}-${currentDose + 50} мкг/сут`, "Контроль ТТГ через 6-8 недель"];
-                } else if (currentTsh < 0.1) {
-                    assessment = "🔴 ПЕРЕДОЗИРОВКА";
-                    recommendation = `Уменьшить дозу на 25 мкг/сут`;
-                    color = "#dc2626";
-                    nextSteps = [`Снизить дозу до ${currentDose - 25} мкг/сут`, "Контроль ТТГ через 4-6 недель"];
-                }
-                
-                return { assessment, recommendation, color, nextSteps };
             }
         };
 
@@ -822,348 +629,6 @@
             
             document.getElementById('antibodiesResult').innerHTML = resultHTML;
             document.getElementById('antibodiesResult').style.display = 'block';
-        }
-
-        // КАЛЬКУЛЯТОРЫ ТЕРАПИИ
-        function calculateThyroidDose() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const age = parseInt(document.getElementById('age').value);
-            const tsh = parseFloat(document.getElementById('tshLevel').value);
-            const hasHeartDisease = document.getElementById('heartDisease')?.checked || false;
-            
-            if (!weight || !age || !tsh) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-            
-            const calculatedDose = THYROID_KNOWLEDGE.calculateLThyroxineDose(weight, age, tsh, hasHeartDisease);
-            
-            let recommendations = [];
-            let patientCategory = '';
-            
-            if (age >= 60 || hasHeartDisease || tsh > 20) {
-                patientCategory = age >= 60 ? 'старше 60 лет' : hasHeartDisease ? 'с сердечно-сосудистыми заболеваниями' : 'с ТТГ > 20 мМЕ/л';
-                recommendations.push("Начните с 25-50 мкг/сут");
-                recommendations.push("Увеличивайте дозу постепенно каждые 4-6 недель");
-            } else if (age >= 40) {
-                patientCategory = '40-59 лет';
-                recommendations.push("Стандартная стартовая доза");
-            } else {
-                patientCategory = 'моложе 40 лет';
-                recommendations.push("Полная заместительная доза");
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.8em; font-weight: 800; color: var(--primary);">
-                        ${calculatedDose} мкг/сут
-                    </div>
-                    <div style="color: var(--text-light);">Рекомендуемая стартовая доза L-тироксина</div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 Детали расчета:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Категория пациента:</span>
-                            <strong>${patientCategory}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Вес пациента:</span>
-                            <strong>${weight} кг</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Уровень ТТГ:</span>
-                            <strong>${tsh} мМЕ/л</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Принимать утром натощак за 30-60 мин до еды</li>
-                        <li>Контроль ТТГ через 6-8 недель</li>
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('doseResult').innerHTML = resultHTML;
-            document.getElementById('doseResult').style.display = 'block';
-        }
-
-        function calculateDoseAdjustment() {
-            const currentDose = parseFloat(document.getElementById('currentDose').value);
-            const currentTsh = parseFloat(document.getElementById('currentTsh').value);
-            const targetTsh = parseFloat(document.getElementById('targetTsh').value);
-            
-            if (!currentDose || !currentTsh || !targetTsh) {
-                alert('Заполните все поля');
-                return;
-            }
-            
-            const adjustment = THYROID_KNOWLEDGE.calculateDoseAdjustment(currentDose, currentTsh, targetTsh);
-            
-            let resultHTML = `
-                <h4>📈 Рекомендация по коррекции:</h4>
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <p><strong>${adjustment.recommendation}</strong></p>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
-                    <h4>📊 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${currentDose} мкг/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий ТТГ:</span>
-                            <strong>${currentTsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Целевой ТТГ:</span>
-                            <strong>${targetTsh} мМЕ/л</strong>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('adjustmentResult').innerHTML = resultHTML;
-            document.getElementById('adjustmentResult').style.display = 'block';
-        }
-
-        function calculateThionamideDose() {
-            const condition = document.getElementById('thyroidCondition').value;
-            const weight = parseFloat(document.getElementById('patientWeight').value);
-            const freeT4 = parseFloat(document.getElementById('freeT4Level').value);
-            
-            if (!weight || !freeT4) {
-                alert('Пожалуйста, заполните вес пациента и уровень св. Т4');
-                return;
-            }
-            
-            const result = THYROID_KNOWLEDGE.calculateThionamideDose(condition, weight, freeT4);
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: var(--primary);">
-                        ${result.drugChoice}
-                    </div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>💊 Режим дозирования:</h4>
-                    <div style="display: grid; gap: 12px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Стартовая доза:</strong></span>
-                            <span style="font-size: 1.2em; color: var(--primary-dark);">${result.initialDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Поддерживающая доза:</strong></span>
-                            <span style="font-size: 1.2em; color: var(--success);">${result.maintenanceDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Продолжительность:</strong></span>
-                            <span style="font-size: 1.1em; color: var(--warning);">${result.duration}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('thionamideResult').innerHTML = resultHTML;
-            document.getElementById('thionamideResult').style.display = 'block';
-        }
-
-        function calculateBlockReplace() {
-            const weight = parseFloat(document.getElementById('blockWeight').value);
-            const freeT4 = parseFloat(document.getElementById('blockT4').value);
-            const duration = parseInt(document.getElementById('blockDuration').value);
-            
-            if (!weight || !freeT4) {
-                alert('Пожалуйста, заполните вес пациента и уровень св. Т4');
-                return;
-            }
-            
-            const blockDose = freeT4 > 30 ? "30-40 мг/сут" : "20-30 мг/сут";
-            const replaceDose = Math.round(weight * 1.6) + " мкг/сут";
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: var(--secondary);">
-                        Режим "Блокада и Замещение"
-                    </div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>💊 Схема лечения:</h4>
-                    <div style="display: grid; gap: 15px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 8px;">
-                            <span><strong>Тиамазол (блокада):</strong></span>
-                            <span style="font-size: 1.3em; color: var(--primary-dark);">${blockDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 8px;">
-                            <span><strong>Левотироксин (замещение):</strong></span>
-                            <span style="font-size: 1.3em; color: var(--success);">${replaceDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 8px;">
-                            <span><strong>Продолжительность:</strong></span>
-                            <span style="font-size: 1.2em; color: var(--warning);">${duration} месяцев</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        <li>Контроль ТТГ целевой 0.5-1.5 мМЕ/л</li>
-                        <li>Контроль функции щитовидной железы каждые 6-8 недель</li>
-                        <li>Общий анализ крови каждые 2 месяца</li>
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('blockReplaceResult').innerHTML = resultHTML;
-            document.getElementById('blockReplaceResult').style.display = 'block';
-        }
-
-        function monitorLt4Effectiveness() {
-            const currentDose = parseFloat(document.getElementById('monitorDose').value);
-            const currentTsh = parseFloat(document.getElementById('monitorTsh').value);
-            const currentT4 = parseFloat(document.getElementById('monitorT4')?.value) || null;
-            
-            if (!currentDose || !currentTsh) {
-                alert('Пожалуйста, заполните текущую дозу L-T4 и уровень ТТГ');
-                return;
-            }
-            
-            const result = THYROID_KNOWLEDGE.monitorLt4Effectiveness(currentDose, currentTsh, currentT4);
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${result.color};">
-                        ${result.assessment}
-                    </div>
-                    <div style="font-size: 1.2em; margin-top: 10px; color: var(--text);">
-                        ${result.recommendation}
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>📊 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 12px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Текущая доза L-T4:</strong></span>
-                            <span style="font-size: 1.2em;">${currentDose} мкг/сут</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>ТТГ:</strong></span>
-                            <span style="font-size: 1.2em; color: ${result.color};">${currentTsh} мМЕ/л</span>
-                        </div>
-                        ${currentT4 ? `
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>св. Т4:</strong></span>
-                            <span style="font-size: 1.2em;">${currentT4} пмоль/л</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>📝 Дальнейшие действия:</h4>
-                    <ul>
-                        ${result.nextSteps.map(step => `<li>${step}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('monitorResult').innerHTML = resultHTML;
-            document.getElementById('monitorResult').style.display = 'block';
-        }
-
-        function assessLt4Overdose() {
-            const tsh = parseFloat(document.getElementById('overdoseTsh').value);
-            const t4 = parseFloat(document.getElementById('overdoseT4').value);
-            const symptoms = document.getElementById('overdoseSymptoms').value;
-            
-            if (!tsh) {
-                alert('Пожалуйста, введите значение ТТГ');
-                return;
-            }
-            
-            let severity = "";
-            let recommendations = [];
-            let color = "";
-            
-            if (tsh < 0.1 && t4 > 26) {
-                severity = "🔴 ВЫРАЖЕННАЯ ПЕРЕДОЗИРОВКА";
-                color = "#dc2626";
-                recommendations = [
-                    "Немедленно снизить дозу L-T4 на 25-50%",
-                    "Контроль ТТГ и св.Т4 через 2-4 недели",
-                    "Оценка сердечно-сосудистого статуса"
-                ];
-            } else if (tsh < 0.1 && t4 > 22) {
-                severity = "🟡 УМЕРЕННАЯ ПЕРЕДОЗИРОВКА";
-                color = "#d97706";
-                recommendations = [
-                    "Снизить дозу L-T4 на 25 мкг/сут",
-                    "Контроль ТТГ через 4-6 недели"
-                ];
-            } else if (tsh < 0.1) {
-                severity = "🟡 СУБКЛИНИЧЕСКАЯ ПЕРЕДОЗИРОВКА";
-                color = "#d97706";
-                recommendations = [
-                    "Снизить дозу L-T4 на 12.5-25 мкг/сут",
-                    "Контроль ТТГ через 6-8 недель"
-                ];
-            } else {
-                severity = "🟢 НОРМА";
-                color = "#059669";
-                recommendations = ["Продолжать текущую терапию"];
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">
-                        ${severity}
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>📊 Показатели:</h4>
-                    <div style="display: grid; gap: 12px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>ТТГ:</strong></span>
-                            <span style="font-size: 1.2em; color: ${color};">${tsh} мМЕ/л</span>
-                        </div>
-                        ${t4 ? `
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>св. Т4:</strong></span>
-                            <span style="font-size: 1.2em; color: ${color};">${t4} пмоль/л</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('overdoseResult').innerHTML = resultHTML;
-            document.getElementById('overdoseResult').style.display = 'block';
         }
 
         function analyzeCompleteProfile() {
@@ -1276,7 +741,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница щитовидной железы загружена');
+            console.log('Главная страница щитовидной железы загружена');
         });
     </script>
 </body>
