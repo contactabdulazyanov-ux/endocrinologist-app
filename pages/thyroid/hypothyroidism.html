@@ -451,7 +451,6 @@
             <p>Комплексная диагностика, расчет терапии и мониторинг лечения</p>
         </div>
 
-        <!-- ИСПРАВЛЕННОЕ МЕНЮ С ПРАВИЛЬНЫМИ ССЫЛКАМИ -->
         <nav class="main-menu">
             <a href="../../index.html">🏠 Главная</a>
             <a href="index.html">🦋 Щитовидная железа</a>
@@ -509,6 +508,8 @@
                     <button class="tab-btn active" onclick="switchTab('diagnosis-tab')">📊 Диагностика</button>
                     <button class="tab-btn" onclick="switchTab('antibodies-tab')">🔬 Аутоиммунный процесс</button>
                     <button class="tab-btn" onclick="switchTab('monitoring-tab')">📈 Мониторинг</button>
+                    <button class="tab-btn" onclick="switchTab('lipids-tab')">🩸 Липидный профиль</button>
+                    <button class="tab-btn" onclick="switchTab('pregnancy-tab')">🤰 Беременность</button>
                 </div>
 
                 <div id="diagnosis-tab" class="tab-content active">
@@ -634,6 +635,105 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="lipids-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3>📊 Расчет ЛПНП (формула Фридвальда)</h3>
+                            <div class="form-group">
+                                <label for="lipidCholesterol">Общий холестерин (ммоль/л)</label>
+                                <input type="number" step="0.01" id="lipidCholesterol" placeholder="Например: 5.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="lipidHdl">ХС-ЛПВП (ммоль/л)</label>
+                                <input type="number" step="0.01" id="lipidHdl" placeholder="Например: 1.2">
+                            </div>
+                            <div class="form-group">
+                                <label for="lipidTriglycerides">Триглицериды (ммоль/л)</label>
+                                <input type="number" step="0.01" id="lipidTriglycerides" placeholder="Например: 1.5">
+                            </div>
+                            <button class="btn" onclick="calculateLDL()">🧮 Рассчитать ЛПНП</button>
+                            <div id="lipidResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3>📈 Коэффициент атерогенности</h3>
+                            <div class="form-group">
+                                <label for="atherogenicCholesterol">Общий холестерин (ммоль/л)</label>
+                                <input type="number" step="0.01" id="atherogenicCholesterol" placeholder="Например: 5.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="atherogenicHdl">ХС-ЛПВП (ммоль/л)</label>
+                                <input type="number" step="0.01" id="atherogenicHdl" placeholder="Например: 1.2">
+                            </div>
+                            <button class="btn" onclick="calculateAtherogenicIndex()">📊 Рассчитать КА</button>
+                            <div id="atherogenicResult" class="result-box"></div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px; margin-top: 20px; border-left: 4px solid #ec4899;">
+                        <h4>🔗 Связь гипотиреоза и липидного обмена</h4>
+                        <ul>
+                            <li>При <strong>манифестном гипотиреозе</strong> лечение левотироксином снижает общий холестерин в среднем на <strong>1.5 ммоль/л</strong> и ЛПНП на <strong>1.06 ммоль/л</strong></li>
+                            <li>При <strong>субклиническом гипотиреозе</strong> лечение приводит к меньшему снижению: общий холестерин ↓ ~0.3 ммоль/л, ЛПНП ↓ ~0.28 ммоль/л</li>
+                            <li>Контроль липидного профиля рекомендуется через <strong>8-12 недель</strong> после достижения эутиреоза</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="pregnancy-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3>💊 Калькулятор коррекции дозы при беременности</h3>
+                            <div class="form-group">
+                                <label for="pregCurrentDose">Текущая доза L-T4 (мкг/сут)</label>
+                                <input type="number" id="pregCurrentDose" placeholder="Например: 75">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregTrimester">Триместр беременности</label>
+                                <select id="pregTrimester">
+                                    <option value="1">1-й триместр</option>
+                                    <option value="2">2-й триместр</option>
+                                    <option value="3">3-й триместр</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pregTsh">Текущий ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="pregTsh" placeholder="Например: 2.8">
+                            </div>
+                            <button class="btn" onclick="calculatePregnancyDose()">🤰 Рассчитать коррекцию</button>
+                            <div id="pregnancyDoseResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3>📅 План наблюдения при беременности</h3>
+                            <div class="form-group">
+                                <label for="pregWeek">Срок беременности (недели)</label>
+                                <input type="number" id="pregWeek" placeholder="Например: 8">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregDiagnosis">Диагноз</label>
+                                <select id="pregDiagnosis">
+                                    <option value="manifest">Манифестный гипотиреоз</option>
+                                    <option value="subclinical">Субклинический гипотиреоз</option>
+                                    <option value="ait">АИТ без гипотиреоза</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="generatePregnancyPlan()">📋 Создать план</button>
+                            <div id="pregnancyPlanResult" class="result-box"></div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fef2f2; padding: 20px; border-radius: 12px; margin-top: 20px;">
+                        <h4>⚠️ Риски некомпенсированного гипотиреоза при беременности:</h4>
+                        <ul>
+                            <li>Выкидыш и преждевременные роды</li>
+                            <li>Гестационная гипертензия и преэклампсия</li>
+                            <li>Нарушения развития мозга у плода</li>
+                            <li>Послеродовые кровотечения</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- КОРРЕКЦИЯ ДОЗЫ -->
@@ -695,18 +795,17 @@
                         <div class="motto danger">Девиз: "Предупредить, а не лечить последствия"</div>
                         
                         <div class="target-values">
-                            <h4>🎯 Целевые значения ТТГ:</h4>
+                            <h4>🎯 Целевые значения ТТГ при беременности:</h4>
                             <ul>
                                 <li><strong>1-й триместр:</strong> < 2.5 мМЕ/л</li>
-                                <li><strong>2-й и 3-й триместр:</strong> < 3.0 мМЕ/л</li>
+                                <li><strong>2-й и -й триместр:</strong> < 3.0 мМЕ/л</li>
                             </ul>
                         </div>
                         
                         <ul>
-                            <li><strong>Немедленное</strong> увеличение дозы L-T4 на <strong>25-50%</strong> с момента подтверждения беременности</li>
-                            <li>Контроль ТТГ и св.Т4 <strong>каждые 4-6 недель</strong></li>
-                            <li>После родов - вернуться к <strong>исходной дозе</strong></li>
-                            <li>Контроль ТТГ через <strong>6-8 недель</strong> после родов</li>
+                            <li><strong>Немедленное увеличение дозы L-T4 на 25-50%</strong> при подтверждении беременности</li>
+                            <li>Контроль ТТГ и св.Т4 <strong>каждые 4-6 недель</strong> на протяжении всей беременности</li>
+                            <li>После родов - вернуться к <strong>исходной дозе</strong> с контролем ТТГ через 6-8 недель</li>
                         </ul>
                         
                         <div class="practical-tips">
@@ -933,6 +1032,35 @@
                         reason: "Субоптимальный контроль"
                     };
                 }
+            },
+
+            // Липидный профиль при гипотиреозе
+            evaluateLipids: function(tsh, cholesterol, ldl, hdl) {
+                const recommendations = [];
+                
+                if (tsh > 4.0) {
+                    if (ldl > 3.0 || cholesterol > 5.2) {
+                        recommendations.push(
+                            "Гипотиреоз способствует дислипидемии",
+                            "Приоритет - нормализация функции щитовидной железы",
+                            "Контроль липидов через 8-12 недель после достижения эутиреоза"
+                        );
+                    }
+                }
+                
+                return recommendations;
+            },
+            
+            // Беременность - коррекция дозы
+            pregnancyDoseAdjustment: function(currentDose, trimester, tsh) {
+                let multiplier;
+                if (trimester === "1") {
+                    multiplier = tsh > 2.5 ? 1.4 : 1.25;
+                } else {
+                    multiplier = 1.3;
+                }
+                
+                return Math.round(currentDose * multiplier);
             }
         };
 
@@ -1138,6 +1266,163 @@
             
             document.getElementById('adjustmentResult').innerHTML = resultHTML;
             document.getElementById('adjustmentResult').style.display = 'block';
+        }
+
+        // ЛИПИДНЫЕ КАЛЬКУЛЯТОРЫ
+        function calculateLDL() {
+            const cholesterol = parseFloat(document.getElementById('lipidCholesterol').value);
+            const hdl = parseFloat(document.getElementById('lipidHdl').value);
+            const triglycerides = parseFloat(document.getElementById('lipidTriglycerides').value);
+            
+            if (!cholesterol || !hdl || !triglycerides) {
+                alert('Заполните все поля липидного профиля');
+                return;
+            }
+            
+            // Формула Фридвальда: ЛПНП = Общий ХС - ЛПВП - (ТГ/2.2)
+            const ldl = cholesterol - hdl - (triglycerides / 2.2);
+            const ldlRounded = Math.round(ldl * 100) / 100;
+            
+            let evaluation = "";
+            if (ldlRounded < 2.6) {
+                evaluation = "🟢 Оптимальный уровень";
+            } else if (ldlRounded < 3.4) {
+                evaluation = "🟡 Близко к оптимальному";
+            } else if (ldlRounded < 4.1) {
+                evaluation = "🟠 Погранично высокий";
+            } else if (ldlRounded < 4.9) {
+                evaluation = "🔴 Высокий";
+            } else {
+                evaluation = "🔴 Очень высокий";
+            }
+            
+            document.getElementById('lipidResult').innerHTML = `
+                <h4>📊 Результаты расчета:</h4>
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>ЛПНП (расчетный):</span>
+                            <strong style="font-size: 1.2em;">${ldlRounded} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Оценка:</span>
+                            <strong>${evaluation}</strong>
+                        </div>
+                    </div>
+                </div>
+                <p><em>Расчет по формуле Фридвальда. При ТГ > 4.5 ммоль/л расчет может быть неточным.</em></p>
+            `;
+            document.getElementById('lipidResult').style.display = 'block';
+        }
+
+        function calculateAtherogenicIndex() {
+            const cholesterol = parseFloat(document.getElementById('atherogenicCholesterol').value);
+            const hdl = parseFloat(document.getElementById('atherogenicHdl').value);
+            
+            if (!cholesterol || !hdl) {
+                alert('Заполните оба поля');
+                return;
+            }
+            
+            const index = (cholesterol - hdl) / hdl;
+            const indexRounded = Math.round(index * 100) / 100;
+            
+            let evaluation = "";
+            if (indexRounded < 3.0) {
+                evaluation = "🟢 Низкий риск атеросклероза";
+            } else if (indexRounded < 4.0) {
+                evaluation = "🟡 Умеренный риск";
+            } else {
+                evaluation = "🔴 Высокий риск атеросклероза";
+            }
+            
+            document.getElementById('atherogenicResult').innerHTML = `
+                <h4>📈 Коэффициент атерогенности:</h4>
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; font-weight: 800; color: var(--primary);">${indexRounded}</div>
+                        <div style="color: var(--text-light);">${evaluation}</div>
+                    </div>
+                </div>
+                <p><em>КА = (Общий ХС - ЛПВП) / ЛПВП</em></p>
+            `;
+            document.getElementById('atherogenicResult').style.display = 'block';
+        }
+
+        // КАЛЬКУЛЯТОРЫ ДЛЯ БЕРЕМЕННЫХ
+        function calculatePregnancyDose() {
+            const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
+            const trimester = document.getElementById('pregTrimester').value;
+            const tsh = parseFloat(document.getElementById('pregTsh').value);
+            
+            if (!currentDose) {
+                alert('Введите текущую дозу L-T4');
+                return;
+            }
+            
+            const newDose = HYPOTHYROIDISM_KNOWLEDGE.pregnancyDoseAdjustment(currentDose, trimester, tsh);
+            const increase = Math.round(((newDose - currentDose) / currentDose) * 100);
+            
+            let recommendation, nextControl;
+            if (trimester === "1") {
+                recommendation = "Немедленное увеличение дозы при подтверждении беременности";
+                nextControl = "4 недели";
+            } else {
+                recommendation = "Постепенное увеличение дозы под контролем ТТГ";
+                nextControl = "6 недель";
+            }
+            
+            document.getElementById('pregnancyDoseResult').innerHTML = `
+                <h4>💊 Рекомендация по коррекции:</h4>
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.5em; font-weight: 800; color: var(--danger);">
+                            ${newDose} мкг/сут
+                        </div>
+                        <div style="color: var(--text-light);">Новая доза L-T4 (увеличение на ${increase}%)</div>
+                    </div>
+                    <p><strong>${recommendation}</strong></p>
+                </div>
+                <div style="background: #fffbeb; padding: 12px; border-radius: 6px;">
+                    <strong>📅 Контроль:</strong> ТТГ и св.Т4 через ${nextControl} после коррекции дозы
+                </div>
+            `;
+            document.getElementById('pregnancyDoseResult').style.display = 'block';
+        }
+
+        function generatePregnancyPlan() {
+            const week = parseInt(document.getElementById('pregWeek').value);
+            const diagnosis = document.getElementById('pregDiagnosis').value;
+            
+            let plan = [];
+            
+            if (week <= 12) {
+                plan.push("Контроль ТТГ и св.Т4 каждые 4 недели");
+                plan.push("Коррекция дозы при отклонении ТТГ от целевых значений");
+            } else if (week <= 28) {
+                plan.push("Контроль ТТГ и св.Т4 каждые 6-8 недель");
+                plan.push("Мониторинг артериального давления");
+            } else {
+                plan.push("Контроль ТТГ на 32-й неделе беременности");
+                plan.push("Подготовка к родам");
+                plan.push("План послеродового наблюдения");
+            }
+            
+            if (diagnosis === "manifest") {
+                plan.push("Обязательный контроль липидного профиля");
+                plan.push("Консультация кардиолога при необходимости");
+            }
+            
+            document.getElementById('pregnancyPlanResult').innerHTML = `
+                <h4>📅 Индивидуальный план наблюдения:</h4>
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <ul>
+                        ${plan.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <p><em>Срок беременности: ${week} недель</em></p>
+            `;
+            document.getElementById('pregnancyPlanResult').style.display = 'block';
         }
 
         // Заглушки для остальных функций
