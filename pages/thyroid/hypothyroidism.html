@@ -446,6 +446,14 @@
             border-left: 4px solid #dc2626;
         }
 
+        .protocol-info {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 30px 20px;
@@ -590,50 +598,33 @@
                 <!-- ЛИПИДНЫЙ ПРОФИЛЬ -->
                 <div id="lipids-tab" class="tab-content">
                     <div class="calculator-card">
-                        <h3>🩸 Комплексная оценка липидного профиля с назначением терапии</h3>
+                        <h3>🩸 Комплексная оценка липидного профиля согласно КР РФ 2023</h3>
                         
-                        <div class="form-group">
-                            <label for="lipidCholesterol">Общий холестерин (ммоль/л)</label>
-                            <input type="number" step="0.01" id="lipidCholesterol" placeholder="Например: 5.8" value="6.2">
-                            <div class="range-info">Целевой: < 5.2 ммоль/л</div>
+                        <div class="protocol-info">
+                            <strong>📋 Согласно клиническим рекомендациям РФ 2023:</strong>
+                            <p>Терапия направлена на достижение целевых уровней ХС ЛПНП в зависимости от сердечно-сосудистого риска</p>
                         </div>
                         
                         <div class="form-group">
-                            <label for="lipidHdl">ХС-ЛПВП (ммоль/л)</label>
-                            <input type="number" step="0.01" id="lipidHdl" placeholder="Например: 1.2" value="1.0">
-                            <div class="range-info">Целевой: > 1.0 ммоль/л (муж.), > 1.2 ммоль/л (жен.)</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="lipidLdl">ХС-ЛПНП (ммоль/л)</label>
+                            <label for="lipidLdl">ХС ЛПНП (ммоль/л)</label>
                             <input type="number" step="0.01" id="lipidLdl" placeholder="Например: 3.5" value="4.1">
-                            <div class="range-info">Целевой: < 3.0 ммоль/л (низкий риск), < 2.5 ммоль/л (высокий риск)</div>
+                            <div class="range-info">Исходный уровень для расчета снижения</div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="lipidTriglycerides">Триглицериды (ммоль/л)</label>
-                            <input type="number" step="0.01" id="lipidTriglycerides" placeholder="Например: 1.5" value="2.3">
-                            <div class="range-info">Целевой: < 1.7 ммоль/л</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="lipidTsh">ТТГ пациента (мМЕ/л)</label>
-                            <input type="number" step="0.01" id="lipidTsh" placeholder="Например: 8.5" value="8.5">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="lipidRisk">Сердечно-сосудистый риск</label>
+                            <label for="lipidRisk">Категория сердечно-сосудистого риска</label>
                             <select id="lipidRisk">
-                                <option value="low">Низкий</option>
-                                <option value="moderate">Умеренный</option>
-                                <option value="high" selected>Высокий</option>
-                                <option value="very-high">Очень высокий</option>
+                                <option value="low">Низкий риск</option>
+                                <option value="moderate">Умеренный риск</option>
+                                <option value="high" selected>Высокий риск (СД, АГ)</option>
+                                <option value="very-high">Очень высокий риск (ИБС, инфаркт, инсульт)</option>
+                                <option value="extreme">Экстремальный риск (повторные события)</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="lipidAge">Возраст пациента</label>
-                            <input type="number" id="lipidAge" placeholder="Например: 55" value="55">
+                            <label for="lipidTsh">ТТГ пациента (мМЕ/л)</label>
+                            <input type="number" step="0.01" id="lipidTsh" placeholder="Например: 8.5" value="8.5">
                         </div>
 
                         <div class="form-group">
@@ -646,11 +637,47 @@
                             </select>
                         </div>
 
-                        <button class="btn" onclick="evaluateLipidProfile()">📊 Оценить липидный профиль и назначить лечение</button>
+                        <button class="btn" onclick="evaluateLipidProfile()">📊 Назначить терапию по КР 2023</button>
                         <div id="lipidResult" class="result-box"></div>
+                    </div>
+
+                    <!-- ТАБЛИЦА ЦЕЛЕВЫХ ЗНАЧЕНИЙ -->
+                    <div class="targets-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Категория риска</th>
+                                    <th>Целевой ХС ЛПНП</th>
+                                    <th>Снижение от исходного</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Очень высокий риск</strong></td>
+                                    <td style="color: var(--danger); font-weight: 700;">&lt; 1,4 ммоль/л</td>
+                                    <td>≥ 50%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Высокий риск</strong></td>
+                                    <td style="color: var(--warning); font-weight: 700;">&lt; 1,8 ммоль/л</td>
+                                    <td>≥ 50%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Умеренный риск</strong></td>
+                                    <td style="color: var(--success); font-weight: 700;">&lt; 2,6 ммоль/л</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Низкий риск</strong></td>
+                                    <td style="color: var(--success); font-weight: 700;">&lt; 3,0 ммоль/л</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
+                <!-- ОСТАЛЬНЫЕ ВКЛАДКИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
                 <!-- КОНТРОЛЬ ТЕРАПИИ -->
                 <div id="monitoring-tab" class="tab-content">
                     <div class="calculators-grid">
@@ -921,130 +948,105 @@
                 return { dose: roundedDose, category, calculatedDose };
             },
 
-            // Оценка липидного профиля с назначением препаратов
-            evaluateLipids: function(cholesterol, hdl, ldl, triglycerides, tsh, riskLevel, age, contraindications) {
-                const abnormalities = [];
+            // Оценка липидного профиля по КР РФ 2023
+            evaluateLipids: function(ldl, riskLevel, tsh, contraindications) {
                 const recommendations = [];
                 const medications = [];
-                let overallRisk = "low";
-
-                // Оценка отдельных показателей
-                if (cholesterol > 5.2) abnormalities.push(`Общий холестерин ↑ (${cholesterol} ммоль/л)`);
-                if (hdl < 1.0) abnormalities.push(`ЛПВП ↓ (${hdl} ммоль/л)`);
                 
-                // Критерии для ЛПНП в зависимости от риска
-                const ldlTargets = {
-                    "low": 3.0,
-                    "moderate": 2.6,
-                    "high": 1.8,
-                    "very-high": 1.4
+                // Целевые значения по КР РФ 2023
+                const targets = {
+                    "low": { target: 3.0, reduction: 0 },
+                    "moderate": { target: 2.6, reduction: 0 },
+                    "high": { target: 1.8, reduction: 50 },
+                    "very-high": { target: 1.4, reduction: 50 },
+                    "extreme": { target: 1.0, reduction: 50 }
                 };
-                
-                if (ldl > ldlTargets[riskLevel]) {
-                    abnormalities.push(`ЛПНП ↑ (${ldl} ммоль/л) - целевой < ${ldlTargets[riskLevel]} ммоль/л`);
-                }
-                
-                if (triglycerides > 1.7) abnormalities.push(`Триглицериды ↑ (${triglycerides} ммоль/л)`);
 
-                // Определение общего риска
-                const riskFactors = abnormalities.length;
-                if (riskFactors >= 3) overallRisk = "very-high";
-                else if (riskFactors >= 2) overallRisk = "high";
-                else if (riskFactors >= 1) overallRisk = "moderate";
+                const target = targets[riskLevel];
+                const neededReduction = ((ldl - target.target) / ldl * 100).toFixed(1);
 
-                // Рекомендации по лечению
-                if (tsh > 4.0) {
-                    recommendations.push("💊 <strong>Приоритет - нормализация функции щитовидной железы препаратами левотироксина</strong>");
-                    recommendations.push("📅 Контроль липидов через 8-12 недель после достижения эутиреоза");
-                    
-                    if (overallRisk === "very-high" || overallRisk === "high") {
-                        recommendations.push("⚠️ Рассмотреть назначение статинов параллельно с лечением гипотиреоза");
-                    }
+                // Оценка текущего состояния
+                let evaluation = "";
+                if (ldl <= target.target) {
+                    evaluation = "✅ Целевой уровень достигнут";
+                    recommendations.push("Поддерживающая терапия: продолжить текущее лечение");
                 } else {
-                    // Назначение медикаментозной терапии при нормальном ТТГ
-                    if (overallRisk === "very-high" || overallRisk === "high") {
+                    evaluation = `❌ Требуется снижение ХС ЛПНП на ${neededReduction}%`;
+                }
+
+                // Приоритет лечения гипотиреоза
+                if (tsh > 4.0) {
+                    recommendations.push("💊 <strong>ПРИОРИТЕТ: коррекция гипотиреоза</strong>");
+                    recommendations.push("Начать терапию L-тироксином для нормализации функции щитовидной железы");
+                    recommendations.push("Контроль липидов через 8-12 недель после достижения эутиреоза");
+                } else {
+                    // Назначение гиполипидемической терапии
+                    if (ldl > target.target) {
                         if (contraindications === "none") {
-                            // Назначение статинов
-                            let statinChoice = "";
+                            // СТАТИНЫ - терапия первой линии
                             let statinDose = "";
+                            let statinChoice = "";
                             
-                            if (ldl > 4.0) {
-                                statinChoice = "Аторвастатин 40-80 мг/сут или Розувастатин 20-40 мг/сут";
-                                statinDose = "Высокая интенсивность терапии (снижение ЛПНП на 49-55%)";
-                            } else if (ldl > 3.0) {
-                                statinChoice = "Аторвастатин 20-40 мг/сут или Розувастатин 10-20 мг/сут";
-                                statinDose = "Умеренная интенсивность терапии (снижение ЛПНП на 43-49%)";
+                            if (riskLevel === "very-high" || riskLevel === "extreme") {
+                                statinChoice = "Розувастатин 20-40 мг/сут или Аторвастатин 40-80 мг/сут";
+                                statinDose = "Высокоинтенсивная терапия";
+                            } else if (riskLevel === "high") {
+                                statinChoice = "Розувастатин 10-20 мг/сут или Аторвастатин 20-40 мг/сут";
+                                statinDose = "Интенсивная терапия";
                             } else {
-                                statinChoice = "Аторвастатин 10-20 мг/сут или Розувастатин 5-10 мг/сут";
-                                statinDose = "Низкая интенсивность терапии (снижение ЛПНП на 37-43%)";
+                                statinChoice = "Розувастатин 5-10 мг/сут или Аторвастатин 10-20 мг/сут";
+                                statinDose = "Стандартная терапия";
                             }
                             
                             medications.push({
-                                name: "Статины",
+                                name: "Статины (терапия 1-й линии)",
                                 choice: statinChoice,
                                 dose: statinDose,
-                                duration: "Длительно",
-                                monitoring: "Контроль АСТ/АЛТ, КФК через 4-8 недель"
+                                duration: "Пожизненно",
+                                monitoring: "Контроль липидов через 4-12 недель, АСТ/АЛТ, КФК"
                             });
-                            
-                            recommendations.push("💊 <strong>Медикаментозная терапия показана</strong>");
+
+                            // ЭЗЕТИМИБ - терапия второй линии при необходимости
+                            if (riskLevel === "very-high" || riskLevel === "extreme" || ldl > 4.0) {
+                                medications.push({
+                                    name: "Эзетимиб (терапия 2-й линии)",
+                                    choice: "Эзетимиб 10 мг/сут",
+                                    dose: "Комбинированная терапия",
+                                    duration: "Пожизненно",
+                                    monitoring: "В комбинации со статинами"
+                                });
+                                recommendations.push("💊 <strong>Рассмотреть фиксированную комбинацию статин+эзетимиб</strong>");
+                            }
                             
                         } else {
-                            recommendations.push("⚠️ <strong>Противопоказания к статинам:</strong> " + 
-                                (contraindications === "liver" ? "заболевания печени" :
-                                 contraindications === "muscle" ? "миопатии" : "аллергия"));
-                                 
-                            if (triglycerides > 2.3) {
-                                medications.push({
-                                    name: "Фибраты",
-                                    choice: "Фенофибрат 145 мг/сут",
-                                    dose: "Стандартная доза",
-                                    duration: "Длительно",
-                                    monitoring: "Контроль функции печени"
-                                });
-                            }
-                            
-                            if (ldl > 3.0) {
-                                medications.push({
-                                    name: "Эзетимиб",
-                                    choice: "Эзетимиб 10 мг/сут",
-                                    dose: "Стандартная доза",
-                                    duration: "Длительно",
-                                    monitoring: "Контроль липидов через 4-8 недель"
-                                });
-                            }
+                            // Альтернативная терапия при противопоказаниях
+                            recommendations.push("⚠️ <strong>Противопоказания к статинам</strong>");
+                            medications.push({
+                                name: "Эзетимиб",
+                                choice: "Эзетимиб 10 мг/сут",
+                                dose: "Монотерапия",
+                                duration: "Пожизненно",
+                                monitoring: "Контроль липидов через 4-12 недель"
+                            });
                         }
                         
-                        recommendations.push("🥗 Модификация образа жизни: диета, физическая активность");
-                        recommendations.push("📅 Контроль липидов через 4-8 недель");
-                        
-                    } else if (overallRisk === "moderate") {
-                        recommendations.push("🥗 <strong>Модификация образа жизни в течение 3-6 месяцев</strong>");
-                        recommendations.push("💊 При отсутствии эффекта - рассмотреть статины");
-                        if (age > 40) {
-                            recommendations.push("⚠️ У пациентов старше 40 лет можно рассмотреть раннее назначение статинов");
-                        }
-                    } else {
-                        recommendations.push("📅 Повторный контроль через 6-12 месяцев");
-                        recommendations.push("🥗 Рекомендовать здоровый образ жизни");
+                        recommendations.push("📅 <strong>Оценка эффективности через 4-12 недель</strong>");
+                        recommendations.push("🥗 Обязательная модификация образа жизни");
                     }
                 }
 
-                // Добавление рекомендаций по триглицеридам
-                if (triglycerides > 5.6) {
-                    recommendations.push("⚠️ <strong>Высокий риск панкреатита!</strong> Рассмотреть фибраты");
-                    if (!medications.some(med => med.name === "Фибраты")) {
-                        medications.push({
-                            name: "Фибраты",
-                            choice: "Фенофибрат 145 мг/сут",
-                            dose: "Стандартная доза",
-                            duration: "До снижения ТГ < 5.6 ммоль/л",
-                            monitoring: "Контроль ТГ через 2-4 недели"
-                        });
-                    }
-                }
+                // Общие рекомендации
+                recommendations.push("🕒 <strong>Терапия носит длительный (пожизненный) характер</strong>");
+                recommendations.push("📊 Диагноз по МКБ-10: E78.0-E78.4 Дислипидемия");
 
-                return { abnormalities, recommendations, medications, overallRisk, riskFactors };
+                return { 
+                    evaluation, 
+                    recommendations, 
+                    medications, 
+                    target: target.target,
+                    reduction: target.reduction,
+                    currentLdl: ldl
+                };
             },
 
             // Контроль эффективности терапии
@@ -1254,74 +1256,61 @@
             document.getElementById('doseResult').style.display = 'block';
         }
 
-        // ЛИПИДНЫЙ ПРОФИЛЬ С НАЗНАЧЕНИЕМ ПРЕПАРАТОВ
+        // ЛИПИДНЫЙ ПРОФИЛЬ ПО КР РФ 2023
         function evaluateLipidProfile() {
-            const cholesterol = parseFloat(document.getElementById('lipidCholesterol').value);
-            const hdl = parseFloat(document.getElementById('lipidHdl').value);
             const ldl = parseFloat(document.getElementById('lipidLdl').value);
-            const triglycerides = parseFloat(document.getElementById('lipidTriglycerides').value);
-            const tsh = parseFloat(document.getElementById('lipidTsh').value);
             const riskLevel = document.getElementById('lipidRisk').value;
-            const age = parseInt(document.getElementById('lipidAge').value);
+            const tsh = parseFloat(document.getElementById('lipidTsh').value);
             const contraindications = document.getElementById('lipidContraindications').value;
             
-            if (!cholesterol || !hdl || !ldl || !triglycerides || !tsh || !age) {
-                alert('Заполните все обязательные поля');
+            if (!ldl || !tsh) {
+                alert('Заполните обязательные поля');
                 return;
             }
             
-            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateLipids(cholesterol, hdl, ldl, triglycerides, tsh, riskLevel, age, contraindications);
+            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateLipids(ldl, riskLevel, tsh, contraindications);
             
             const riskLabels = {
                 "low": "Низкий",
                 "moderate": "Умеренный", 
                 "high": "Высокий",
-                "very-high": "Очень высокий"
-            };
-            
-            const riskClasses = {
-                "low": "risk-low",
-                "moderate": "risk-moderate", 
-                "high": "risk-high",
-                "very-high": "risk-very-high"
+                "very-high": "Очень высокий",
+                "extreme": "Экстремальный"
             };
             
             let resultHTML = `
-                <h4>📊 Комплексная оценка липидного профиля</h4>
+                <h4>📊 Оценка по клиническим рекомендациям РФ 2023</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Общий сердечно-сосудистый риск:</span>
-                            <strong><span class="risk-badge ${riskClasses[result.overallRisk]}">${riskLabels[result.overallRisk]}</span></strong>
+                            <span>Категория риска:</span>
+                            <strong>${riskLabels[riskLevel]}</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Выявленные нарушения:</span>
-                            <strong>${result.riskFactors}</strong>
+                            <span>Текущий ХС ЛПНП:</span>
+                            <strong>${ldl} ммоль/л</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ пациента:</span>
-                            <strong>${tsh} мМЕ/л</strong>
+                            <span>Целевой ХС ЛПНП:</span>
+                            <strong style="color: var(--danger);">${result.target} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Требуемое снижение:</span>
+                            <strong>${result.reduction}% от исходного</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Оценка:</span>
+                            <strong>${result.evaluation}</strong>
                         </div>
                     </div>
                 </div>
             `;
             
-            if (result.abnormalities.length > 0) {
-                resultHTML += `
-                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h4>⚠️ Выявленные нарушения липидного обмена:</h4>
-                        <ul>
-                            ${result.abnormalities.map(abn => `<li>${abn}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-            
             // БЛОК С НАЗНАЧЕНИЕМ ПРЕПАРАТОВ
             if (result.medications && result.medications.length > 0) {
                 resultHTML += `
                     <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin: 15px 0; border: 2px solid #0ea5e9;">
-                        <h4>💊 Рекомендуемая медикаментозная терапия:</h4>
+                        <h4>💊 Рекомендуемая терапия по ступенчатому алгоритму:</h4>
                 `;
                 
                 result.medications.forEach(med => {
@@ -1330,7 +1319,7 @@
                             <h5>${med.name}</h5>
                             <div class="dose-recommendation">
                                 <strong>Препарат:</strong> ${med.choice}<br>
-                                <strong>Дозировка:</strong> ${med.dose}<br>
+                                <strong>Режим дозирования:</strong> ${med.dose}<br>
                                 <strong>Длительность:</strong> ${med.duration}<br>
                                 <strong>Мониторинг:</strong> ${med.monitoring}
                             </div>
@@ -1344,28 +1333,28 @@
             // Рекомендации
             resultHTML += `
                 <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Общие рекомендации и план наблюдения:</h4>
+                    <h4>💡 Ключевые положения КР 2023:</h4>
                     <ul>
                         ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
                     </ul>
                 </div>
             `;
             
-            // Особые указания при противопоказаниях
-            if (contraindications !== "none") {
-                resultHTML += `
-                    <div class="contraindication">
-                        <h5>⚠️ Особые указания:</h5>
-                        <p>У пациента имеются противопоказания к стандартной терапии. Рекомендована альтернативная схема лечения с регулярным мониторингом показателей.</p>
-                    </div>
-                `;
-            }
+            // Особые указания
+            resultHTML += `
+                <div class="protocol-info">
+                    <h5>📋 Протокол лечения:</h5>
+                    <p><strong>1-я линия:</strong> Статины → <strong>2-я линия:</strong> + Эзетимиб → <strong>3-я линия:</strong> + ингибиторы PCSK9</p>
+                    <p><strong>Оценка эффективности:</strong> через 4-12 недель (8±4 недели)</p>
+                    <p><strong>Диагноз по МКБ-10:</strong> E78.0-E78.4 Дислипидемия</p>
+                </div>
+            `;
             
             document.getElementById('lipidResult').innerHTML = resultHTML;
             document.getElementById('lipidResult').style.display = 'block';
         }
 
-        // КОНТРОЛЬ ЭФФЕКТИВНОСТИ ТЕРАПИИ
+        // ОСТАВШИЕСЯ ФУНКЦИИ БЕЗ ИЗМЕНЕНИЙ
         function monitorTherapy() {
             const currentDose = parseFloat(document.getElementById('monitorCurrentDose').value);
             const currentTsh = parseFloat(document.getElementById('monitorCurrentTsh').value);
@@ -1416,7 +1405,6 @@
             document.getElementById('monitorResult').style.display = 'block';
         }
 
-        // ПЛАН НАБЛЮДЕНИЯ
         function generateFollowUpPlan() {
             const age = parseInt(document.getElementById('planAge').value);
             const tsh = parseFloat(document.getElementById('planTsh').value);
@@ -1465,7 +1453,6 @@
             document.getElementById('planResult').style.display = 'block';
         }
 
-        // КАЛЬКУЛЯТОРЫ ДЛЯ БЕРЕМЕННЫХ
         function calculatePregnancyDose() {
             const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
             const trimester = document.getElementById('pregTrimester').value;
