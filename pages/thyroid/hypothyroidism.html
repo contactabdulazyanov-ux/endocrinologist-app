@@ -198,17 +198,22 @@
             padding-left: 0;
         }
 
-        .symptom-list li {
-            padding: 4px 0;
-            position: relative;
-            padding-left: 20px;
+        .symptom-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 8px 0;
+            gap: 12px;
         }
 
-        .symptom-list li:before {
-            content: '▪';
-            color: var(--primary);
-            position: absolute;
-            left: 8px;
+        .symptom-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .symptom-text {
+            flex: 1;
         }
 
         .calculators-grid {
@@ -560,8 +565,22 @@
             margin: 15px 0;
         }
 
+        .interaction-warning {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
         .warning-icon {
             color: #d97706;
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .danger-icon {
+            color: #dc2626;
             font-size: 1.2em;
             margin-right: 8px;
         }
@@ -616,7 +635,7 @@
             <h1 class="page-title">Гипотиреоз</h1>
             <p class="page-subtitle">Снижение функции щитовидной железы - диагностика и современное лечение</p>
 
-            <!-- ТАБЛИЦА СИМПТОМОВ -->
+            <!-- ТАБЛИЦА СИМПТОМОВ С ЧЕКБОКСАМИ -->
             <div class="symptoms-table">
                 <table>
                     <thead>
@@ -634,13 +653,34 @@
                             <td><strong>Общее состояние</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Постоянная усталость, слабость, сонливость</li>
-                                    <li>Чувство "разбитости" с самого утра, отсутствие энергии</li>
-                                    <li>Зябкость, непереносимость холода</li>
-                                    <li>Прибавка в весе при сниженном аппетите</li>
-                                    <li>Отечность лица (особенно век), одутловатость</li>
-                                    <li>Микседематозные отеки (плотные, ямка не остается)</li>
-                                    <li>Отечность языка, нечеткость речи</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Постоянная усталость, слабость, сонливость</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Чувство "разбитости" с самого утра, отсутствие энергии</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Зябкость, непереносимость холода</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Прибавка в весе при сниженном аппетите</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Отечность лица (особенно век), одутловатость</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Микседематозные отеки (плотные, ямка не остается)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Отечность языка, нечеткость речи</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -653,10 +693,22 @@
                             <td><strong>Кожа</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Сухость, шелушение, бледность</li>
-                                    <li>Желтоватый оттенок кожи (каротинемия)</li>
-                                    <li>Холодная на ощупь кожа</li>
-                                    <li>Утолщение кожи (микседема)</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Сухость, шелушение, бледность</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Желтоватый оттенок кожи (каротинемия)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Холодная на ощупь кожа</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Утолщение кожи (микседема)</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -664,10 +716,22 @@
                             <td><strong>Волосы и ногти</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Сухие, ломкие волосы, усиленное выпадение</li>
-                                    <li>Поредение наружной трети бровей (симптом Хертога)</li>
-                                    <li>Ломкие, исчерченные ногти</li>
-                                    <li>Замедленный рост ногтей и волос</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Сухие, ломкие волосы, усиленное выпадение</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Поредение наружной трети бровей (симптом Хертога)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Ломкие, исчерченные ногти</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедленный рост ногтей и волос</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -680,10 +744,22 @@
                             <td><strong>Когнитивные функции</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Замедленность мышления ("туман в голове")</li>
-                                    <li>Трудности с концентрацией внимания</li>
-                                    <li>Ухудшение памяти</li>
-                                    <li>Замедленная речь</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедленность мышления ("туман в голове")</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Трудности с концентрацией внимания</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Ухудшение памяти</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедленная речь</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -691,10 +767,22 @@
                             <td><strong>Психическая сфера</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Апатия, депрессия</li>
-                                    <li>Отсутствие интереса к жизни</li>
-                                    <li>Эмоциональная лабильность</li>
-                                    <li>Заторможенность</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Апатия, депрессия</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Отсутствие интереса к жизни</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Эмоциональная лабильность</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Заторможенность</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -702,12 +790,30 @@
                             <td><strong>Неврологические симптомы</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Ощущение покалывания, "мурашек" в конечностях</li>
-                                    <li>Снижение слуха (отек слухового прохода)</li>
-                                    <li>Осиплость голоса</li>
-                                    <li>Мышечная слабость</li>
-                                    <li>Боли в мышцах и суставах</li>
-                                    <li>Замедление сухожильных рефлексов</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Ощущение покалывания, "мурашек" в конечностях</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Снижение слуха (отек слухового прохода)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Осиплость голоса</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Мышечная слабость</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Боли в мышцах и суставах</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедление сухожильных рефлексов</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -720,12 +826,30 @@
                             <td><strong>Сердце и сосуды</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Замедление пульса (брадикардия)</li>
-                                    <li>Склонность к низкому артериальному давлению</li>
-                                    <li>Повышение уровня холестерина</li>
-                                    <li>Ощущение тяжести в грудной клетке</li>
-                                    <li>Перикардиальный выпот (редко)</li>
-                                    <li>Снижение толерантности к физической нагрузке</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедление пульса (брадикардия)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Склонность к низкому артериальному давлению</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Повышение уровня холестерина</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Ощущение тяжести в грудной клетке</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Перикардиальный выпот (редко)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Снижение толерантности к физической нагрузке</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -738,11 +862,26 @@
                             <td><strong>Пищеварительная система</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Склонность к запорам</li>
-                                    <li>Снижение аппетита</li>
-                                    <li>Замедление моторики кишечника</li>
-                                    <li>Тошнота, метеоризм</li>
-                                    <li>Увеличение печени (редко)</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Склонность к запорам</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Снижение аппетита</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Замедление моторики кишечника</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Тошнота, метеоризм</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Увеличение печени (редко)</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -755,13 +894,34 @@
                             <td><strong>Женская репродуктивная система</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Нарушения менструального цикла</li>
-                                    <li>Обильные менструации (меноррагия)</li>
-                                    <li>Нерегулярные менструации</li>
-                                    <li>Аменорея (отсутствие менструаций)</li>
-                                    <li>Бесплодие</li>
-                                    <li>Трудности с вынашиванием беременности</li>
-                                    <li>Галакторея (редко)</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Нарушения менструального цикла</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Обильные менструации (меноррагия)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Нерегулярные менструации</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Аменорея (отсутствие менструаций)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Бесплодие</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Трудности с вынашиванием беременности</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Галакторея (редко)</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -769,9 +929,18 @@
                             <td><strong>Мужская репродуктивная система</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Снижение либидо</li>
-                                    <li>Эректильная дисфункция</li>
-                                    <li>Нарушение сперматогенеза</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Снижение либидо</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Эректильная дисфункция</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Нарушение сперматогенеза</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -779,8 +948,14 @@
                             <td><strong>Общие для обоих полов</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Снижение либидо</li>
-                                    <li>Нарушение фертильности</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Снижение либидо</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Нарушение фертильности</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -793,9 +968,18 @@
                             <td><strong>Дыхательная система</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Одышка при физической нагрузке</li>
-                                    <li>Ночное апноэ (редко)</li>
-                                    <li>Плевральный выпот (редко)</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Одышка при физической нагрузке</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Ночное апноэ (редко)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Плевральный выпот (редко)</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -803,8 +987,14 @@
                             <td><strong>Система крови</strong></td>
                             <td>
                                 <ul class="symptom-list">
-                                    <li>Анемия (нормохромная, нормоцитарная)</li>
-                                    <li>Склонность к кровоточивости</li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Анемия (нормохромная, нормоцитарная)</span>
+                                    </li>
+                                    <li class="symptom-item">
+                                        <input type="checkbox" class="symptom-checkbox">
+                                        <span class="symptom-text">Склонность к кровоточивости</span>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -1618,9 +1808,9 @@
                 ];
             }
 
-            // Добавляем рекомендации по смене производителя
+            // Добавляем рекомендации по взаимодействию с другими препаратами
             recommendations.push(
-                "⚠️ <strong>ВАЖНО:</strong> При смене производителя левотироксина необходим контрольный анализ уровня ТТГ и св. Т4 через 6-8 недель после начала приема препарата от нового производителя"
+                "⚠️ <strong>ВАЖНО:</strong> Препараты железа, кальция, антациды и ингибиторы протонной помпы принимаются раздельно от L-тироксина с разницей в 4 часа"
             );
             
             let resultHTML = `
@@ -1654,6 +1844,14 @@
                     <p><strong>При смене производителя левотироксина необходим контрольный анализ уровня ТТГ и св. Т4 через 6-8 недель после начала приема препарата от нового производителя.</strong></p>
                     <p style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">
                         Разные производители могут использовать различные вспомогательные вещества, что может влиять на биодоступность препарата.
+                    </p>
+                </div>
+
+                <div class="interaction-warning">
+                    <h4><span class="danger-icon">⚠️</span> ВАЖНО: Взаимодействие с другими препаратами</h4>
+                    <p><strong>Препараты железа, кальция, антациды и ингибиторы протонной помпы принимаются раздельно от L-тироксина с разницей в 4 часа.</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">
+                        Эти препараты могут снижать всасывание L-тироксина в желудочно-кишечном тракте.
                     </p>
                 </div>
                 
@@ -1937,7 +2135,7 @@
 
         function calculatePregnancyDose() {
             const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
-            const trimester = document.getElementById('pregTrimester').value;
+            const trimester = document.getElementById('pregTrimester').value);
             const tsh = parseFloat(document.getElementById('pregTsh').value);
             
             if (!currentDose) {
