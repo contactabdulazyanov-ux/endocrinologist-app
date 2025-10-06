@@ -488,6 +488,33 @@
             border: 2px solid #0ea5e9;
         }
 
+        .icd-code {
+            display: inline-block;
+            background: #6366f1;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .medication-interaction {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .interaction-warning {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 30px 20px;
@@ -954,11 +981,13 @@
                 let form = "";
                 let severity = "";
                 let recommendations = [];
+                let icdCode = "";
                 let autoimmuneNote = atpo > 34 ? " (аутоиммунный тиреоидит)" : "";
 
                 if (tsh > 4.0 && t4 < 11.0) {
                     form = "🔴 ПЕРВИЧНЫЙ МАНИФЕСТНЫЙ ГИПОТИРЕОЗ" + autoimmuneNote;
                     severity = "danger";
+                    icdCode = "E03.9";
                     recommendations = [
                         "Необходима заместительная терапия L-тироксином",
                         "Контроль ТТГ через 6-8 недель после начала лечения",
@@ -969,6 +998,7 @@
                 } else if (tsh > 4.0 && t4 >= 11.0) {
                     form = "🟡 СУБКЛИНИЧЕСКИЙ ГИПОТИРЕОЗ" + autoimmuneNote;
                     severity = "warning";
+                    icdCode = "E02";
                     
                     if (tsh > 10.0 || atpo > 34) {
                         recommendations = [
@@ -983,13 +1013,23 @@
                             "При планировании беременности - рассмотреть терапию"
                         ];
                     }
+                } else if (tsh <= 4.0 && atpo > 34) {
+                    form = "🟡 АУТОИММУННЫЙ ТИРЕОИДИТ (эутиреоз)";
+                    severity = "warning";
+                    icdCode = "E06.3";
+                    recommendations = [
+                        "Наблюдение, контроль ТТГ через 6-12 месяцев",
+                        "При планировании беременности - усиленный контроль",
+                        "Обучение пациента симптомам гипотиреоза"
+                    ];
                 } else if (tsh <= 4.0) {
                     form = "🟢 ЭУТИРЕОЗ (норма)";
                     severity = "success";
+                    icdCode = "-";
                     recommendations = ["Плановое наблюдение"];
                 }
 
-                return { form, severity, recommendations };
+                return { form, severity, recommendations, icdCode };
             },
 
             // Расчет дозы L-тироксина
@@ -1269,7 +1309,10 @@
                         <div style="font-size: 1.5em; font-weight: 800; color: ${
                             result.severity === 'danger' ? '#dc2626' : 
                             result.severity === 'warning' ? '#d97706' : '#059669'
-                        };">${result.form}</div>
+                        };">
+                            ${result.form}
+                            ${result.icdCode !== '-' ? `<span class="icd-code">МКБ-10: ${result.icdCode}</span>` : ''}
+                        </div>
                     </div>
                     
                     <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
@@ -1332,6 +1375,11 @@
                     "Принимать утром натощак за 30-60 мин до еды"
                 ];
             }
+
+            // Добавляем рекомендации по взаимодействию с другими препаратами
+            recommendations.push(
+                "⏰ <strong>ВАЖНО:</strong> При одновременном приеме с препаратами железа, кальция или антацидами необходим интервал не менее 4 часов"
+            );
             
             let resultHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -1356,6 +1404,21 @@
                             <span>Округленная доза:</span>
                             <strong>${result.dose} мкг/сут</strong>
                         </div>
+                    </div>
+                </div>
+
+                <div class="medication-interaction">
+                    <h4>💊 Взаимодействие с другими препаратами:</h4>
+                    <div class="interaction-warning">
+                        <strong>⏰ КРИТИЧЕСКИ ВАЖНО:</strong> L-тироксин нельзя принимать одновременно с:
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li>Препаратами железа</li>
+                            <li>Препаратами кальция</li>
+                            <li>Антацидами</li>
+                            <li>Ингибиторами протонной помпы</li>
+                            <li>Холестирамином</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Необходим интервал не менее 4 часов!</strong></p>
                     </div>
                 </div>
                 
