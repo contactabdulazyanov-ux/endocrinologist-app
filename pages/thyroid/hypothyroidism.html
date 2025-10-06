@@ -1455,31 +1455,85 @@
     </div>
 
     <script>
-        // Функция для копирования симптомов с галочками
+        // Функция для копирования симптомов с галочками и группировкой по системам
         function copySymptomsWithChecks() {
-            const symptomItems = document.querySelectorAll('.symptom-item');
+            const systemGroups = document.querySelectorAll('.system-group');
             let symptomsToCopy = "🦋 ВЫБРАННЫЕ СИМПТОМЫ ГИПОТИРЕОЗА:\n\n";
             let hasCheckedSymptoms = false;
             let totalChecked = 0;
 
-            // Проходим по всем симптомам
-            symptomItems.forEach(item => {
-                const checkbox = item.querySelector('.symptom-checkbox');
-                const text = item.querySelector('.symptom-text').textContent;
+            // Проходим по всем группам систем
+            systemGroups.forEach(systemGroup => {
+                const systemName = systemGroup.textContent.trim();
+                const systemTableRow = systemGroup.closest('tr');
                 
-                if (checkbox.checked) {
-                    symptomsToCopy += `✅ ${text}\n`;
-                    hasCheckedSymptoms = true;
-                    totalChecked++;
+                if (systemTableRow) {
+                    let systemSymptoms = "";
+                    let systemHasChecked = false;
+                    
+                    // Ищем все строки с симптомами для этой системы
+                    let nextRow = systemTableRow.nextElementSibling;
+                    while (nextRow && !nextRow.classList.contains('system-group')) {
+                        const systemCell = nextRow.querySelector('td:first-child strong');
+                        const symptomItems = nextRow.querySelectorAll('.symptom-item');
+                        
+                        if (symptomItems.length > 0) {
+                            const systemTitle = systemCell ? systemCell.textContent.trim() : "Общие симптомы";
+                            
+                            symptomItems.forEach(item => {
+                                const checkbox = item.querySelector('.symptom-checkbox');
+                                const text = item.querySelector('.symptom-text').textContent;
+                                
+                                if (checkbox.checked) {
+                                    if (!systemHasChecked) {
+                                        systemSymptoms += `🔹 ${systemName}\n`;
+                                        systemHasChecked = true;
+                                    }
+                                    systemSymptoms += `   • ${text}\n`;
+                                    hasCheckedSymptoms = true;
+                                    totalChecked++;
+                                }
+                            });
+                        }
+                        nextRow = nextRow.nextElementSibling;
+                    }
+                    
+                    if (systemHasChecked) {
+                        symptomsToCopy += systemSymptoms + "\n";
+                    }
                 }
             });
 
-            // Если нет выбранных симптомов, копируем все
+            // Если нет выбранных симптомов, копируем всю структуру
             if (!hasCheckedSymptoms) {
                 symptomsToCopy += "❌ Нет выбранных симптомов\n\n";
-                symptomItems.forEach(item => {
-                    const text = item.querySelector('.symptom-text').textContent;
-                    symptomsToCopy += `☐ ${text}\n`;
+                
+                systemGroups.forEach(systemGroup => {
+                    const systemName = systemGroup.textContent.trim();
+                    const systemTableRow = systemGroup.closest('tr');
+                    
+                    if (systemTableRow) {
+                        symptomsToCopy += `🔹 ${systemName}\n`;
+                        
+                        let nextRow = systemTableRow.nextElementSibling;
+                        while (nextRow && !nextRow.classList.contains('system-group')) {
+                            const systemCell = nextRow.querySelector('td:first-child strong');
+                            const symptomItems = nextRow.querySelectorAll('.symptom-item');
+                            
+                            if (symptomItems.length > 0) {
+                                const systemTitle = systemCell ? systemCell.textContent.trim() : "Общие симптомы";
+                                symptomsToCopy += `   📋 ${systemTitle}:\n`;
+                                
+                                symptomItems.forEach(item => {
+                                    const text = item.querySelector('.symptom-text').textContent;
+                                    symptomsToCopy += `     ☐ ${text}\n`;
+                                });
+                                symptomsToCopy += "\n";
+                            }
+                            nextRow = nextRow.nextElementSibling;
+                        }
+                        symptomsToCopy += "\n";
+                    }
                 });
             } else {
                 symptomsToCopy += `\n📊 Всего выбрано: ${totalChecked} симптомов`;
@@ -1491,11 +1545,9 @@
 
             // Копируем в буфер обмена
             navigator.clipboard.writeText(symptomsToCopy).then(() => {
-                // Показываем уведомление
                 showCopyNotification();
             }).catch(err => {
                 console.error('Ошибка при копировании: ', err);
-                // Fallback для старых браузеров
                 fallbackCopyTextToClipboard(symptomsToCopy);
             });
         }
