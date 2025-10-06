@@ -106,7 +106,6 @@
             padding: 20px;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, 
                 rgba(99, 102, 241, 0.1) 0%, 
@@ -158,7 +157,6 @@
             margin: 0 auto;
         }
 
-        /* Navigation */
         .main-menu {
             display: flex;
             justify-content: center;
@@ -209,7 +207,6 @@
             border-color: var(--primary-light);
         }
 
-        /* Content */
         .content {
             background: var(--glass);
             backdrop-filter: blur(20px);
@@ -235,7 +232,6 @@
             margin-bottom: 40px;
         }
 
-        /* Cards */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -319,7 +315,6 @@
             color: var(--secondary);
         }
 
-        /* Symptoms Table */
         .symptoms-section {
             margin: 50px 0;
         }
@@ -441,7 +436,6 @@
             color: var(--text);
         }
 
-        /* Calculators */
         .calculators-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -606,7 +600,6 @@
             }
         }
 
-        /* Tabs */
         .diagnostic-section {
             background: linear-gradient(135deg, 
                 rgba(245, 158, 11, 0.1) 0%, 
@@ -681,7 +674,6 @@
             display: block;
         }
 
-        /* Notification */
         .copy-notification {
             position: fixed;
             top: 30px;
@@ -709,7 +701,6 @@
             }
         }
 
-        /* Additional styles for medical content */
         .clinical-guide {
             background: linear-gradient(135deg, 
                 rgba(16, 185, 129, 0.1) 0%, 
@@ -836,7 +827,6 @@
         .lipid-borderline { color: var(--warning); }
         .lipid-high { color: var(--danger); }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -892,7 +882,6 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="background-shapes">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -900,13 +889,11 @@
     </div>
 
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <h1><i class="fas fa-ribbon"></i> ГИПОТИРЕОЗ</h1>
             <p>Современная диагностика и персонализированное лечение щитовидной железы</p>
         </header>
 
-        <!-- Navigation -->
         <nav class="main-menu">
             <a href="../../index.html" class="nav-btn">
                 <i class="fas fa-home"></i> Главная
@@ -922,12 +909,10 @@
             </a>
         </nav>
 
-        <!-- Main Content -->
         <main class="content">
             <h1 class="page-title">Гипотиреоз</h1>
             <p class="page-subtitle">Современный подход к диагностике и лечению снижения функции щитовидной железы</p>
 
-            <!-- Copy Symptoms Button -->
             <div class="symptoms-section">
                 <div class="section-header">
                     <h2 class="section-title">📋 Симптоматика</h2>
@@ -936,7 +921,6 @@
                     </button>
                 </div>
 
-                <!-- Symptoms Table -->
                 <div class="symptoms-table">
                     <table>
                         <thead>
@@ -946,7 +930,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ОБЩИЕ И КЛАССИЧЕСКИЕ СИМПТОМЫ -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>1. Наиболее частые и характерные жалобы ("классические")</strong></td>
                             </tr>
@@ -986,7 +969,6 @@
                                 </td>
                             </tr>
 
-                            <!-- КОЖА И ПРИДАТКИ -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>2. Изменения со стороны кожи и ее придатков</strong></td>
                             </tr>
@@ -1037,7 +1019,6 @@
                                 </td>
                             </tr>
 
-                            <!-- НЕВРОЛОГИЧЕСКИЕ И ПСИХИЧЕСКИЕ -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>3. Неврологические и психические проявления</strong></td>
                             </tr>
@@ -1119,7 +1100,6 @@
                                 </td>
                             </tr>
 
-                            <!-- СЕРДЕЧНО-СОСУДИСТАЯ СИСТЕМА -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>4. Сердечно-сосудистая система</strong></td>
                             </tr>
@@ -1155,7 +1135,6 @@
                                 </td>
                             </tr>
 
-                            <!-- ЖЕЛУДОЧНО-КИШЕЧНЫЙ ТРАКТ -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>5. Желудочно-кишечные нарушения</strong></td>
                             </tr>
@@ -1187,7 +1166,6 @@
                                 </td>
                             </tr>
 
-                            <!-- РЕПРОДУКТИВНАЯ СИСТЕМА -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>6. Нарушения репродуктивной системы</strong></td>
                             </tr>
@@ -1261,7 +1239,6 @@
                                 </td>
                             </tr>
 
-                            <!-- ДРУГИЕ СИСТЕМЫ -->
                             <tr class="system-group">
                                 <td colspan="2"><strong>7. Другие системы и органы</strong></td>
                             </tr>
@@ -1304,7 +1281,6 @@
                 </div>
             </div>
 
-            <!-- Information Cards -->
             <div class="info-grid">
                 <div class="info-card">
                     <h3><i class="fas fa-microscope"></i> Лабораторная диагностика</h3>
@@ -1342,7 +1318,6 @@
                 </div>
             </div>
 
-            <!-- Diagnostic Section with Tabs -->
             <div class="diagnostic-section">
                 <h2 class="section-title"><i class="fas fa-stethoscope"></i> Диагностика и лечение</h2>
                 <p class="section-subtitle">Комплексная оценка и персонализированные рекомендации</p>
@@ -1365,7 +1340,6 @@
                     </button>
                 </div>
 
-                <!-- Diagnosis Tab -->
                 <div id="diagnosis-tab" class="tab-content active">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -1417,7 +1391,6 @@
                     </div>
                 </div>
 
-                <!-- Lipids Tab -->
                 <div id="lipids-tab" class="tab-content">
                     <div class="calculator-card">
                         <h3><i class="fas fa-vial"></i> Комплексная оценка липидного профиля согласно КР РФ 2023</h3>
@@ -1473,7 +1446,6 @@
                         <div id="lipidResult" class="result-box"></div>
                     </div>
 
-                    <!-- Таблица целевых значений -->
                     <div class="targets-table">
                         <table>
                             <thead>
@@ -1514,7 +1486,6 @@
                     </div>
                 </div>
 
-                <!-- Vitamin D Tab -->
                 <div id="vitamin-d-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -1576,7 +1547,6 @@
                         </div>
                     </div>
                     
-                    <!-- Дополнительная информация о витамине D -->
                     <div class="clinical-guide">
                         <h3><i class="fas fa-info-circle"></i> Почему витамин D важен при аутоиммунном тиреоидите?</h3>
                         <div class="info-grid">
@@ -1596,7 +1566,6 @@
                     </div>
                 </div>
 
-                <!-- Monitoring Tab -->
                 <div id="monitoring-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -1654,7 +1623,6 @@
                     </div>
                 </div>
 
-                <!-- Pregnancy Tab -->
                 <div id="pregnancy-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -1708,7 +1676,6 @@
                 </div>
             </div>
 
-            <!-- Clinical Guide Section -->
             <div class="clinical-guide">
                 <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Ведение гипотиреоза: ключевые принципы</h2>
                 <p class="section-subtitle">Индивидуальный подход для разных клинических ситуаций</p>
@@ -1783,15 +1750,13 @@
         </main>
     </div>
 
-    <!-- Notification -->
     <div id="copyNotification" class="copy-notification">
         <i class="fas fa-check-circle"></i> Симптомы скопированы в буфер обмена!
     </div>
 
     <script>
-        // БАЗА ЗНАНИЙ ПО ГИПОТИРЕОЗУ - ПОЛНАЯ ВЕРСИЯ
+        // БАЗА ЗНАНИЙ ПО ГИПОТИРЕОЗУ
         const HYPOTHYROIDISM_KNOWLEDGE = {
-            // Диагностика формы гипотиреоза
             diagnoseForm: function(tsh, t4, atpo = null) {
                 if (!tsh) return null;
 
@@ -1844,7 +1809,6 @@
                 return { form, severity, recommendations };
             },
 
-            // Расчет дозы L-тироксина
             calculateDose: function(weight, age, tsh, hasHeartDisease = false) {
                 let dosePerKg;
                 let category = "";
@@ -1866,13 +1830,11 @@
                 return { dose: roundedDose, category, calculatedDose };
             },
 
-            // Оценка липидного профиля по КР РФ 2023
             evaluateLipids: function(ldl, hdl, trig, total, riskLevel, tsh) {
                 const recommendations = [];
                 const medications = [];
                 const lipidPanel = [];
                 
-                // Целевые значения по КР РФ 2023
                 const targets = {
                     "low": { target: 3.0, reduction: 0 },
                     "moderate": { target: 2.6, reduction: 0 },
@@ -1884,7 +1846,6 @@
                 const target = targets[riskLevel];
                 const neededReduction = ((ldl - target.target) / ldl * 100).toFixed(1);
 
-                // Оценка текущего состояния
                 let evaluation = "";
                 if (ldl <= target.target) {
                     evaluation = "✅ Целевой уровень достигнут";
@@ -1893,24 +1854,20 @@
                     evaluation = `❌ Требуется снижение ХС ЛПНП на ${neededReduction}%`;
                 }
 
-                // Анализ всех липидных фракций
                 lipidPanel.push({ name: "ХС ЛПНП", value: ldl, status: ldl <= target.target ? "normal" : "high", target: target.target });
                 lipidPanel.push({ name: "ХС ЛПВП", value: hdl, status: hdl >= 1.2 ? "normal" : "low", target: ">1.2" });
                 lipidPanel.push({ name: "Триглицериды", value: trig, status: trig < 1.7 ? "normal" : "high", target: "<1.7" });
                 lipidPanel.push({ name: "Общий ХС", value: total, status: total < 5.2 ? "normal" : "high", target: "<5.2" });
 
-                // Расчет индексов атерогенности
                 const nonHdl = total - hdl;
                 const castelli1 = ldl / hdl;
                 const castelli2 = total / hdl;
 
-                // Приоритет лечения гипотиреоза
                 if (tsh > 4.0) {
                     recommendations.push("💊 <strong>ПРИОРИТЕТ: коррекция гипотиреоза</strong>");
                     recommendations.push("Начать терапию L-тироксином для нормализации функции щитовидной железы");
                     recommendations.push("Контроль липидов через 8-12 недель после достижения эутиреоза");
                 } else {
-                    // Назначение гиполипидемической терапии
                     if (ldl > target.target) {
                         let statinChoice = "";
                         let statinDose = "";
@@ -1953,7 +1910,6 @@
                 };
             },
 
-            // Контроль эффективности терапии
             evaluateTherapy: function(currentDose, currentTsh, currentT4, age) {
                 const recommendations = [];
                 let evaluation = "";
@@ -1983,7 +1939,6 @@
                     recommendations.push("Контроль ТТГ через 8-12 недель");
                 }
 
-                // Оценка св. Т4
                 if (currentT4 > 22.0) {
                     recommendations.push("св. Т4 повышен - возможна передозировка");
                 } else if (currentT4 < 11.0) {
@@ -1993,7 +1948,6 @@
                 return { evaluation, recommendations, newDose };
             },
 
-            // План наблюдения
             generateFollowUpPlan: function(age, tsh, isStable, comorbidities) {
                 const plan = [];
                 let nextControl = "";
@@ -2026,7 +1980,6 @@
                 return { plan, nextControl };
             },
 
-            // Беременность - коррекция дозы
             pregnancyDoseAdjustment: function(currentDose, trimester, tsh) {
                 let multiplier;
                 if (trimester === "1") {
@@ -2090,7 +2043,7 @@
             }
         };
 
-        // ОСНОВНЫЕ ФУНКЦИИ СТРАНИЦЫ
+        // ОСНОВНЫЕ ФУНКЦИИ
         function copySymptomsWithChecks() {
             const systemGroups = document.querySelectorAll('.system-group');
             let symptomsToCopy = "🦋 ВЫБРАННЫЕ СИМПТОМЫ ГИПОТИРЕОЗА:\n\n";
@@ -2208,9 +2161,8 @@
             document.body.removeChild(textArea);
         }
 
-        // Инициализация при загрузке страницы
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Modern hypothyroidism page loaded');
             initTabs();
             initSymptomCheckboxes();
         });
@@ -2250,7 +2202,7 @@
             if (activeButton) activeButton.classList.add('active');
         }
 
-        // МЕДИЦИНСКИЕ КАЛЬКУЛЯТОРЫ - ПОЛНАЯ ФУНКЦИОНАЛЬНОСТЬ
+        // КАЛЬКУЛЯТОРЫ
         function diagnoseHypothyroidism() {
             const tsh = parseFloat(document.getElementById('diagnosisTsh').value);
             const t4 = parseFloat(document.getElementById('diagnosisT4').value);
@@ -2406,7 +2358,6 @@
             let resultHTML = `
                 <h4>📊 Комплексная оценка липидного профиля по КР РФ 2023</h4>
                 
-                <!-- ПАНЕЛЬ ЛИПИДОВ -->
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 15px 0;">
                     <h5>🩸 Результаты липидного спектра:</h5>
                     <div class="lipid-panel">
@@ -2433,7 +2384,6 @@
                     </div>
                 </div>
                 
-                <!-- ИНДЕКСЫ АТЕРОГЕННОСТИ -->
                 <div style="background: rgba(99, 102, 241, 0.1); padding: 20px; border-radius: 12px; margin: 15px 0;">
                     <h5>📈 Индексы атерогенности:</h5>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 15px;">
@@ -2461,7 +2411,6 @@
                     </div>
                 </div>
                 
-                <!-- ОБЩАЯ ОЦЕНКА -->
                 <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between;">
@@ -2488,7 +2437,6 @@
                 </div>
             `;
             
-            // БЛОК С НАЗНАЧЕНИЕМ ПРЕПАРАТОВ
             if (result.medications && result.medications.length > 0) {
                 resultHTML += `
                     <div style="background: rgba(99, 102, 241, 0.1); padding: 20px; border-radius: 12px; margin: 15px 0;">
@@ -2511,7 +2459,6 @@
                 resultHTML += `</div>`;
             }
             
-            // Рекомендации
             resultHTML += `
                 <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
                     <h4>💡 Ключевые положения КР 2023:</h4>
@@ -2551,7 +2498,6 @@
             let resultHTML = `
                 <h4>🌞 Персонализированная терапия витамина D при АИТ</h4>
                 
-                <!-- СТАТУС ПАЦИЕНТА -->
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 15px 0;">
                     <h5>📊 Статус пациента:</h5>
                     <div style="display: grid; gap: 10px;">
