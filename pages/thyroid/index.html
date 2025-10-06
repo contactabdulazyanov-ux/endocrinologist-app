@@ -282,100 +282,6 @@
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
 
-        /* СЕКЦИИ */
-        .section {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 50px 40px;
-            border-radius: 24px;
-            margin: 50px 0;
-            border: 2px solid #bae6fd;
-            box-shadow: var(--shadow);
-        }
-
-        .section-title {
-            font-size: 2.2em;
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-weight: 800;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 1.2em;
-            color: var(--text-light);
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 400;
-        }
-
-        .calculators-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .calculator-card {
-            background: white;
-            border-radius: 20px;
-            padding: 35px 30px;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .calculator-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .calculator-card h3 {
-            color: var(--dark);
-            margin-bottom: 25px;
-            font-size: 1.4em;
-            font-weight: 700;
-        }
-
-        .form-group {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border);
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 12px;
-            font-size: 1.1em;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 16px;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
-        }
-
-        .range-info {
-            font-size: 0.95em;
-            color: var(--text-light);
-            margin-top: 10px;
-            font-style: italic;
-        }
-
         /* ЭКСТРЕННЫЕ СОСТОЯНИЯ */
         .emergency-section {
             background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
@@ -526,7 +432,6 @@
             .page-title {
                 font-size: 2em;
             }
-            .calculators-grid,
             .info-cards-grid,
             .emergency-grid {
                 grid-template-columns: 1fr;
@@ -548,10 +453,9 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            .section, .emergency-section {
+            .emergency-section {
                 padding: 30px 20px;
             }
-            .calculator-card,
             .emergency-card,
             .info-card {
                 padding: 25px 20px;
@@ -666,6 +570,43 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="protocol-step">
+                            <span class="step-number">4</span>
+                            <strong>Инфузионная терапия</strong>
+                            <p>Осторожная инфузия под контролем уровня электролитов для коррекции гипотонии и гипонатриемии</p>
+                        </div>
+
+                        <div class="protocol-step">
+                            <span class="step-number">5</span>
+                            <strong>Пассивное согревание</strong>
+                            <p>Укутывание обычными одеялами (активное согревание противопоказано!)</p>
+                        </div>
+
+                        <div class="protocol-step">
+                            <span class="step-number">6</span>
+                            <strong>Коррекция гипогликемии</strong>
+                            <p>Введение глюкозы при подтвержденной гипогликемии</p>
+                        </div>
+
+                        <div class="protocol-step">
+                            <span class="step-number">7</span>
+                            <strong>Эмпирическая антибиотикотерапия</strong>
+                            <p>Антибиотики широкого спектра до получения результатов анализов (инфекция - частая причина комы)</p>
+                        </div>
+
+                        <div class="warning-note">
+                            ⚠️ КРИТИЧЕСКИ ВАЖНО: Диагноз устанавливается на основании клинической картины, не дожидаясь лабораторного подтверждения!
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px 0; color: #7f1d1d;">📊 Мониторинг в ОРИТ:</h4>
+                        <ul class="monitoring-list">
+                            <li>Непрерывный мониторинг ЭКГ, АД, ЧДД, SpO₂</li>
+                            <li>Контроль температуры тела каждые 2 часа</li>
+                            <li>Биохимический контроль: электролиты, глюкоза, креатинин</li>
+                            <li>Оценка неврологического статуса</li>
+                            <li>Контроль диуреза</li>
+                        </ul>
                     </div>
 
                     <!-- ТИРЕОТОКСИЧЕСКИЙ КРИЗ -->
@@ -695,6 +636,15 @@
 
                         <div class="protocol-step">
                             <span class="step-number">3</span>
+                            <strong>Блокада высвобождения гормонов</strong>
+                            <div class="dosage-box">
+                                💊 <strong>Йодид калия:</strong> 250 мг каждые 6 часов<br>
+                                <em>Начинать через 1 час после тиреостатиков</em>
+                            </div>
+                        </div>
+
+                        <div class="protocol-step">
+                            <span class="step-number">4</span>
                             <strong>Блокада периферических эффектов</strong>
                             <div class="dosage-box">
                                 💊 <strong>Пропранолол:</strong> 40-80 мг каждые 6 часов<br>
@@ -702,62 +652,35 @@
                                 💉 <strong>Пропранолол в/в:</strong> 1-2 мг каждые 10 минут под контролем АД и ЧСС
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- ОСНОВНЫЕ ЗАБОЛЕВАНИЯ -->
-            <div class="section">
-                <h2 class="section-title">🦋 Основные заболевания щитовидной железы</h2>
-                <p class="section-subtitle">Краткий обзор патологий и их характеристик</p>
-                
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <h3>📉 Гипотиреоз</h3>
-                        <div class="form-group">
-                            <p><strong>Сниженная функция щитовидной железы</strong></p>
-                            <ul class="feature-list">
-                                <li>Недостаток гормонов Т3 и Т4</li>
-                                <li>Замедление обмена веществ</li>
-                                <li>Повышенная утомляемость</li>
-                                <li>Набор веса, отечность</li>
-                                <li>Брадикардия, гипотония</li>
-                            </ul>
+                        <div class="protocol-step">
+                            <span class="step-number">5</span>
+                            <strong>Глюкокортикоиды</strong>
+                            <div class="dosage-box">
+                                💉 <strong>Гидрокортизон:</strong> 100 мг в/в каждые 8 часов<br>
+                                или<br>
+                                💉 <strong>Дексаметазон:</strong> 2 мг каждые 6 часов
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <p><strong>Лабораторные изменения:</strong></p>
-                            <ul class="feature-list">
-                                <li>ТТГ ↑ (основной маркер)</li>
-                                <li>св. Т4 ↓ (при манифестной форме)</li>
-                                <li>Анти-ТПО ↑ (при АИТ)</li>
-                                <li>Холестерин ↑</li>
-                            </ul>
-                        </div>
-                        <a href="hypothyroidism.html" class="btn">📉 Перейти к калькуляторам гипотиреоза</a>
-                    </div>
 
-                    <div class="calculator-card">
-                        <h3>📈 Гипертиреоз</h3>
-                        <div class="form-group">
-                            <p><strong>Повышенная функция щитовидной железы</strong></p>
-                            <ul class="feature-list">
-                                <li>Избыток гормонов Т3 и Т4</li>
-                                <li>Ускорение обмена веществ</li>
-                                <li>Снижение веса, тахикардия</li>
-                                <li>Нервозность, тремор</li>
-                                <li>Непереносимость жары</li>
-                            </ul>
+                        <div class="protocol-step">
+                            <span class="step-number">6</span>
+                            <strong>Поддерживающая терапия</strong>
+                            <p>Коррекция гипертермии, седация, лечение провоцирующих факторов</p>
                         </div>
-                        <div class="form-group">
-                            <p><strong>Лабораторные изменения:</strong></p>
-                            <ul class="feature-list">
-                                <li>ТТГ ↓ (основной маркер)</li>
-                                <li>св. Т4 ↑, св. Т3 ↑</li>
-                                <li>АТ-рТТГ ↑ (при болезни Грейвса)</li>
-                                <li>Ускоренное СОЭ (при тиреоидите)</li>
-                            </ul>
+
+                        <div class="warning-note">
+                            ⚠️ ПРОТИВОПОКАЗАНО: Салицилаты (могут вытеснять тиреоидные гормоны из связи с белками)
                         </div>
-                        <a href="hyperthyroidism.html" class="btn">📈 Перейти к калькуляторам гипертиреоза</a>
+
+                        <h4 style="margin: 20px 0 10px 0; color: #7f1d1d;">🎯 Критерии диагностики:</h4>
+                        <ul class="monitoring-list">
+                            <li>Температура > 38.5°C</li>
+                            <li>Тахикардия > 130 уд/мин</li>
+                            <li>Нарушения ЦНС (ажитация, делирий, кома)</li>
+                            <li>ЖКТ-симптомы (тошнота, рвота, диарея)</li>
+                            <li>Сердечная недостаточность, отек легких</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -769,7 +692,7 @@
             console.log('Главная страница щитовидной железы загружена');
             
             // Анимация для карточек
-            const cards = document.querySelectorAll('.info-card, .calculator-card, .emergency-card, .stat-card');
+            const cards = document.querySelectorAll('.info-card, .emergency-card, .stat-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
