@@ -5,127 +5,556 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заболевания щитовидной железы - Эндокринолог PRO</title>
     <style>
-        /* Все предыдущие стили остаются */
-        
-        /* НОВЫЕ СТИЛИ ДЛЯ ЭКСТРЕННЫХ СОСТОЯНИЙ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --secondary-dark: #6d28d9;
+            --accent: #06b6d4;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --danger-dark: #b91c1c;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: var(--dark);
+            padding: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .main-menu a {
+            padding: 14px 28px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-menu a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .main-menu a.active {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.3em;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        /* СТАТИСТИКА */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bae6fd;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        /* ИНФОРМАЦИОННЫЕ КАРТОЧКИ */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .info-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .info-card .btn {
+            width: 100%;
+            justify-content: center;
+            font-size: 1.1em;
+            padding: 16px 32px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1em;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        /* КНОПКИ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        /* СЕКЦИИ */
+        .section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 50px 40px;
+            border-radius: 24px;
+            margin: 50px 0;
+            border: 2px solid #bae6fd;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-card h3 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .form-group {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .range-info {
+            font-size: 0.95em;
+            color: var(--text-light);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ЭКСТРЕННЫЕ СОСТОЯНИЯ */
         .emergency-section {
             background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
+            padding: 50px 40px;
+            border-radius: 24px;
+            margin: 50px 0;
             border: 2px solid #fecaca;
+            box-shadow: var(--shadow);
         }
 
         .emergency-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
         }
 
         .emergency-card {
             background: white;
-            border-radius: 16px;
-            padding: 30px;
-            border-left: 6px solid;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 35px 30px;
+            border-left: 8px solid;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .emergency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .emergency-card.critical {
-            border-left-color: #dc2626;
+            border-left-color: var(--danger);
             background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
         }
 
         .emergency-card.warning {
-            border-left-color: #d97706;
+            border-left-color: var(--warning);
             background: linear-gradient(135deg, #fffbeb 0%, #fed7aa 100%);
         }
 
         .emergency-title {
-            font-size: 1.5em;
+            font-size: 1.6em;
             font-weight: 800;
             margin-bottom: 20px;
-            color: #dc2626;
+            color: var(--danger-dark);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .emergency-subtitle {
             font-size: 1.1em;
             color: #7f1d1d;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-weight: 600;
         }
 
         .protocol-step {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 4px solid #dc2626;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--danger);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .step-number {
             display: inline-block;
-            background: #dc2626;
+            background: var(--danger);
             color: white;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             text-align: center;
-            line-height: 25px;
+            line-height: 30px;
             font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .medication-alert {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
+            margin-right: 12px;
+            font-size: 0.9em;
         }
 
         .dosage-box {
             background: #ecfdf5;
-            border: 2px solid #10b981;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 10px 0;
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .warning-note {
+            background: #fef2f2;
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            font-weight: 700;
+            color: var(--danger-dark);
         }
 
         .monitoring-list {
             list-style: none;
             padding: 0;
-            margin: 15px 0;
+            margin: 20px 0;
         }
 
         .monitoring-list li {
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #e5e7eb;
             position: relative;
-            padding-left: 25px;
+            padding-left: 35px;
+            font-size: 1em;
         }
 
         .monitoring-list li:before {
             content: '📊';
             position: absolute;
             left: 0;
+            font-size: 1.2em;
         }
 
-        .warning-note {
-            background: #fef2f2;
-            border: 2px solid #ef4444;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 15px 0;
-            font-weight: 600;
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 1024px) {
+            .content {
+                padding: 40px 30px;
+            }
+            .header {
+                padding: 40px 30px;
+            }
+            .header h1 {
+                font-size: 2.8em;
+            }
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .content {
+                padding: 30px 20px;
+            }
+            .header {
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .page-title {
+                font-size: 2em;
+            }
+            .calculators-grid,
+            .info-cards-grid,
             .emergency-grid {
                 grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-menu {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .main-menu a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .section, .emergency-section {
+                padding: 30px 20px;
+            }
+            .calculator-card,
+            .emergency-card,
+            .info-card {
+                padding: 25px 20px;
             }
         }
     </style>
@@ -168,6 +597,33 @@
                 </div>
             </div>
 
+            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
+            <div class="info-cards-grid">
+                <div class="info-card">
+                    <h3>📉 Гипотиреоз</h3>
+                    <p>Сниженная функция щитовидной железы с характерными симптомами и лабораторными изменениями</p>
+                    <ul class="feature-list">
+                        <li>Расчет дозы L-тироксина</li>
+                        <li>Контроль эффективности терапии</li>
+                        <li>Коррекция при беременности</li>
+                        <li>Оценка липидного профиля</li>
+                    </ul>
+                    <a href="hypothyroidism.html" class="btn">📉 Перейти к калькуляторам</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>📈 Гипертиреоз</h3>
+                    <p>Повышенная функция щитовидной железы с различными формами и подходами к лечению</p>
+                    <ul class="feature-list">
+                        <li>Дифференциальная диагностика</li>
+                        <li>Расчет доз тиреостатиков</li>
+                        <li>Оценка риска рецидива</li>
+                        <li>Ведение беременности</li>
+                    </ul>
+                    <a href="hyperthyroidism.html" class="btn">📈 Перейти к калькуляторам</a>
+                </div>
+            </div>
+
             <!-- ЭКСТРЕННЫЕ СОСТОЯНИЯ -->
             <div class="emergency-section">
                 <h2 class="section-title">🚨 Экстренные состояния щитовидной железы</h2>
@@ -204,49 +660,12 @@
                             <strong>Глюкокортикоидная терапия</strong>
                             <div class="dosage-box">
                                 💉 <strong>Гидрокортизон:</strong> 100 мг в/в каждые 8 часов до стабилизации<br>
-                                <div class="medication-alert">
+                                <div class="warning-note">
                                     💊 <strong>Альтернатива при отсутствии гидрокортизона:</strong><br>
                                     Преднизолон 25-30 мг в/в каждые 12 часов
                                 </div>
                             </div>
                         </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">4</span>
-                            <strong>Инфузионная терапия</strong>
-                            <p>Осторожная инфузия под контролем уровня электролитов для коррекции гипотонии и гипонатриемии</p>
-                        </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">5</span>
-                            <strong>Пассивное согревание</strong>
-                            <p>Укутывание обычными одеялами (активное согревание противопоказано!)</p>
-                        </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">6</span>
-                            <strong>Коррекция гипогликемии</strong>
-                            <p>Введение глюкозы при подтвержденной гипогликемии</p>
-                        </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">7</span>
-                            <strong>Эмпирическая антибиотикотерапия</strong>
-                            <p>Антибиотики широкого спектра до получения результатов анализов (инфекция - частая причина комы)</p>
-                        </div>
-
-                        <div class="warning-note">
-                            ⚠️ КРИТИЧЕСКИ ВАЖНО: Диагноз устанавливается на основании клинической картины, не дожидаясь лабораторного подтверждения!
-                        </div>
-
-                        <h4 style="margin: 20px 0 10px 0; color: #7f1d1d;">📊 Мониторинг в ОРИТ:</h4>
-                        <ul class="monitoring-list">
-                            <li>Непрерывный мониторинг ЭКГ, АД, ЧДД, SpO₂</li>
-                            <li>Контроль температуры тела каждые 2 часа</li>
-                            <li>Биохимический контроль: электролиты, глюкоза, креатинин</li>
-                            <li>Оценка неврологического статуса</li>
-                            <li>Контроль диуреза</li>
-                        </ul>
                     </div>
 
                     <!-- ТИРЕОТОКСИЧЕСКИЙ КРИЗ -->
@@ -276,15 +695,6 @@
 
                         <div class="protocol-step">
                             <span class="step-number">3</span>
-                            <strong>Блокада высвобождения гормонов</strong>
-                            <div class="dosage-box">
-                                💊 <strong>Йодид калия:</strong> 250 мг каждые 6 часов<br>
-                                <em>Начинать через 1 час после тиреостатиков</em>
-                            </div>
-                        </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">4</span>
                             <strong>Блокада периферических эффектов</strong>
                             <div class="dosage-box">
                                 💊 <strong>Пропранолол:</strong> 40-80 мг каждые 6 часов<br>
@@ -292,68 +702,12 @@
                                 💉 <strong>Пропранолол в/в:</strong> 1-2 мг каждые 10 минут под контролем АД и ЧСС
                             </div>
                         </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">5</span>
-                            <strong>Глюкокортикоиды</strong>
-                            <div class="dosage-box">
-                                💉 <strong>Гидрокортизон:</strong> 100 мг в/в каждые 8 часов<br>
-                                или<br>
-                                💉 <strong>Дексаметазон:</strong> 2 мг каждые 6 часов
-                            </div>
-                        </div>
-
-                        <div class="protocol-step">
-                            <span class="step-number">6</span>
-                            <strong>Поддерживающая терапия</strong>
-                            <p>Коррекция гипертермии, седация, лечение провоцирующих факторов</p>
-                        </div>
-
-                        <div class="warning-note">
-                            ⚠️ ПРОТИВОПОКАЗАНО: Салицилаты (могут вытеснять тиреоидные гормоны из связи с белками)
-                        </div>
-
-                        <h4 style="margin: 20px 0 10px 0; color: #7f1d1d;">🎯 Критерии диагностики:</h4>
-                        <ul class="monitoring-list">
-                            <li>Температура > 38.5°C</li>
-                            <li>Тахикардия > 130 уд/мин</li>
-                            <li>Нарушения ЦНС (ажитация, делирий, кома)</li>
-                            <li>ЖКТ-симптомы (тошнота, рвота, диарея)</li>
-                            <li>Сердечная недостаточность, отек легких</li>
-                        </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
-            <div class="info-cards-grid">
-                <div class="info-card">
-                    <h3>📉 Гипотиреоз</h3>
-                    <p>Сниженная функция щитовидной железы с характерными симптомами и лабораторными изменениями</p>
-                    <ul class="feature-list">
-                        <li>Расчет дозы L-тироксина</li>
-                        <li>Контроль эффективности терапии</li>
-                        <li>Коррекция при беременности</li>
-                        <li>Оценка липидного профиля</li>
-                    </ul>
-                    <a href="hypothyroidism.html" class="btn">📉 Перейти к калькуляторам</a>
-                </div>
-
-                <div class="info-card">
-                    <h3>📈 Гипертиреоз</h3>
-                    <p>Повышенная функция щитовидной железы с различными формами и подходами к лечению</p>
-                    <ul class="feature-list">
-                        <li>Дифференциальная диагностика</li>
-                        <li>Расчет доз тиреостатиков</li>
-                        <li>Оценка риска рецидива</li>
-                        <li>Ведение беременности</li>
-                    </ul>
-                    <a href="hyperthyroidism.html" class="btn">📈 Перейти к калькуляторам</a>
-                </div>
-            </div>
-
             <!-- ОСНОВНЫЕ ЗАБОЛЕВАНИЯ -->
-            <div class="diagnostic-section">
+            <div class="section">
                 <h2 class="section-title">🦋 Основные заболевания щитовидной железы</h2>
                 <p class="section-subtitle">Краткий обзор патологий и их характеристик</p>
                 
@@ -362,7 +716,7 @@
                         <h3>📉 Гипотиреоз</h3>
                         <div class="form-group">
                             <p><strong>Сниженная функция щитовидной железы</strong></p>
-                            <ul>
+                            <ul class="feature-list">
                                 <li>Недостаток гормонов Т3 и Т4</li>
                                 <li>Замедление обмена веществ</li>
                                 <li>Повышенная утомляемость</li>
@@ -372,7 +726,7 @@
                         </div>
                         <div class="form-group">
                             <p><strong>Лабораторные изменения:</strong></p>
-                            <ul>
+                            <ul class="feature-list">
                                 <li>ТТГ ↑ (основной маркер)</li>
                                 <li>св. Т4 ↓ (при манифестной форме)</li>
                                 <li>Анти-ТПО ↑ (при АИТ)</li>
@@ -386,7 +740,7 @@
                         <h3>📈 Гипертиреоз</h3>
                         <div class="form-group">
                             <p><strong>Повышенная функция щитовидной железы</strong></p>
-                            <ul>
+                            <ul class="feature-list">
                                 <li>Избыток гормонов Т3 и Т4</li>
                                 <li>Ускорение обмена веществ</li>
                                 <li>Снижение веса, тахикардия</li>
@@ -396,7 +750,7 @@
                         </div>
                         <div class="form-group">
                             <p><strong>Лабораторные изменения:</strong></p>
-                            <ul>
+                            <ul class="feature-list">
                                 <li>ТТГ ↓ (основной маркер)</li>
                                 <li>св. Т4 ↑, св. Т3 ↑</li>
                                 <li>АТ-рТТГ ↑ (при болезни Грейвса)</li>
@@ -404,47 +758,6 @@
                             </ul>
                         </div>
                         <a href="hyperthyroidism.html" class="btn">📈 Перейти к калькуляторам гипертиреоза</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ДИАГНОСТИЧЕСКИЕ ВОЗМОЖНОСТИ -->
-            <div class="diagnostic-section">
-                <h2 class="section-title">🔍 Диагностические возможности</h2>
-                <p class="section-subtitle">Полный спектр калькуляторов для точной диагностики и лечения</p>
-
-                <div class="info-cards-grid">
-                    <div class="info-card">
-                        <h3>🧮 Калькуляторы гипотиреоза</h3>
-                        <ul class="feature-list">
-                            <li>Расчет стартовой дозы L-тироксина</li>
-                            <li>Коррекция дозы при беременности</li>
-                            <li>Оценка липидного профиля по КР 2023</li>
-                            <li>Контроль эффективности терапии</li>
-                            <li>План динамического наблюдения</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3>🧮 Калькуляторы гипертиреоза</h3>
-                        <ul class="feature-list">
-                            <li>Дифференциальная диагностика форм</li>
-                            <li>Расчет доз тиреостатиков</li>
-                            <li>Режим "блокируй и замещай"</li>
-                            <li>Оценка риска рецидива</li>
-                            <li>Ведение беременности</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3>📊 Мониторинг лечения</h3>
-                        <ul class="feature-list">
-                            <li>Контроль гормональных показателей</li>
-                            <li>Оценка побочных эффектов</li>
-                            <li>Коррекция сопутствующей терапии</li>
-                            <li>Индивидуальные целевые значения</li>
-                            <li>Долгосрочное наблюдение</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -456,16 +769,16 @@
             console.log('Главная страница щитовидной железы загружена');
             
             // Анимация для карточек
-            const cards = document.querySelectorAll('.info-card, .calculator-card, .emergency-card');
+            const cards = document.querySelectorAll('.info-card, .calculator-card, .emergency-card, .stat-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
+                card.style.transform = 'translateY(30px)';
                 
                 setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
+                    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 100 * index);
+                }, 150 * index);
             });
         });
     </script>
