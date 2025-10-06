@@ -772,7 +772,7 @@
             <!-- КАЛЬКУЛЯТОР МКБ-10 -->
             <div class="icd-calculator">
                 <h2 class="calculator-title">🧮 Калькулятор МКБ-10</h2>
-                <p class="calculator-subtitle">Быстрый подбор кодов заболеваний щитовидной железы и беременности</p>
+                <p class="calculator-subtitle">Быстрый подбор кодов заболеваний щитовидной железы, включая беременность</p>
 
                 <div class="disease-categories">
                     <!-- ГИПОТИРЕОЗ -->
@@ -887,49 +887,49 @@
                         </div>
                     </div>
 
-                    <!-- БЕРЕМЕННОСТЬ И АКУШЕРСКИЕ СОСТОЯНИЯ -->
+                    <!-- ЩИТОВИДНАЯ ЖЕЛЕЗА И БЕРЕМЕННОСТЬ -->
                     <div class="disease-category">
-                        <div class="category-title">🤰 Беременность и акушерские состояния</div>
+                        <div class="category-title">🤰 Щитовидная железа и беременность</div>
                         <div class="quick-codes">
-                            <div class="quick-code" onclick="copyCode('O00.1')">
+                            <div class="quick-code" onclick="copyCode('O99.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O00.1</div>
-                                    <div class="code-desc">Трубная беременность</div>
+                                    <div class="code-number">O99.2</div>
+                                    <div class="code-desc">Эндокринные болезни при беременности</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
-                            <div class="quick-code" onclick="copyCode('O03.9')">
+                            <div class="quick-code" onclick="copyCode('E03.9 + O99.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O03.9</div>
-                                    <div class="code-desc">Самопроизвольный аборт</div>
+                                    <div class="code-number">E03.9 + O99.2</div>
+                                    <div class="code-desc">Гипотиреоз при беременности</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
-                            <div class="quick-code" onclick="copyCode('O04.9')">
+                            <div class="quick-code" onclick="copyCode('E05.9 + O99.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O04.9</div>
-                                    <div class="code-desc">Медицинский аборт</div>
+                                    <div class="code-number">E05.9 + O99.2</div>
+                                    <div class="code-desc">Тиреотоксикоз при беременности</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
-                            <div class="quick-code" onclick="copyCode('O14.9')">
+                            <div class="quick-code" onclick="copyCode('E06.3 + O99.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O14.9</div>
-                                    <div class="code-desc">Преэклампсия</div>
+                                    <div class="code-number">E06.3 + O99.2</div>
+                                    <div class="code-desc">Аутоиммунный тиреоидит при беременности</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
-                            <div class="quick-code" onclick="copyCode('O15.9')">
+                            <div class="quick-code" onclick="copyCode('E04.9 + O99.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O15.9</div>
-                                    <div class="code-desc">Эклампсия</div>
+                                    <div class="code-number">E04.9 + O99.2</div>
+                                    <div class="code-desc">Зоб при беременности</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
-                            <div class="quick-code" onclick="copyCode('O21.9')">
+                            <div class="quick-code" onclick="copyCode('P72.2')">
                                 <div class="code-info">
-                                    <div class="code-number">O21.9</div>
-                                    <div class="code-desc">Рвота беременных</div>
+                                    <div class="code-number">P72.2</div>
+                                    <div class="code-desc">Врожденный гипотиреоз у новорожденного</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
@@ -1085,50 +1085,50 @@
                     </div>
                 </div>
 
-                <!-- БЕРЕМЕННОСТЬ И АКУШЕРСКИЕ СОСТОЯНИЯ -->
+                <!-- ЩИТОВИДНАЯ ЖЕЛЕЗА И БЕРЕМЕННОСТЬ -->
                 <div class="form-group">
-                    <label>🤰 Беременность и акушерские состояния:</label>
+                    <label>🤰 Щитовидная железа и беременность:</label>
                     <div class="checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O00.1">
+                            <input type="checkbox" name="pregnancy" value="O99.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Трубная беременность</div>
-                                <div class="checkbox-description">Внематочная беременность в маточной трубе</div>
+                                <div class="checkbox-title">Эндокринные болезни при беременности</div>
+                                <div class="checkbox-description">Основной код для заболеваний ЩЖ у беременных</div>
                             </div>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O03.9">
+                            <input type="checkbox" name="pregnancy" value="E03.9 + O99.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Самопроизвольный аборт</div>
-                                <div class="checkbox-description">Выкидыш без дополнительных уточнений</div>
+                                <div class="checkbox-title">Гипотиреоз при беременности</div>
+                                <div class="checkbox-description">Сочетание кодов для гипотиреоза у беременных</div>
                             </div>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O04.9">
+                            <input type="checkbox" name="pregnancy" value="E05.9 + O99.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Медицинский аборт</div>
-                                <div class="checkbox-description">Искусственный аборт без осложнений</div>
+                                <div class="checkbox-title">Тиреотоксикоз при беременности</div>
+                                <div class="checkbox-description">Сочетание кодов для тиреотоксикоза у беременных</div>
                             </div>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O14.9">
+                            <input type="checkbox" name="pregnancy" value="E06.3 + O99.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Преэклампсия</div>
-                                <div class="checkbox-description">Преэклампсия [нефропатия] неуточненная</div>
+                                <div class="checkbox-title">Аутоиммунный тиреоидит при беременности</div>
+                                <div class="checkbox-description">Сочетание кодов для АИТ у беременных</div>
                             </div>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O15.9">
+                            <input type="checkbox" name="pregnancy" value="E04.9 + O99.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Эклампсия</div>
-                                <div class="checkbox-description">Эклампсия, неуточненная по срокам</div>
+                                <div class="checkbox-title">Зоб при беременности</div>
+                                <div class="checkbox-description">Сочетание кодов для зоба у беременных</div>
                             </div>
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="pregnancy" value="O21.9">
+                            <input type="checkbox" name="pregnancy" value="P72.2">
                             <div class="checkbox-text">
-                                <div class="checkbox-title">Рвота беременных неуточненная</div>
-                                <div class="checkbox-description">Тошнота и рвота беременных</div>
+                                <div class="checkbox-title">Врожденный гипотиреоз у новорожденного</div>
+                                <div class="checkbox-description">Неонатальный транзиторный гипотиреоз</div>
                             </div>
                         </label>
                     </div>
@@ -1369,34 +1369,30 @@
                 details: "Нетоксический зоб без дополнительных уточнений"
             },
 
-            // Беременность и акушерские состояния
-            "O00.1": {
-                description: "Трубная беременность",
-                details: "Внематочная беременность в маточной трубе. Включает: разрыв маточной трубы, трубный аборт"
+            // Щитовидная железа и беременность
+            "O99.2": {
+                description: "Эндокринные болезни при беременности",
+                details: "Болезни эндокринной системы, расстройства питания и нарушения обмена веществ, осложняющие беременность, роды и послеродовой период"
             },
-            "O03.9": {
-                description: "Самопроизвольный аборт",
-                details: "Выкидыш без дополнительных уточнений"
+            "E03.9 + O99.2": {
+                description: "Гипотиреоз при беременности",
+                details: "Сочетание кодов: гипотиреоз неуточненный, осложняющий беременность"
             },
-            "O04.9": {
-                description: "Медицинский аборт",
-                details: "Искусственный аборт без осложнений"
+            "E05.9 + O99.2": {
+                description: "Тиреотоксикоз при беременности",
+                details: "Сочетание кодов: тиреотоксикоз неуточненный, осложняющий беременность"
             },
-            "O14.9": {
-                description: "Преэклампсия",
-                details: "Преэклампсия [нефропатия] неуточненная"
+            "E06.3 + O99.2": {
+                description: "Аутоиммунный тиреоидит при беременности",
+                details: "Сочетание кодов: аутоиммунный тиреоидит, осложняющий беременность"
             },
-            "O15.9": {
-                description: "Эклампсия",
-                details: "Эклампсия, неуточненная по срокам"
+            "E04.9 + O99.2": {
+                description: "Зоб при беременности",
+                details: "Сочетание кодов: нетоксический зоб неуточненный, осложняющий беременность"
             },
-            "O21.9": {
-                description: "Рвота беременных неуточненная",
-                details: "Тошнота и рвота беременных"
-            },
-            "Z32.1": {
-                description: "Беременность подтвержденная",
-                details: "Диагноз подтвержденной беременности"
+            "P72.2": {
+                description: "Врожденный гипотиреоз у новорожденного",
+                details: "Неонатальный транзиторный гипотиреоз. Исключает: врожденный гипотиреоз без зоба (E03.0), врожденный гипотиреоз с зобом (E03.1)"
             }
         };
 
@@ -1420,7 +1416,7 @@
         }
 
         function showAllCodes() {
-            let codesHTML = '<h3>📋 Все коды МКБ-10 заболеваний щитовидной железы и беременности</h3><div style="display: grid; gap: 10px; margin-top: 20px;">';
+            let codesHTML = '<h3>📋 Все коды МКБ-10 заболеваний щитовидной железы</h3><div style="display: grid; gap: 10px; margin-top: 20px;">';
             
             for (const [code, info] of Object.entries(ICD10_CODES)) {
                 codesHTML += `
@@ -1521,7 +1517,7 @@
                 `;
             }
 
-            if (selectedCodes.some(code => code.startsWith('O'))) {
+            if (selectedCodes.some(code => code.includes('O99.2'))) {
                 resultHTML += `
                     <div class="clinical-criteria">
                         <div class="criteria-title">📋 Особенности ведения беременности при патологии ЩЖ:</div>
@@ -1530,6 +1526,7 @@
                             <li>Целевой ТТГ при беременности: 0.2-2.5 мМЕ/л</li>
                             <li>Коррекция дозы L-тироксина на 25-30% с наступлением беременности</li>
                             <li>Контроль АТ-ТПО при аутоиммунном тиреоидите</li>
+                            <li>Тиреостатики при беременности: пропилтиоурацил в 1 триместре</li>
                         </ul>
                     </div>
                 `;
