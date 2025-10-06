@@ -772,7 +772,7 @@
             <!-- КАЛЬКУЛЯТОР МКБ-10 -->
             <div class="icd-calculator">
                 <h2 class="calculator-title">🧮 Калькулятор МКБ-10</h2>
-                <p class="calculator-subtitle">Быстрый подбор кодов заболеваний щитовидной железы</p>
+                <p class="calculator-subtitle">Быстрый подбор кодов заболеваний щитовидной железы и беременности</p>
 
                 <div class="disease-categories">
                     <!-- ГИПОТИРЕОЗ -->
@@ -881,6 +881,55 @@
                                 <div class="code-info">
                                     <div class="code-number">E04.2</div>
                                     <div class="code-desc">Многоузловой нетоксический зоб</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- БЕРЕМЕННОСТЬ И АКУШЕРСКИЕ СОСТОЯНИЯ -->
+                    <div class="disease-category">
+                        <div class="category-title">🤰 Беременность и акушерские состояния</div>
+                        <div class="quick-codes">
+                            <div class="quick-code" onclick="copyCode('O00.1')">
+                                <div class="code-info">
+                                    <div class="code-number">O00.1</div>
+                                    <div class="code-desc">Трубная беременность</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                            <div class="quick-code" onclick="copyCode('O03.9')">
+                                <div class="code-info">
+                                    <div class="code-number">O03.9</div>
+                                    <div class="code-desc">Самопроизвольный аборт</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                            <div class="quick-code" onclick="copyCode('O04.9')">
+                                <div class="code-info">
+                                    <div class="code-number">O04.9</div>
+                                    <div class="code-desc">Медицинский аборт</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                            <div class="quick-code" onclick="copyCode('O14.9')">
+                                <div class="code-info">
+                                    <div class="code-number">O14.9</div>
+                                    <div class="code-desc">Преэклампсия</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                            <div class="quick-code" onclick="copyCode('O15.9')">
+                                <div class="code-info">
+                                    <div class="code-number">O15.9</div>
+                                    <div class="code-desc">Эклампсия</div>
+                                </div>
+                                <button class="code-copy">Копировать</button>
+                            </div>
+                            <div class="quick-code" onclick="copyCode('O21.9')">
+                                <div class="code-info">
+                                    <div class="code-number">O21.9</div>
+                                    <div class="code-desc">Рвота беременных</div>
                                 </div>
                                 <button class="code-copy">Копировать</button>
                             </div>
@@ -1031,6 +1080,55 @@
                             <div class="checkbox-text">
                                 <div class="checkbox-title">Хронический тиреоидит</div>
                                 <div class="checkbox-description">Хроническая форма с транзиторным тиреотоксикозом</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- БЕРЕМЕННОСТЬ И АКУШЕРСКИЕ СОСТОЯНИЯ -->
+                <div class="form-group">
+                    <label>🤰 Беременность и акушерские состояния:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O00.1">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Трубная беременность</div>
+                                <div class="checkbox-description">Внематочная беременность в маточной трубе</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O03.9">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Самопроизвольный аборт</div>
+                                <div class="checkbox-description">Выкидыш без дополнительных уточнений</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O04.9">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Медицинский аборт</div>
+                                <div class="checkbox-description">Искусственный аборт без осложнений</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O14.9">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Преэклампсия</div>
+                                <div class="checkbox-description">Преэклампсия [нефропатия] неуточненная</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O15.9">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Эклампсия</div>
+                                <div class="checkbox-description">Эклампсия, неуточненная по срокам</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="pregnancy" value="O21.9">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Рвота беременных неуточненная</div>
+                                <div class="checkbox-description">Тошнота и рвота беременных</div>
                             </div>
                         </label>
                     </div>
@@ -1269,6 +1367,36 @@
             "E04.9": {
                 description: "Нетоксический зоб неуточненный",
                 details: "Нетоксический зоб без дополнительных уточнений"
+            },
+
+            // Беременность и акушерские состояния
+            "O00.1": {
+                description: "Трубная беременность",
+                details: "Внематочная беременность в маточной трубе. Включает: разрыв маточной трубы, трубный аборт"
+            },
+            "O03.9": {
+                description: "Самопроизвольный аборт",
+                details: "Выкидыш без дополнительных уточнений"
+            },
+            "O04.9": {
+                description: "Медицинский аборт",
+                details: "Искусственный аборт без осложнений"
+            },
+            "O14.9": {
+                description: "Преэклампсия",
+                details: "Преэклампсия [нефропатия] неуточненная"
+            },
+            "O15.9": {
+                description: "Эклампсия",
+                details: "Эклампсия, неуточненная по срокам"
+            },
+            "O21.9": {
+                description: "Рвота беременных неуточненная",
+                details: "Тошнота и рвота беременных"
+            },
+            "Z32.1": {
+                description: "Беременность подтвержденная",
+                details: "Диагноз подтвержденной беременности"
             }
         };
 
@@ -1292,7 +1420,7 @@
         }
 
         function showAllCodes() {
-            let codesHTML = '<h3>📋 Все коды МКБ-10 заболеваний щитовидной железы</h3><div style="display: grid; gap: 10px; margin-top: 20px;">';
+            let codesHTML = '<h3>📋 Все коды МКБ-10 заболеваний щитовидной железы и беременности</h3><div style="display: grid; gap: 10px; margin-top: 20px;">';
             
             for (const [code, info] of Object.entries(ICD10_CODES)) {
                 codesHTML += `
@@ -1388,6 +1516,20 @@
                             <li>св. Т4 > 22.0 пмоль/л, св. Т3 > 6.5 пмоль/л</li>
                             <li>АТ-рТТГ > 1.75 МЕ/л (при болезни Грейвса)</li>
                             <li>Клинические симптомы тиреотоксикоза</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (selectedCodes.some(code => code.startsWith('O'))) {
+                resultHTML += `
+                    <div class="clinical-criteria">
+                        <div class="criteria-title">📋 Особенности ведения беременности при патологии ЩЖ:</div>
+                        <ul>
+                            <li>Контроль ТТГ каждые 4 недели в 1 триместре</li>
+                            <li>Целевой ТТГ при беременности: 0.2-2.5 мМЕ/л</li>
+                            <li>Коррекция дозы L-тироксина на 25-30% с наступлением беременности</li>
+                            <li>Контроль АТ-ТПО при аутоиммунном тиреоидите</li>
                         </ul>
                     </div>
                 `;
