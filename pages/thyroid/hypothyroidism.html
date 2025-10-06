@@ -454,6 +454,40 @@
             border-radius: 8px;
         }
 
+        .lipid-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .lipid-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .lipid-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .lipid-normal { color: var(--success); }
+        .lipid-borderline { color: var(--warning); }
+        .lipid-high { color: var(--danger); }
+        .lipid-low { color: var(--accent); }
+
+        .index-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px solid #0ea5e9;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 30px 20px;
@@ -476,6 +510,9 @@
             }
             .comparison-grid {
                 grid-template-columns: 1fr;
+            }
+            .lipid-panel {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -595,20 +632,45 @@
                     </div>
                 </div>
 
-                <!-- ЛИПИДНЫЙ ПРОФИЛЬ -->
+                <!-- ЛИПИДНЫЙ ПРОФИЛЬ - ОБНОВЛЕННАЯ ВЕРСИЯ -->
                 <div id="lipids-tab" class="tab-content">
                     <div class="calculator-card">
                         <h3>🩸 Комплексная оценка липидного профиля согласно КР РФ 2023</h3>
                         
                         <div class="protocol-info">
                             <strong>📋 Согласно клиническим рекомендациям РФ 2023:</strong>
-                            <p>Терапия направлена на достижение целевых уровней ХС ЛПНП в зависимости от сердечно-сосудистого риска</p>
+                            <p>Комплексная оценка всех фракций липидов с расчетом индексов атерогенности</p>
                         </div>
-                        
+
+                        <!-- ОСНОВНЫЕ ЛИПИДЫ -->
                         <div class="form-group">
-                            <label for="lipidLdl">ХС ЛПНП (ммоль/л)</label>
+                            <label for="lipidLdl">ХС ЛПНП (ммоль/л) *</label>
                             <input type="number" step="0.01" id="lipidLdl" placeholder="Например: 3.5" value="4.1">
-                            <div class="range-info">Исходный уровень для расчета снижения</div>
+                            <div class="range-info">Норма: < 3.0 ммоль/л (для низкого риска)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lipidHdl">ХС ЛПВП (ммоль/л)</label>
+                            <input type="number" step="0.01" id="lipidHdl" placeholder="Например: 1.2" value="1.0">
+                            <div class="range-info">Норма: > 1.0 ммоль/л (мужчины), > 1.2 ммоль/л (женщины)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lipidTrig">Триглицериды (ммоль/л)</label>
+                            <input type="number" step="0.01" id="lipidTrig" placeholder="Например: 1.7" value="2.1">
+                            <div class="range-info">Норма: < 1.7 ммоль/л</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lipidTotal">Общий холестерин (ммоль/л)</label>
+                            <input type="number" step="0.01" id="lipidTotal" placeholder="Например: 5.8" value="6.2">
+                            <div class="range-info">Норма: < 5.2 ммоль/л</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lipidLp">ЛП(а) (мг/дл) - опционально</label>
+                            <input type="number" step="0.1" id="lipidLp" placeholder="Например: 30">
+                            <div class="range-info">Норма: < 30 мг/дл</div>
                         </div>
 
                         <div class="form-group">
@@ -649,6 +711,7 @@
                                     <th>Категория риска</th>
                                     <th>Целевой ХС ЛПНП</th>
                                     <th>Снижение от исходного</th>
+                                    <th>Целевые триглицериды</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -656,28 +719,31 @@
                                     <td><strong>Очень высокий риск</strong></td>
                                     <td style="color: var(--danger); font-weight: 700;">&lt; 1,4 ммоль/л</td>
                                     <td>≥ 50%</td>
+                                    <td>&lt; 1,7 ммоль/л</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Высокий риск</strong></td>
                                     <td style="color: var(--warning); font-weight: 700;">&lt; 1,8 ммоль/л</td>
                                     <td>≥ 50%</td>
+                                    <td>&lt; 1,7 ммоль/л</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Умеренный риск</strong></td>
                                     <td style="color: var(--success); font-weight: 700;">&lt; 2,6 ммоль/л</td>
                                     <td>-</td>
+                                    <td>&lt; 1,7 ммоль/л</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Низкий риск</strong></td>
                                     <td style="color: var(--success); font-weight: 700;">&lt; 3,0 ммоль/л</td>
                                     <td>-</td>
+                                    <td>&lt; 1,7 ммоль/л</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- ОСТАЛЬНЫЕ ВКЛАДКИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
                 <!-- КОНТРОЛЬ ТЕРАПИИ -->
                 <div id="monitoring-tab" class="tab-content">
                     <div class="calculators-grid">
@@ -949,9 +1015,10 @@
             },
 
             // Оценка липидного профиля по КР РФ 2023
-            evaluateLipids: function(ldl, riskLevel, tsh, contraindications) {
+            evaluateLipids: function(ldl, hdl, trig, total, lp, riskLevel, tsh, contraindications) {
                 const recommendations = [];
                 const medications = [];
+                const lipidPanel = [];
                 
                 // Целевые значения по КР РФ 2023
                 const targets = {
@@ -974,6 +1041,37 @@
                     evaluation = `❌ Требуется снижение ХС ЛПНП на ${neededReduction}%`;
                 }
 
+                // Анализ всех липидных фракций
+                // ХС ЛПНП
+                let ldlStatus = "normal";
+                if (ldl < target.target) ldlStatus = "normal";
+                else if (ldl <= target.target * 1.3) ldlStatus = "borderline";
+                else ldlStatus = "high";
+                lipidPanel.push({ name: "ХС ЛПНП", value: ldl, status: ldlStatus, target: target.target });
+
+                // ХС ЛПВП
+                let hdlStatus = hdl >= 1.2 ? "normal" : "low";
+                lipidPanel.push({ name: "ХС ЛПВП", value: hdl, status: hdlStatus, target: ">1.2" });
+
+                // Триглицериды
+                let trigStatus = trig < 1.7 ? "normal" : trig <= 2.3 ? "borderline" : "high";
+                lipidPanel.push({ name: "Триглицериды", value: trig, status: trigStatus, target: "<1.7" });
+
+                // Общий холестерин
+                let totalStatus = total < 5.2 ? "normal" : total <= 6.2 ? "borderline" : "high";
+                lipidPanel.push({ name: "Общий ХС", value: total, status: totalStatus, target: "<5.2" });
+
+                // ЛП(а) если указан
+                if (lp) {
+                    let lpStatus = lp < 30 ? "normal" : lp <= 50 ? "borderline" : "high";
+                    lipidPanel.push({ name: "ЛП(а)", value: lp, status: lpStatus, target: "<30" });
+                }
+
+                // Расчет индексов атерогенности
+                const nonHdl = total - hdl;
+                const castelli1 = ldl / hdl;
+                const castelli2 = total / hdl;
+
                 // Приоритет лечения гипотиреоза
                 if (tsh > 4.0) {
                     recommendations.push("💊 <strong>ПРИОРИТЕТ: коррекция гипотиреоза</strong>");
@@ -981,7 +1079,7 @@
                     recommendations.push("Контроль липидов через 8-12 недель после достижения эутиреоза");
                 } else {
                     // Назначение гиполипидемической терапии
-                    if (ldl > target.target) {
+                    if (ldl > target.target || trig > 2.3) {
                         if (contraindications === "none") {
                             // СТАТИНЫ - терапия первой линии
                             let statinDose = "";
@@ -1005,6 +1103,17 @@
                                 duration: "Пожизненно",
                                 monitoring: "Контроль липидов через 4-12 недель, АСТ/АЛТ, КФК"
                             });
+
+                            // ФИБРАТЫ при высоких триглицеридах
+                            if (trig > 5.6) {
+                                medications.push({
+                                    name: "Фенофибрат (при ТГ > 5.6 ммоль/л)",
+                                    choice: "Фенофибрат 145 мг/сут",
+                                    dose: "Комбинированная терапия",
+                                    duration: "Пожизненно",
+                                    monitoring: "Особый контроль функции печени"
+                                });
+                            }
 
                             // ЭЗЕТИМИБ - терапия второй линии при необходимости
                             if (riskLevel === "very-high" || riskLevel === "extreme" || ldl > 4.0) {
@@ -1043,6 +1152,12 @@
                     evaluation, 
                     recommendations, 
                     medications, 
+                    lipidPanel,
+                    indices: {
+                        nonHdl: nonHdl.toFixed(1),
+                        castelli1: castelli1.toFixed(1),
+                        castelli2: castelli2.toFixed(1)
+                    },
                     target: target.target,
                     reduction: target.reduction,
                     currentLdl: ldl
@@ -1256,19 +1371,23 @@
             document.getElementById('doseResult').style.display = 'block';
         }
 
-        // ЛИПИДНЫЙ ПРОФИЛЬ ПО КР РФ 2023
+        // ЛИПИДНЫЙ ПРОФИЛЬ ПО КР РФ 2023 - ОБНОВЛЕННАЯ ВЕРСИЯ
         function evaluateLipidProfile() {
             const ldl = parseFloat(document.getElementById('lipidLdl').value);
+            const hdl = parseFloat(document.getElementById('lipidHdl').value);
+            const trig = parseFloat(document.getElementById('lipidTrig').value);
+            const total = parseFloat(document.getElementById('lipidTotal').value);
+            const lp = parseFloat(document.getElementById('lipidLp').value) || null;
             const riskLevel = document.getElementById('lipidRisk').value;
             const tsh = parseFloat(document.getElementById('lipidTsh').value);
             const contraindications = document.getElementById('lipidContraindications').value;
             
-            if (!ldl || !tsh) {
-                alert('Заполните обязательные поля');
+            if (!ldl || !hdl || !trig || !total || !tsh) {
+                alert('Заполните все обязательные поля липидного профиля');
                 return;
             }
             
-            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateLipids(ldl, riskLevel, tsh, contraindications);
+            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateLipids(ldl, hdl, trig, total, lp, riskLevel, tsh, contraindications);
             
             const riskLabels = {
                 "low": "Низкий",
@@ -1279,7 +1398,82 @@
             };
             
             let resultHTML = `
-                <h4>📊 Оценка по клиническим рекомендациям РФ 2023</h4>
+                <h4>📊 Комплексная оценка липидного профиля по КР РФ 2023</h4>
+                
+                <!-- ПАНЕЛЬ ЛИПИДОВ -->
+                <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 15px 0;">
+                    <h5>🩸 Результаты липидного спектра:</h5>
+                    <div class="lipid-panel">
+            `;
+            
+            // Отображение всех липидных показателей
+            result.lipidPanel.forEach(lipid => {
+                let statusClass = "";
+                let statusIcon = "";
+                
+                switch(lipid.status) {
+                    case "normal":
+                        statusClass = "lipid-normal";
+                        statusIcon = "✅";
+                        break;
+                    case "borderline":
+                        statusClass = "lipid-borderline";
+                        statusIcon = "⚠️";
+                        break;
+                    case "high":
+                        statusClass = "lipid-high";
+                        statusIcon = "❌";
+                        break;
+                    case "low":
+                        statusClass = "lipid-low";
+                        statusIcon = "📉";
+                        break;
+                }
+                
+                resultHTML += `
+                    <div class="lipid-item">
+                        <div style="font-weight: 600; margin-bottom: 5px;">${lipid.name}</div>
+                        <div class="lipid-value ${statusClass}">${lipid.value}</div>
+                        <div style="font-size: 0.9em; color: var(--text-light);">
+                            ${statusIcon} Цель: ${lipid.target}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultHTML += `
+                    </div>
+                </div>
+                
+                <!-- ИНДЕКСЫ АТЕРОГЕННОСТИ -->
+                <div class="index-card">
+                    <h5>📈 Индексы атерогенности:</h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600;">ХС не-ЛПВП</div>
+                            <div style="font-size: 1.2em; font-weight: 700; color: ${result.indices.nonHdl > 3.3 ? 'var(--danger)' : 'var(--success)'}">
+                                ${result.indices.nonHdl} ммоль/л
+                            </div>
+                            <div style="font-size: 0.8em; color: var(--text-light);">Цель: < 3.3</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600;">Индекс Кастелли 1</div>
+                            <div style="font-size: 1.2em; font-weight: 700; color: ${result.indices.castelli1 > 3.0 ? 'var(--danger)' : 'var(--success)'}">
+                                ${result.indices.castelli1}
+                            </div>
+                            <div style="font-size: 0.8em; color: var(--text-light);">Цель: < 3.0</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: 600;">Индекс Кастелли 2</div>
+                            <div style="font-size: 1.2em; font-weight: 700; color: ${result.indices.castelli2 > 5.0 ? 'var(--danger)' : 'var(--success)'}">
+                                ${result.indices.castelli2}
+                            </div>
+                            <div style="font-size: 0.8em; color: var(--text-light);">Цель: < 5.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ОБЩАЯ ОЦЕНКА -->
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between;">
@@ -1345,6 +1539,7 @@
                 <div class="protocol-info">
                     <h5>📋 Протокол лечения:</h5>
                     <p><strong>1-я линия:</strong> Статины → <strong>2-я линия:</strong> + Эзетимиб → <strong>3-я линия:</strong> + ингибиторы PCSK9</p>
+                    <p><strong>При ТГ > 5.6 ммоль/л:</strong> Рассмотреть фибраты для профилактики панкреатита</p>
                     <p><strong>Оценка эффективности:</strong> через 4-12 недель (8±4 недели)</p>
                     <p><strong>Диагноз по МКБ-10:</strong> E78.0-E78.4 Дислипидемия</p>
                 </div>
