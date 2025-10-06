@@ -438,6 +438,85 @@
             content: " *";
             color: var(--danger);
         }
+
+        /* Новые стили для системы симптомов */
+        .symptoms-system {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 25px 0;
+            border: 1px solid #bbf7d0;
+        }
+
+        .system-group {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
+        }
+
+        .system-title {
+            font-size: 1.3em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .symptoms-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 8px;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .symptom-item:hover {
+            background: #f1f5f9;
+        }
+
+        .symptom-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            margin-top: 20px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .copy-result {
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #bbf7d0;
+            display: none;
+        }
+
+        .copy-result pre {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -457,6 +536,219 @@
         <div class="content">
             <h1 class="page-title">Гипертиреоз (Тиреотоксикоз)</h1>
             <p class="page-subtitle">Повышенная функция щитовидной железы - диагностика и современное лечение</p>
+
+            <!-- НОВАЯ СЕКЦИЯ: Система симптомов -->
+            <section class="symptoms-system">
+                <h2 class="section-title">🎯 Система клинических симптомов гипертиреоза</h2>
+                <p class="section-subtitle">Отметьте жалобы пациента для формирования клинической картины</p>
+
+                <div class="system-group">
+                    <div class="system-title">🧠 1. Нервная система и психика</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="emotional_lability" data-system="Нервная система и психика">
+                            Эмоциональная лабильность: Повышенная раздражительность, плаксивость, вспыльчивость
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="anxiety" data-system="Нервная система и психика">
+                            Тревожность и беспокойство: Чувство постоянного внутреннего напряжения
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="sleep_disorders" data-system="Нервная система и психика">
+                            Нарушения сна: Бессонница, частые пробуждения, поверхностный сон
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="tremor" data-system="Нервная система и психика">
+                            Судорожные подергивания: Мелкий тремор пальцев ("симптом телеграфного столба")
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="weakness" data-system="Нервная система и психика">
+                            Слабость, быстрая утомляемость
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="headache" data-system="Нервная система и психика">
+                            Головные боли
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">❤️ 2. Сердечно-сосудистая система (Кардиальные жалобы)</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="tachycardia" data-system="Сердечно-сосудистая система">
+                            Учащенное сердцебиение (тахикардия): Ощущение "сердцебиения" в покое
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="arrhythmia" data-system="Сердечно-сосудистая система">
+                            Нарушения ритма: Чувство "перебоев", "замирания" сердца
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="shortness_of_breath" data-system="Сердечно-сосудистая система">
+                            Одышка при небольшой физической нагрузке или в покое
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="chest_pain" data-system="Сердечно-сосудистая система">
+                            Боли в области сердца колющего или сжимающего характера
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="blood_pressure" data-system="Сердечно-сосудистая система">
+                            Повышение систолического давления при нормальном диастолическом
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">🔥 3. Обмен веществ и терморегуляция</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="weight_loss" data-system="Обмен веществ и терморегуляция">
+                            Потеря веса при сохраненном или повышенном аппетите ("волчий аппетит")
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="heat_intolerance" data-system="Обмен веществ и терморегуляция">
+                            Повышенная температура тела: Непереносимость жары, потливость
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="subfebrile" data-system="Обмен веществ и терморегуляция">
+                            Субфебрилитет: Длительное повышение температуры (37.1-37.5 °C)
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="muscle_weakness" data-system="Обмен веществ и терморегуляция">
+                            Мышечная слабость: Трудно подняться по лестнице, встать со стула
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">🍽️ 4. Желудочно-кишечный тракт</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="frequent_stool" data-system="Желудочно-кишечный тракт">
+                            Учащенный стул: До нескольких раз в день (диарея)
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="abdominal_pain" data-system="Желудочно-кишечный тракт">
+                            Боли в животе спастического характера
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="nausea" data-system="Желудочно-кишечный тракт">
+                            Тошнота, реже рвота
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="increased_appetite" data-system="Желудочно-кишечный тракт">
+                            Повышенный аппетит (реже — снижение у пожилых)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">👁️ 5. Глаза (Офтальмологические симптомы)</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="exophthalmos" data-system="Глаза">
+                            Экзофтальм (пучеглазие): Выпячивание глазных яблок
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="eye_discomfort" data-system="Глаза">
+                            Ощущение "песка", рези, жжения в глазах
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="tearing" data-system="Глаза">
+                            Слезотечение
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="diplopia" data-system="Глаза">
+                            Двоение в глазах (диплопия)
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="eyelid_edema" data-system="Глаза">
+                            Отечность и пигментация век
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="rare_blinking" data-system="Глаза">
+                            Редкое мигание (симптом Штельвага)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">🦵 6. Кожа и ее придатки</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="hot_skin" data-system="Кожа и ее придатки">
+                            Влажная, горячая на ощупь кожа ("бархатная кожа")
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="sweating" data-system="Кожа и ее придатки">
+                            Повышенная потливость (гипергидроз)
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="hair_loss" data-system="Кожа и ее придатки">
+                            Ломкость и выпадение волос
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="nail_changes" data-system="Кожа и ее придатки">
+                            Изменения ногтей: Ломкость, отслоение ("ноготь Пламмера")
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="pretibial_myxedema" data-system="Кожа и ее придатки">
+                            Претибиальная микседема: Отеки на передней поверхности голеней
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">💑 7. Половая система</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="menstrual_disorders" data-system="Половая система">
+                            У женщин: Нарушения менструального цикла, бесплодие
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="miscarriage" data-system="Половая система">
+                            У женщин: Невынашивание беременности
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="decreased_libido_m" data-system="Половая система">
+                            У мужчин: Снижение либидо, эректильная дисфункция
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="gynecomastia" data-system="Половая система">
+                            У мужчин: Гинекомастия (увеличение молочных желез)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="system-group">
+                    <div class="system-title">💪 8. Костно-мышечная система</div>
+                    <div class="symptoms-list">
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="muscle_weakness_bones" data-system="Костно-мышечная система">
+                            Мышечная слабость
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="osteoporosis" data-system="Костно-мышечная система">
+                            Остеопороз: Повышенная хрупкость костей, боли в костях
+                        </label>
+                        <label class="symptom-item">
+                            <input type="checkbox" name="symptoms" value="periodic_paralysis" data-system="Костно-мышечная система">
+                            Периодические параличи (редко)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn copy-btn" onclick="copySelectedSymptoms()">
+                        📋 Скопировать выбранные жалобы
+                    </button>
+                    <button class="btn btn-warning" onclick="clearAllSymptoms()">
+                        🗑️ Очистить все
+                    </button>
+                </div>
+
+                <div id="copyResult" class="copy-result"></div>
+            </section>
 
             <!-- ИСПРАВЛЕННЫЙ КАЛЬКУЛЯТОР: Определение формы гипертиреоза -->
             <section class="disease-section">
@@ -1067,6 +1359,64 @@
     </div>
 
     <script>
+        // Функции для системы симптомов
+        function copySelectedSymptoms() {
+            const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptoms"]:checked'));
+            
+            if (selectedSymptoms.length === 0) {
+                alert('Пожалуйста, выберите хотя бы один симптом');
+                return;
+            }
+
+            // Группируем симптомы по системам
+            const symptomsBySystem = {};
+            selectedSymptoms.forEach(symptom => {
+                const system = symptom.getAttribute('data-system');
+                const text = symptom.parentElement.textContent.trim();
+                
+                if (!symptomsBySystem[system]) {
+                    symptomsBySystem[system] = [];
+                }
+                symptomsBySystem[system].push(text);
+            });
+
+            // Формируем текст для копирования
+            let copyText = "КЛИНИЧЕСКИЕ СИМПТОМЫ ГИПЕРТИРЕОЗА:\n\n";
+            
+            Object.keys(symptomsBySystem).forEach(system => {
+                copyText += `${system}:\n`;
+                symptomsBySystem[system].forEach((symptom, index) => {
+                    copyText += `  ${index + 1}. ${symptom}\n`;
+                });
+                copyText += "\n";
+            });
+
+            copyText += `Всего симптомов: ${selectedSymptoms.length}`;
+
+            // Копируем в буфер обмена
+            navigator.clipboard.writeText(copyText).then(() => {
+                const resultDiv = document.getElementById('copyResult');
+                resultDiv.innerHTML = `
+                    <h4>✅ Скопировано в буфер обмена!</h4>
+                    <pre>${copyText}</pre>
+                `;
+                resultDiv.style.display = 'block';
+                
+                // Прокручиваем к результату
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                alert('Не удалось скопировать текст. Попробуйте еще раз.');
+            });
+        }
+
+        function clearAllSymptoms() {
+            document.querySelectorAll('input[name="symptoms"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('copyResult').style.display = 'none';
+        }
+
         // 1. ИСПРАВЛЕННЫЙ КАЛЬКУЛЯТОР: Определение формы гипертиреоза
         function calculateHyperthyroidismForm() {
             const tsh = parseFloat(document.getElementById('formTsh').value);
@@ -1376,11 +1726,11 @@
             document.getElementById('formUltrasound').value = 'hypoechoic';
         }
 
-        // 2. Калькулятор стартовой дозы тиреостатиков
+        // 2. Калькулятор стартовой дозы тиреостатиков (ОБНОВЛЕННЫЙ)
         function calculateGravesDose() {
             const weight = parseFloat(document.getElementById('gravesWeight').value);
             const t4 = parseFloat(document.getElementById('gravesT4').value);
-            const severity = document.getElementById('gravesSeverity').value;
+            const severity = document.getElementById('gravesSeverity').value);
             const heartDisease = document.getElementById('gravesHeartDisease').value === 'yes';
 
             if (!weight || !t4) {
@@ -1415,7 +1765,8 @@
                 recommendations.push("Назначение бета-блокаторов под контролем ЭКГ");
             }
 
-            recommendations.push("Контроль общего анализа крови каждые 2 недели в первые 2 месяца");
+            // ОБНОВЛЕННАЯ РЕКОМЕНДАЦИЯ ПО КОНТРОЛЮ АНАЛИЗА КРОВИ
+            recommendations.push("Контроль общего анализа крови каждые 2 недели в первые 2 месяца, затем каждые 1.5-3 месяца");
             recommendations.push("Обучение пациента симптомам агранулоцитоза");
 
             let resultHTML = `
@@ -2131,7 +2482,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница гипертиреоза с ВСЕМИ калькуляторами загружена');
+            console.log('Страница гипертиреоза с ВСЕМИ калькуляторами и системой симптомов загружена');
         });
     </script>
 </body>
