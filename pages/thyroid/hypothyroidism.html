@@ -42,7 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* Анимированный фон */
         .background-shapes {
             position: fixed;
             top: 0;
@@ -181,6 +180,194 @@
             color: var(--text-light);
             margin-bottom: 50px;
             text-align: center;
+        }
+
+        /* СТИЛИ ДЛЯ ЧЕК-ЛИСТА СИМПТОМОВ */
+        .symptoms-checklist {
+            margin-bottom: 50px;
+        }
+
+        .checklist-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .symptom-system {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .symptom-system:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .system-title {
+            color: var(--dark);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .symptoms-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .symptom-item:hover {
+            background: #f8fafc;
+            border-color: var(--primary);
+        }
+
+        .symptom-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .symptom-item input[type="checkbox"]:checked + .checkmark {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .symptom-item input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .symptom-item input[type="checkbox"]:checked ~ .symptom-text {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .symptom-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .checklist-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+
+        .result-box {
+            background: #f0fdf4;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 2px solid #bbf7d0;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .selected-symptoms {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .system-group {
+            margin-bottom: 20px;
+        }
+
+        .system-group-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .symptom-line {
+            padding: 5px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .symptom-line:last-child {
+            border-bottom: none;
         }
 
         /* ИНФО-БЛОКИ И КАЛЬКУЛЯТОРЫ */
@@ -324,50 +511,6 @@
             font-size: 0.9em;
             color: var(--text-light);
             margin-top: 8px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-        }
-
-        .result-box {
-            background: #f0fdf4;
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 25px;
-            border: 2px solid #bbf7d0;
-            display: none;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .diagnostic-section {
@@ -557,7 +700,6 @@
         .lipid-borderline { color: var(--warning); }
         .lipid-high { color: var(--danger); }
 
-        /* ВОССТАНОВЛЕННЫЕ СТИЛИ ДЛЯ ЛИПИДНОГО ПРОФИЛЯ И ВИТАМИНА D */
         .lipid-calculator {
             background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
             border: 2px solid #fdba74;
@@ -625,6 +767,9 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+            .checklist-container {
+                grid-template-columns: 1fr;
+            }
             .main-menu {
                 flex-direction: column;
             }
@@ -670,6 +815,265 @@
         </nav>
 
         <main class="content">
+            <!-- ЧЕК-ЛИСТ СИМПТОМОВ -->
+            <div class="symptoms-checklist">
+                <h2 class="page-title">📋 Чек-лист симптомов гипотиреоза</h2>
+                <p class="page-subtitle">Отмечайте симптомы пациента для формирования клинической картины</p>
+
+                <div class="checklist-container">
+                    <!-- Нервная система и психика -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-brain"></i> Нервная система и психика
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Астения: Выраженная слабость, утомляемость, 'упадок сил'">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Астения: Выраженная слабость, утомляемость, "упадок сил"</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Сонливость: Постоянная сонливость даже после полноценного ночного сна">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Сонливость: Постоянная сонливость даже после полноценного ночного сна</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Замедленность мышления: 'Туман в голове', трудности с концентрацией внимания и памятью">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Замедленность мышления: "Туман в голове", трудности с концентрацией внимания и памятью</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Снижение настроения: Апатия, депрессия, подавленность">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Снижение настроения: Апатия, депрессия, подавленность</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Изменение голоса: Осиплость, голос становится более низким и грубым">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Изменение голоса: Осиплость, голос становится более низким и грубым</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Ухудшение слуха">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Ухудшение слуха</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Нервная система и психика" data-symptom="Парестезии: Чувство 'ползания мурашек' в конечностях">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Парестезии: Чувство "ползания мурашек" в конечностях</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Сердечно-сосудистая система -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-heart"></i> Сердечно-сосудистая система
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Брадикардия: Замедление пульса (менее 60 ударов в минуту)">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Брадикардия: Замедление пульса (менее 60 ударов в минуту)</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Гипотония: Склонность к пониженному артериальному давлению">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Гипотония: Склонность к пониженному артериальному давлению</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Кардиалгия: Неприятные ощущения, дискомфорт или неинтенсивные боли в области сердца">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Кардиалгия: Неприятные ощущения, дискомфорт или неинтенсивные боли в области сердца</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Одышка при небольшой физической нагрузке">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Одышка при небольшой физической нагрузке</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Перикардиальный выпот: Скопление жидкости в полости перикарда">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Перикардиальный выпот: Скопление жидкости в полости перикарда</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Система пищеварения -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-stomach"></i> Система пищеварения
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Система пищеварения" data-symptom="Снижение аппетита (при этом вес часто увеличивается)">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Снижение аппетита (при этом вес часто увеличивается)</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Система пищеварения" data-symptom="Набор веса: Небольшой, несмотря на плохой аппетит">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Набор веса: Небольшой, несмотря на плохой аппетит</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Система пищеварения" data-symptom="Запоры: Стойкие, атонические">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Запоры: Стойкие, атонические</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Система пищеварения" data-symptom="Дискинезия желчевыводящих путей: Тяжесть в правом подреберье">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Дискинезия желчевыводящих путей: Тяжесть в правом подреберье</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Система пищеварения" data-symptom="Тошнота">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Тошнота</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Кожные покровы и придатки -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-user"></i> Кожные покровы и придатки
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Кожные покровы и придатки" data-symptom="Сухость кожи: Кожа шелушащаяся, холодная на ощупь, бледная с желтоватым оттенком">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Сухость кожи: Кожа шелушащаяся, холодная на ощупь, бледная с желтоватым оттенком</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Кожные покровы и придатки" data-symptom="Отеки: Плотные, 'слизистые' отеки (микседема), особенно на лице">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Отеки: Плотные, "слизистые" отеки (микседема), особенно на лице</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Кожные покровы и придатки" data-symptom="Изменение волос: Волосы тусклые, ломкие, усиленное выпадение">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Изменение волос: Волосы тусклые, ломкие, усиленное выпадение</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Кожные покровы и придатки" data-symptom="Изменение ногтей: Ногти тонкие, слоящиеся, с бороздками, медленно растут">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Изменение ногтей: Ногти тонкие, слоящиеся, с бороздками, медленно растут</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Опорно-двигательная система -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-bone"></i> Опорно-двигательная система
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Опорно-двигательная система" data-symptom="Мышечная слабость (миопатия)">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Мышечная слабость (миопатия)</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Опорно-двигательная система" data-symptom="Судороги, болезненные мышечные спазмы">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Судороги, болезненные мышечные спазмы</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Опорно-двигательная система" data-symptom="Скованность в суставах, артралгии (боли в суставах)">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Скованность в суставах, артралгии (боли в суставах)</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Опорно-двигательная система" data-symptom="Замедленность движений">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Замедленность движений</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Половая система и эндокринные железы -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-venus-mars"></i> Половая система и эндокринные железы
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У женщин: Нарушения менструального цикла по типу олиго- или аменореи">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У женщин: Нарушения менструального цикла по типу олиго- или аменореи</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У женщин: Дисфункциональные маточные кровотечения">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У женщин: Дисфункциональные маточные кровотечения</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У женщин: Бесплодие">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У женщин: Бесплодие</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У женщин: Снижение либидо">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У женщин: Снижение либидо</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У мужчин: Снижение либидо">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У мужчин: Снижение либидо</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У мужчин: Эректильная дисфункция">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У мужчин: Эректильная дисфункция</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Половая система и эндокринные железы" data-symptom="У мужчин: Бесплодие">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">У мужчин: Бесплодие</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Другие общие симптомы -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-thermometer"></i> Другие общие симптомы
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Другие общие симптомы" data-symptom="Зябкость: Постоянное ощущение холода, непереносимость низких температур">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Зябкость: Постоянное ощущение холода, непереносимость низких температур</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Другие общие симптомы" data-symptom="Постоянное ощущение кома в горле">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Постоянное ощущение кома в горле</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-actions">
+                    <button class="btn btn-success" onclick="showSelectedSymptoms()">
+                        <i class="fas fa-copy"></i> Показать выбранные симптомы
+                    </button>
+                    <button class="btn btn-secondary" onclick="copySelectedSymptoms()">
+                        <i class="fas fa-clipboard"></i> Скопировать в буфер обмена
+                    </button>
+                    <button class="btn" onclick="clearAllSymptoms()">
+                        <i class="fas fa-trash"></i> Очистить все
+                    </button>
+                </div>
+
+                <div id="symptomsResult" class="result-box">
+                    <h4>Выбранные симптомы:</h4>
+                    <div id="selectedSymptomsList" class="selected-symptoms"></div>
+                </div>
+            </div>
+
+            <!-- Остальная часть страницы -->
             <h1 class="page-title">Гипотиреоз</h1>
             <p class="page-subtitle">Современный подход к диагностике и лечению снижения функции щитовидной железы</p>
 
@@ -729,7 +1133,6 @@
                     <button class="tab-btn" data-tab="pregnancy-tab">
                         <i class="fas fa-baby"></i> Беременность
                     </button>
-                    <!-- ВОССТАНОВЛЕННЫЕ ВКЛАДКИ -->
                     <button class="tab-btn" data-tab="lipid-tab">
                         <i class="fas fa-chart-bar"></i> Липидный профиль
                     </button>
@@ -741,6 +1144,7 @@
                     </button>
                 </div>
 
+                <!-- ВКЛАДКА ДИАГНОСТИКА -->
                 <div id="diagnosis-tab" class="tab-content active">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -792,6 +1196,7 @@
                     </div>
                 </div>
 
+                <!-- ВКЛАДКА ЛЕЧЕНИЕ -->
                 <div id="treatment-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -849,6 +1254,7 @@
                     </div>
                 </div>
 
+                <!-- ВКЛАДКА КОНТРОЛЬ ТЕРАПИИ -->
                 <div id="monitoring-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -906,6 +1312,7 @@
                     </div>
                 </div>
 
+                <!-- ВКЛАДКА БЕРЕМЕННОСТЬ -->
                 <div id="pregnancy-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card">
@@ -958,7 +1365,7 @@
                     </div>
                 </div>
 
-                <!-- ВОССТАНОВЛЕННАЯ ВКЛАДКА: ЛИПИДНЫЙ ПРОФИЛЬ -->
+                <!-- ВКЛАДКА ЛИПИДНЫЙ ПРОФИЛЬ -->
                 <div id="lipid-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card lipid-calculator">
@@ -1063,7 +1470,7 @@
                     </div>
                 </div>
 
-                <!-- ВОССТАНОВЛЕННАЯ ВКЛАДКА: ВИТАМИН D + АИТ -->
+                <!-- ВКЛАДКА ВИТАМИН D + АИТ -->
                 <div id="vitamin-d-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card vitamin-d-section">
@@ -1139,7 +1546,7 @@
                     </div>
                 </div>
 
-                <!-- ВОССТАНОВЛЕННАЯ ВКЛАДКА: РАСШИРЕННАЯ ДИАГНОСТИКА -->
+                <!-- ВКЛАДКА РАСШИРЕННАЯ ДИАГНОСТИКА -->
                 <div id="advanced-tab" class="tab-content">
                     <div class="calculators-grid">
                         <div class="calculator-card advanced-diagnostics">
@@ -1509,6 +1916,88 @@
                 return { plan, targets };
             }
         };
+
+        // ФУНКЦИИ ДЛЯ ЧЕК-ЛИСТА СИМПТОМОВ
+        function getSelectedSymptoms() {
+            const selectedSymptoms = {};
+            const checkboxes = document.querySelectorAll('.symptom-item input[type="checkbox"]:checked');
+            
+            checkboxes.forEach(checkbox => {
+                const system = checkbox.getAttribute('data-system');
+                const symptom = checkbox.getAttribute('data-symptom');
+                
+                if (!selectedSymptoms[system]) {
+                    selectedSymptoms[system] = [];
+                }
+                selectedSymptoms[system].push(symptom);
+            });
+            
+            return selectedSymptoms;
+        }
+
+        function showSelectedSymptoms() {
+            const selectedSymptoms = getSelectedSymptoms();
+            const resultDiv = document.getElementById('selectedSymptomsList');
+            const resultBox = document.getElementById('symptomsResult');
+            
+            if (Object.keys(selectedSymptoms).length === 0) {
+                resultDiv.innerHTML = '<p style="color: var(--text-light); text-align: center;">Нет выбранных симптомов</p>';
+            } else {
+                let html = '';
+                for (const [system, symptoms] of Object.entries(selectedSymptoms)) {
+                    html += `<div class="system-group">`;
+                    html += `<div class="system-group-title">${system}</div>`;
+                    symptoms.forEach(symptom => {
+                        html += `<div class="symptom-line">${symptom}</div>`;
+                    });
+                    html += `</div>`;
+                }
+                resultDiv.innerHTML = html;
+            }
+            
+            resultBox.style.display = 'block';
+        }
+
+        function copySelectedSymptoms() {
+            const selectedSymptoms = getSelectedSymptoms();
+            
+            if (Object.keys(selectedSymptoms).length === 0) {
+                alert('Нет выбранных симптомов для копирования');
+                return;
+            }
+            
+            let text = 'ВЫБРАННЫЕ СИМПТОМЫ ГИПОТИРЕОЗА:\n\n';
+            
+            for (const [system, symptoms] of Object.entries(selectedSymptoms)) {
+                text += `▸ ${system}:\n`;
+                symptoms.forEach(symptom => {
+                    text += `  • ${symptom}\n`;
+                });
+                text += '\n';
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Симптомы скопированы в буфер обмена!');
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Симптомы скопированы в буфер обмена!');
+            });
+        }
+
+        function clearAllSymptoms() {
+            const checkboxes = document.querySelectorAll('.symptom-item input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('symptomsResult').style.display = 'none';
+        }
 
         // ВАЛИДАЦИЯ ВВОДА
         function validateInputs(inputs) {
@@ -1940,7 +2429,7 @@
             document.getElementById('pregnancyPlanResult').style.display = 'block';
         }
 
-        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ ЛИПИДНОГО ПРОФИЛЯ
+        // ФУНКЦИИ ДЛЯ ЛИПИДНОГО ПРОФИЛЯ
         function evaluateLipidProfile() {
             const totalChol = parseFloat(document.getElementById('lipidTotalChol').value);
             const ldl = parseFloat(document.getElementById('lipidLDL').value);
@@ -2112,7 +2601,7 @@
             document.getElementById('iaResult').style.display = 'block';
         }
 
-        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ ВИТАМИНА D
+        // ФУНКЦИИ ДЛЯ ВИТАМИНА D
         function evaluateVitaminD() {
             const level = parseFloat(document.getElementById('vitaminDLevel').value);
             const age = parseInt(document.getElementById('vitaminDAge').value);
@@ -2276,7 +2765,7 @@
             document.getElementById('correctionResult').style.display = 'block';
         }
 
-        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ РАСШИРЕННОЙ ДИАГНОСТИКИ
+        // ФУНКЦИИ ДЛЯ РАСШИРЕННОЙ ДИАГНОСТИКИ
         function calculateThyroidIndices() {
             const tsh = parseFloat(document.getElementById('advTsh').value);
             const ft4 = parseFloat(document.getElementById('advFT4').value);
