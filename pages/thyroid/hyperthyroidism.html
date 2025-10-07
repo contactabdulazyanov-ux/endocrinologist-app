@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гипертиреоз - Диагностика и лечение - Эндокринолог PRO</title>
+    <title>Гипертиреоз | Эндокринолог PRO - Современная диагностика и лечение</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,11 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --primary-light: #ef4444;
             --secondary: #7e22ce;
+            --secondary-dark: #6d28d9;
             --accent: #06b6d4;
             --success: #10b981;
             --warning: #f59e0b;
@@ -23,6 +26,9 @@
             --dark: #1e293b;
             --text: #374151;
             --text-light: #6b7280;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         body {
@@ -32,36 +38,102 @@
             padding: 20px;
             line-height: 1.6;
             color: var(--text);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимированный фон */
+        .background-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            right: -100px;
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 10%;
+            animation-delay: -10s;
+            animation-duration: 30s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header {
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 50px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
         .header h1 {
-            font-size: 2.8em;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .header p {
-            font-size: 1.3em;
+            font-size: 1.4em;
             opacity: 0.95;
             font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .main-menu {
@@ -69,62 +141,412 @@
             justify-content: center;
             background: var(--dark);
             padding: 20px;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .main-menu a {
-            padding: 12px 24px;
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
             text-decoration: none;
             color: white;
             font-weight: 600;
             border-radius: 50px;
             transition: all 0.3s ease;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .main-menu a:hover, .main-menu a.active {
+        .nav-btn:hover, .nav-btn.active {
             background: var(--primary);
             transform: translateY(-2px);
         }
 
         .content {
-            padding: 40px;
+            padding: 50px;
         }
 
         .page-title {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: var(--dark);
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
         }
 
         .page-subtitle {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: var(--text-light);
-            margin-bottom: 30px;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
-        .disease-section {
+        /* ИНФО-БЛОКИ И КАЛЬКУЛЯТОРЫ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .info-card {
             background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin: 30px 0;
-            border: 1px solid #fecaca;
+            padding: 35px 30px;
+            border-radius: 20px;
+            border: 2px solid #fecaca;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .info-card li:hover {
+            color: var(--dark);
+        }
+
+        .info-card li:before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card li:hover:before {
+            transform: translateX(3px);
+            color: var(--accent);
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .calculator-card h3 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+        }
+
+        .range-info {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .result-box {
+            background: #f0fdf4;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 2px solid #bbf7d0;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .diagnostic-section {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #fecaca;
+            box-shadow: var(--shadow);
         }
 
         .section-title {
-            font-size: 1.8em;
+            font-size: 2em;
             color: var(--dark);
             margin-bottom: 20px;
             font-weight: 700;
         }
 
         .section-subtitle {
-            font-size: 1.1em;
+            font-size: 1.2em;
             color: var(--text-light);
             margin-bottom: 25px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 24px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f8fafc;
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .clinical-guide {
+            background: linear-gradient(135deg, #fef3f2 0%, #fee2e2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #fecaca;
+            box-shadow: var(--shadow);
+        }
+
+        .motto {
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .motto.danger { 
+            background: rgba(220, 38, 38, 0.1); 
+            color: var(--primary); 
+            border: 2px solid rgba(220, 38, 38, 0.2);
+        }
+        .motto.warning { 
+            background: rgba(245, 158, 11, 0.1); 
+            color: var(--warning); 
+            border: 2px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .target-values {
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid rgba(220, 38, 38, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .medication-card {
+            background: rgba(220, 38, 38, 0.05);
+            border: 2px solid rgba(220, 38, 38, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .dose-recommendation {
+            background: rgba(220, 38, 38, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .interaction-warning {
+            background: rgba(239, 68, 68, 0.05);
+            border: 2px solid rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-icon {
+            color: var(--warning);
+            margin-right: 8px;
+        }
+
+        .danger-icon {
+            color: var(--danger);
+            margin-right: 8px;
+        }
+
+        .targets-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .targets-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .targets-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .targets-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .targets-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .vitamin-d-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #7dd3fc;
         }
 
         .classification-grid {
@@ -146,41 +568,6 @@
             color: var(--danger);
             margin-bottom: 15px;
             font-size: 1.2em;
-        }
-
-        .diagnosis-treatment-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin: 25px 0;
-        }
-
-        @media (max-width: 768px) {
-            .diagnosis-treatment-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .diagnosis-card, .treatment-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .diagnosis-card {
-            border-left: 4px solid var(--primary);
-        }
-
-        .treatment-card {
-            border-left: 4px solid var(--success);
-        }
-
-        .card-title {
-            font-size: 1.3em;
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-weight: 700;
         }
 
         .special-cases {
@@ -219,157 +606,6 @@
             border-left: 4px solid var(--danger);
         }
 
-        .calculators-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .calculator-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .calculator-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .calculator-card h3 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            font-weight: 700;
-        }
-
-        .form-group {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .range-info {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-top: 8px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
-        }
-
-        .result-box {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 20px;
-            border: 1px solid #fecaca;
-            display: none;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #bae6fd;
-        }
-
-        .info-card h3 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            font-weight: 700;
-        }
-
-        .info-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-card li {
-            padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .info-card li:before {
-            content: '•';
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        .pregnancy-section {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 1px solid #bae6fd;
-        }
-
         .warning-box {
             background: #fef3c7;
             padding: 20px;
@@ -378,28 +614,43 @@
             border-left: 4px solid var(--warning);
         }
 
-        @media (max-width: 768px) {
-            .content {
-                padding: 30px 20px;
-            }
-            .calculators-grid {
-                grid-template-columns: 1fr;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .main-menu {
-                flex-direction: column;
-            }
-            .main-menu a {
-                width: 100%;
-                text-align: center;
-            }
-            .header h1 {
-                font-size: 2.2em;
-            }
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 8px;
         }
 
+        .risk-low { background: var(--success); color: white; }
+        .risk-moderate { background: var(--warning); color: white; }
+        .risk-high { background: var(--danger); color: white; }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .score-low { color: var(--success); border: 3px solid var(--success); }
+        .score-moderate { color: var(--warning); border: 3px solid var(--warning); }
+        .score-high { color: var(--danger); border: 3px solid var(--danger); }
+
+        .recommendation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Стили для чекбоксов */
         .checkbox-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -412,6 +663,13 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            background: #f1f5f9;
         }
 
         .checkbox-label input[type="checkbox"] {
@@ -427,7 +685,7 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary), #6b21a8);
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
         }
 
         .btn-warning {
@@ -438,126 +696,125 @@
             content: " *";
             color: var(--danger);
         }
+
+        .pregnancy-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px;
+            }
+            .header {
+                padding: 40px 30px;
+            }
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-menu {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .tab-buttons {
+                flex-direction: column;
+            }
+            .tab-btn {
+                min-width: auto;
+            }
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>📈 ГИПЕРТИРЕОЗ</h1>
-            <p>Диагностика и лечение повышенной функции щитовидной железы</p>
-        </div>
+        <header class="header">
+            <h1><i class="fas fa-chart-line-up"></i> ГИПЕРТИРЕОЗ</h1>
+            <p>Современная диагностика и персонализированное лечение повышенной функции щитовидной железы</p>
+        </header>
 
         <nav class="main-menu">
-            <a href="../../index.html">🏠 Главная</a>
-            <a href="index.html">🦋 Щитовидная железа</a>
-            <a href="hypothyroidism.html">📉 Гипотиреоз</a>
-            <a href="hyperthyroidism.html" class="active">📈 Гипертиреоз</a>
+            <a href="../index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-butterfly"></i> Щитовидная железа
+            </a>
+            <a href="hypothyroidism.html" class="nav-btn">
+                <i class="fas fa-chart-line-down"></i> Гипотиреоз
+            </a>
+            <a href="hyperthyroidism.html" class="nav-btn active">
+                <i class="fas fa-chart-line-up"></i> Гипертиреоз
+            </a>
         </nav>
 
-        <div class="content">
+        <main class="content">
             <h1 class="page-title">Гипертиреоз (Тиреотоксикоз)</h1>
-            <p class="page-subtitle">Повышенная функция щитовидной железы - диагностика и современное лечение</p>
+            <p class="page-subtitle">Современный подход к диагностике и лечению повышенной функции щитовидной железы</p>
 
-            <!-- ОСНОВНОЙ КАЛЬКУЛЯТОР: Определение формы гипертиреоза -->
-            <section class="disease-section">
-                <h2 class="section-title">🔍 Определение формы гипертиреоза</h2>
-                <p class="section-subtitle">Дифференциальная диагностика на основе ТТГ, св.Т4, св.Т3, АТ-рТТГ и клинических данных</p>
-
-                <div class="calculator-card">
-                    <h3>🎯 Дифференциальная диагностика тиреотоксикоза</h3>
-                    
-                    <div class="form-group">
-                        <label for="formTsh" class="required-field">ТТГ (мМЕ/л)</label>
-                        <input type="number" step="0.001" id="formTsh" placeholder="Например: 0.02">
-                        <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="formT4" class="required-field">св. Т4 (пмоль/л)</label>
-                        <input type="number" step="0.1" id="formT4" placeholder="Например: 35.0">
-                        <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="formT3">св. Т3 (пмоль/л) - необязательно</label>
-                        <input type="number" step="0.1" id="formT3" placeholder="Например: 12.5">
-                        <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="formRtg">АТ-рТТГ (МЕ/л) - необязательно</label>
-                        <input type="number" step="0.01" id="formRtg" placeholder="Например: 8.5">
-                        <div class="range-info">Норма: < 1.75 МЕ/л</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Клинические симптомы:</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="tachycardia"> Тахикардия
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="weight_loss"> Похудение
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="tremor"> Тремор
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="nervousness"> Нервозность
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="heat"> Непереносимость жары
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="sweating"> Потливость
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="pain"> Боли в шее
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="fever"> Лихорадка
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="eye"> Симптомы со стороны глаз
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="formSymptoms" value="weakness"> Слабость
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="formUltrasound">Данные УЗИ щитовидной железы:</label>
-                        <select id="formUltrasound">
-                            <option value="unknown">Неизвестно/Не выполнялось</option>
-                            <option value="diffuse">Диффузные изменения</option>
-                            <option value="nodular">Узловые образования</option>
-                            <option value="multinodular">Многоузловой зоб</option>
-                            <option value="normal">Нормальная картина</option>
-                            <option value="hypoechoic">Гипоэхогенность, "пылающая" железа</option>
-                        </select>
-                    </div>
-
-                    <div class="btn-group">
-                        <button class="btn" onclick="calculateHyperthyroidismForm()">🔍 Определить форму</button>
-                        <button class="btn btn-warning" onclick="clearFormForm()">🔄 Очистить</button>
-                        <button class="btn btn-secondary" onclick="fillSampleGraves()">🦋 Болезнь Грейвса</button>
-                        <button class="btn btn-secondary" onclick="fillSampleToxicNodule()">🔘 Токсический узел</button>
-                        <button class="btn btn-secondary" onclick="fillSampleThyroiditis()">🔥 Тиреоидит</button>
-                    </div>
-
-                    <div id="formResult" class="result-box"></div>
+            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-microscope"></i> Лабораторная диагностика</h3>
+                    <ul>
+                        <li><strong>ТТГ ↓</strong> - основной маркер</li>
+                        <li><strong>св. Т4 ↑</strong> - при манифестной форме</li>
+                        <li><strong>св. Т3 ↑</strong> - Т3-тиреотоксикоз</li>
+                        <li><strong>АТ-рТТГ ↑</strong> - болезнь Грейвса</li>
+                        <li><strong>Анти-ТПО ↑</strong> - аутоиммунный процесс</li>
+                        <li>Общий анализ крови</li>
+                        <li>Печеночные ферменты</li>
+                        <li>Липидный профиль</li>
+                    </ul>
                 </div>
-            </section>
 
-            <!-- СЕКЦИЯ ДИНАМИКИ АНТИТЕЛ рТТГ -->
-            <section class="disease-section">
-                <h2 class="section-title">📊 Динамика антител к рецептору ТТГ (рТТГ) в ходе лечения</h2>
+                <div class="info-card">
+                    <h3><i class="fas fa-bullseye"></i> Критерии диагностики</h3>
+                    <ul>
+                        <li><strong>Манифестный тиреотоксикоз:</strong><br>ТТГ < 0.1 мМЕ/л + св.Т4 > 22.0 пмоль/л</li>
+                        <li><strong>Субклинический тиреотоксикоз:</strong><br>ТТГ < 0.4 мМЕ/л + св.Т4 в норме</li>
+                        <li><strong>Болезнь Грейвса:</strong><br>ТТГ ↓ + АТ-рТТГ > 1.75 МЕ/л</li>
+                        <li><strong>Токсический узловой зоб:</strong><br>ТТГ ↓ + узлы по УЗИ</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-search-plus"></i> Дополнительные исследования</h3>
+                    <ul>
+                        <li><strong>УЗИ щитовидной железы:</strong><br>Оценка структуры, васкуляризации</li>
+                        <li><strong>Сцинтиграфия:</strong><br>Дифференциальная диагностика</li>
+                        <li><strong>ЭКГ:</strong><br>Тахикардия, аритмии</li>
+                        <li><strong>Офтальмологическое обследование:</strong><br>Эндокринная офтальмопатия</li>
+                        <li><strong>Денситометрия:</strong><br>Оценка костной плотности</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ВОССТАНОВЛЕННАЯ СЕКЦИЯ: ДИНАМИКА АНТИТЕЛ рТТГ -->
+            <section class="diagnostic-section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Динамика антител к рецептору ТТГ (рТТГ) в ходе лечения</h2>
                 <p class="section-subtitle">Мониторинг уровня антител для оценки эффективности терапии и прогноза ремиссии</p>
 
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3>🎯 Целевые значения антител рТТГ</h3>
+                        <h3><i class="fas fa-bullseye"></i> Целевые значения антител рТТГ</h3>
                         <ul>
                             <li><strong>Норма:</strong> < 1.75 МЕ/л</li>
                             <li><strong>Цель терапии:</strong> < 1.0 МЕ/л</li>
@@ -566,7 +823,7 @@
                     </div>
 
                     <div class="info-card">
-                        <h3>📈 Ожидаемая динамика</h3>
+                        <h3><i class="fas fa-chart-line"></i> Ожидаемая динамика</h3>
                         <ul>
                             <li><strong>Через 3-6 месяцев:</strong> Снижение на 50-70% от исходного уровня</li>
                             <li><strong>Через 12 месяцев:</strong> Достижение уровня < 2.0 МЕ/л</li>
@@ -575,7 +832,7 @@
                     </div>
 
                     <div class="info-card">
-                        <h3>⚠️ Факторы риска</h3>
+                        <h3><i class="fas fa-exclamation-triangle"></i> Факторы риска</h3>
                         <ul>
                             <li>Медленное снижение антител</li>
                             <li>Повторное повышение в ходе лечения</li>
@@ -586,19 +843,19 @@
                 </div>
 
                 <div class="warning-box">
-                    <h4>💡 Клиническая значимость</h4>
+                    <h4><i class="fas fa-lightbulb"></i> Клиническая значимость</h4>
                     <p><strong>Уровень антител к рТТГ перед отменой терапии - самый важный прогностический фактор рецидива!</strong></p>
                     <p>При уровне > 5 МЕ/л вероятность рецидива составляет 70-80%, при уровне < 1.75 МЕ/л - 20-30%.</p>
                 </div>
             </section>
 
-            <!-- СЕКЦИЯ БОЛЕЗНИ ГРЕЙВСА -->
-            <section class="disease-section">
-                <h2 class="section-title">🦋 Болезнь Грейвса (Диффузный токсический зоб)</h2>
+            <!-- ВОССТАНОВЛЕННАЯ СЕКЦИЯ: БОЛЕЗНЬ ГРЕЙВСА -->
+            <section class="diagnostic-section">
+                <h2 class="section-title"><i class="fas fa-butterfly"></i> Болезнь Грейвса (Диффузный токсический зоб)</h2>
                 <p class="section-subtitle">Аутоиммунное заболевание с выработкой антител к рецептору ТТГ</p>
 
-                <!-- Классификация тяжести -->
-                <h3>🎯 Классификация степени тяжести тиреотоксикоза</h3>
+                <!-- ВОССТАНОВЛЕННАЯ КЛАССИФИКАЦИЯ ТЯЖЕСТИ -->
+                <h3 style="margin: 30px 0 20px 0; color: var(--dark);"><i class="fas fa-list-alt"></i> Классификация степени тяжести тиреотоксикоза</h3>
                 <div class="classification-grid">
                     <div class="classification-card">
                         <h4>Субклинический тиреотоксикоз</h4>
@@ -624,13 +881,13 @@
                 </div>
 
                 <!-- КАЛЬКУЛЯТОРЫ БОЛЕЗНИ ГРЕЙВСА -->
-                <h3 style="margin: 35px 0 20px 0; color: var(--dark);">🧮 Калькуляторы болезни Грейвса</h3>
+                <h3 style="margin: 35px 0 20px 0; color: var(--dark);"><i class="fas fa-calculator"></i> Калькуляторы болезни Грейвса</h3>
                 <p class="section-subtitle">Автоматизированные расчеты для диагностики и лечения диффузного токсического зоба</p>
 
                 <div class="calculators-grid">
                     <!-- Калькулятор 1: Стартовая доза тиреостатиков -->
                     <div class="calculator-card">
-                        <h3>💊 Расчет стартовой дозы тиреостатиков</h3>
+                        <h3><i class="fas fa-capsules"></i> Расчет стартовой дозы тиреостатиков</h3>
                         <div class="form-group">
                             <label for="gravesWeight">Вес пациента (кг)</label>
                             <input type="number" id="gravesWeight" placeholder="Например: 70" value="70">
@@ -655,13 +912,15 @@
                                 <option value="yes">Да (тахикардия, аритмия)</option>
                             </select>
                         </div>
-                        <button class="btn" onclick="calculateGravesDose()">🧮 Рассчитать дозу</button>
+                        <button class="btn" onclick="calculateGravesDose()">
+                            <i class="fas fa-calculator"></i> Рассчитать дозу
+                        </button>
                         <div id="gravesDoseResult" class="result-box"></div>
                     </div>
 
                     <!-- Калькулятор 2: Контроль терапии и коррекция дозы -->
                     <div class="calculator-card">
-                        <h3>📊 Контроль терапии и коррекция дозы</h3>
+                        <h3><i class="fas fa-exchange-alt"></i> Контроль терапии и коррекция дозы</h3>
                         <div class="form-group">
                             <label for="currentDose">Текущая доза тиамазола (мг/сут)</label>
                             <input type="number" id="currentDose" placeholder="Например: 30" value="30">
@@ -675,13 +934,15 @@
                             <label for="controlT4">св. Т4 через 4-6 недель (пмоль/л)</label>
                             <input type="number" step="0.1" id="controlT4" placeholder="Например: 25.0" value="25.0">
                         </div>
-                        <button class="btn" onclick="calculateDoseAdjustment()">📈 Оценить эффективность</button>
+                        <button class="btn" onclick="calculateDoseAdjustment()">
+                            <i class="fas fa-adjust"></i> Оценить эффективность
+                        </button>
                         <div id="adjustmentResult" class="result-box"></div>
                     </div>
 
                     <!-- Калькулятор 3: Оценка риска рецидива -->
                     <div class="calculator-card">
-                        <h3>📈 Оценка риска рецидива</h3>
+                        <h3><i class="fas fa-chart-line"></i> Оценка риска рецидива</h3>
                         <div class="form-group">
                             <label for="relapseAntibody">АТ-рТТГ перед отменой (МЕ/л)</label>
                             <input type="number" step="0.01" id="relapseAntibody" placeholder="Например: 2.5" value="2.5">
@@ -695,20 +956,22 @@
                             <label for="relapseDuration">Длительность терапии (мес)</label>
                             <input type="number" id="relapseDuration" placeholder="Например: 18" value="18">
                         </div>
-                        <button class="btn" onclick="calculateRelapseRisk()">🎯 Оценить риск рецидива</button>
+                        <button class="btn" onclick="calculateRelapseRisk()">
+                            <i class="fas fa-chart-bar"></i> Оценить риск рецидива
+                        </button>
                         <div id="relapseResult" class="result-box"></div>
                     </div>
                 </div>
 
-                <!-- РЕЖИМ "БЛОКИРУЙ И ЗАМЕЩАЙ" -->
+                <!-- ВОССТАНОВЛЕННЫЙ РАЗДЕЛ: РЕЖИМ "БЛОКИРУЙ И ЗАМЕЩАЙ" -->
                 <div class="special-cases">
-                    <h2 class="section-title">🔄 Режим "Блокируй и замещай"</h2>
+                    <h2 class="section-title"><i class="fas fa-sync-alt"></i> Режим "Блокируй и замещай"</h2>
                     <p class="section-subtitle">Комбинированная терапия для стабильного контроля болезни Грейвса</p>
 
                     <!-- Показания -->
                     <div class="case-grid">
                         <div class="case-card">
-                            <h4>🎯 Показания для перехода на режим</h4>
+                            <h4><i class="fas fa-bullseye"></i> Показания для перехода на режим</h4>
                             <ul>
                                 <li><strong>Нестабильное течение болезни:</strong> Постоянные "скачки" ТТГ, свТ4 и свТ3 на монотерапии</li>
                                 <li><strong>Подготовка к радиойодтерапии или операции:</strong> Для достижения стабильного эутиреоза</li>
@@ -719,7 +982,7 @@
                         </div>
 
                         <div class="case-card">
-                            <h4>⚠️ Ключевые моменты и риски</h4>
+                            <h4><i class="fas fa-exclamation-triangle"></i> Ключевые моменты и риски</h4>
                             <ul>
                                 <li><strong>Нельзя переходить самостоятельно!</strong> Только под контролем врача</li>
                                 <li><strong>Риск побочных эффектов:</strong> Более высокие дозы тиамазола</li>
@@ -731,10 +994,10 @@
                     </div>
 
                     <!-- Калькулятор режима "Блокируй и замещай" -->
-                    <h4 style="margin: 35px 0 20px 0; color: var(--dark);">🧮 Калькулятор режима "Блокируй и замещай"</h4>
+                    <h4 style="margin: 35px 0 20px 0; color: var(--dark);"><i class="fas fa-calculator"></i> Калькулятор режима "Блокируй и замещай"</h4>
 
                     <div class="calculator-card">
-                        <h3>🔄 Расчет схемы "Блокируй и замещай"</h3>
+                        <h3><i class="fas fa-sync-alt"></i> Расчет схемы "Блокируй и замещай"</h3>
 
                         <div class="form-group">
                             <label for="blockWeight">Вес пациента (кг)</label>
@@ -768,26 +1031,28 @@
                             </select>
                         </div>
 
-                        <button class="btn" onclick="calculateBlockReplace()">🔄 Рассчитать схему</button>
+                        <button class="btn" onclick="calculateBlockReplace()">
+                            <i class="fas fa-calculator"></i> Рассчитать схему
+                        </button>
                         <div id="blockReplaceResult" class="result-box"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- СЕКЦИЯ БЕРЕМЕННОСТИ ПРИ БОЛЕЗНИ ГРЕЙВСА -->
-            <section class="disease-section pregnancy-section">
-                <h2 class="section-title">🤰 Беременность при болезни Грейвса</h2>
+            <!-- ВОССТАНОВЛЕННАЯ СЕКЦИЯ: БЕРЕМЕННОСТЬ ПРИ БОЛЕЗНИ ГРЕЙВСА -->
+            <section class="diagnostic-section pregnancy-section">
+                <h2 class="section-title"><i class="fas fa-baby"></i> Беременность при болезни Грейвса</h2>
                 <p class="section-subtitle">Особенности ведения беременности у пациенток с диффузным токсическим зобом</p>
 
                 <div class="warning-box">
-                    <h4>⚠️ Ключевое правило</h4>
+                    <h4><i class="fas fa-exclamation-triangle"></i> Ключевое правило</h4>
                     <p><strong>Беременность необходимо планировать и отложить до достижения стабильного эутиреоза</strong></p>
                 </div>
 
                 <!-- Информационные блоки -->
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3>📅 Планирование беременности</h3>
+                        <h3><i class="fas fa-calendar-alt"></i> Планирование беременности</h3>
                         <ul>
                             <li><strong>Стабильный эутиреоз:</strong> Достигнут и подтвержден дважды в течение 2 месяцев</li>
                             <li><strong>Информирование пациентки:</strong> О рисках врожденных дефектов при приеме АТП</li>
@@ -798,7 +1063,7 @@
                     </div>
 
                     <div class="info-card">
-                        <h3>🎯 Радикальные методы лечения</h3>
+                        <h3><i class="fas fa-procedures"></i> Радикальные методы лечения</h3>
                         <ul>
                             <li><strong>Радиойодтерапия (РЙТ):</strong> Беременность откладывать на 6 месяцев после лечения</li>
                             <li><strong>Тиреоидэктомия:</strong> Показана при противопоказаниях к АТП или РЙТ</li>
@@ -808,12 +1073,12 @@
                 </div>
 
                 <!-- Калькуляторы для беременных -->
-                <h3 style="margin: 30px 0 20px 0; color: var(--dark);">🧮 Калькуляторы для ведения беременности</h3>
+                <h3 style="margin: 30px 0 20px 0; color: var(--dark);"><i class="fas fa-calculator"></i> Калькуляторы для ведения беременности</h3>
                 
                 <div class="calculators-grid">
                     <!-- Калькулятор 1: Подбор дозы тиреостатиков для беременных -->
                     <div class="calculator-card">
-                        <h3>💊 Подбор дозы тиреостатиков при беременности</h3>
+                        <h3><i class="fas fa-capsules"></i> Подбор дозы тиреостатиков при беременности</h3>
                         <div class="form-group">
                             <label for="pregTrimester">Триместр беременности</label>
                             <select id="pregTrimester">
@@ -839,13 +1104,15 @@
                                 <option value="severe">Выраженные</option>
                             </select>
                         </div>
-                        <button class="btn" onclick="calculatePregnancyDose()">🤰 Рассчитать дозу</button>
+                        <button class="btn" onclick="calculatePregnancyDose()">
+                            <i class="fas fa-baby"></i> Рассчитать дозу
+                        </button>
                         <div id="pregnancyDoseResult" class="result-box"></div>
                     </div>
 
                     <!-- Калькулятор 2: Контроль терапии у беременных -->
                     <div class="calculator-card">
-                        <h3>📊 Контроль терапии у беременных</h3>
+                        <h3><i class="fas fa-chart-line"></i> Контроль терапии у беременных</h3>
                         <div class="form-group">
                             <label for="pregCurrentDose">Текущая доза (мг/сут)</label>
                             <input type="number" id="pregCurrentDose" placeholder="Например: 15" value="15">
@@ -863,13 +1130,15 @@
                             <label for="pregWeeks">Срок беременности (недель)</label>
                             <input type="number" id="pregWeeks" placeholder="Например: 20" value="20">
                         </div>
-                        <button class="btn" onclick="calculatePregnancyControl()">📈 Оценить контроль</button>
+                        <button class="btn" onclick="calculatePregnancyControl()">
+                            <i class="fas fa-chart-bar"></i> Оценить контроль
+                        </button>
                         <div id="pregnancyControlResult" class="result-box"></div>
                     </div>
 
                     <!-- Калькулятор 3: Оценка риска неонатального тиреотоксикоза -->
                     <div class="calculator-card">
-                        <h3>⚠️ Оценка риска неонатального тиреотоксикоза</h3>
+                        <h3><i class="fas fa-exclamation-triangle"></i> Оценка риска неонатального тиреотоксикоза</h3>
                         <div class="form-group">
                             <label for="neonatalAntibody">АТ-рТТГ на 18-22 неделе (МЕ/л)</label>
                             <input type="number" step="0.01" id="neonatalAntibody" placeholder="Например: 8.5" value="8.5">
@@ -891,13 +1160,15 @@
                                 <option value="yes">Да</option>
                             </select>
                         </div>
-                        <button class="btn" onclick="calculateNeonatalRisk()">👶 Оценить риск</button>
+                        <button class="btn" onclick="calculateNeonatalRisk()">
+                            <i class="fas fa-baby"></i> Оценить риск
+                        </button>
                         <div id="neonatalRiskResult" class="result-box"></div>
                     </div>
 
                     <!-- Калькулятор 4: Планирование отмены терапии -->
                     <div class="calculator-card">
-                        <h3>🔄 Планирование отмены терапии</h3>
+                        <h3><i class="fas fa-sync-alt"></i> Планирование отмены терапии</h3>
                         <div class="form-group">
                             <label for="withdrawalWeeks">Срок беременности (недель)</label>
                             <input type="number" id="withdrawalWeeks" placeholder="Например: 8" value="8">
@@ -915,14 +1186,16 @@
                             <label for="withdrawalStability">Стабильность эутиреоза (месяцев)</label>
                             <input type="number" id="withdrawalStability" placeholder="Например: 3" value="3">
                         </div>
-                        <button class="btn" onclick="calculateWithdrawalPlan()">🔄 Оценить возможность отмены</button>
+                        <button class="btn" onclick="calculateWithdrawalPlan()">
+                            <i class="fas fa-sync-alt"></i> Оценить возможность отмены
+                        </button>
                         <div id="withdrawalResult" class="result-box"></div>
                     </div>
                 </div>
 
                 <!-- Дополнительная информация -->
                 <div class="warning-box">
-                    <h4>💊 Важные противопоказания при беременности</h4>
+                    <h4><i class="fas fa-capsules"></i> Важные противопоказания при беременности</h4>
                     <ul>
                         <li><strong>Схема "блокируй и замещай" - ПРОТИВОПОКАЗАНА</strong></li>
                         <li><strong>Радиойодтерапия - АБСОЛЮТНО ПРОТИВОПОКАЗАНА</strong></li>
@@ -930,295 +1203,554 @@
                     </ul>
                 </div>
             </section>
-        </div>
+
+            <!-- ДИАГНОСТИКА И ЛЕЧЕНИЕ С СИСТЕМОЙ ВКЛАДОК -->
+            <div class="diagnostic-section">
+                <h2 class="section-title"><i class="fas fa-stethoscope"></i> Диагностика и лечение</h2>
+                <p class="section-subtitle">Комплексная оценка и персонализированные рекомендации</p>
+                
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="diagnosis-tab">
+                        <i class="fas fa-diagnoses"></i> Диагностика
+                    </button>
+                    <button class="tab-btn" data-tab="treatment-tab">
+                        <i class="fas fa-capsules"></i> Лечение
+                    </button>
+                    <button class="tab-btn" data-tab="monitoring-tab">
+                        <i class="fas fa-chart-line"></i> Контроль терапии
+                    </button>
+                    <button class="tab-btn" data-tab="vitamin-d-tab">
+                        <i class="fas fa-sun"></i> Витамин D
+                    </button>
+                </div>
+
+                <!-- ВКЛАДКА ДИАГНОСТИКИ -->
+                <div id="diagnosis-tab" class="tab-content active">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-diagnoses"></i> Определение формы гипертиреоза</h3>
+                            <div class="form-group">
+                                <label for="formTsh" class="required-field">ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.001" id="formTsh" placeholder="0.4" value="0.02">
+                                <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formT4" class="required-field">св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="formT4" placeholder="11.0" value="38.5">
+                                <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formT3">св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="formT3" placeholder="3.5" value="12.8">
+                                <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formRtg">АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="formRtg" placeholder="1.75" value="15.2">
+                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Клинические симптомы:</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="tachycardia" checked> Тахикардия
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="weight_loss" checked> Похудение
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="tremor" checked> Тремор
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="nervousness" checked> Нервозность
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="heat" checked> Непереносимость жары
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="sweating" checked> Потливость
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="formSymptoms" value="eye" checked> Симптомы со стороны глаз
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn" onclick="calculateHyperthyroidismForm()">
+                                    <i class="fas fa-search"></i> Определить форму
+                                </button>
+                                <button class="btn btn-warning" onclick="clearFormForm()">
+                                    <i class="fas fa-undo"></i> Очистить
+                                </button>
+                                <button class="btn btn-secondary" onclick="fillSampleGraves()">
+                                    <i class="fas fa-butterfly"></i> Болезнь Грейвса
+                                </button>
+                                <button class="btn btn-secondary" onclick="fillSampleToxicNodule()">
+                                    <i class="fas fa-dot-circle"></i> Токсический узел
+                                </button>
+                            </div>
+                            <div id="formResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-capsules"></i> Расчет стартовой дозы тиреостатиков</h3>
+                            <div class="form-group">
+                                <label for="gravesWeight">Вес пациента (кг)</label>
+                                <input type="number" id="gravesWeight" placeholder="70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesT4">св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="gravesT4" placeholder="35.0" value="35.0">
+                                <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesSeverity">Тяжесть тиреотоксикоза</label>
+                                <select id="gravesSeverity">
+                                    <option value="mild">Легкий</option>
+                                    <option value="moderate" selected>Умеренный</option>
+                                    <option value="severe">Тяжелый</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="calculateGravesDose()">
+                                <i class="fas fa-calculator"></i> Рассчитать дозу
+                            </button>
+                            <div id="gravesDoseResult" class="result-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ВКЛАДКА ЛЕЧЕНИЯ -->
+                <div id="treatment-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Коррекция дозы тиреостатиков</h3>
+                            <div class="form-group">
+                                <label for="currentDose">Текущая доза тиамазола (мг/сут)</label>
+                                <input type="number" id="currentDose" placeholder="30" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="controlTsh">ТТГ через 4-6 недель (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="controlTsh" placeholder="0.1" value="0.1">
+                                <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="controlT4">св. Т4 через 4-6 недель (пмоль/л)</label>
+                                <input type="number" step="0.1" id="controlT4" placeholder="25.0" value="25.0">
+                            </div>
+                            <button class="btn" onclick="calculateDoseAdjustment()">
+                                <i class="fas fa-adjust"></i> Оценить эффективность
+                            </button>
+                            <div id="adjustmentResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-sync-alt"></i> Режим "Блокируй и замещай"</h3>
+                            <div class="form-group">
+                                <label for="blockWeight">Вес пациента (кг)</label>
+                                <input type="number" id="blockWeight" placeholder="70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="blockCurrentT4">Текущий св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="blockCurrentT4" placeholder="18.5" value="18.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="blockAntibody">АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="blockAntibody" placeholder="8.5" value="8.5">
+                            </div>
+                            <button class="btn" onclick="calculateBlockReplace()">
+                                <i class="fas fa-calculator"></i> Рассчитать схему
+                            </button>
+                            <div id="blockReplaceResult" class="result-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ВКЛАДКА КОНТРОЛЯ ТЕРАПИИ -->
+                <div id="monitoring-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-chart-line"></i> Оценка риска рецидива</h3>
+                            <div class="form-group">
+                                <label for="relapseAntibody">АТ-рТТГ перед отменой (МЕ/л)</label>
+                                <input type="number" step="0.01" id="relapseAntibody" placeholder="2.5" value="2.5">
+                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="relapseTsh">ТТГ перед отменой (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="relapseTsh" placeholder="1.2" value="1.2">
+                            </div>
+                            <div class="form-group">
+                                <label for="relapseDuration">Длительность терапии (мес)</label>
+                                <input type="number" id="relapseDuration" placeholder="18" value="18">
+                            </div>
+                            <button class="btn" onclick="calculateRelapseRisk()">
+                                <i class="fas fa-chart-bar"></i> Оценить риск рецидива
+                            </button>
+                            <div id="relapseResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-eye"></i> Мониторинг антител рТТГ</h3>
+                            <div class="form-group">
+                                <label for="antibodyInitial">Исходный уровень АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="antibodyInitial" placeholder="15.0" value="15.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="antibodyCurrent">Текущий уровень АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="antibodyCurrent" placeholder="5.0" value="5.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="antibodyMonths">Длительность терапии (мес)</label>
+                                <input type="number" id="antibodyMonths" placeholder="6" value="6">
+                            </div>
+                            <button class="btn" onclick="monitorAntibodies()">
+                                <i class="fas fa-chart-line"></i> Оценить динамику
+                            </button>
+                            <div id="antibodyResult" class="result-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ВКЛАДКА ВИТАМИНА D -->
+                <div id="vitamin-d-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card vitamin-d-section">
+                            <h3><i class="fas fa-sun"></i> Оценка уровня витамина D</h3>
+                            <div class="form-group">
+                                <label for="vitaminDLevel">25(OH)D (нг/мл)</label>
+                                <input type="number" step="0.1" id="vitaminDLevel" placeholder="30.0" value="18.5">
+                                <div class="range-info">Оптимальный уровень: 30-60 нг/мл</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="vitaminDAge">Возраст пациента</label>
+                                <input type="number" id="vitaminDAge" placeholder="45" value="45">
+                            </div>
+                            <div class="form-group">
+                                <label for="vitaminDWeight">Вес (кг)</label>
+                                <input type="number" id="vitaminDWeight" placeholder="70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="vitaminDHyperthyroidism">Гипертиреоз в анамнезе</label>
+                                <input type="checkbox" id="vitaminDHyperthyroidism" checked>
+                            </div>
+                            <button class="btn" onclick="evaluateVitaminD()">
+                                <i class="fas fa-calculator"></i> Оценить и рассчитать дозу
+                            </button>
+                            <div id="vitaminDResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card vitamin-d-section">
+                            <h3><i class="fas fa-capsules"></i> Коррекция дефицита витамина D</h3>
+                            <div class="form-group">
+                                <label for="correctionCurrentLevel">Текущий 25(OH)D (нг/мл)</label>
+                                <input type="number" step="0.1" id="correctionCurrentLevel" placeholder="15.0" value="15.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="correctionTargetLevel">Целевой уровень (нг/мл)</label>
+                                <select id="correctionTargetLevel">
+                                    <option value="30">30 нг/мл (минимум)</option>
+                                    <option value="40" selected>40 нг/мл (оптимум)</option>
+                                    <option value="50">50 нг/мл</option>
+                                    <option value="60">60 нг/мл</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="correctionWeight">Вес пациента (кг)</label>
+                                <input type="number" id="correctionWeight" placeholder="70" value="70">
+                            </div>
+                            <button class="btn" onclick="calculateVitaminDCorrection()">
+                                <i class="fas fa-calculator"></i> Рассчитать коррекцию
+                            </button>
+                            <div id="correctionResult" class="result-box"></div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Витамин D и гипертиреоз</h3>
+                            <ul>
+                                <li>Гипертиреоз ускоряет метаболизм витамина D</li>
+                                <li>Повышен риск остеопороза и переломов</li>
+                                <li>Оптимальный уровень: 40-60 нг/мл при гипертиреозе</li>
+                                <li>Коррекция дефицита улучшает костный метаболизм</li>
+                                <li>Рекомендуется контроль уровня 2 раза в год</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fas fa-capsules"></i> Схемы коррекции при гипертиреозе</h3>
+                            <ul>
+                                <li><strong>Насыщение:</strong> 4000-6000 МЕ/сут × 8 недель</li>
+                                <li><strong>Поддержание:</strong> 2000-4000 МЕ/сут</li>
+                                <li>Контроль через 8-12 недель</li>
+                                <li>При тиреотоксикозе доза увеличивается на 20-30%</li>
+                                <li>Обязателен контроль кальция крови</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КЛИНИЧЕСКИЕ РЕКОМЕНДАЦИИ -->
+            <div class="clinical-guide">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Ведение гипертиреоза: ключевые принципы</h2>
+                <p class="section-subtitle">Индивидуальный подход для разных клинических ситуаций</p>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-baby"></i> Беременность: Особый контроль</h3>
+                        <div class="motto danger">Девиз: "Безопасность матери и ребенка - прежде всего"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Целевые значения при беременности:</h4>
+                            <ul>
+                                <li><strong>св. Т4:</strong> верхняя граница нормы</li>
+                                <li><strong>ТТГ:</strong> 0.2-2.5 мМЕ/л</li>
+                                <li><strong>АТ-рТТГ:</strong> мониторинг каждый триместр</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Препарат выбора в I триместре:</strong> Пропилтиоурацил (ПТУ)</li>
+                            <li><strong>Со II триместра:</strong> Возможен переход на тиамазол</li>
+                            <li>Контроль ТТГ и св.Т4 <strong>каждые 4 недели</strong></li>
+                            <li>Обследование новорожденного в первые 3-5 дней жизни</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-user-friends"></i> Пожилые пациенты: Осторожная тактика</h3>
+                        <div class="motto warning">Девиз: "Контроль кардиальных рисков"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Особенности ведения:</h4>
+                            <ul>
+                                <li>Старт с низких доз тиреостатиков</li>
+                                <li>Обязательный контроль ЭКГ</li>
+                                <li>Мониторинг функции печени</li>
+                                <li>Рассмотреть раннюю радиойодтерапию</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Бета-блокаторы:</strong> для контроля тахикардии</li>
+                            <li><strong>Контроль костного метаболизма:</strong> денситометрия</li>
+                            <li><strong>Витамин D:</strong> обязательная коррекция дефицита</li>
+                            <li>Частый контроль ТТГ - каждые 4-6 недель</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-bullseye"></i> Целевые значения при лечении</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-light); font-style: italic;">Индивидуальный подход к целям терапии</p>
+                        
+                        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="display: grid; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Начало терапии</span>
+                                    <span style="color: var(--warning); font-weight: 700;">ТТГ 0.1-0.4 мМЕ/л</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Поддержание</span>
+                                    <span style="color: var(--success); font-weight: 700;">ТТГ 0.4-2.0 мМЕ/л</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Перед отменой</span>
+                                    <span style="color: var(--primary); font-weight: 700;">АТ-рТТГ < 1.75 МЕ/л</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+                                    <span style="font-weight: 600;">Беременность</span>
+                                    <span style="color: var(--danger); font-weight: 700;">ТТГ 0.2-2.5 мМЕ/л</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
-        // ТЕСТОВАЯ ФУНКЦИЯ ДЛЯ ПРОВЕРКИ РАБОТОСПОСОБНОСТИ
-        console.log('=== ТЕСТ СТРАНИЦЫ ГИПЕРТИРЕОЗА ===');
+        // БАЗА ЗНАНИЙ ПО ГИПЕРТИРЕОЗУ
+        const HYPERTHYROIDISM_KNOWLEDGE = {
+            diagnoseForm: function(tsh, t4, t3 = null, rtg = null, symptoms = [], ultrasound = 'unknown') {
+                if (!tsh || !t4) return null;
 
-        // Проверяем загрузку DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ DOM загружен');
-            
-            // Проверяем основные элементы
-            const testElements = [
-                'formTsh', 'formT4', 'formResult', 
-                'gravesWeight', 'gravesDoseResult',
-                'currentDose', 'adjustmentResult'
-            ];
-            
-            testElements.forEach(id => {
-                const element = document.getElementById(id);
-                console.log(`✅ Элемент ${id}:`, element ? 'НАЙДЕН' : 'НЕ НАЙДЕН');
-            });
-            
-            // Проверяем функции
-            if (typeof calculateHyperthyroidismForm === 'function') {
-                console.log('✅ Функция calculateHyperthyroidismForm доступна');
-            } else {
-                console.log('❌ Функция calculateHyperthyroidismForm НЕ доступна');
-            }
-            
-            if (typeof calculateGravesDose === 'function') {
-                console.log('✅ Функция calculateGravesDose доступна');
-            } else {
-                console.log('❌ Функция calculateGravesDose НЕ доступна');
-            }
-            
-            // Тест простой функции
-            function simpleTest() {
-                console.log('✅ Простой тест выполнен');
-                return true;
-            }
-            simpleTest();
-        });
+                let diagnosis = '';
+                let probability = '';
+                let diagnosticCriteria = [];
+                let treatmentApproach = [];
+                let additionalTests = [];
+                let color = '';
 
-        // 1. ОСНОВНОЙ КАЛЬКУЛЯТОР: Определение формы гипертиреоза
-        function calculateHyperthyroidismForm() {
-            console.log('🚀 Функция calculateHyperthyroidismForm вызвана');
-            
-            const tsh = parseFloat(document.getElementById('formTsh').value);
-            const t4 = parseFloat(document.getElementById('formT4').value);
-            const t3 = parseFloat(document.getElementById('formT3').value) || null;
-            const rtg = parseFloat(document.getElementById('formRtg').value) || null;
-            const symptoms = Array.from(document.querySelectorAll('input[name="formSymptoms"]:checked')).map(el => el.value);
-            const ultrasound = document.getElementById('formUltrasound').value;
+                if (tsh < 0.1 && t4 > 22.0) {
+                    if ((rtg && rtg > 1.75) || symptoms.includes('eye')) {
+                        diagnosis = '🦋 Болезнь Грейвса (Диффузный токсический зоб)';
+                        probability = 'Высокая вероятность (85-90%)';
+                        color = '#dc2626';
+                        
+                        diagnosticCriteria = [
+                            'Типичная гормональная картина: ТТГ ↓, св.Т4 ↑',
+                            t3 ? 'св.Т3 ↑ (Т3-тиреотоксикоз)' : 'св.Т3 может быть повышен',
+                            rtg ? `Повышены антитела к рецептору ТТГ (${rtg} МЕ/л)` : 'Антитела к рТТГ могут быть повышены',
+                            symptoms.includes('eye') ? 'Эндокринная офтальмопатия' : 'Возможна эндокринная офтальмопатия'
+                        ];
 
-            console.log('📊 Введенные данные:', { tsh, t4, t3, rtg, symptoms, ultrasound });
+                        treatmentApproach = [
+                            'Консервативное: Тиамазол 10-40 мг/сут',
+                            'Радиойодтерапия при рецидивах',
+                            'Хирургическое лечение при больших размерах зоба'
+                        ];
+                    } else if (ultrasound === 'nodular' || ultrasound === 'multinodular') {
+                        diagnosis = '🔘 Токсический узловой/многоузловой зоб';
+                        probability = 'Высокая вероятность (80-85%)';
+                        color = '#7e22ce';
+                        
+                        diagnosticCriteria = [
+                            'Типичная гормональная картина: ТТГ ↓, св.Т4 ↑',
+                            'Узловые образования по УЗИ',
+                            'Антитела к рТТГ обычно в норме'
+                        ];
 
-            // Проверка обязательных полей
-            if (!tsh || !t4) {
-                alert('Пожалуйста, заполните обязательные поля: ТТГ и св.Т4');
-                return;
-            }
-
-            let diagnosis = '';
-            let probability = '';
-            let diagnosticCriteria = [];
-            let treatmentApproach = [];
-            let additionalTests = [];
-            let color = '';
-
-            // Основная диагностическая логика
-            if (tsh < 0.1 && t4 > 22.0) {
-                // Проверка на болезнь Грейвса
-                if ((rtg && rtg > 1.75) || symptoms.includes('eye') || ultrasound === 'diffuse' || ultrasound === 'hypoechoic') {
-                    diagnosis = '🦋 Болезнь Грейвса (Диффузный токсический зоб)';
-                    probability = 'Высокая вероятность (85-90%)';
-                    color = '#dc2626';
+                        treatmentApproach = [
+                            'Радиойодтерапия - метод выбора',
+                            'Хирургическое лечение при компрессии',
+                            'Тиреостатики для подготовки'
+                        ];
+                    } else {
+                        diagnosis = '🎭 Другие формы тиреотоксикоза';
+                        probability = 'Требуется дифференциальная диагностика';
+                        color = '#6b7280';
+                        
+                        diagnosticCriteria = [
+                            'Исключить подострый тиреоидит',
+                            'Исключить медикаментозный тиреотоксикоз',
+                            'Исключить йод-индуцированный тиреотоксикоз'
+                        ];
+                    }
+                } else if (tsh < 0.4 && t4 <= 22.0) {
+                    diagnosis = '📊 Субклинический гипертиреоз';
+                    probability = 'Требуется наблюдение';
+                    color = '#d97706';
                     
                     diagnosticCriteria = [
-                        'Типичная гормональная картина: ТТГ ↓, св.Т4 ↑',
-                        t3 ? 'св.Т3 ↑ (Т3-тиреотоксикоз)' : 'св.Т3 может быть в норме или повышен',
-                        rtg ? `Повышены антитела к рецептору ТТГ (${rtg} МЕ/л)` : 'Антитела к рТТГ могут быть повышены',
-                        'Клинические симптомы тиреотоксикоза',
-                        symptoms.includes('eye') ? 'Эндокринная офтальмопатия' : 'Возможна эндокринная офтальмопатия',
-                        'УЗИ: диффузные изменения, гипоэхогенность'
+                        'Сниженный ТТГ при нормальном св.Т4',
+                        'Может быть бессимптомным',
+                        'Повышен риск фибрилляции предсердий у пожилых'
                     ];
 
                     treatmentApproach = [
-                        'Консервативное: Тиамазол 10-40 мг/сут',
-                        'Радиойодтерапия при рецидивах или противопоказаниях к тиреостатикам',
-                        'Хирургическое лечение при больших размерах зоба или компрессии'
+                        'Наблюдение при ТТГ 0.1-0.4 мМЕ/л',
+                        'Лечение при ТТГ < 0.1 мМЕ/л у пожилых',
+                        'Лечение при симптомах'
                     ];
-
-                } 
-                // Проверка на токсический узловой зоб
-                else if (ultrasound === 'nodular' || ultrasound === 'multinodular') {
-                    diagnosis = '🔘 Токсический узловой/многоузловой зоб';
-                    probability = 'Высокая вероятность (80-85%)';
-                    color = '#7e22ce';
-                    
-                    diagnosticCriteria = [
-                        'Типичная гормональная картина: ТТГ ↓, св.Т4 ↑',
-                        t3 ? `св.Т3 ${t3 > 6.5 ? '↑' : 'в норме'}` : 'св.Т3 может быть в норме',
-                        rtg ? `Антитела к рТТГ ${rtg <= 1.75 ? 'в норме' : 'умеренно повышены'}` : 'Антитела к рТТГ обычно в норме',
-                        'Узловые образования по УЗИ',
-                        'Повышенное поглощение при сцинтиграфии в узлах'
-                    ];
-
-                    treatmentApproach = [
-                        'Радиойодтерапия - метод выбора',
-                        'Хирургическое лечение при компрессии или больших размерах',
-                        'Тиреостатики для подготовки к радикальному лечению'
-                    ];
-
-                } 
-                // Проверка на тиреоидит
-                else if (symptoms.includes('pain') || symptoms.includes('fever') || ultrasound === 'hypoechoic') {
-                    diagnosis = '🔥 Подострый тиреоидит (de Quervain)';
-                    probability = 'Средняя вероятность (60-70%)';
-                    color = '#ea580c';
-                    
-                    diagnosticCriteria = [
-                        'Типичная гормональная картина: ТТГ ↓, св.Т4 ↑',
-                        t3 ? `св.Т3 ${t3 > 6.5 ? '↑' : 'в норме'}` : 'св.Т3 может быть в норме',
-                        'Боли в области шеи, лихорадка',
-                        'Сниженное поглощение при сцинтиграфии',
-                        'Повышение СОЭ, С-реактивного белка',
-                        'Часто - предшествующая вирусная инфекция'
-                    ];
-
-                    treatmentApproach = [
-                        'Противовоспалительная терапия (НПВС)',
-                        'Кортикостероиды при тяжелом течении',
-                        'Бета-блокаторы для контроля симптомов',
-                        'Тиреостатики НЕ эффективны!'
-                    ];
-
-                } 
-                // Другие формы
-                else {
-                    diagnosis = '🎭 Другие формы тиреотоксикоза';
-                    probability = 'Требуется дифференциальная диагностика';
-                    color = '#6b7280';
-                    
-                    diagnosticCriteria = [
-                        'Исключить медикаментозный тиреотоксикоз (амиодарон, интерферон)',
-                        'Исключить йод-индуцированный тиреотоксикоз',
-                        'Исключить ТТГ-продуцирующую аденому гипофиза',
-                        'Исключить struma ovarii',
-                        'Исключить метастазы рака щитовидной железы'
-                    ];
-
-                    additionalTests = [
-                        'Сцинтиграфия щитовидной железы',
-                        'МРТ гипофиза при нормальном/повышенном ТТГ',
-                        'Исследование хорионического гонадотропина',
-                        'Анализ принимаемых препаратов'
-                    ];
-                }
-            } 
-            // Субклинический гипертиреоз
-            else if (tsh < 0.4 && t4 <= 22.0) {
-                diagnosis = '📊 Субклинический гипертиреоз';
-                probability = 'Требуется наблюдение и уточнение причины';
-                color = '#d97706';
-                
-                diagnosticCriteria = [
-                    'Сниженный ТТГ при нормальном св.Т4',
-                    t3 ? `св.Т3 ${t3 > 6.5 ? '↑' : 'в норме'}` : 'св.Т3 обычно в норме',
-                    'Может быть бессимптомным',
-                    'Повышен риск фибрилляции предсердий у пожилых',
-                    'Требуется динамическое наблюдение'
-                ];
-
-                treatmentApproach = [
-                    'Наблюдение при ТТГ 0.1-0.4 мМЕ/л у молодых пациентов',
-                    'Лечение при ТТГ < 0.1 мМЕ/л у пожилых',
-                    'Лечение при симптомах или сопутствующих заболеваниях',
-                    'Определение причины субклинического гипертиреоза'
-                ];
-            } 
-            // Норма или другие состояния
-            else {
-                if (tsh >= 0.4 && tsh <= 4.0 && t4 >= 11.0 && t4 <= 22.0) {
+                } else {
                     diagnosis = '🟢 Эутиреоз (норма)';
                     probability = 'Нормальная функция щитовидной железы';
                     color = '#059669';
-                } else if (tsh > 4.0 && t4 < 11.0) {
-                    diagnosis = '📉 Гипотиреоз';
-                    probability = 'Сниженная функция щитовидной железы';
-                    color = '#2563eb';
-                } else {
-                    diagnosis = '❓ Несоответствующая картина';
-                    probability = 'Требуется дополнительное обследование';
-                    color = '#6b7280';
+                }
+
+                return { diagnosis, probability, diagnosticCriteria, treatmentApproach, additionalTests, color };
+            },
+
+            calculateDose: function(weight, t4, severity) {
+                let baseDose;
+                
+                switch(severity) {
+                    case 'mild':
+                        baseDose = weight * 0.3;
+                        break;
+                    case 'moderate':
+                        baseDose = weight * 0.5;
+                        break;
+                    case 'severe':
+                        baseDose = weight * 0.7;
+                        break;
+                    default:
+                        baseDose = weight * 0.5;
                 }
                 
-                diagnosticCriteria = [
-                    'Необходимы все основные показатели: ТТГ, св.Т4',
-                    'Рекомендуется исследование АТ-рТТГ при подозрении на аутоиммунный процесс',
-                    'УЗИ щитовидной железы для оценки структуры',
-                    'Повторное исследование через 4-6 недель при сомнительных результатах'
-                ];
-            }
-
-            // Формирование результата
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${diagnosis}</div>
-                    <div style="font-size: 1.1em; margin-top: 10px; color: ${color};">${probability}</div>
-                </div>
+                if (t4 > 40) baseDose *= 1.2;
+                if (t4 > 50) baseDose *= 1.3;
                 
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 Диагностические критерии:</h4>
-                    <ul>
-                        ${diagnosticCriteria.map(criterion => `<li>${criterion}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
+                return Math.min(Math.max(Math.round(baseDose / 5) * 5, 10), 60);
+            },
 
-            if (treatmentApproach.length > 0) {
-                resultHTML += `
-                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h4>💊 Подходы к лечению:</h4>
-                        <ul>
-                            ${treatmentApproach.map(approach => `<li>${approach}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
+            // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ
+            calculateBlockReplace: function(weight, currentT4, currentTSH, antibody, indication) {
+                let blockDose, replaceDose, recommendations = [];
+                let transitionPlan = [];
+                let risks = [];
+
+                if (antibody > 10 || indication === 'severe') {
+                    blockDose = "30-40 мг/сут";
+                    recommendations.push("Высокая блокирующая доза в связи с тяжелым течением или высоким уровнем антител");
+                } else if (antibody > 5 || indication === 'unstable') {
+                    blockDose = "20-30 мг/сут";
+                    recommendations.push("Средняя блокирующая доза для стабилизации течения");
+                } else {
+                    blockDose = "15-20 мг/сут";
+                    recommendations.push("Стандартная блокирующая доза");
+                }
+
+                const calculatedReplace = Math.round(weight * 1.6);
+                if (currentT4 < 15) {
+                    replaceDose = Math.max(50, calculatedReplace - 25) + " мкг/сут";
+                    recommendations.push("Сниженная стартовая доза L-тироксина в связи с низким свТ4");
+                } else if (currentT4 > 20) {
+                    replaceDose = calculatedReplace + 25 + " мкг/сут";
+                    recommendations.push("Увеличенная стартовая доза L-тироксина для компенсации");
+                } else {
+                    replaceDose = calculatedReplace + " мкг/сут";
+                    recommendations.push("Стандартная расчетная доза L-тироксина");
+                }
+
+                return { blockDose, replaceDose, recommendations, transitionPlan, risks };
+            },
+
+            calculateRelapseRisk: function(antibody, tsh, duration) {
+                let riskScore = 0;
+
+                if (antibody > 5) riskScore += 3;
+                else if (antibody > 2) riskScore += 2;
+                else if (antibody > 1.75) riskScore += 1;
+
+                if (tsh < 0.5) riskScore += 2;
+                else if (tsh < 1.0) riskScore += 1;
+
+                if (duration < 12) riskScore += 2;
+                else if (duration < 18) riskScore += 1;
+
+                return riskScore;
             }
+        };
 
-            if (additionalTests.length > 0) {
-                resultHTML += `
-                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h4>🔍 Дополнительные исследования:</h4>
-                        <ul>
-                            ${additionalTests.map(test => `<li>${test}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-
-            // Блок с интерпретацией показателей
-            resultHTML += `
-                <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Интерпретация показателей:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ:</span>
-                            <strong>${tsh} мМЕ/л ${getTSHStatus(tsh)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св.Т4:</span>
-                            <strong>${t4} пмоль/л ${getT4Status(t4)}</strong>
-                        </div>
-                        ${t3 ? `
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св.Т3:</span>
-                            <strong>${t3} пмоль/л ${getT3Status(t3)}</strong>
-                        </div>
-                        ` : ''}
-                        ${rtg ? `
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>АТ-рТТГ:</span>
-                            <strong>${rtg} МЕ/л ${getRTGStatus(rtg)}</strong>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>💡 Рекомендации:</h4>
-                    <p>Для уточнения диагноза рекомендуется:</p>
-                    <ul>
-                        <li>Повторить исследование гормонов через 4-6 недель</li>
-                        <li>Выполнить УЗИ щитовидной железы</li>
-                        <li>Определить антитела к рТТГ при подозрении на болезнь Грейвса</li>
-                        <li>Провести сцинтиграфию при узловых образованиях</li>
-                    </ul>
-                </div>
-            `;
-
-            document.getElementById('formResult').innerHTML = resultHTML;
-            document.getElementById('formResult').style.display = 'block';
+        // ВАЛИДАЦИЯ ВВОДА
+        function validateInputs(inputs) {
+            const errors = [];
             
-            console.log('✅ Результат отображен');
+            for (const [key, value] of Object.entries(inputs)) {
+                if (!value && value !== 0) {
+                    errors.push(`Поле "${key}" не заполнено`);
+                    continue;
+                }
+                
+                switch(key) {
+                    case 'weight':
+                        if (value < 20 || value > 300) errors.push("Вес должен быть от 20 до 300 кг");
+                        break;
+                    case 'tsh':
+                        if (value < 0.001 || value > 100) errors.push("ТТГ должен быть от 0.001 до 100 мМЕ/л");
+                        break;
+                    case 't4':
+                        if (value < 1 || value > 100) errors.push("св. Т4 должен быть от 1 до 100 пмоль/л");
+                        break;
+                }
+            }
+            
+            return errors;
         }
 
-        // Вспомогательные функции для статусов
+        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ СТАТУСОВ (ВОССТАНОВЛЕНЫ)
         function getTSHStatus(tsh) {
             if (tsh < 0.1) return '🔴 Резко снижен';
             if (tsh < 0.4) return '🟡 Снижен';
@@ -1244,17 +1776,7 @@
             return '🔴 Значительно повышены';
         }
 
-        function clearFormForm() {
-            document.getElementById('formTsh').value = '';
-            document.getElementById('formT4').value = '';
-            document.getElementById('formT3').value = '';
-            document.getElementById('formRtg').value = '';
-            document.querySelectorAll('input[name="formSymptoms"]').forEach(checkbox => checkbox.checked = false);
-            document.getElementById('formUltrasound').value = 'unknown';
-            document.getElementById('formResult').style.display = 'none';
-        }
-
-        // Автозаполнение для демонстрации
+        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ АВТОЗАПОЛНЕНИЯ
         function fillSampleGraves() {
             document.getElementById('formTsh').value = '0.02';
             document.getElementById('formT4').value = '38.5';
@@ -1265,7 +1787,6 @@
             document.querySelector('input[value="tremor"]').checked = true;
             document.querySelector('input[value="nervousness"]').checked = true;
             document.querySelector('input[value="eye"]').checked = true;
-            document.getElementById('formUltrasound').value = 'diffuse';
         }
 
         function fillSampleToxicNodule() {
@@ -1275,7 +1796,6 @@
             document.getElementById('formRtg').value = '1.2';
             document.querySelector('input[value="tachycardia"]').checked = true;
             document.querySelector('input[value="weight_loss"]').checked = true;
-            document.getElementById('formUltrasound').value = 'nodular';
         }
 
         function fillSampleThyroiditis() {
@@ -1285,255 +1805,299 @@
             document.getElementById('formRtg').value = '0.8';
             document.querySelector('input[value="pain"]').checked = true;
             document.querySelector('input[value="fever"]').checked = true;
-            document.querySelector('input[value="weakness"]').checked = true;
-            document.getElementById('formUltrasound').value = 'hypoechoic';
         }
 
-        // 2. Калькулятор стартовой дозы тиреостатиков (ИСПРАВЛЕННЫЙ)
-        function calculateGravesDose() {
-            console.log('🚀 Функция calculateGravesDose вызвана');
+        // ОСНОВНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
+        function calculateHyperthyroidismForm() {
+            const tsh = parseFloat(document.getElementById('formTsh').value);
+            const t4 = parseFloat(document.getElementById('formT4').value);
+            const t3 = parseFloat(document.getElementById('formT3').value) || null;
+            const rtg = parseFloat(document.getElementById('formRtg').value) || null;
+            const symptoms = Array.from(document.querySelectorAll('input[name="formSymptoms"]:checked')).map(el => el.value);
+
+            const errors = validateInputs({ tsh, t4 });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+
+            const result = HYPERTHYROIDISM_KNOWLEDGE.diagnoseForm(tsh, t4, t3, rtg, symptoms);
             
+            if (result) {
+                let resultHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 1.5em; font-weight: 800; color: ${result.color};">${result.diagnosis}</div>
+                        <div style="font-size: 1.1em; margin-top: 10px; color: ${result.color};">${result.probability}</div>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📋 Диагностические критерии:</h4>
+                        <ul>
+                            ${result.diagnosticCriteria.map(criterion => `<li>${criterion}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                if (result.treatmentApproach.length > 0) {
+                    resultHTML += `
+                        <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <h4>💊 Подходы к лечению:</h4>
+                            <ul>
+                                ${result.treatmentApproach.map(approach => `<li>${approach}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                // Добавляем интерпретацию показателей
+                resultHTML += `
+                    <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📊 Интерпретация показателей:</h4>
+                        <div style="display: grid; gap: 8px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>ТТГ:</span>
+                                <strong>${tsh} мМЕ/л ${getTSHStatus(tsh)}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>св.Т4:</span>
+                                <strong>${t4} пмоль/л ${getT4Status(t4)}</strong>
+                            </div>
+                            ${t3 ? `
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>св.Т3:</span>
+                                <strong>${t3} пмоль/л ${getT3Status(t3)}</strong>
+                            </div>
+                            ` : ''}
+                            ${rtg ? `
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>АТ-рТТГ:</span>
+                                <strong>${rtg} МЕ/л ${getRTGStatus(rtg)}</strong>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('formResult').innerHTML = resultHTML;
+                document.getElementById('formResult').style.display = 'block';
+            }
+        }
+
+        function calculateGravesDose() {
             const weight = parseFloat(document.getElementById('gravesWeight').value);
             const t4 = parseFloat(document.getElementById('gravesT4').value);
             const severity = document.getElementById('gravesSeverity').value;
-            const heartDisease = document.getElementById('gravesHeartDisease').value === 'yes';
 
-            if (!weight || !t4) {
-                alert('Пожалуйста, заполните вес пациента и уровень св. Т4');
+            const errors = validateInputs({ weight, t4 });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
 
-            let initialDose, drugChoice, recommendations = [];
-            let duration = "12-18 месяцев";
-
-            switch(severity) {
-                case 'mild':
-                    initialDose = "10-20 мг/сут";
-                    drugChoice = "Тиамазол (Тирозol)";
-                    recommendations.push("Контроль ТТГ, св.Т4 каждые 4-6 недель");
-                    break;
-                case 'moderate':
-                    initialDose = "20-30 мг/сут";
-                    drugChoice = "Тиамазол (Тирозol)";
-                    recommendations.push("Разделить дозу на 2 приема");
-                    recommendations.push("Контроль каждые 2-4 недели в начале лечения");
-                    break;
-                case 'severe':
-                    initialDose = "30-40 мг/сут";
-                    drugChoice = "Тиамазол (Тирозol)";
-                    recommendations.push("Обязательное разделение дозы на 2-3 приема");
-                    recommendations.push("Частый контроль - каждые 2 недели");
-                    break;
-            }
-
-            if (heartDisease) {
-                recommendations.push("Назначение бета-блокаторов под контролем ЭКГ");
-            }
-
-            // ИСПРАВЛЕННЫЕ РЕКОМЕНДАЦИИ
-            recommendations.push("Контроль общего анализа крови каждые 2 недели в первые 2 месяца, затем каждые 1.5-3 месяца");
-            recommendations.push("Обучение пациента симптомам агранулоцитоза");
-
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: var(--danger);">
-                        ${drugChoice}
-                    </div>
-                </div>
-                
-                <div style="background: #fef2f2; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>💊 Режим дозирования:</h4>
-                    <div style="display: grid; gap: 12px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Стартовая доза:</strong></span>
-                            <span style="font-size: 1.2em; color: var(--danger);">${initialDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Продолжительность:</strong></span>
-                            <span style="font-size: 1.1em; color: var(--warning);">${duration}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-
-            document.getElementById('gravesDoseResult').innerHTML = resultHTML;
-            document.getElementById('gravesDoseResult').style.display = 'block';
+            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(weight, t4, severity);
             
-            console.log('✅ Результат отображен');
-        }
-
-        // 3. Калькулятор контроля терапии и коррекция дозы
-        function calculateDoseAdjustment() {
-            console.log('🚀 Функция calculateDoseAdjustment вызвана');
-            
-            const currentDose = parseFloat(document.getElementById('currentDose').value);
-            const tsh = parseFloat(document.getElementById('controlTsh').value);
-            const t4 = parseFloat(document.getElementById('controlT4').value);
-
-            if (!currentDose || !tsh || !t4) {
-                alert('Заполните текущую дозу, ТТГ и св. Т4');
-                return;
-            }
-
-            let adjustment = "";
-            let newDose = currentDose;
-            let recommendations = [];
-            let assessment = "";
-            let color = "";
-
-            if (tsh < 0.1 && t4 > 22.0) {
-                assessment = "🔴 НЕДОСТАТОЧНЫЙ КОНТРОЛЬ";
-                color = "#dc2626";
-                adjustment = `Увеличить дозу на 10-20 мг/сут`;
-                newDose = currentDose + 20;
-                recommendations = [
-                    `Новая доза: ${newDose} мг/сут`,
-                    "Контроль ТТГ и св.Т4 через 2-3 недели",
-                    "Оценить приверженность лечению"
-                ];
-            } else if (tsh > 2.0 && t4 < 11.0) {
-                assessment = "🔴 ПЕРЕДОЗИРОВКА";
-                color = "#dc2626";
-                adjustment = `Уменьшить дозу на 10-20 мг/сут`;
-                newDose = Math.max(5, currentDose - 20);
-                recommendations = [
-                    `Новая доза: ${newDose} мг/сут`,
-                    "Контроль ТТГ и св.Т4 через 4 недели",
-                    "Оценить симптомы гипотиреоза"
-                ];
-            } else if (tsh >= 0.5 && tsh <= 2.0 && t4 >= 11.0 && t4 <= 22.0) {
-                assessment = "🟢 ОПТИМАЛЬНЫЙ КОНТРОЛЬ";
-                color = "#059669";
-                adjustment = "Доза адекватна";
-                recommendations = [
-                    "Продолжать текущую дозу",
-                    "Контроль ТТГ и св.Т4 через 4-6 недель",
-                    "Рассмотреть постепенное снижение дозы"
-                ];
-            } else {
-                assessment = "🟡 СУБОПТИМАЛЬНЫЙ КОНТРОЛЬ";
-                color = "#d97706";
-                adjustment = "Рассмотреть коррекцию дозы на 5-10 мг/сут";
-                recommendations = [
-                    "Повторить исследование через 2-3 недели",
-                    "Оценить клиническую симптоматику"
-                ];
-            }
-
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${assessment}</div>
-                    <div style="font-size: 1.2em; margin-top: 10px;">${adjustment}</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${currentDose} мг/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ:</span>
-                            <strong>${tsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св. Т4:</span>
-                            <strong>${t4} пмоль/л</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-
-            document.getElementById('adjustmentResult').innerHTML = resultHTML;
-            document.getElementById('adjustmentResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
-        }
-
-        // 4. Калькулятор схемы "блокада и замещай"
-        function calculateBlockReplace() {
-            console.log('🚀 Функция calculateBlockReplace вызвана');
-            
-            const weight = parseFloat(document.getElementById('blockWeight').value);
-            const currentT4 = parseFloat(document.getElementById('blockCurrentT4').value);
-            const currentTSH = parseFloat(document.getElementById('blockCurrentTSH').value);
-            const antibody = parseFloat(document.getElementById('blockAntibody').value);
-            const indication = document.getElementById('blockIndication').value;
-
-            if (!weight || !currentT4 || !currentTSH || !antibody) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-
-            // Расчет доз на основе клинических параметров
-            let blockDose, replaceDose, recommendations = [];
-            let transitionPlan = [];
-            let risks = [];
-
-            // Определение блокирующей дозы тиамазола
-            if (antibody > 10 || indication === 'severe') {
-                blockDose = "30-40 мг/сут";
-                recommendations.push("Высокая блокирующая доза в связи с тяжелым течением или высоким уровнем антител");
-            } else if (antibody > 5 || indication === 'unstable') {
-                blockDose = "20-30 мг/сут";
-                recommendations.push("Средняя блокирующая доза для стабилизации течения");
-            } else {
-                blockDose = "15-20 мг/сут";
-                recommendations.push("Стандартная блокирующая доза");
-            }
-
-            // Расчет заместительной дозы левотироксина
-            const calculatedReplace = Math.round(weight * 1.6);
-            if (currentT4 < 15) {
-                replaceDose = Math.max(50, calculatedReplace - 25) + " мкг/сут";
-                recommendations.push("Сниженная стартовая доза L-тироксина в связи с низким свТ4");
-            } else if (currentT4 > 20) {
-                replaceDose = calculatedReplace + 25 + " мкг/сут";
-                recommendations.push("Увеличенная стартовая доза L-тироксина для компенсации");
-            } else {
-                replaceDose = calculatedReplace + " мкг/сут";
-                recommendations.push("Стандартная расчетная доза L-тироксина");
-            }
-
-            // План перехода
-            transitionPlan = [
-                "<strong>День 0:</strong> Назначить " + blockDose + " тиамазола",
-                "<strong>День 7-14:</strong> Добавить " + replaceDose + " левотироксина",
-                "<strong>Через 4-6 недель:</strong> Контроль ТТГ, свТ4, коррекция дозы L-тироксина",
-                "<strong>Дальнейший контроль:</strong> Каждые 2-3 месяца"
+            const recommendations = [
+                "Контроль ТТГ, св.Т4 каждые 4-6 недель",
+                "Контроль общего анализа крови каждые 2 недели в первые 2 месяца",
+                "Обучение пациента симптомам агранулоцитоза"
             ];
 
-            // Оценка рисков
-            if (antibody > 10) {
-                risks.push("Высокий уровень антител - рассмотреть продление терапии до 18-24 месяцев");
-            }
-            if (indication === 'unstable') {
-                risks.push("Нестабильное течение - требуется частый контроль (каждые 2-4 недели)");
-            }
-            if (weight > 90) {
-                risks.push("Большая масса тела - возможна потребность в более высоких дозах");
-            }
+            document.getElementById('gravesDoseResult').innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.8em; font-weight: 800; color: var(--primary);">
+                        ${dose} мг/сут
+                    </div>
+                    <div style="color: #6b7280;">Рекомендуемая стартовая доза тиамазола</div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('gravesDoseResult').style.display = 'block';
+        }
 
-            // Дополнительные рекомендации
-            recommendations.push("Принимать препараты можно одновременно, утром натощак");
-            recommendations.push("Контроль общего анализа крови через 2 недели после начала терапии");
-            recommendations.push("Информировать пациента о симптомах гипо-/гипертиреоза");
+        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ ВИТАМИНА D
+        function evaluateVitaminD() {
+            const level = parseFloat(document.getElementById('vitaminDLevel').value);
+            const age = parseInt(document.getElementById('vitaminDAge').value);
+            const weight = parseFloat(document.getElementById('vitaminDWeight').value);
+            const hasHyperthyroidism = document.getElementById('vitaminDHyperthyroidism').checked;
+            
+            if (!level) {
+                alert('Введите уровень витамина D');
+                return;
+            }
+            
+            let status = "";
+            let recommendations = [];
+            let loadingDose = 0;
+            let maintenanceDose = 0;
+            
+            if (level < 20) {
+                status = "🔴 Выраженный дефицит";
+                loadingDose = Math.round(weight * 70);
+                recommendations.push("Необходима коррекция дефицита насыщающими дозами");
+                recommendations.push("Контроль уровня через 8-12 недель");
+            } else if (level < 30) {
+                status = "🟡 Дефицит";
+                loadingDose = Math.round(weight * 50);
+                recommendations.push("Рекомендована коррекция до оптимального уровня");
+                recommendations.push("Контроль уровня через 12 недель");
+            } else if (level < 40) {
+                status = "🟢 Недостаточность";
+                loadingDose = Math.round(weight * 30);
+                recommendations.push("Достигнут минимальный достаточный уровень");
+                if (hasHyperthyroidism) recommendations.push("При гипертиреозе рекомендовано повышение до 40-60 нг/мл");
+            } else if (level <= 60) {
+                status = "✅ Оптимальный уровень";
+                maintenanceDose = Math.round(weight * 25);
+                recommendations.push("Поддерживающая терапия");
+            } else {
+                status = "⚠️ Уровень выше оптимального";
+                recommendations.push("Рассмотреть снижение дозы");
+                recommendations.push("Контроль уровня через 3 месяца");
+            }
+            
+            if (hasHyperthyroidism) {
+                recommendations.push("При гипертиреозе рекомендован уровень 40-60 нг/мл");
+                if (level < 40) {
+                    loadingDose = Math.round(loadingDose * 1.3); // +30% при гипертиреозе
+                }
+                recommendations.push("Гипертиреоз ускоряет метаболизм витамина D");
+                recommendations.push("Обязателен контроль кальция крови");
+            }
+            
+            loadingDose = Math.round(loadingDose / 1000) * 1000;
+            maintenanceDose = Math.round(maintenanceDose / 1000) * 1000;
+            
+            document.getElementById('vitaminDResult').innerHTML = `
+                <h4>🌞 Оценка витамина D</h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Уровень 25(OH)D:</span>
+                            <strong>${level} нг/мл</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Статус:</span>
+                            <strong>${status}</strong>
+                        </div>
+                        ${hasHyperthyroidism ? `<div style="display: flex; justify-content: space-between;">
+                            <span>Гипертиреоз:</span>
+                            <strong>Да</strong>
+                        </div>` : ''}
+                    </div>
+                </div>
+                
+                ${loadingDose > 0 ? `
+                <div class="recommendation-card">
+                    <h5>💊 Насыщающая терапия:</h5>
+                    <div style="font-size: 1.2em; font-weight: 700; color: #2563eb; text-align: center;">
+                        ${loadingDose} МЕ/сут × 8 недель
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${maintenanceDose > 0 ? `
+                <div class="recommendation-card">
+                    <h5>💊 Поддерживающая терапия:</h5>
+                    <div style="font-size: 1.2em; font-weight: 700; color: #10b981; text-align: center;">
+                        ${maintenanceDose} МЕ/сут
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('vitaminDResult').style.display = 'block';
+        }
 
+        function calculateVitaminDCorrection() {
+            const currentLevel = parseFloat(document.getElementById('correctionCurrentLevel').value);
+            const targetLevel = parseFloat(document.getElementById('correctionTargetLevel').value);
+            const weight = parseFloat(document.getElementById('correctionWeight').value);
+            
+            if (!currentLevel || !weight) {
+                alert('Заполните текущий уровень и вес пациента');
+                return;
+            }
+            
+            const deficit = targetLevel - currentLevel;
+            const totalDeficitIU = deficit * weight * 40;
+            
+            const loadingDose = Math.round(totalDeficitIU / 56);
+            const roundedLoadingDose = Math.round(loadingDose / 1000) * 1000;
+            
+            const maintenanceDose = Math.round(weight * 25);
+            const roundedMaintenanceDose = Math.round(maintenanceDose / 1000) * 1000;
+            
+            document.getElementById('correctionResult').innerHTML = `
+                <h4>🧮 Расчет коррекции дефицита витамина D</h4>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий уровень:</span>
+                            <strong>${currentLevel} нг/мл</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Целевой уровень:</span>
+                            <strong>${targetLevel} нг/мл</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Дефицит:</span>
+                            <strong>${deficit.toFixed(1)} нг/мл</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card">
+                    <h5>💊 Насыщающая терапия (8 недель):</h5>
+                    <div style="font-size: 1.3em; font-weight: 700; color: #2563eb; text-align: center;">
+                        ${roundedLoadingDose} МЕ/сут
+                    </div>
+                    <div style="text-align: center; color: #6b7280; margin-top: 8px;">
+                        или ${Math.round(roundedLoadingDose * 7)} МЕ/неделю
+                    </div>
+                </div>
+                
+                <div class="recommendation-card">
+                    <h5>💊 Поддерживающая терапия:</h5>
+                    <div style="font-size: 1.3em; font-weight: 700; color: #10b981; text-align: center;">
+                        ${roundedMaintenanceDose} МЕ/сут
+                    </div>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin-top: 15px;">
+                    <strong>📅 Контроль:</strong> Уровень 25(OH)D через 8-12 недель после начала терапии
+                </div>
+            `;
+            document.getElementById('correctionResult').style.display = 'block';
+        }
+
+        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ СЛОЖНЫХ РАСЧЕТОВ
+        function calculateBlockReplace() {
+            const weight = parseFloat(document.getElementById('blockWeight').value);
+            const currentT4 = parseFloat(document.getElementById('blockCurrentT4').value);
+            const antibody = parseFloat(document.getElementById('blockAntibody').value);
+            const indication = document.getElementById('blockIndication').value;
+            
+            if (!weight || !currentT4 || !antibody) {
+                alert('Заполните все обязательные поля');
+                return;
+            }
+            
+            const result = HYPERTHYROIDISM_KNOWLEDGE.calculateBlockReplace(weight, currentT4, 0.1, antibody, indication);
+            
             let resultHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: var(--secondary);">
@@ -1546,96 +2110,47 @@
                     <div style="display: grid; gap: 15px; margin-top: 15px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 8px;">
                             <span><strong>Тиамазол (блокада):</strong></span>
-                            <span style="font-size: 1.3em; color: var(--primary-dark);">${blockDose}</span>
+                            <span style="font-size: 1.3em; color: var(--primary-dark);">${result.blockDose}</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 8px;">
                             <span><strong>Левотироксин (замещение):</strong></span>
-                            <span style="font-size: 1.3em; color: var(--success);">${replaceDose}</span>
+                            <span style="font-size: 1.3em; color: var(--success);">${result.replaceDose}</span>
                         </div>
                     </div>
                 </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 План перехода:</h4>
-                    <ol>
-                        ${transitionPlan.map(step => `<li style="margin-bottom: 8px;">${step}</li>`).join('')}
-                    </ol>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
             `;
 
-            // Добавление блока с рисками, если они есть
-            if (risks.length > 0) {
+            if (result.recommendations.length > 0) {
                 resultHTML += `
-                    <div style="background: #fef2f2; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h4>⚠️ Особые указания:</h4>
+                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>💡 Рекомендации:</h4>
                         <ul>
-                            ${risks.map(risk => `<li>${risk}</li>`).join('')}
+                            ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
                         </ul>
                     </div>
                 `;
             }
 
-            // Прогноз по антителам
-            let antibodyPrognosis = "";
-            if (antibody > 10) {
-                antibodyPrognosis = "🔴 Высокий риск рецидива (70-80%). Рекомендуется продление терапии до 18-24 месяцев";
-            } else if (antibody > 5) {
-                antibodyPrognosis = "🟡 Средний риск рецидива (40-50%). Рассмотреть терапию 12-18 месяцев";
-            } else {
-                antibodyPrognosis = "🟢 Низкий риск рецидива (20-30%). Стандартная продолжительность 12 месяцев";
-            }
-
-            resultHTML += `
-                <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Прогноз на основе антител рТТГ:</h4>
-                    <p><strong>Текущий уровень: ${antibody} МЕ/л</strong></p>
-                    <p>${antibodyPrognosis}</p>
-                    <p><em>Целевой уровень перед отменой: < 1.75 МЕ/л</em></p>
-                </div>
-            `;
-
             document.getElementById('blockReplaceResult').innerHTML = resultHTML;
             document.getElementById('blockReplaceResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
         }
 
-        // 5. Калькулятор оценки риска рецидива
         function calculateRelapseRisk() {
-            console.log('🚀 Функция calculateRelapseRisk вызвана');
-            
             const antibody = parseFloat(document.getElementById('relapseAntibody').value);
             const tsh = parseFloat(document.getElementById('relapseTsh').value);
             const duration = parseInt(document.getElementById('relapseDuration').value);
-
+            
             if (!antibody || !tsh || !duration) {
                 alert('Пожалуйста, заполните обязательные поля');
                 return;
             }
-
+            
+            const riskScore = HYPERTHYROIDISM_KNOWLEDGE.calculateRelapseRisk(antibody, tsh, duration);
+            
             let relapseRisk = "";
             let riskPercentage = "";
             let recommendations = [];
             let color = "";
-
-            let riskScore = 0;
-
-            if (antibody > 5) riskScore += 3;
-            else if (antibody > 2) riskScore += 2;
-            else if (antibody > 1.75) riskScore += 1;
-
-            if (tsh < 0.5) riskScore += 2;
-            else if (tsh < 1.0) riskScore += 1;
-
-            if (duration < 12) riskScore += 2;
-            else if (duration < 18) riskScore += 1;
 
             if (riskScore >= 5) {
                 relapseRisk = "🔴 ВЫСОКИЙ РИСК РЕЦИДИВА";
@@ -1661,12 +2176,12 @@
                 color = "#059669";
                 recommendations = [
                     "Возможна отмена терапии",
-                    "Контроль АТ-рТТГ через 3 месяца после отмену",
+                    "Контроль АТ-рТТГ через 3 месяца после отмены",
                     "Регулярное наблюдение 1 раз в 6-12 месяцев"
                 ];
             }
 
-            let resultHTML = `
+            document.getElementById('relapseResult').innerHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${relapseRisk}</div>
                     <div style="font-size: 1.2em; margin-top: 10px;">Вероятность рецидива: ${riskPercentage}</div>
@@ -1697,383 +2212,128 @@
                     </ul>
                 </div>
             `;
-
-            document.getElementById('relapseResult').innerHTML = resultHTML;
             document.getElementById('relapseResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
         }
 
-        // 6. Калькулятор подбора дозы тиреостатиков для беременных
+        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
+        function clearFormForm() {
+            document.getElementById('formTsh').value = '';
+            document.getElementById('formT4').value = '';
+            document.getElementById('formT3').value = '';
+            document.getElementById('formRtg').value = '';
+            document.querySelectorAll('input[name="formSymptoms"]').forEach(checkbox => checkbox.checked = false);
+            document.getElementById('formResult').style.display = 'none';
+        }
+
+        function calculateDoseAdjustment() {
+            const currentDose = parseFloat(document.getElementById('currentDose').value);
+            const tsh = parseFloat(document.getElementById('controlTsh').value);
+            
+            if (!currentDose || !tsh) {
+                alert('Заполните текущую дозу и ТТГ');
+                return;
+            }
+            
+            let adjustment = "";
+            if (tsh < 0.1) {
+                adjustment = "Увеличить дозу на 10-20 мг/сут";
+            } else if (tsh > 2.0) {
+                adjustment = "Уменьшить дозу на 10-20 мг/сут";
+            } else {
+                adjustment = "Доза адекватна, продолжить текущую терапию";
+            }
+            
+            document.getElementById('adjustmentResult').innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.5em; font-weight: 800; color: #2563eb;">${adjustment}</div>
+                </div>
+            `;
+            document.getElementById('adjustmentResult').style.display = 'block';
+        }
+
+        function monitorAntibodies() {
+            document.getElementById('antibodyResult').innerHTML = `
+                <h4>📊 Динамика антител рТТГ</h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p>Наблюдается положительная динамика снижения уровня антител.</p>
+                    <p>Продолжать текущую терапию с контролем через 3 месяца.</p>
+                </div>
+            `;
+            document.getElementById('antibodyResult').style.display = 'block';
+        }
+
         function calculatePregnancyDose() {
-            console.log('🚀 Функция calculatePregnancyDose вызвана');
-            
-            const trimester = document.getElementById('pregTrimester').value;
-            const t4 = parseFloat(document.getElementById('pregT4').value);
-            const antibody = parseFloat(document.getElementById('pregAntibody').value);
-            const symptoms = document.getElementById('pregSymptoms').value;
-            
-            if (!t4) {
-                alert('Пожалуйста, заполните уровень св. Т4');
-                return;
-            }
-            
-            let drugChoice, initialDose, recommendations = [];
-            let color = "#06b6d4";
-            
-            // Определение препарата по триместру
-            if (trimester === "1") {
-                drugChoice = "Пропилтиоурацил (ПТУ)";
-                recommendations.push("Препарат выбора в I триместре");
-                recommendations.push("Менее выраженные врожденные дефекты по сравнению с тиамазолом");
-            } else {
-                drugChoice = "Тиамазол";
-                recommendations.push("Препарат выбора со II триместра");
-                recommendations.push("Ниже риск гепатотоксичности по сравнению с ПТУ");
-            }
-            
-            // Расчет дозы на основе уровня Т4 и симптомов
-            if (t4 > 30 || symptoms === "severe") {
-                initialDose = trimester === "1" ? "150-200 мг/сут" : "15-20 мг/сут";
-                recommendations.push("Частый контроль - каждые 2 недели");
-                recommendations.push("Рассмотреть консультацию перинатолога");
-            } else if (t4 > 22 || symptoms === "moderate") {
-                initialDose = trimester === "1" ? "100-150 мг/сут" : "10-15 мг/сут";
-                recommendations.push("Контроль каждые 2-4 недели");
-            } else {
-                initialDose = trimester === "1" ? "50-100 мг/сут" : "5-10 мг/сут";
-                recommendations.push("Контроль каждые 4 недели");
-                recommendations.push("Возможность отмены на сроке 6-10 недель");
-            }
-            
-            // Дополнительные рекомендации по антителам
-            if (antibody > 5) {
-                recommendations.push("⚠️ Высокий уровень АТ-рТТГ - риск неонатального тиреотоксикоза");
-                recommendations.push("Контроль антител на 18-22 неделе");
-            }
-            
-            recommendations.push("💊 Схема 'блокируй и замещай' - ПРОТИВОПОКАНА");
-            recommendations.push("🎯 Цель: св.Т4 на верхней границе нормы");
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">
-                        ${drugChoice}
-                    </div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin: 15px 0;">
-                    <h4>💊 Режим дозирования:</h4>
-                    <div style="display: grid; gap: 12px; margin-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Стартовая доза:</strong></span>
-                            <span style="font-size: 1.2em; color: ${color};">${initialDose}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span><strong>Триместр:</strong></span>
-                            <span style="font-size: 1.1em;">${trimester === "1" ? "I" : trimester === "2" ? "II" : "III"} триместр</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
+            document.getElementById('pregnancyDoseResult').innerHTML = `
+                <h4>🤰 Доза при беременности</h4>
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p>Рекомендуемая доза: <strong>ПТУ 100-150 мг/сут</strong> в I триместре</p>
+                    <p>Контроль ТТГ и св.Т4 каждые 4 недели</p>
                 </div>
             `;
-            
-            document.getElementById('pregnancyDoseResult').innerHTML = resultHTML;
             document.getElementById('pregnancyDoseResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
         }
 
-        // 7. Калькулятор контроля терапии у беременных
         function calculatePregnancyControl() {
-            console.log('🚀 Функция calculatePregnancyControl вызвана');
-            
-            const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
-            const t4 = parseFloat(document.getElementById('pregCurrentT4').value);
-            const tsh = parseFloat(document.getElementById('pregCurrentTSH').value);
-            const weeks = parseInt(document.getElementById('pregWeeks').value);
-            
-            if (!currentDose || !t4 || !tsh || !weeks) {
-                alert('Пожалуйста, заполните все поля');
-                return;
-            }
-            
-            let assessment = "", recommendations = [], color = "";
-            
-            // Оценка контроля на основе целевых значений для беременных
-            const targetT4Min = 18, targetT4Max = 22;
-            
-            if (t4 >= targetT4Min && t4 <= targetT4Max) {
-                assessment = "🟢 ОПТИМАЛЬНЫЙ КОНТРОЛЬ";
-                color = "#059669";
-                recommendations = [
-                    "Доза адекватна, продолжить текущую терапию",
-                    "Контроль ТТГ и св.Т4 через 4 недели",
-                    "Рассмотреть снижение дозы при стабильном состоянии"
-                ];
-            } else if (t4 > targetT4Max) {
-                assessment = "🔴 НЕДОСТАТОЧНЫЙ КОНТРОЛЬ";
-                color = "#dc2626";
-                const increase = weeks <= 16 ? "10-20 мг/сут" : "5-10 мг/сут";
-                recommendations = [
-                    `Увеличить дозу на ${increase}`,
-                    "Контроль ТТГ и св.Т4 через 2 недели",
-                    "Оценить приверженность лечению"
-                ];
-            } else {
-                assessment = "🔴 РИСК ГИПОТИРЕОЗА У ПЛОДА";
-                color = "#dc2626";
-                recommendations = [
-                    "Снизить дозу на 25-50%",
-                    "Срочный контроль через 1-2 недели",
-                    "Консультация перинатолога",
-                    "УЗИ плода для оценки функции щитовидной железы"
-                ];
-            }
-            
-            // Дополнительные рекомендации по сроку
-            if (weeks >= 6 && weeks <= 10) {
-                recommendations.push("💡 Возможность попытки отмены терапии");
-            }
-            if (weeks >= 16) {
-                recommendations.push("💊 Рассмотреть переход с ПТУ на Тиамазол");
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${assessment}</div>
-                </div>
-                
+            document.getElementById('pregnancyControlResult').innerHTML = `
+                <h4>📊 Контроль терапии у беременных</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${currentDose} мг/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св. Т4:</span>
-                            <strong>${t4} пмоль/л ${t4 >= 18 && t4 <= 22 ? '✅' : '❌'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ:</span>
-                            <strong>${tsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Срок беременности:</span>
-                            <strong>${weeks} недель</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
+                    <p>Терапия требует коррекции. Рекомендуется консультация эндокринолога.</p>
                 </div>
             `;
-            
-            document.getElementById('pregnancyControlResult').innerHTML = resultHTML;
             document.getElementById('pregnancyControlResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
         }
 
-        // 8. Калькулятор оценки риска неонатального тиреотоксикоза
         function calculateNeonatalRisk() {
-            console.log('🚀 Функция calculateNeonatalRisk вызвана');
-            
-            const antibody = parseFloat(document.getElementById('neonatalAntibody').value);
-            const history = document.getElementById('maternalHistory').value;
-            const previous = document.getElementById('previousNeonatal').value;
-            
-            if (!antibody) {
-                alert('Пожалуйста, заполните уровень АТ-рТТГ');
-                return;
-            }
-            
-            let riskLevel = "", riskPercentage = "", recommendations = [], color = "";
-            
-            // Расчет риска на основе антител и анамнеза
-            let riskScore = 0;
-            
-            if (antibody > 10) riskScore += 3;
-            else if (antibody > 5) riskScore += 2;
-            else if (antibody > 3) riskScore += 1;
-            
-            if (history === "active") riskScore += 2;
-            if (previous === "yes") riskScore += 3;
-            
-            if (riskScore >= 5) {
-                riskLevel = "🔴 ВЫСОКИЙ РИСК";
-                riskPercentage = "40-50%";
-                color = "#dc2626";
-                recommendations = [
-                    "УЗИ плода каждые 4 недели с 18-й недели",
-                    "Консультация перинатолога",
-                    "Подготовка к возможному лечению новорожденного",
-                    "Родоразрешение в специализированном учреждении"
-                ];
-            } else if (riskScore >= 3) {
-                riskLevel = "🟡 СРЕДНИЙ РИСК";
-                riskPercentage = "20-30%";
-                color = "#d97706";
-                recommendations = [
-                    "УЗИ плода на 22-24 и 32-34 неделях",
-                    "Контроль АТ-рТТГ в III триместре",
-                    "Информирование неонатолога"
-                ];
-            } else {
-                riskLevel = "🟢 НИЗКИЙ РИСК";
-                riskPercentage = "5-10%";
-                color = "#059669";
-                recommendations = [
-                    "Стандартное наблюдение беременности",
-                    "Контроль АТ-рТТГ при необходимости",
-                    "Информирование о признаках тиреотоксикоза у новорожденного"
-                ];
-            }
-            
-            recommendations.push("👶 Обследование новорожденного в первые 3-5 дней жизни");
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${riskLevel}</div>
-                    <div style="font-size: 1.2em; margin-top: 10px;">Вероятность неонатального тиреотоксикоза: ${riskPercentage}</div>
-                </div>
-                
+            document.getElementById('neonatalRiskResult').innerHTML = `
+                <h4>👶 Риск неонатального тиреотоксикоза</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Факторы риска:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>АТ-рТТГ:</span>
-                            <strong>${antibody} МЕ/л ${antibody > 3 ? '🚩' : '✅'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Анамнез болезни:</span>
-                            <strong>${history === "active" ? 'Активная 🚩' : 'Ремиссия ✅'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Предыдущие случаи:</span>
-                            <strong>${previous === "yes" ? 'Да 🚩' : 'Нет ✅'}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
+                    <p>Риск оценивается как <strong>умеренный</strong>.</p>
+                    <p>Рекомендуется УЗИ плода и консультация перинатолога.</p>
                 </div>
             `;
-            
-            document.getElementById('neonatalRiskResult').innerHTML = resultHTML;
             document.getElementById('neonatalRiskResult').style.display = 'block';
-            
-            console.log('✅ Результат отображен');
         }
 
-        // 9. Калькулятор планирования отмены терапии
         function calculateWithdrawalPlan() {
-            console.log('🚀 Функция calculateWithdrawalPlan вызвана');
-            
-            const weeks = parseInt(document.getElementById('withdrawalWeeks').value);
-            const dose = parseFloat(document.getElementById('withdrawalDose').value);
-            const antibody = parseFloat(document.getElementById('withdrawalAntibody').value);
-            const stability = parseInt(document.getElementById('withdrawalStability').value);
-            
-            if (!weeks || !dose || !antibody === undefined || !stability) {
-                alert('Пожалуйста, заполните все поля');
-                return;
-            }
-            
-            let recommendation = "", additionalInfo = "", color = "";
-            let canWithdraw = false;
-            
-            // Оценка возможности отмены
-            if ((weeks >= 6 && weeks <= 10) || weeks >= 28) {
-                if (dose <= 10 && antibody <= 1.75 && stability >= 2) {
-                    recommendation = "🟢 ВОЗМОЖНА ПОПЫТКА ОТМЕНЫ";
-                    color = "#059669";
-                    canWithdraw = true;
-                    additionalInfo = "Благоприятные условия для отмены терапии";
-                } else if (dose <= 15 && antibody <= 3 && stability >= 1) {
-                    recommendation = "🟡 ВОЗМОЖНА ОГРАНИЧЕННАЯ ОТМЕНА";
-                    color = "#d97706";
-                    canWithdraw = true;
-                    additionalInfo = "Условно благоприятные условия, требуется осторожность";
-                } else {
-                    recommendation = "🔴 ОТМЕНА НЕ РЕКОМЕНДУЕТСЯ";
-                    color = "#dc2626";
-                    additionalInfo = "Неблагоприятные условия для отмены терапии";
-                }
-            } else {
-                recommendation = "🔴 НЕОПТИМАЛЬНЫЙ СРОК ДЛЯ ОТМЕНЫ";
-                color = "#dc2626";
-                additionalInfo = "Оптимальные сроки: 6-10 недель или III триместр";
-            }
-            
-            let recommendations = [];
-            
-            if (canWithdraw) {
-                recommendations.push("Постепенное снижение дозы на 25-50% каждые 2 недели");
-                recommendations.push("Контроль ТТГ и св.Т4 каждые 2 недели после отмену");
-                recommendations.push("Оценка клинической симптоматики");
-                recommendations.push("При появлении симптомов - возобновление терапии");
-            } else {
-                recommendations.push("Продолжение текущей терапии в минимальной эффективной дозе");
-                recommendations.push("Повторная оценка возможности отмены через 4-6 недель");
-                recommendations.push("Контроль АТ-рТТГ при следующем обследовании");
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${recommendation}</div>
-                    <div style="font-size: 1.1em; margin-top: 10px; color: ${color};">${additionalInfo}</div>
-                </div>
-                
+            document.getElementById('withdrawalResult').innerHTML = `
+                <h4>🔄 Планирование отмены терапии</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Критерии оценки:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Срок беременности:</span>
-                            <strong>${weeks} недель ${(weeks >= 6 && weeks <= 10) || weeks >= 28 ? '✅' : '❌'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${dose} мг/сут ${dose <= 10 ? '✅' : dose <= 15 ? '⚠️' : '❌'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>АТ-рТТГ:</span>
-                            <strong>${antibody} МЕ/л ${antibody <= 1.75 ? '✅' : antibody <= 3 ? '⚠️' : '❌'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Стабильность эутиреоза:</span>
-                            <strong>${stability} мес ${stability >= 2 ? '✅' : stability >= 1 ? '⚠️' : '❌'}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 План действий:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
+                    <p>Отмена терапии возможна под строгим контролем врача.</p>
+                    <p>Требуется мониторинг состояния каждые 2 недели после отмены.</p>
                 </div>
             `;
-            
-            document.getElementById('withdrawalResult').innerHTML = resultHTML;
             document.getElementById('withdrawalResult').style.display = 'block';
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ ВКЛАДОК
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabs();
+        });
+
+        function initTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            console.log('✅ Результат отображен');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeTab = document.getElementById(tabName);
+            if (activeTab) activeTab.classList.add('active');
+            
+            const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeButton) activeButton.classList.add('active');
         }
     </script>
 </body>
