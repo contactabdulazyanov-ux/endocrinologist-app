@@ -655,7 +655,7 @@
         </header>
 
         <nav class="main-menu">
-            <a href="../../index.html" class="nav-btn">
+            <a href="../index.html" class="nav-btn">
                 <i class="fas fa-home"></i> Главная
             </a>
             <a href="index.html" class="nav-btn">
@@ -1353,6 +1353,54 @@
                 return { dose: roundedDose, category, calculatedDose };
             },
 
+            calculateTreatmentPlan: function(weight, age, tsh, comorbidities) {
+                const baseDose = this.calculateDose(weight, age, tsh, comorbidities.includes('cvd'));
+                let plan = [];
+                let monitoring = [];
+                
+                if (comorbidities === 'cvd' || comorbidities === 'both') {
+                    plan.push("Старт с 25 мкг/сут");
+                    plan.push("Увеличение на 25 мкг каждые 6-8 недель");
+                    plan.push("Контроль ЭКГ перед каждым увеличением дозы");
+                } else if (comorbidities === 'elderly') {
+                    plan.push("Старт с 25-50 мкг/сут");
+                    plan.push("Увеличение на 12.5-25 мкг каждые 6-8 недель");
+                } else {
+                    plan.push("Старт с полной расчетной дозой");
+                    plan.push("Коррекция по результатам контроля через 6-8 недель");
+                }
+                
+                monitoring.push("Контроль ТТГ через 6-8 недель после начала терапии");
+                monitoring.push("Коррекция дозы по результатам ТТГ");
+                monitoring.push("После стабилизации - контроль каждые 6-12 месяцев");
+                
+                return { plan, monitoring, dose: baseDose.dose };
+            },
+
+            calculateDoseAdjustment: function(currentDose, currentTsh, targetTsh) {
+                const tshDiff = currentTsh - targetTsh;
+                let adjustment = 0;
+                let recommendation = "";
+                
+                if (tshDiff > 2.0) {
+                    adjustment = 25;
+                    recommendation = `Увеличить дозу на 25 мкг/сут (до ${currentDose + 25} мкг/сут)`;
+                } else if (tshDiff > 0.5) {
+                    adjustment = 12.5;
+                    recommendation = `Увеличить дозу на 12.5 мкг/сут (до ${currentDose + 12.5} мкг/сут)`;
+                } else if (tshDiff < -2.0) {
+                    adjustment = -25;
+                    recommendation = `Уменьшить дозу на 25 мкг/сут (до ${currentDose - 25} мкг/сут)`;
+                } else if (tshDiff < -0.5) {
+                    adjustment = -12.5;
+                    recommendation = `Уменьшить дозу на 12.5 мкг/сут (до ${currentDose - 12.5} мкг/сут)`;
+                } else {
+                    recommendation = "Доза адекватна, продолжить текущую терапию";
+                }
+                
+                return { adjustment, newDose: currentDose + adjustment, recommendation };
+            },
+
             evaluateTherapy: function(currentDose, currentTsh, currentT4, age) {
                 const recommendations = [];
                 let evaluation = "";
@@ -1432,8 +1480,465 @@
                 }
                 
                 return Math.round(currentDose * multiplier);
+            },
+
+            generatePregnancyPlan: function(week, diagnosis, tsh) {
+                let plan = [];
+                let targets = "";
+                
+                if (week <= 12) {
+                    targets = "ТТГ < 2.5 мМЕ/л";
+                    plan.push("Контроль ТТГ и св.Т4 каждые 4 недели");
+                    plan.push("Коррекция дозы при отклонении ТТГ от целевых значений");
+                } else if (week <= 28) {
+                    targets = "ТТГ < 3.0 мМЕ/л";
+                    plan.push("Контроль ТТГ и св.Т4 каждые 6-8 недель");
+                    plan.push("Мониторинг артериального давления");
+                } else {
+                    targets = "ТТГ < 3.0 мМЕ/л";
+                    plan.push("Контроль ТТГ на 32-й неделе беременности");
+                    plan.push("Подготовка к родам");
+                    plan.push("План послеродового наблюдения");
+                }
+                
+                if (diagnosis === "manifest") {
+                    plan.push("Обязательный контроль липидного профиля");
+                    plan.push("Консультация кардиолога при необходимости");
+                }
+                
+                return { plan, targets };
             }
         };
+
+        // ВАЛИДАЦИЯ ВВОДА
+        function validateInputs(inputs) {
+            const errors = [];
+            
+            for (const [key, value] of Object.entries(inputs)) {
+                if (!value && value !== 0) {
+                    errors.push(`Поле "${key}" не заполнено`);
+                    continue;
+                }
+                
+                switch(key) {
+                    case 'weight':
+                        if (value < 20 || value > 300) errors.push("Вес должен быть от 20 до 300 кг");
+                        break;
+                    case 'age':
+                        if (value < 1 || value > 120) errors.push("Возраст должен быть от 1 до 120 лет");
+                        break;
+                    case 'tsh':
+                        if (value < 0.01 || value > 100) errors.push("ТТГ должен быть от 0.01 до 100 мМЕ/л");
+                        break;
+                    case 't4':
+                        if (value < 1 || value > 50) errors.push("св. Т4 должен быть от 1 до 50 пмоль/л");
+                        break;
+                }
+            }
+            
+            return errors;
+        }
+
+        // ОСНОВНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
+        function diagnoseHypothyroidism() {
+            const tsh = parseFloat(document.getElementById('diagnosisTsh').value);
+            const t4 = parseFloat(document.getElementById('diagnosisT4').value) || null;
+            const atpo = parseFloat(document.getElementById('diagnosisAtpo').value) || null;
+            
+            const errors = validateInputs({ tsh, t4: t4 || 0 });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.diagnoseForm(tsh, t4, atpo);
+            
+            if (result) {
+                let resultHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 1.5em; font-weight: 800; color: ${
+                            result.severity === 'danger' ? '#ef4444' : 
+                            result.severity === 'warning' ? '#f59e0b' : '#10b981'
+                        };">${result.form}</div>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📊 Лабораторные показатели:</h4>
+                        <div style="display: grid; gap: 8px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>ТТГ:</span>
+                                <strong>${tsh} мМЕ/л</strong>
+                            </div>
+                            ${t4 ? `<div style="display: flex; justify-content: space-between;">
+                                <span>св. Т4:</span>
+                                <strong>${t4} пмоль/л</strong>
+                            </div>` : ''}
+                            ${atpo ? `<div style="display: flex; justify-content: space-between;">
+                                <span>Анти-ТПО:</span>
+                                <strong>${atpo} МЕ/мл</strong>
+                            </div>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                        <h4>💡 Рекомендации:</h4>
+                        <ul>
+                            ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                document.getElementById('diagnosisResult').innerHTML = resultHTML;
+                document.getElementById('diagnosisResult').style.display = 'block';
+            }
+        }
+
+        function calculateHypothyroidismDose() {
+            const weight = parseFloat(document.getElementById('doseWeight').value);
+            const age = parseInt(document.getElementById('doseAge').value);
+            const tsh = parseFloat(document.getElementById('doseTsh').value);
+            const hasHeartDisease = document.getElementById('doseHeartDisease').checked;
+            
+            const errors = validateInputs({ weight, age, tsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.calculateDose(weight, age, tsh, hasHeartDisease);
+            
+            let recommendations = [];
+            
+            if (age >= 60 || hasHeartDisease) {
+                recommendations = [
+                    "Начните с 25-50 мкг/сут",
+                    "Увеличивайте дозу постепенно каждые 4-6 недель",
+                    "Контроль ЭКГ перед началом терапии",
+                    "Особый контроль у пациентов с ССЗ"
+                ];
+            } else {
+                recommendations = [
+                    "Можно начинать с полной расчетной дозы",
+                    "Контроль ТТГ через 6-8 недель",
+                    "Принимать утром натощак за 30-60 мин до еды"
+                ];
+            }
+
+            recommendations.push(
+                "⚠️ <strong>ВАЖНО:</strong> Препараты железа, кальция, антациды принимаются раздельно от L-тироксина с разницей в 4 часа"
+            );
+            
+            let resultHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.8em; font-weight: 800; color: #2563eb;">
+                        ${result.dose} мкг/сут
+                    </div>
+                    <div style="color: #6b7280;">Рекомендуемая стартовая доза L-тироксина</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📋 Детали расчета:</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Категория пациента:</span>
+                            <strong>${result.category}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Расчетная формула:</span>
+                            <strong>${weight} кг × ${(result.calculatedDose / weight).toFixed(1)} мкг/кг</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Округленная доза:</span>
+                            <strong>${result.dose} мкг/сут</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interaction-warning">
+                    <h4><i class="fas fa-exclamation-triangle danger-icon"></i> ВАЖНО: Взаимодействие с другими препаратами</h4>
+                    <p><strong>Препараты железа, кальция, антациды принимаются раздельно от L-тироксина с разницей в 4 часа.</strong></p>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации по лечению:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('doseResult').innerHTML = resultHTML;
+            document.getElementById('doseResult').style.display = 'block';
+        }
+
+        function calculateTreatmentPlan() {
+            const weight = parseFloat(document.getElementById('treatmentWeight').value);
+            const age = parseInt(document.getElementById('treatmentAge').value);
+            const tsh = parseFloat(document.getElementById('treatmentTsh').value);
+            const comorbidities = document.getElementById('treatmentComorbidities').value;
+            
+            const errors = validateInputs({ weight, age, tsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.calculateTreatmentPlan(weight, age, tsh, comorbidities);
+            
+            document.getElementById('treatmentResult').innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.8em; font-weight: 800; color: #2563eb;">
+                        ${result.dose} мкг/сут
+                    </div>
+                </div>
+                
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📋 План терапии:</h4>
+                    <ul>
+                        ${result.plan.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Мониторинг:</h4>
+                    <ul>
+                        ${result.monitoring.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('treatmentResult').style.display = 'block';
+        }
+
+        function calculateDoseAdjustment() {
+            const currentDose = parseFloat(document.getElementById('adjustmentCurrentDose').value);
+            const currentTsh = parseFloat(document.getElementById('adjustmentCurrentTsh').value);
+            const targetTsh = parseFloat(document.getElementById('adjustmentTargetTsh').value);
+            
+            const errors = validateInputs({ currentDose, currentTsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.calculateDoseAdjustment(currentDose, currentTsh, targetTsh);
+            
+            document.getElementById('adjustmentResult').innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.5em; font-weight: 800; color: #2563eb;">${result.recommendation}</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий ТТГ:</span>
+                            <strong>${currentTsh} мМЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Целевой ТТГ:</span>
+                            <strong>${targetTsh} мМЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Разница:</span>
+                            <strong>${Math.abs(currentTsh - targetTsh).toFixed(1)} мМЕ/л</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('adjustmentResult').style.display = 'block';
+        }
+
+        function monitorTherapy() {
+            const currentDose = parseFloat(document.getElementById('monitorCurrentDose').value);
+            const currentTsh = parseFloat(document.getElementById('monitorCurrentTsh').value);
+            const currentT4 = parseFloat(document.getElementById('monitorCurrentT4').value);
+            const age = parseInt(document.getElementById('monitorAge').value);
+            
+            const errors = validateInputs({ currentDose, currentTsh, currentT4, age });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateTherapy(currentDose, currentTsh, currentT4, age);
+            
+            let resultHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.5em; font-weight: 800; color: ${
+                        result.evaluation.includes('✅') ? '#10b981' : 
+                        result.evaluation.includes('⚠️') ? '#f59e0b' : '#ef4444'
+                    };">${result.evaluation}</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📋 Текущие показатели:</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущая доза:</span>
+                            <strong>${currentDose} мкг/сут</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий ТТГ:</span>
+                            <strong>${currentTsh} мМЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>св. Т4:</span>
+                            <strong>${currentT4} пмоль/л</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('monitorResult').innerHTML = resultHTML;
+            document.getElementById('monitorResult').style.display = 'block';
+        }
+
+        function generateFollowUpPlan() {
+            const age = parseInt(document.getElementById('planAge').value);
+            const tsh = parseFloat(document.getElementById('planTsh').value);
+            const isStable = document.getElementById('planStable').checked;
+            const comorbidities = document.getElementById('planComorbidities').value;
+            
+            const errors = validateInputs({ age, tsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.generateFollowUpPlan(age, tsh, isStable, comorbidities);
+            
+            let resultHTML = `
+                <h4>📅 Индивидуальный план наблюдения</h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Возраст пациента:</span>
+                            <strong>${age} лет</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий ТТГ:</span>
+                            <strong>${tsh} мМЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Стабильное состояние:</span>
+                            <strong>${isStable ? 'Да' : 'Нет'}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Следующий контроль:</span>
+                            <strong>${result.nextControl}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>📋 План действий:</h4>
+                    <ul>
+                        ${result.plan.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('planResult').innerHTML = resultHTML;
+            document.getElementById('planResult').style.display = 'block';
+        }
+
+        function calculatePregnancyDose() {
+            const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
+            const trimester = document.getElementById('pregTrimester').value;
+            const tsh = parseFloat(document.getElementById('pregTsh').value);
+            
+            const errors = validateInputs({ currentDose, tsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const newDose = HYPOTHYROIDISM_KNOWLEDGE.pregnancyDoseAdjustment(currentDose, trimester, tsh);
+            const increase = Math.round(((newDose - currentDose) / currentDose) * 100);
+            
+            let recommendation, nextControl;
+            if (trimester === "1") {
+                recommendation = "Немедленное увеличение дозы при подтверждении беременности";
+                nextControl = "4 недели";
+            } else {
+                recommendation = "Постепенное увеличение дозы под контролем ТТГ";
+                nextControl = "6 недель";
+            }
+            
+            document.getElementById('pregnancyDoseResult').innerHTML = `
+                <h4>💊 Рекомендация по коррекции:</h4>
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.5em; font-weight: 800; color: #ef4444;">
+                            ${newDose} мкг/сут
+                        </div>
+                        <div style="color: #6b7280;">Новая доза L-T4 (увеличение на ${increase}%)</div>
+                    </div>
+                    <p><strong>${recommendation}</strong></p>
+                </div>
+                <div style="background: #fef3c7; padding: 12px; border-radius: 6px;">
+                    <strong>📅 Контроль:</strong> ТТГ и св.Т4 через ${nextControl} после коррекции дозы
+                </div>
+            `;
+            document.getElementById('pregnancyDoseResult').style.display = 'block';
+        }
+
+        function generatePregnancyPlan() {
+            const week = parseInt(document.getElementById('pregWeek').value);
+            const diagnosis = document.getElementById('pregDiagnosis').value;
+            const tsh = parseFloat(document.getElementById('pregTshValue').value);
+            
+            const errors = validateInputs({ week, tsh });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = HYPOTHYROIDISM_KNOWLEDGE.generatePregnancyPlan(week, diagnosis, tsh);
+            
+            let tshEvaluation = "";
+            if (week <= 12 && tsh > 2.5) {
+                tshEvaluation = "❌ Требуется коррекция дозы";
+            } else if (week > 12 && tsh > 3.0) {
+                tshEvaluation = "❌ Требуется коррекция дозы";
+            } else {
+                tshEvaluation = "✅ В пределах целевых значений";
+            }
+            
+            document.getElementById('pregnancyPlanResult').innerHTML = `
+                <h4>📅 План наблюдения при беременности</h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Срок беременности:</span>
+                            <strong>${week} недель</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий ТТГ:</span>
+                            <strong>${tsh} мМЕ/л ${tshEvaluation}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Целевой ТТГ:</span>
+                            <strong>${result.targets}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>📋 План действий:</h4>
+                    <ul>
+                        ${result.plan.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('pregnancyPlanResult').style.display = 'block';
+        }
 
         // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ ЛИПИДНОГО ПРОФИЛЯ
         function evaluateLipidProfile() {
@@ -1923,451 +2428,6 @@
                 </div>
             `;
             document.getElementById('geneticResult').style.display = 'block';
-        }
-
-        // ОСНОВНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
-        function diagnoseHypothyroidism() {
-            const tsh = parseFloat(document.getElementById('diagnosisTsh').value);
-            const t4 = parseFloat(document.getElementById('diagnosisT4').value);
-            const atpo = parseFloat(document.getElementById('diagnosisAtpo').value) || null;
-            
-            if (!tsh) {
-                alert('Введите значение ТТГ для диагностики');
-                return;
-            }
-            
-            const result = HYPOTHYROIDISM_KNOWLEDGE.diagnoseForm(tsh, t4, atpo);
-            
-            if (result) {
-                let resultHTML = `
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 1.5em; font-weight: 800; color: ${
-                            result.severity === 'danger' ? '#ef4444' : 
-                            result.severity === 'warning' ? '#f59e0b' : '#10b981'
-                        };">${result.form}</div>
-                    </div>
-                    
-                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h4>📊 Лабораторные показатели:</h4>
-                        <div style="display: grid; gap: 8px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>ТТГ:</span>
-                                <strong>${tsh} мМЕ/л</strong>
-                            </div>
-                            ${t4 ? `<div style="display: flex; justify-content: space-between;">
-                                <span>св. Т4:</span>
-                                <strong>${t4} пмоль/л</strong>
-                            </div>` : ''}
-                            ${atpo ? `<div style="display: flex; justify-content: space-between;">
-                                <span>Анти-ТПО:</span>
-                                <strong>${atpo} МЕ/мл</strong>
-                            </div>` : ''}
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                        <h4>💡 Рекомендации:</h4>
-                        <ul>
-                            ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-                
-                document.getElementById('diagnosisResult').innerHTML = resultHTML;
-                document.getElementById('diagnosisResult').style.display = 'block';
-            }
-        }
-
-        function calculateHypothyroidismDose() {
-            const weight = parseFloat(document.getElementById('doseWeight').value);
-            const age = parseInt(document.getElementById('doseAge').value);
-            const tsh = parseFloat(document.getElementById('doseTsh').value);
-            const hasHeartDisease = document.getElementById('doseHeartDisease').checked;
-            
-            if (!weight || !age || !tsh) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-            
-            const result = HYPOTHYROIDISM_KNOWLEDGE.calculateDose(weight, age, tsh, hasHeartDisease);
-            
-            let recommendations = [];
-            
-            if (age >= 60 || hasHeartDisease) {
-                recommendations = [
-                    "Начните с 25-50 мкг/сут",
-                    "Увеличивайте дозу постепенно каждые 4-6 недель",
-                    "Контроль ЭКГ перед началом терапии",
-                    "Особый контроль у пациентов с ССЗ"
-                ];
-            } else {
-                recommendations = [
-                    "Можно начинать с полной расчетной дозы",
-                    "Контроль ТТГ через 6-8 недель",
-                    "Принимать утром натощак за 30-60 мин до еды"
-                ];
-            }
-
-            recommendations.push(
-                "⚠️ <strong>ВАЖНО:</strong> Препараты железа, кальция, антациды принимаются раздельно от L-тироксина с разницей в 4 часа"
-            );
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.8em; font-weight: 800; color: #2563eb;">
-                        ${result.dose} мкг/сут
-                    </div>
-                    <div style="color: #6b7280;">Рекомендуемая стартовая доза L-тироксина</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 Детали расчета:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Категория пациента:</span>
-                            <strong>${result.category}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Расчетная формула:</span>
-                            <strong>${weight} кг × ${result.calculatedDose / weight} мкг/кг</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Округленная доза:</span>
-                            <strong>${result.dose} мкг/сут</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="interaction-warning">
-                    <h4><i class="fas fa-exclamation-triangle danger-icon"></i> ВАЖНО: Взаимодействие с другими препаратами</h4>
-                    <p><strong>Препараты железа, кальция, антациды принимаются раздельно от L-тироксина с разницей в 4 часа.</strong></p>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации по лечению:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('doseResult').innerHTML = resultHTML;
-            document.getElementById('doseResult').style.display = 'block';
-        }
-
-        function calculateTreatmentPlan() {
-            const weight = parseFloat(document.getElementById('treatmentWeight').value);
-            const age = parseInt(document.getElementById('treatmentAge').value);
-            const tsh = parseFloat(document.getElementById('treatmentTsh').value);
-            const comorbidities = document.getElementById('treatmentComorbidities').value;
-            
-            if (!weight || !age || !tsh) {
-                alert('Заполните вес, возраст и ТТГ пациента');
-                return;
-            }
-            
-            const result = HYPOTHYROIDISM_KNOWLEDGE.calculateDose(weight, age, tsh, comorbidities.includes('cvd'));
-            
-            let plan = [];
-            let monitoring = [];
-            
-            if (comorbidities === 'cvd' || comorbidities === 'both') {
-                plan.push("Старт с 25 мкг/сут");
-                plan.push("Увеличение на 25 мкг каждые 6-8 недель");
-                plan.push("Контроль ЭКГ перед каждым увеличением дозы");
-            } else if (comorbidities === 'elderly') {
-                plan.push("Старт с 25-50 мкг/сут");
-                plan.push("Увеличение на 12.5-25 мкг каждые 6-8 недель");
-            } else {
-                plan.push("Старт с полной расчетной дозой");
-                plan.push("Коррекция по результатам контроля через 6-8 недель");
-            }
-            
-            monitoring.push("Контроль ТТГ через 6-8 недель после начала терапии");
-            monitoring.push("Коррекция дозы по результатам ТТГ");
-            monitoring.push("После стабилизации - контроль каждые 6-12 месяцев");
-            
-            document.getElementById('treatmentResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.8em; font-weight: 800; color: #2563eb;">
-                        ${result.dose} мкг/сут
-                    </div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 План терапии:</h4>
-                    <ul>
-                        ${plan.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Мониторинг:</h4>
-                    <ul>
-                        ${monitoring.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            document.getElementById('treatmentResult').style.display = 'block';
-        }
-
-        function calculateDoseAdjustment() {
-            const currentDose = parseFloat(document.getElementById('adjustmentCurrentDose').value);
-            const currentTsh = parseFloat(document.getElementById('adjustmentCurrentTsh').value);
-            const targetTsh = parseFloat(document.getElementById('adjustmentTargetTsh').value);
-            
-            if (!currentDose || !currentTsh) {
-                alert('Заполните текущую дозу и ТТГ');
-                return;
-            }
-            
-            let adjustment = 0;
-            let recommendation = "";
-            
-            if (currentTsh > targetTsh + 1) {
-                adjustment = 25;
-                recommendation = `Увеличить дозу на 25 мкг/сут (до ${currentDose + 25} мкг/сут)`;
-            } else if (currentTsh < targetTsh - 1) {
-                adjustment = -25;
-                recommendation = `Уменьшить дозу на 25 мкг/сут (до ${currentDose - 25} мкг/сут)`;
-            } else if (currentTsh > targetTsh + 0.5) {
-                adjustment = 12.5;
-                recommendation = `Увеличить дозу на 12.5 мкг/сут (до ${currentDose + 12.5} мкг/сут)`;
-            } else if (currentTsh < targetTsh - 0.5) {
-                adjustment = -12.5;
-                recommendation = `Уменьшить дозу на 12.5 мкг/сут (до ${currentDose - 12.5} мкг/сут)`;
-            } else {
-                recommendation = "Доза адекватна, продолжить текущую терапию";
-            }
-            
-            document.getElementById('adjustmentResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: #2563eb;">${recommendation}</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий ТТГ:</span>
-                            <strong>${currentTsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Целевой ТТГ:</span>
-                            <strong>${targetTsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Разница:</span>
-                            <strong>${Math.abs(currentTsh - targetTsh).toFixed(1)} мМЕ/л</strong>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('adjustmentResult').style.display = 'block';
-        }
-
-        function monitorTherapy() {
-            const currentDose = parseFloat(document.getElementById('monitorCurrentDose').value);
-            const currentTsh = parseFloat(document.getElementById('monitorCurrentTsh').value);
-            const currentT4 = parseFloat(document.getElementById('monitorCurrentT4').value);
-            const age = parseInt(document.getElementById('monitorAge').value);
-            
-            if (!currentDose || !currentTsh || !currentT4 || !age) {
-                alert('Заполните все поля для оценки терапии');
-                return;
-            }
-            
-            const result = HYPOTHYROIDISM_KNOWLEDGE.evaluateTherapy(currentDose, currentTsh, currentT4, age);
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${
-                        result.evaluation.includes('✅') ? '#10b981' : 
-                        result.evaluation.includes('⚠️') ? '#f59e0b' : '#ef4444'
-                    };">${result.evaluation}</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📋 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${currentDose} мкг/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий ТТГ:</span>
-                            <strong>${currentTsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св. Т4:</span>
-                            <strong>${currentT4} пмоль/л</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('monitorResult').innerHTML = resultHTML;
-            document.getElementById('monitorResult').style.display = 'block';
-        }
-
-        function generateFollowUpPlan() {
-            const age = parseInt(document.getElementById('planAge').value);
-            const tsh = parseFloat(document.getElementById('planTsh').value);
-            const isStable = document.getElementById('planStable').checked;
-            const comorbidities = document.getElementById('planComorbidities').value;
-            
-            if (!age || !tsh) {
-                alert('Заполните возраст и текущий ТТГ');
-                return;
-            }
-            
-            const result = HYPOTHYROIDISM_KNOWLEDGE.generateFollowUpPlan(age, tsh, isStable, comorbidities);
-            
-            let resultHTML = `
-                <h4>📅 Индивидуальный план наблюдения</h4>
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Возраст пациента:</span>
-                            <strong>${age} лет</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий ТТГ:</span>
-                            <strong>${tsh} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Стабильное состояние:</span>
-                            <strong>${isStable ? 'Да' : 'Нет'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Следующий контроль:</span>
-                            <strong>${result.nextControl}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>📋 План действий:</h4>
-                    <ul>
-                        ${result.plan.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('planResult').innerHTML = resultHTML;
-            document.getElementById('planResult').style.display = 'block';
-        }
-
-        function calculatePregnancyDose() {
-            const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
-            const trimester = document.getElementById('pregTrimester').value;
-            const tsh = parseFloat(document.getElementById('pregTsh').value);
-            
-            if (!currentDose) {
-                alert('Введите текущую дозу L-T4');
-                return;
-            }
-            
-            const newDose = HYPOTHYROIDISM_KNOWLEDGE.pregnancyDoseAdjustment(currentDose, trimester, tsh);
-            const increase = Math.round(((newDose - currentDose) / currentDose) * 100);
-            
-            let recommendation, nextControl;
-            if (trimester === "1") {
-                recommendation = "Немедленное увеличение дозы при подтверждении беременности";
-                nextControl = "4 недели";
-            } else {
-                recommendation = "Постепенное увеличение дозы под контролем ТТГ";
-                nextControl = "6 недель";
-            }
-            
-            document.getElementById('pregnancyDoseResult').innerHTML = `
-                <h4>💊 Рекомендация по коррекции:</h4>
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <div style="font-size: 1.5em; font-weight: 800; color: #ef4444;">
-                            ${newDose} мкг/сут
-                        </div>
-                        <div style="color: #6b7280;">Новая доза L-T4 (увеличение на ${increase}%)</div>
-                    </div>
-                    <p><strong>${recommendation}</strong></p>
-                </div>
-                <div style="background: #fef3c7; padding: 12px; border-radius: 6px;">
-                    <strong>📅 Контроль:</strong> ТТГ и св.Т4 через ${nextControl} после коррекции дозы
-                </div>
-            `;
-            document.getElementById('pregnancyDoseResult').style.display = 'block';
-        }
-
-        function generatePregnancyPlan() {
-            const week = parseInt(document.getElementById('pregWeek').value);
-            const diagnosis = document.getElementById('pregDiagnosis').value);
-            const tsh = parseFloat(document.getElementById('pregTshValue').value);
-            
-            let plan = [];
-            let targets = "";
-            
-            if (week <= 12) {
-                targets = "ТТГ < 2.5 мМЕ/л";
-                plan.push("Контроль ТТГ и св.Т4 каждые 4 недели");
-                plan.push("Коррекция дозы при отклонении ТТГ от целевых значений");
-            } else if (week <= 28) {
-                targets = "ТТГ < 3.0 мМЕ/л";
-                plan.push("Контроль ТТГ и св.Т4 каждые 6-8 недель");
-                plan.push("Мониторинг артериального давления");
-            } else {
-                targets = "ТТГ < 3.0 мМЕ/л";
-                plan.push("Контроль ТТГ на 32-й неделе беременности");
-                plan.push("Подготовка к родам");
-                plan.push("План послеродового наблюдения");
-            }
-            
-            if (diagnosis === "manifest") {
-                plan.push("Обязательный контроль липидного профиля");
-                plan.push("Консультация кардиолога при необходимости");
-            }
-            
-            let tshEvaluation = "";
-            if (week <= 12 && tsh > 2.5) {
-                tshEvaluation = "❌ Требуется коррекция дозы";
-            } else if (week > 12 && tsh > 3.0) {
-                tshEvaluation = "❌ Требуется коррекция дозы";
-            } else {
-                tshEvaluation = "✅ В пределах целевых значений";
-            }
-            
-            document.getElementById('pregnancyPlanResult').innerHTML = `
-                <h4>📅 План наблюдения при беременности</h4>
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Срок беременности:</span>
-                            <strong>${week} недель</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий ТТГ:</span>
-                            <strong>${tsh} мМЕ/л ${tshEvaluation}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Целевой ТТГ:</span>
-                            <strong>${targets}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>📋 План действий:</h4>
-                    <ul>
-                        ${plan.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            document.getElementById('pregnancyPlanResult').style.display = 'block';
         }
 
         // ИНИЦИАЛИЗАЦИЯ
