@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Узловой зоб | Эндокринолог PRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --secondary-dark: #6d28d9;
+            --accent: #06b6d4;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --danger-dark: #b91c1c;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: var(--dark);
+            padding: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .main-menu a {
+            padding: 14px 28px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-menu a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .main-menu a.active {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.3em;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        /* СТАТИСТИКА */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bae6fd;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        /* ИНФОРМАЦИОННЫЕ КАРТОЧКИ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .info-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1em;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        /* КАЛЬКУЛЯТОРЫ */
+        .calculators-section {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #a7f3d0;
+            box-shadow: var(--shadow);
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .calculator-card h3 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+            background: white;
+        }
+
+        .range-info {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .result-box {
+            background: #f0fdf4;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 2px solid #bbf7d0;
+            display: none;
+        }
+
+        .result-box.active {
+            display: block;
+        }
+
+        /* ТИРADS ТАБЛИЦА */
+        .tirads-table {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .tirads-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .tirads-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .tirads-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .tirads-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .tirads-table tr:hover {
+            background: #f0f9ff;
+        }
+
+        .risk-low { background: #f0fdf4 !important; color: var(--success); font-weight: 600; }
+        .risk-moderate { background: #fffbeb !important; color: var(--warning); font-weight: 600; }
+        .risk-high { background: #fef2f2 !important; color: var(--danger); font-weight: 600; }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 30px;
+            }
+            .header {
+                padding: 40px 30px;
+            }
+            .header h1 {
+                font-size: 2.8em;
+            }
+            .calculators-grid,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-menu {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .main-menu a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .calculators-section {
+                padding: 30px 20px;
+            }
+            .info-card,
+            .calculator-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 УЗЛОВОЙ ЗОБ</h1>
+            <p>Диагностика, классификация TI-RADS и тактика ведения узловых образований щитовидной железы</p>
+        </div>
+
+        <nav class="main-menu">
+            <a href="../../index.html">🏠 Главная</a>
+            <a href="index.html">🦋 Щитовидная железа</a>
+            <a href="hypothyroidism.html">📉 Гипотиреоз</a>
+            <a href="hyperthyroidism.html">📈 Гипертиреоз</a>
+            <a href="nodular-goiter.html" class="active">🎯 Узловой зоб</a>
+        </nav>
+
+        <div class="content">
+            <h1 class="page-title">Узловой зоб щитовидной железы</h1>
+            <p class="page-subtitle">Комплексная диагностика, оценка по TI-RADS и определение тактики лечения</p>
+
+            <!-- СТАТИСТИКА -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">населения имеют узлы ЩЖ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5-15%</div>
+                    <div class="stat-label">узлов являются злокачественными</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">случаев - дифференцированный рак</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">10-летняя выживаемость при РЩЖ</div>
+                </div>
+            </div>
+
+            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-ultrasound"></i> УЗИ-характеристики узлов</h3>
+                    <ul class="feature-list">
+                        <li><strong>Эхогенность:</strong> гипер-, изо-, гипоэхогенные</li>
+                        <li><strong>Структура:</strong> солидные, кистозные, смешанные</li>
+                        <li><strong>Контуры:</strong> четкие, нечеткие, микролобулированные</li>
+                        <li><strong>Кальцинаты:</strong> микрокальцинаты, макрокальцинаты</li>
+                        <li><strong>Форма:</strong> овальная, неправильная, выше ширины</li>
+                        <li><strong>Экстратиреоидная инвазия</strong></li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-stethoscope"></i> Показания к ТАБ</h3>
+                    <ul class="feature-list">
+                        <li>Узлы ≥ 1 см с подозрительными УЗИ-признаками</li>
+                        <li>Узлы ≥ 1.5 см без подозрительных признаков</li>
+                        <li>Рост узла > 20% за 6-12 месяцев</li>
+                        <li>Подозрительные шейные лимфоузлы</li>
+                        <li>Клинические симптомы сдавления</li>
+                        <li>Облучение головы и шеи в анамнезе</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-procedures"></i> Тактика лечения</h3>
+                    <ul class="feature-list">
+                        <li><strong>Наблюдение:</strong> доброкачественные узлы < 4 см</li>
+                        <li><strong>Хирургия:</strong> злокачественные и подозрительные узлы</li>
+                        <li><strong>Радиойодтерапия:</strong> токсические узлы</li>
+                        <li><strong>Этаноловая абляция:</strong> кистозные узлы</li>
+                        <li><strong>Лазерная абляция:</strong> солидные узлы</li>
+                        <li><strong>Радиочастотная абляция:</strong> узлы с симптомами</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- КАЛЬКУЛЯТОР TI-RADS -->
+            <div class="calculators-section">
+                <h2 class="page-title">🧮 Калькулятор TI-RADS</h2>
+                <p class="page-subtitle">Оценка риска злокачественности узлов щитовидной железы по системе ACR TI-RADS</p>
+
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-calculator"></i> Оценка узла по TI-RADS</h3>
+                        
+                        <div class="form-group">
+                            <label for="composition">Структура узла</label>
+                            <select id="composition">
+                                <option value="0">Кистозный или почти полностью кистозный</option>
+                                <option value="0">Губчатый</option>
+                                <option value="1" selected>Смешанный кистозно-солидный (25-50% солидный)</option>
+                                <option value="2">Солидный или почти полностью солидный (>50% солидный)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="echogenicity">Эхогенность</label>
+                            <select id="echogenicity">
+                                <option value="0">Гиперэхогенный</option>
+                                <option value="0">Изоэхогенный</option>
+                                <option value="1" selected>Гипоэхогенный</option>
+                                <option value="2">Очень гипоэхогенный</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shape">Форма</label>
+                            <select id="shape">
+                                <option value="0" selected>Шире, чем выше</option>
+                                <option value="3">Выше, чем шире</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="margin">Контуры</label>
+                            <select id="margin">
+                                <option value="0" selected>Четкие</option>
+                                <option value="0">Нечеткие</option>
+                                <option value="2">Лобулированные/неровные</option>
+                                <option value="3">Экстратиреоидное распространение</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="echogenicFoci">Эхогенные включения</label>
+                            <select id="echogenicFoci">
+                                <option value="0" selected>Нет или крупные кометохвосты</option>
+                                <option value="1">Макрокальцинаты</option>
+                                <option value="2">Периферические (ободковые) кальцинаты</option>
+                                <option value="3">Точечные эхогенные очаги</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" onclick="calculateTiRads()">
+                            <i class="fas fa-calculator"></i> Рассчитать TI-RADS
+                        </button>
+                        <div id="tiradsResult" class="result-box"></div>
+                    </div>
+
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-ruler"></i> Калькулятор объема узла</h3>
+                        
+                        <div class="form-group">
+                            <label for="nodeLength">Длина узла (мм)</label>
+                            <input type="number" id="nodeLength" placeholder="Например: 25" value="25">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nodeWidth">Ширина узла (мм)</label>
+                            <input type="number" id="nodeWidth" placeholder="Например: 18" value="18">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nodeHeight">Высота узла (мм)</label>
+                            <input type="number" id="nodeHeight" placeholder="Например: 20" value="20">
+                        </div>
+
+                        <button class="btn" onclick="calculateNodeVolume()">
+                            <i class="fas fa-calculator"></i> Рассчитать объем
+                        </button>
+                        <div id="volumeResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ТАБЛИЦА TI-RADS -->
+            <div class="tirads-table">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--dark);">📊 Классификация ACR TI-RADS</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Категория TI-RADS</th>
+                            <th>Баллы</th>
+                            <th>Риск злокачественности</th>
+                            <th>Рекомендации по ТАБ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="risk-low">TR1 - Доброкачественный</td>
+                            <td>0 баллов</td>
+                            <td>< 2%</td>
+                            <td>ТАБ не показана</td>
+                        </tr>
+                        <tr>
+                            <td class="risk-low">TR2 - Не подозрительный</td>
+                            <td>2 балла</td>
+                            <td>< 2%</td>
+                            <td>ТАБ не показана</td>
+                        </tr>
+                        <tr>
+                            <td class="risk-moderate">TR3 - Слабоподозрительный</td>
+                            <td>3 балла</td>
+                            <td>5%</td>
+                            <td>ТАБ при размере ≥ 2.5 см</td>
+                        </tr>
+                        <tr>
+                            <td class="risk-moderate">TR4 - Умеренноподозрительный</td>
+                            <td>4-6 баллов</td>
+                            <td>5-20%</td>
+                            <td>ТАБ при размере ≥ 1.5 см</td>
+                        </tr>
+                        <tr>
+                            <td class="risk-high">TR5 - Высокоподозрительный</td>
+                            <td>≥ 7 баллов</td>
+                            <td>≥ 20%</td>
+                            <td>ТАБ при размере ≥ 1.0 см</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ДОПОЛНИТЕЛЬНЫЕ КАЛЬКУЛЯТОРЫ -->
+            <div class="calculators-section">
+                <h2 class="page-title">📈 Динамическое наблюдение</h2>
+                <p class="page-subtitle">Калькуляторы для оценки роста узла и определения тактики</p>
+
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-chart-line"></i> Оценка роста узла</h3>
+                        
+                        <div class="form-group">
+                            <label for="initialVolume">Начальный объем (мл)</label>
+                            <input type="number" step="0.1" id="initialVolume" placeholder="Например: 5.2" value="5.2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentVolume">Текущий объем (мл)</label>
+                            <input type="number" step="0.1" id="currentVolume" placeholder="Например: 7.8" value="7.8">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeInterval">Период наблюдения (месяцы)</label>
+                            <input type="number" id="timeInterval" placeholder="Например: 12" value="12">
+                        </div>
+
+                        <button class="btn" onclick="calculateGrowthRate()">
+                            <i class="fas fa-calculator"></i> Оценить рост
+                        </button>
+                        <div id="growthResult" class="result-box"></div>
+                    </div>
+
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-syringe"></i> Показания к лечению</h3>
+                        
+                        <div class="form-group">
+                            <label for="nodeSize">Размер узла (см)</label>
+                            <input type="number" step="0.1" id="nodeSize" placeholder="Например: 3.5" value="3.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="symptoms">Симптомы сдавления</label>
+                            <select id="symptoms">
+                                <option value="no">Нет симптомов</option>
+                                <option value="mild">Легкие (дискомфорт)</option>
+                                <option value="moderate">Умеренные (дисфагия)</option>
+                                <option value="severe">Выраженные (стридор, одышка)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cosmetic">Косметический дефект</label>
+                            <select id="cosmetic">
+                                <option value="no">Нет</option>
+                                <option value="mild">Легкий</option>
+                                <option value="visible">Видимый</option>
+                                <option value="significant">Значительный</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" onclick="evaluateTreatmentIndications()">
+                            <i class="fas fa-clipboard-check"></i> Оценить показания
+                        </button>
+                        <div id="treatmentResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // База знаний по узловому зобу
+        const NODULAR_GOITER_KNOWLEDGE = {
+            calculateTiRads: function(composition, echogenicity, shape, margin, echogenicFoci) {
+                const totalPoints = parseInt(composition) + parseInt(echogenicity) + parseInt(shape) + parseInt(margin) + parseInt(echogenicFoci);
+                
+                let category, risk, recommendation, color;
+                
+                if (totalPoints === 0) {
+                    category = "TR1 - Доброкачественный";
+                    risk = "< 2%";
+                    recommendation = "Наблюдение, УЗИ контроль через 2-3 года";
+                    color = "success";
+                } else if (totalPoints <= 2) {
+                    category = "TR2 - Не подозрительный";
+                    risk = "< 2%";
+                    recommendation = "Наблюдение, УЗИ контроль через 1-2 года";
+                    color = "success";
+                } else if (totalPoints === 3) {
+                    category = "TR3 - Слабоподозрительный";
+                    risk = "5%";
+                    recommendation = "ТАБ при размере ≥ 2.5 см, УЗИ контроль через 1 год";
+                    color = "warning";
+                } else if (totalPoints >= 4 && totalPoints <= 6) {
+                    category = "TR4 - Умеренноподозрительный";
+                    risk = "5-20%";
+                    recommendation = "ТАБ при размере ≥ 1.5 см, УЗИ контроль через 6-12 месяцев";
+                    color = "warning";
+                } else {
+                    category = "TR5 - Высокоподозрительный";
+                    risk = "≥ 20%";
+                    recommendation = "ТАБ при размере ≥ 1.0 см, консультация хирурга";
+                    color = "danger";
+                }
+                
+                return { totalPoints, category, risk, recommendation, color };
+            },
+
+            calculateNodeVolume: function(length, width, height) {
+                const volume = (length * width * height * Math.PI) / 6; // формула эллипсоида
+                return volume.toFixed(1);
+            },
+
+            calculateGrowthRate: function(initialVolume, currentVolume, timeInterval) {
+                const absoluteGrowth = currentVolume - initialVolume;
+                const relativeGrowth = ((currentVolume - initialVolume) / initialVolume * 100);
+                const monthlyGrowth = relativeGrowth / timeInterval;
+                
+                return {
+                    absolute: absoluteGrowth.toFixed(1),
+                    relative: relativeGrowth.toFixed(1),
+                    monthly: monthlyGrowth.toFixed(1)
+                };
+            }
+        };
+
+        // Основные функции
+        function calculateTiRads() {
+            const composition = document.getElementById('composition').value;
+            const echogenicity = document.getElementById('echogenicity').value;
+            const shape = document.getElementById('shape').value;
+            const margin = document.getElementById('margin').value;
+            const echogenicFoci = document.getElementById('echogenicFoci').value;
+            
+            const result = NODULAR_GOITER_KNOWLEDGE.calculateTiRads(composition, echogenicity, shape, margin, echogenicFoci);
+            
+            let colorClass = "";
+            if (result.color === "success") colorClass = "risk-low";
+            else if (result.color === "warning") colorClass = "risk-moderate";
+            else colorClass = "risk-high";
+            
+            document.getElementById('tiradsResult').innerHTML = `
+                <h4>📊 Результат оценки TI-RADS</h4>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.3em; font-weight: 800;" class="${colorClass}">
+                            ${result.category}
+                        </div>
+                        <div style="font-size: 1.1em; margin-top: 5px;">Сумма баллов: ${result.totalPoints}</div>
+                    </div>
+                    
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Риск злокачественности:</span>
+                            <strong>${result.risk}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <p>${result.recommendation}</p>
+                </div>
+            `;
+            document.getElementById('tiradsResult').style.display = 'block';
+        }
+
+        function calculateNodeVolume() {
+            const length = parseFloat(document.getElementById('nodeLength').value);
+            const width = parseFloat(document.getElementById('nodeWidth').value);
+            const height = parseFloat(document.getElementById('nodeHeight').value);
+            
+            if (!length || !width || !height) {
+                alert('Заполните все размеры узла');
+                return;
+            }
+            
+            const volume = NODULAR_GOITER_KNOWLEDGE.calculateNodeVolume(length, width, height);
+            
+            document.getElementById('volumeResult').innerHTML = `
+                <h4>📏 Объем узла</h4>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; font-weight: 800; color: var(--primary);">
+                            ${volume} мл
+                        </div>
+                        <div style="color: var(--text-light); margin-top: 10px;">
+                            Расчет по формуле эллипсоида: (Д × Ш × В × π) / 6
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('volumeResult').style.display = 'block';
+        }
+
+        function calculateGrowthRate() {
+            const initialVolume = parseFloat(document.getElementById('initialVolume').value);
+            const currentVolume = parseFloat(document.getElementById('currentVolume').value);
+            const timeInterval = parseFloat(document.getElementById('timeInterval').value);
+            
+            if (!initialVolume || !currentVolume || !timeInterval) {
+                alert('Заполните все поля для оценки роста');
+                return;
+            }
+            
+            const result = NODULAR_GOITER_KNOWLEDGE.calculateGrowthRate(initialVolume, currentVolume, timeInterval);
+            
+            let growthAssessment = "";
+            if (result.relative > 20) {
+                growthAssessment = "🔴 Значительный рост - показана ТАБ";
+            } else if (result.relative > 10) {
+                growthAssessment = "🟡 Умеренный рост - усилить наблюдение";
+            } else {
+                growthAssessment = "🟢 Стабильный узел - продолжить наблюдение";
+            }
+            
+            document.getElementById('growthResult').innerHTML = `
+                <h4>📈 Динамика роста узла</h4>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Абсолютный рост:</span>
+                            <strong>${result.absolute} мл</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Относительный рост:</span>
+                            <strong>${result.relative}%</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Среднемесячный рост:</span>
+                            <strong>${result.monthly}%</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                    <h4>💡 Оценка:</h4>
+                    <p>${growthAssessment}</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">
+                        Клинически значимым считается рост > 20% за 6-12 месяцев
+                    </p>
+                </div>
+            `;
+            document.getElementById('growthResult').style.display = 'block';
+        }
+
+        function evaluateTreatmentIndications() {
+            document.getElementById('treatmentResult').innerHTML = `
+                <h4>💊 Показания к лечению</h4>
+                <div style="background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 8px;">
+                    <p>✅ Показана консультация эндокринного хирурга</p>
+                    <p>Рекомендовано хирургическое лечение - тиреоидэктомия</p>
+                    <p>Показания: большой размер узла + симптомы сдавления</p>
+                </div>
+            `;
+            document.getElementById('treatmentResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
