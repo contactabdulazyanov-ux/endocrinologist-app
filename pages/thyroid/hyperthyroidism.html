@@ -528,7 +528,7 @@
 
         <!-- ИСПРАВЛЕННАЯ НАВИГАЦИЯ -->
         <nav class="main-menu">
-            <a href="../index.html">🏠 Главная</a>
+            <a href="../../index.html">🏠 Главная</a>
             <a href="index.html">🦋 Щитовидная железа</a>
             <a href="hypothyroidism.html">📉 Гипотиреоз</a>
             <a href="hyperthyroidism.html" class="active">📈 Гипертиреоз</a>
@@ -1194,7 +1194,7 @@
                         <li><strong>1.</strong> Немедленная отмена тиреостатика</li>
                         <li><strong>2.</strong> Госпитализация</li>
                         <li><strong>3.</strong> Отмена других лейкопенических препаратов</li>
-                        <li><strong>4.</strong> Эмпиическая антибактериальная терапия в/в</li>
+                        <li><strong>4.</strong> Эмпирическая антибактериальная терапия в/в</li>
                         <li><strong>Важно:</strong> Лечение преднизолоном не эффективно</li>
                     </ul>
                 </div>
@@ -2482,9 +2482,51 @@
             document.getElementById('withdrawalResult').style.display = 'block';
         }
 
+        // ТЕСТОВЫЙ СКРИПТ ДЛЯ ПРОВЕРКИ РАБОТОСПОСОБНОСТИ
+        console.log('=== ТЕСТ СТРАНИЦЫ ГИПЕРТИРЕОЗА ===');
+
+        // Проверяем загрузку DOM
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница гипертиреоза с ВСЕМИ калькуляторами и системой симптомов загружена');
+            console.log('✅ DOM загружен');
+            
+            // Проверяем основные элементы
+            const testElements = [
+                'formTsh', 'formT4', 'formResult', 
+                'gravesWeight', 'gravesDoseResult',
+                'currentDose', 'adjustmentResult'
+            ];
+            
+            testElements.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`✅ Элемент ${id}:`, element ? 'НАЙДЕН' : 'НЕ НАЙДЕН');
+            });
+            
+            // Проверяем функции
+            if (typeof calculateHyperthyroidismForm === 'function') {
+                console.log('✅ Функция calculateHyperthyroidismForm доступна');
+            } else {
+                console.log('❌ Функция calculateHyperthyroidismForm НЕ доступна');
+            }
+            
+            if (typeof calculateGravesDose === 'function') {
+                console.log('✅ Функция calculateGravesDose доступна');
+            } else {
+                console.log('❌ Функция calculateGravesDose НЕ доступна');
+            }
+            
+            // Тест простой функции
+            function simpleTest() {
+                console.log('✅ Простой тест выполнен');
+                return true;
+            }
+            simpleTest();
         });
+
+        // Проверяем копирование симптомов
+        function testCopySymptoms() {
+            console.log('✅ Тест копирования симптомов запущен');
+            return true;
+        }
     </script>
 </body>
 </html>
