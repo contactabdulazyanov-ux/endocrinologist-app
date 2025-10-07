@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Паращитовидные железы | Эндокринолог PRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7e22ce;
+            --primary-dark: #6b21a8;
+            --primary-light: #a855f7;
+            --secondary: #c026d3;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --text: #e2e8f0;
+            --text-light: #94a3b8;
+            --text-lighter: #64748b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, #1e1b4b 50%, #3730a3 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .background-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.03;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+            background: linear-gradient(45deg, var(--accent), var(--warning));
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -10s;
+            background: linear-gradient(45deg, var(--success), var(--secondary));
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, 
+                rgba(126, 34, 206, 0.1) 0%, 
+                rgba(192, 38, 211, 0.1) 50%, 
+                rgba(168, 85, 247, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .header:hover::before {
+            left: 100%;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: var(--text-light);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(126, 34, 206, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .content {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2em;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, 
+                rgba(126, 34, 206, 0.1) 0%, 
+                rgba(192, 38, 211, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .info-card:hover::before {
+            width: 8px;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .info-card h3 {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .info-card li:hover {
+            color: var(--text);
+        }
+
+        .info-card li:before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card li:hover:before {
+            transform: translateX(3px);
+            color: var(--secondary);
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .calculator-card {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%, 
+                rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(126, 34, 206, 0.1) 0%, 
+                transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .calculator-card:hover::before {
+            opacity: 1;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .calculator-card h3 {
+            color: var(--text);
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group:hover {
+            border-color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .range-info {
+            font-size: 0.9em;
+            color: var(--text-lighter);
+            margin-top: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(126, 34, 206, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, 
+                rgba(16, 185, 129, 0.1) 0%, 
+                rgba(6, 182, 212, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .clinical-guide {
+            background: linear-gradient(135deg, 
+                rgba(245, 158, 11, 0.1) 0%, 
+                rgba(251, 191, 36, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            justify-content: center;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary-light);
+            box-shadow: 0 10px 25px rgba(126, 34, 206, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--glass-hover);
+            border-color: var(--primary-light);
+            color: var(--text);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .target-values {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .medication-card {
+            background: rgba(126, 34, 206, 0.05);
+            border: 1px solid rgba(126, 34, 206, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .dose-recommendation {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .interaction-warning {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-icon {
+            color: var(--warning);
+            margin-right: 8px;
+        }
+
+        .danger-icon {
+            color: var(--danger);
+            margin-right: 8px;
+        }
+
+        .targets-table {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .targets-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .targets-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .targets-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .targets-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .motto {
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .motto.danger { 
+            background: rgba(239, 68, 68, 0.1); 
+            color: var(--danger); 
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .motto.warning { 
+            background: rgba(245, 158, 11, 0.1); 
+            color: var(--warning); 
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .main-menu {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-bone"></i> ПАРАЩИТОВИДНЫЕ ЖЕЛЕЗЫ</h1>
+            <p>Диагностика и лечение нарушений кальциевого обмена и паратиреоидной функции</p>
+        </header>
+
+        <nav class="main-menu">
+            <a href="../../index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="../thyroid/index.html" class="nav-btn">
+                <i class="fas fa-butterfly"></i> Щитовидная железа
+            </a>
+            <a href="index.html" class="nav-btn active">
+                <i class="fas fa-bone"></i> Паращитовидные железы
+            </a>
+            <a href="../adrenal/index.html" class="nav-btn">
+                <i class="fas fa-brain"></i> Надпочечники
+            </a>
+        </nav>
+
+        <main class="content">
+            <h1 class="page-title">Паращитовидные железы</h1>
+            <p class="page-subtitle">Регуляция кальциевого обмена и диагностика паратиреоидных заболеваний</p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-vial"></i> Лабораторная диагностика</h3>
+                    <ul>
+                        <li><strong>ПТГ ↑</strong> - основной маркер</li>
+                        <li><strong>Кальций общий ↑</strong> - при гиперпаратиреозе</li>
+                        <li><strong>Кальций ионизированный ↑</strong> - более точный показатель</li>
+                        <li><strong>Фосфор ↓</strong> - характерно для первичного гиперпаратиреоза</li>
+                        <li><strong>Щелочная фосфатаза ↑</strong> - при костной форме</li>
+                        <li><strong>Витамин D ↓</strong> - вторичный гиперпаратиреоз</li>
+                        <li><strong>Креатинин</strong> - оценка функции почек</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-bullseye"></i> Критерии диагностики</h3>
+                    <ul>
+                        <li><strong>Первичный гиперпаратиреоз:</strong><br>ПТГ ↑ + Ca общий ↑ > 2.6 ммоль/л</li>
+                        <li><strong>Вторичный гиперпаратиреоз:</strong><br>ПТГ ↑ + Ca нормальный или ↓</li>
+                        <li><strong>Третичный гиперпаратиреоз:</strong><br>ПТГ ↑ + Ca ↑ после трансплантации почек</li>
+                        <li><strong>Гипопаратиреоз:</strong><br>ПТГ ↓ + Ca ↓ < 2.1 ммоль/л</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-search-plus"></i> Дополнительные исследования</h3>
+                    <ul>
+                        <li><strong>УЗИ шеи:</strong><br>Визуализация паращитовидных желез</li>
+                        <li><strong>Сцинтиграфия с MIBI:</strong><br>Локализация аденом</li>
+                        <li><strong>КТ шеи и грудной клетки:</strong><br>При эктопированных железах</li>
+                        <li><strong>Денситометрия:</strong><br>Оценка минеральной плотности костей</li>
+                        <li><strong>Анализ мочи:</strong><br>Суточная экскреция кальция</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="clinical-guide">
+                <h2 class="section-title"><i class="fas fa-stethoscope"></i> Диагностика и лечение</h2>
+                <p class="section-subtitle">Комплексная оценка кальциевого обмена и паратиреоидной функции</p>
+                
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="diagnosis-tab">
+                        <i class="fas fa-diagnoses"></i> Диагностика
+                    </button>
+                    <button class="tab-btn" data-tab="hyper-tab">
+                        <i class="fas fa-chart-line-up"></i> Гиперпаратиреоз
+                    </button>
+                    <button class="tab-btn" data-tab="hypo-tab">
+                        <i class="fas fa-chart-line-down"></i> Гипопаратиреоз
+                    </button>
+                    <button class="tab-btn" data-tab="surgery-tab">
+                        <i class="fas fa-procedures"></i> Хирургическое лечение
+                    </button>
+                </div>
+
+                <div id="diagnosis-tab" class="tab-content active">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-diagnoses"></i> Определение формы нарушения</h3>
+                            <div class="form-group">
+                                <label for="diagnosisPth">ПТГ (паратгормон)</label>
+                                <input type="number" step="0.1" id="diagnosisPth" placeholder="15" value="125">
+                                <div class="range-info">Норма: 15-65 пг/мл</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="diagnosisCa">Кальций общий</label>
+                                <input type="number" step="0.01" id="diagnosisCa" placeholder="2.2" value="2.85">
+                                <div class="range-info">Норма: 2.15-2.55 ммоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="diagnosisPhos">Фосфор</label>
+                                <input type="number" step="0.01" id="diagnosisPhos" placeholder="1.0" value="0.75">
+                                <div class="range-info">Норма: 0.87-1.45 ммоль/л</div>
+                            </div>
+                            <button class="btn" onclick="diagnoseParathyroid()">
+                                <i class="fas fa-search"></i> Диагностировать
+                            </button>
+                            <div id="diagnosisResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-calculator"></i> Калькулятор ионизированного кальция</h3>
+                            <div class="form-group">
+                                <label for="calcTotalCa">Кальций общий (ммоль/л)</label>
+                                <input type="number" step="0.01" id="calcTotalCa" placeholder="2.4" value="2.85">
+                            </div>
+                            <div class="form-group">
+                                <label for="calcAlbumin">Альбумин (г/л)</label>
+                                <input type="number" id="calcAlbumin" placeholder="42" value="38">
+                                <div class="range-info">Норма: 35-52 г/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="calcPh">pH крови</label>
+                                <input type="number" step="0.01" id="calcPh" placeholder="7.4" value="7.42">
+                                <div class="range-info">Норма: 7.35-7.45</div>
+                            </div>
+                            <button class="btn" onclick="calculateIonizedCalcium()">
+                                <i class="fas fa-calculator"></i> Рассчитать
+                            </button>
+                            <div id="calciumResult" class="result-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hyper-tab" class="tab-content">
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-chart-line-up"></i> Оценка гиперпаратиреоза</h3>
+                        
+                        <div class="dose-recommendation">
+                            <strong>📋 Согласно клиническим рекомендациям:</strong>
+                            <p>Комплексная оценка показателей для определения тактики лечения</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hyperPth">ПТГ (пг/мл) *</label>
+                            <input type="number" step="0.1" id="hyperPth" placeholder="Например: 120" value="125">
+                            <div class="range-info">Норма: 15-65 пг/мл</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hyperCa">Кальций общий (ммоль/л)</label>
+                            <input type="number" step="0.01" id="hyperCa" placeholder="Например: 2.8" value="2.85">
+                            <div class="range-info">Норма: 2.15-2.55 ммоль/л</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hyperPhos">Фосфор (ммоль/л)</label>
+                            <input type="number" step="0.01" id="hyperPhos" placeholder="Например: 0.8" value="0.75">
+                            <div class="range-info">Норма: 0.87-1.45 ммоль/л</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hyperAge">Возраст пациента</label>
+                            <input type="number" id="hyperAge" placeholder="Например: 55" value="55">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hyperCreatinine">Креатинин (мкмоль/л)</label>
+                            <input type="number" id="hyperCreatinine" placeholder="Например: 90" value="95">
+                            <div class="range-info">Норма: 60-110 мкмоль/л</div>
+                        </div>
+
+                        <button class="btn" onclick="evaluateHyperparathyroidism()">
+                            <i class="fas fa-calculator"></i> Оценить показания к лечению
+                        </button>
+                        <div id="hyperResult" class="result-box"></div>
+                    </div>
+                </div>
+
+                <div id="hypo-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-chart-line-down"></i> Расчет терапии при гипопаратиреозе</h3>
+                            <div class="form-group">
+                                <label for="hypoWeight">Вес пациента (кг)</label>
+                                <input type="number" id="hypoWeight" placeholder="Например: 70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="hypoCa">Текущий кальций (ммоль/л)</label>
+                                <input type="number" step="0.01" id="hypoCa" placeholder="Например: 1.8" value="1.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="hypoPth">ПТГ (пг/мл)</label>
+                                <input type="number" step="0.1" id="hypoPth" placeholder="Например: 8" value="8">
+                            </div>
+                            <div class="form-group">
+                                <label for="hypoAlbumin">Альбумин (г/л)</label>
+                                <input type="number" id="hypoAlbumin" placeholder="Например: 40" value="40">
+                            </div>
+                            <button class="btn" onclick="calculateHypoparathyroidismTherapy()">
+                                <i class="fas fa-calculator"></i> Рассчитать терапию
+                            </button>
+                            <div id="hypoResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-capsules"></i> Коррекция витамина D</h3>
+                            <div class="form-group">
+                                <label for="vitdLevel">Витамин D (25-ОН), нг/мл</label>
+                                <input type="number" step="0.1" id="vitdLevel" placeholder="Например: 15" value="15">
+                                <div class="range-info">Целевой уровень: 30-60 нг/мл</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="vitdWeight">Вес пациента (кг)</label>
+                                <input type="number" id="vitdWeight" placeholder="Например: 70" value="70">
+                            </div>
+                            <button class="btn" onclick="calculateVitaminDCorrection()">
+                                <i class="fas fa-sun"></i> Рассчитать коррекцию
+                            </button>
+                            <div id="vitaminDResult" class="result-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="surgery-tab" class="tab-content">
+                    <div class="calculator-card">
+                        <h3><i class="fas fa-procedures"></i> Критерии хирургического лечения</h3>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Показания к паратиреоидэктомии:</h4>
+                            <ul>
+                                <li>Уровень кальция > 0.25 ммоль/л выше верхней границы нормы</li>
+                                <li>Кальций в суточной моче > 10 ммоль/сут</li>
+                                <li>Скорость клубочковой фильтрации < 60 мл/мин</li>
+                                <li>Плотность костей T-score < -2.5 SD</li>
+                                <li>Возраст < 50 лет</li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surgeryAge">Возраст пациента</label>
+                            <input type="number" id="surgeryAge" placeholder="Например: 45" value="45">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surgeryCa">Кальций (ммоль/л)</label>
+                            <input type="number" step="0.01" id="surgeryCa" placeholder="Например: 2.9" value="2.9">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surgeryUrineCa">Кальций в моче (ммоль/сут)</label>
+                            <input type="number" step="0.1" id="surgeryUrineCa" placeholder="Например: 12.5" value="12.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surgeryGfr">СКФ (мл/мин)</label>
+                            <input type="number" id="surgeryGfr" placeholder="Например: 55" value="55">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surgeryTscore">T-score денситометрии</label>
+                            <input type="number" step="0.1" id="surgeryTscore" placeholder="Например: -2.8" value="-2.8">
+                        </div>
+
+                        <button class="btn" onclick="evaluateSurgeryIndications()">
+                            <i class="fas fa-clipboard-check"></i> Оценить показания
+                        </button>
+                        <div id="surgeryResult" class="result-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clinical-guide">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Ведение паратиреоидных заболеваний</h2>
+                <p class="section-subtitle">Ключевые принципы диагностики и лечения</p>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-chart-line-up"></i> Гиперпаратиреоз: Активная тактика</h3>
+                        <div class="motto danger">Девиз: "Выявить причину, предотвратить осложнения"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Целевые значения после лечения:</h4>
+                            <ul>
+                                <li><strong>Кальций:</strong> 2.15-2.55 ммоль/л</li>
+                                <li><strong>ПТГ:</strong> 15-65 пг/мл</li>
+                                <li><strong>Фосфор:</strong> 0.87-1.45 ммоль/л</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Хирургическое лечение</strong> - метод выбора при первичной форме</li>
+                            <li>Контроль кальция <strong>ежедневно в течение 2 недель</strong> после операции</li>
+                            <li>При консервативном лечении - контроль каждые <strong>3-6 месяцев</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-chart-line-down"></i> Гипопаратиреоз: Заместительная терапия</h3>
+                        <div class="motto warning">Девиз: "Стабильность, а не колебания"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Целевой кальций:</h4>
+                            <ul>
+                                <li><strong>2.0-2.2 ммоль/л</strong></li>
+                                <li>Избегать нормальных значений - риск гиперкальциурии</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Кальций + витамин D</strong> - основа терапии</li>
+                            <li>Контроль кальция <strong>2-4 раза в год</strong> при стабильном состоянии</li>
+                            <li>Мониторинг функции почек и уровня витамина D</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Неотложные состояния</h3>
+                        <div class="motto danger">Требуют немедленного вмешательства</div>
+                        
+                        <div style="background: var(--glass); border-radius: 12px; padding: 20px;">
+                            <div style="display: grid; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--glass-border);">
+                                    <span style="font-weight: 600;">Гиперкальциемический криз</span>
+                                    <span style="color: var(--danger); font-weight: 700;">Ca > 3.5 ммоль/л</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--glass-border);">
+                                    <span style="font-weight: 600;">Тетания</span>
+                                    <span style="color: var(--warning); font-weight: 700;">Ca < 1.8 ммоль/л</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+                                    <span style="font-weight: 600;">Острая почечная недостаточность</span>
+                                    <span style="color: var(--danger); font-weight: 700;">СКФ < 15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // База знаний по паращитовидным железам
+        const PARATHYROID_KNOWLEDGE = {
+            diagnoseForm: function(pth, calcium, phosphorus) {
+                if (!pth || !calcium) return null;
+
+                let form = "";
+                let severity = "";
+                let recommendations = [];
+
+                if (pth > 65 && calcium > 2.55) {
+                    form = "🔴 ПЕРВИЧНЫЙ ГИПЕРПАРАТИРЕОЗ";
+                    severity = "danger";
+                    recommendations = [
+                        "Сцинтиграфия с MIBI для локализации аденомы",
+                        "УЗИ паращитовидных желез",
+                        "Консультация эндокринного хирурга",
+                        "Денситометрия для оценки остеопороза",
+                        "Анализ мочи на суточную экскрецию кальция"
+                    ];
+                } else if (pth > 65 && calcium <= 2.55) {
+                    form = "🟡 ВТОРИЧНЫЙ ГИПЕРПАРАТИРЕОЗ";
+                    severity = "warning";
+                    recommendations = [
+                        "Исследование витамина D (25-ОН)",
+                        "Оценка функции почек (креатинин, СКФ)",
+                        "Коррекция дефицита витамина D",
+                        "Лечение основного заболевания"
+                    ];
+                } else if (pth < 15 && calcium < 2.15) {
+                    form = "🔴 ГИПОПАРАТИРЕОЗ";
+                    severity = "danger";
+                    recommendations = [
+                        "Срочная коррекция гипокальциемии",
+                        "Назначение препаратов кальция и витамина D",
+                        "Контроль магния в крови",
+                        "ЭКГ для оценки интервала QT"
+                    ];
+                } else {
+                    form = "🟢 НОРМА";
+                    severity = "success";
+                    recommendations = ["Плановое наблюдение"];
+                }
+
+                // Учет уровня фосфора
+                if (phosphorus < 0.87 && form.includes("ГИПЕРПАРАТИРЕОЗ")) {
+                    recommendations.push("Снижение фосфора характерно для первичного гиперпаратиреоза");
+                }
+
+                return { form, severity, recommendations };
+            },
+
+            calculateIonizedCalcium: function(totalCa, albumin, ph) {
+                // Формула коррекции кальция по альбумину
+                const correctedCa = totalCa + 0.02 * (40 - albumin);
+                
+                // Учет pH (упрощенная формула)
+                let ionizedCa;
+                if (ph > 7.45) {
+                    ionizedCa = correctedCa * 0.45; // алкалоз снижает ионизированный кальций
+                } else if (ph < 7.35) {
+                    ionizedCa = correctedCa * 0.55; // ацидоз повышает ионизированный кальций
+                } else {
+                    ionizedCa = correctedCa * 0.50; // нормальный pH
+                }
+
+                return {
+                    corrected: correctedCa.toFixed(2),
+                    ionized: ionizedCa.toFixed(2),
+                    status: ionizedCa > 1.15 ? "high" : ionizedCa < 1.0 ? "low" : "normal"
+                };
+            },
+
+            evaluateHyperparathyroidism: function(pth, calcium, phosphorus, age, creatinine) {
+                const recommendations = [];
+                let surgeryIndicated = false;
+                let criteria = [];
+
+                // Критерии NIH для хирургического лечения
+                if (calcium > 2.85) {
+                    criteria.push("Кальций > 0.25 ммоль/л выше нормы");
+                    surgeryIndicated = true;
+                }
+                if (age < 50) {
+                    criteria.push("Возраст < 50 лет");
+                    surgeryIndicated = true;
+                }
+                if (creatinine > 120 || (age > 50 && creatinine > 90)) {
+                    criteria.push("Снижение функции почек");
+                    surgeryIndicated = true;
+                }
+                if (calcium > 2.7) {
+                    criteria.push("Выраженная гиперкальциемия");
+                    surgeryIndicated = true;
+                }
+
+                if (surgeryIndicated) {
+                    recommendations.push("💊 <strong>ПОКАЗАНА КОНСУЛЬТАЦИЯ ХИРУРГА</strong>");
+                    recommendations.push("Паратиреоидэктомия - метод выбора");
+                } else {
+                    recommendations.push("💊 <strong>КОНСЕРВАТИВНОЕ ЛЕЧЕНИЕ</strong>");
+                    recommendations.push("Наблюдение с контролем каждые 6-12 месяцев");
+                    recommendations.push("Гидратация, ограничение приема кальция");
+                }
+
+                return { 
+                    surgeryIndicated, 
+                    criteria, 
+                    recommendations 
+                };
+            }
+        };
+
+        // Основные функции
+        function diagnoseParathyroid() {
+            const pth = parseFloat(document.getElementById('diagnosisPth').value);
+            const calcium = parseFloat(document.getElementById('diagnosisCa').value);
+            const phosphorus = parseFloat(document.getElementById('diagnosisPhos').value);
+            
+            if (!pth || !calcium) {
+                alert('Введите значения ПТГ и кальция для диагностики');
+                return;
+            }
+            
+            const result = PARATHYROID_KNOWLEDGE.diagnoseForm(pth, calcium, phosphorus);
+            
+            if (result) {
+                let resultHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 1.5em; font-weight: 800; color: ${
+                            result.severity === 'danger' ? 'var(--danger)' : 
+                            result.severity === 'warning' ? 'var(--warning)' : 'var(--success)'
+                        };">${result.form}</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>📊 Лабораторные показатели:</h4>
+                        <div style="display: grid; gap: 8px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>ПТГ:</span>
+                                <strong>${pth} пг/мл</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Кальций общий:</span>
+                                <strong>${calcium} ммоль/л</strong>
+                            </div>
+                            ${phosphorus ? `<div style="display: flex; justify-content: space-between;">
+                                <span>Фосфор:</span>
+                                <strong>${phosphorus} ммоль/л</strong>
+                            </div>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                        <h4>💡 Рекомендации:</h4>
+                        <ul>
+                            ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                document.getElementById('diagnosisResult').innerHTML = resultHTML;
+                document.getElementById('diagnosisResult').style.display = 'block';
+            }
+        }
+
+        function calculateIonizedCalcium() {
+            const totalCa = parseFloat(document.getElementById('calcTotalCa').value);
+            const albumin = parseFloat(document.getElementById('calcAlbumin').value);
+            const ph = parseFloat(document.getElementById('calcPh').value);
+            
+            if (!totalCa || !albumin || !ph) {
+                alert('Заполните все поля для расчета');
+                return;
+            }
+            
+            const result = PARATHYROID_KNOWLEDGE.calculateIonizedCalcium(totalCa, albumin, ph);
+            
+            let statusText = "";
+            let statusColor = "";
+            
+            if (result.status === "high") {
+                statusText = "Повышен";
+                statusColor = "var(--danger)";
+            } else if (result.status === "low") {
+                statusText = "Понижен";
+                statusColor = "var(--warning)";
+            } else {
+                statusText = "Норма";
+                statusColor = "var(--success)";
+            }
+            
+            document.getElementById('calciumResult').innerHTML = `
+                <h4>📊 Результаты расчета:</h4>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Кальций общий (скорректированный):</span>
+                            <strong>${result.corrected} ммоль/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Кальций ионизированный (расчетный):</span>
+                            <strong style="color: ${statusColor}">${result.ionized} ммоль/л (${statusText})</strong>
+                        </div>
+                    </div>
+                </div>
+                <div style="color: var(--text-light); font-size: 0.9em;">
+                    <strong>Норма ионизированного кальция:</strong> 1.0-1.15 ммоль/л
+                </div>
+            `;
+            document.getElementById('calciumResult').style.display = 'block';
+        }
+
+        function evaluateHyperparathyroidism() {
+            const pth = parseFloat(document.getElementById('hyperPth').value);
+            const calcium = parseFloat(document.getElementById('hyperCa').value);
+            const phosphorus = parseFloat(document.getElementById('hyperPhos').value);
+            const age = parseInt(document.getElementById('hyperAge').value);
+            const creatinine = parseFloat(document.getElementById('hyperCreatinine').value);
+            
+            if (!pth || !calcium || !age || !creatinine) {
+                alert('Заполните все обязательные поля');
+                return;
+            }
+            
+            const result = PARATHYROID_KNOWLEDGE.evaluateHyperparathyroidism(pth, calcium, phosphorus, age, creatinine);
+            
+            let resultHTML = `
+                <h4>📋 Оценка гиперпаратиреоза</h4>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.3em; font-weight: 800; color: ${
+                            result.surgeryIndicated ? 'var(--danger)' : 'var(--success)'
+                        };">
+                            ${result.surgeryIndicated ? '🔴 ПОКАЗАНО ХИРУРГИЧЕСКОЕ ЛЕЧЕНИЕ' : '🟢 КОНСЕРВАТИВНОЕ ЛЕЧЕНИЕ'}
+                        </div>
+                    </div>
+            `;
+            
+            if (result.criteria.length > 0) {
+                resultHTML += `
+                    <h5>📈 Выявленные критерии:</h5>
+                    <ul>
+                        ${result.criteria.map(crit => `<li>${crit}</li>`).join('')}
+                    </ul>
+                `;
+            }
+            
+            resultHTML += `</div>`;
+            
+            resultHTML += `
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('hyperResult').innerHTML = resultHTML;
+            document.getElementById('hyperResult').style.display = 'block';
+        }
+
+        // Вспомогательные функции для табов
+        function initTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeTab = document.getElementById(tabName);
+            if (activeTab) activeTab.classList.add('active');
+            
+            const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeButton) activeButton.classList.add('active');
+        }
+
+        // Заглушки для остальных функций
+        function calculateHypoparathyroidismTherapy() {
+            document.getElementById('hypoResult').innerHTML = `
+                <h4>💊 Рекомендации по терапии:</h4>
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                    <p>Кальций карбонат 1000-2000 мг 3 раза в день во время еды</p>
+                    <p>Кальцитриол 0.25-1.0 мкг/сут под контролем кальция</p>
+                    <p>Контроль кальция через 1 неделю, затем каждые 1-3 месяца</p>
+                </div>
+            `;
+            document.getElementById('hypoResult').style.display = 'block';
+        }
+
+        function calculateVitaminDCorrection() {
+            document.getElementById('vitaminDResult').innerHTML = `
+                <h4>🌞 Коррекция витамина D:</h4>
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 8px;">
+                    <p>Насыщающая доза: 50,000 МЕ еженедельно в течение 8 недель</p>
+                    <p>Поддерживающая доза: 2000-4000 МЕ/сут</p>
+                    <p>Контроль через 3 месяца после начала лечения</p>
+                </div>
+            `;
+            document.getElementById('vitaminDResult').style.display = 'block';
+        }
+
+        function evaluateSurgeryIndications() {
+            document.getElementById('surgeryResult').innerHTML = `
+                <h4>🔪 Показания к операции:</h4>
+                <div style="background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 8px;">
+                    <p>✅ Показана консультация эндокринного хирурга</p>
+                    <p>Рекомендована паратиреоидэктомия</p>
+                    <p>Предоперационная локализация: сцинтиграфия с MIBI + УЗИ</p>
+                </div>
+            `;
+            document.getElementById('surgeryResult').style.display = 'block';
+        }
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabs();
+        });
+    </script>
+</body>
+</html>
