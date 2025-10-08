@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нарушения обмена веществ - Эндокринолог PRO</title>
+    <title>Сахарный диабет | Эндокринолог PRO - Современная диагностика и лечение</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,70 +13,126 @@
         }
 
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
-            --secondary: #0d9488;
-            --accent: #10b981;
-            --success: #059669;
-            --warning: #d97706;
-            --danger: #dc2626;
-            --light: #f0fdf4;
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --primary-light: #ef4444;
+            --secondary: #ea580c;
+            --secondary-dark: #c2410c;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #fef2f2;
             --dark: #1e293b;
             --text: #374151;
             --text-light: #6b7280;
+            --border: #fecaca;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #86efac 0%, #4ade80 100%);
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
             color: var(--text);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            right: -100px;
+            animation-delay: -5s;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 10%;
+            animation-delay: -10s;
+            animation-duration: 30s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 50px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        }
-
         .header h1 {
-            font-size: 2.8em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            position: relative;
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .header p {
-            font-size: 1.3em;
+            font-size: 1.4em;
             opacity: 0.95;
             font-weight: 300;
-            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .main-menu {
@@ -83,32 +140,27 @@
             justify-content: center;
             background: var(--dark);
             padding: 20px;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
-            backdrop-filter: blur(10px);
         }
 
-        .main-menu a {
-            padding: 12px 24px;
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
             text-decoration: none;
             color: white;
             font-weight: 600;
             border-radius: 50px;
             transition: all 0.3s ease;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.95em;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .main-menu a:hover {
+        .nav-btn:hover, .nav-btn.active {
             background: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
-        }
-
-        .main-menu a.active {
-            background: var(--primary);
-            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
         }
 
         .content {
@@ -116,195 +168,164 @@
         }
 
         .page-title {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: var(--dark);
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
         }
 
         .page-subtitle {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: var(--text-light);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
-        .disease-grid {
+        /* СТИЛИ ДЛЯ ЧЕК-ЛИСТА СИМПТОМОВ */
+        .symptoms-checklist {
+            margin-bottom: 50px;
+        }
+
+        .checklist-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
-        .disease-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid #bbf7d0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            position: relative;
-            overflow: hidden;
+        .symptom-system {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
         }
 
-        .disease-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-
-        .disease-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(5, 150, 105, 0.25);
+        .symptom-system:hover {
             border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
-        .disease-card h3 {
+        .system-title {
             color: var(--dark);
+            font-size: 1.4em;
             margin-bottom: 20px;
-            font-size: 1.5em;
-            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .disease-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 12px;
+        .symptoms-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .symptom-item:hover {
+            background: #fef2f2;
+            border-color: var(--primary);
+        }
+
+        .symptom-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-light);
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .symptom-item input[type="checkbox"]:checked + .checkmark {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .symptom-item input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
             color: white;
-        }
-
-        .disease-card ul {
-            margin: 20px 0;
-            padding-left: 20px;
-        }
-
-        .disease-card li {
-            margin-bottom: 10px;
-            color: var(--text);
-            position: relative;
-            padding-left: 10px;
-        }
-
-        .disease-card li::before {
-            content: '•';
-            color: var(--primary);
             font-weight: bold;
-            position: absolute;
-            left: -15px;
+            font-size: 14px;
+        }
+
+        .symptom-item input[type="checkbox"]:checked ~ .symptom-text {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .symptom-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .checklist-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
+            gap: 10px;
+            padding: 16px 32px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 12px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
             cursor: pointer;
-            margin-top: 15px;
-            font-size: 0.95em;
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
         }
 
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
         }
 
-        .calculator-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid #bbf7d0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .calculator-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(5, 150, 105, 0.15);
-        }
-
-        .calculator-card h3 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-group {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #bbf7d0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .form-group:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 10px;
-            font-size: 1em;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #bbf7d0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f0fdf4;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
         }
 
         .result-box {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            background: #f0fdf4;
             padding: 25px;
             border-radius: 12px;
-            margin-top: 20px;
-            border: 1px solid #bae6fd;
+            margin-top: 25px;
+            border: 2px solid #bbf7d0;
             display: none;
             animation: slideUp 0.5s ease;
         }
@@ -312,7 +333,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -320,773 +341,1474 @@
             }
         }
 
-        .info-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            padding: 35px;
-            border-radius: 16px;
-            margin: 35px 0;
-            border: 1px solid #bbf7d0;
+        .selected-symptoms {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
         }
 
-        .info-section h3 {
+        .system-group {
+            margin-bottom: 20px;
+        }
+
+        .system-group-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        .symptom-line {
+            padding: 5px 0;
+            border-bottom: 1px solid #fef2f2;
+        }
+
+        .symptom-line:last-child {
+            border-bottom: none;
+        }
+
+        /* ИНФО-БЛОКИ И КАЛЬКУЛЯТОРЫ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 35px 30px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card h3 {
             color: var(--dark);
             margin-bottom: 20px;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
         }
 
-        th, td {
-            border: 1px solid #bbf7d0;
-            padding: 16px;
-            text-align: left;
+        .info-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid #fecaca;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text);
+            transition: color 0.3s ease;
         }
 
-        th {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-weight: 600;
-            font-size: 0.95em;
+        .info-card li:hover {
+            color: var(--dark);
         }
 
-        tr:nth-child(even) {
-            background: #f0fdf4;
+        .info-card li:before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
         }
 
-        tr:hover {
-            background: #dcfce7;
+        .info-card li:hover:before {
+            transform: translateX(3px);
+            color: var(--accent);
         }
 
-        .feature-grid {
+        .calculators-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
         }
 
-        .feature-item {
-            text-align: center;
-            padding: 25px;
+        .calculator-card {
             background: white;
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .calculator-card h3 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group {
+            background: #fef2f2;
+            border: 1px solid var(--border);
             border-radius: 12px;
-            border: 1px solid #bbf7d0;
+            padding: 20px;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
         }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.1);
+        .form-group:hover {
+            border-color: var(--primary);
+            background: #fee2e2;
         }
 
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
 
-        .calculator-value {
-            font-size: 2.5em;
-            font-weight: 800;
-            color: var(--primary);
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+        }
+
+        .range-info {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .diagnostic-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #7dd3fc;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 24px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #fef2f2;
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .clinical-guide {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #bbf7d0;
+            box-shadow: var(--shadow);
+        }
+
+        .motto {
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            margin: 15px 0;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.2em;
         }
 
-        .risk-indicator {
+        .motto.danger { 
+            background: rgba(220, 38, 38, 0.1); 
+            color: var(--danger); 
+            border: 2px solid rgba(220, 38, 38, 0.2);
+        }
+        .motto.warning { 
+            background: rgba(245, 158, 11, 0.1); 
+            color: var(--warning); 
+            border: 2px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .target-values {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .medication-card {
+            background: rgba(220, 38, 38, 0.05);
+            border: 2px solid rgba(220, 38, 38, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .dose-recommendation {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .interaction-warning {
+            background: rgba(239, 68, 68, 0.05);
+            border: 2px solid rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-icon {
+            color: var(--warning);
+            margin-right: 8px;
+        }
+
+        .danger-icon {
+            color: var(--danger);
+            margin-right: 8px;
+        }
+
+        .targets-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .targets-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .targets-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .targets-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .targets-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .risk-badge {
             display: inline-block;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: 600;
-            margin-left: 10px;
+            margin-left: 8px;
         }
 
-        .risk-low { background: #dcfce7; color: #166534; }
-        .risk-medium { background: #fef3c7; color: #92400e; }
-        .risk-high { background: #fecaca; color: #991b1b; }
+        .risk-low { background: var(--success); color: white; }
+        .risk-moderate { background: var(--warning); color: white; }
+        .risk-high { background: var(--danger); color: white; }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .score-low { color: var(--success); border: 3px solid var(--success); }
+        .score-moderate { color: var(--warning); border: 3px solid var(--warning); }
+        .score-high { color: var(--danger); border: 3px solid var(--danger); }
+
+        .recommendation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
         @media (max-width: 768px) {
             .content {
-                padding: 30px 20px;
+                padding: 30px;
             }
-            
-            .disease-grid, .calculator-grid {
+            .header {
+                padding: 40px 30px;
+            }
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .calculators-grid {
                 grid-template-columns: 1fr;
             }
-            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .checklist-container {
+                grid-template-columns: 1fr;
+            }
             .main-menu {
                 flex-direction: column;
-                align-items: center;
             }
-            
-            .main-menu a {
+            .nav-btn {
                 width: 100%;
-                text-align: center;
+                justify-content: center;
             }
-            
-            .header h1 {
-                font-size: 2.2em;
+            .tab-buttons {
+                flex-direction: column;
+            }
+            .tab-btn {
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>⚖️ ОБМЕН ВЕЩЕСТВ</h1>
-            <p>Комплексная диагностика и коррекция метаболических нарушений</p>
-        </div>
+        <header class="header">
+            <h1><i class="fas fa-syringe"></i> САХАРНЫЙ ДИАБЕТ</h1>
+            <p>Современная диагностика и персонализированное лечение диабета</p>
+        </header>
 
         <nav class="main-menu">
-            <a href="../../index.html">🏠 Главная</a>
-            <a href="../thyroid/index.html">🦋 Щитовидная железа</a>
-            <a href="../diabetes/index.html">💉 Сахарный диабет</a>
-            <a href="index.html" class="active">⚖️ Обмен веществ</a>
-            <a href="../adrenal/index.html">🧠 Надпочечники</a>
+            <a href="../index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="../thyroid/index.html" class="nav-btn">
+                <i class="fas fa-butterfly"></i> Щитовидная железа
+            </a>
+            <a href="index.html" class="nav-btn active">
+                <i class="fas fa-syringe"></i> Сахарный диабет
+            </a>
+            <a href="../metabolic/index.html" class="nav-btn">
+                <i class="fas fa-weight-scale"></i> Обмен веществ
+            </a>
+            <a href="../adrenal/index.html" class="nav-btn">
+                <i class="fas fa-brain"></i> Надпочечники
+            </a>
         </nav>
 
-        <div class="content">
-            <h1 class="page-title">Нарушения обмена веществ</h1>
-            <p class="page-subtitle">Диагностика, лечение и профилактика метаболических заболеваний</p>
+        <main class="content">
+            <!-- ЧЕК-ЛИСТ СИМПТОМОВ -->
+            <div class="symptoms-checklist">
+                <h2 class="page-title">📋 Чек-лист симптомов диабета</h2>
+                <p class="page-subtitle">Отмечайте симптомы пациента для формирования клинической картины</p>
 
-            <!-- Быстрый доступ -->
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <h3>Ожирение</h3>
-                    <p>Оценка ИМТ и состава тела</p>
+                <div class="checklist-container">
+                    <!-- Классические симптомы -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-bolt"></i> Классические симптомы
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Классические симптомы" data-symptom="Полиурия: Учащенное мочеиспускание">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Полиурия: Учащенное мочеиспускание</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Классические симптомы" data-symptom="Полидипсия: Повышенная жажда">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Полидипсия: Повышенная жажда</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Классические симптомы" data-symptom="Полифагия: Повышенный аппетит">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Полифагия: Повышенный аппетит</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Классические симптомы" data-symptom="Снижение массы тела">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Снижение массы тела</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Общие симптомы -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-exclamation-triangle"></i> Общие симптомы
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Общие симптомы" data-symptom="Слабость, утомляемость">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Слабость, утомляемость</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Общие симптомы" data-symptom="Сухость во рту">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Сухость во рту</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Общие симптомы" data-symptom="Кожный зуд">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Кожный зуд</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Общие симптомы" data-symptom="Затуманенное зрение">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Затуманенное зрение</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Осложнения -->
+                    <div class="symptom-system">
+                        <h3 class="system-title">
+                            <i class="fas fa-heartbeat"></i> Осложнения
+                        </h3>
+                        <div class="symptoms-list">
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Осложнения" data-symptom="Онемение или покалывание в конечностях">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Онемение или покалывание в конечностях</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Осложнения" data-symptom="Медленное заживление ран">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Медленное заживление ран</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Осложнения" data-symptom="Частые инфекции">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Частые инфекции</span>
+                            </label>
+                            <label class="symptom-item">
+                                <input type="checkbox" data-system="Осложнения" data-symptom="Нарушение эрекции у мужчин">
+                                <span class="checkmark"></span>
+                                <span class="symptom-text">Нарушение эрекции у мужчин</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Метаболический синдром</h3>
-                    <p>Комплексная диагностика</p>
+
+                <div class="checklist-actions">
+                    <button class="btn btn-success" onclick="showSelectedSymptoms()">
+                        <i class="fas fa-copy"></i> Показать выбранные симптомы
+                    </button>
+                    <button class="btn btn-secondary" onclick="copySelectedSymptoms()">
+                        <i class="fas fa-clipboard"></i> Скопировать в буфер обмена
+                    </button>
+                    <button class="btn" onclick="clearAllSymptoms()">
+                        <i class="fas fa-trash"></i> Очистить все
+                    </button>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🩸</div>
-                    <h3>Дислипидемия</h3>
-                    <p>Липидный профиль и риски</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🍎</div>
-                    <h3>Питание</h3>
-                    <p>Диетотерапия и коррекция</p>
+
+                <div id="symptomsResult" class="result-box">
+                    <h4>Выбранные симптомы:</h4>
+                    <div id="selectedSymptomsList" class="selected-symptoms"></div>
                 </div>
             </div>
 
-            <div class="disease-grid">
-                <div class="disease-card">
-                    <h3><div class="disease-icon">🍎</div> Ожирение</h3>
-                    <p>Избыточное накопление жировой ткани:</p>
+            <!-- ОСНОВНОЕ СОДЕРЖАНИЕ -->
+            <h1 class="page-title">Сахарный диабет</h1>
+            <p class="page-subtitle">Современный подход к диагностике и лечению сахарного диабета</p>
+
+            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-microscope"></i> Лабораторная диагностика</h3>
                     <ul>
-                        <li>Расчет ИМТ и окружности талии</li>
-                        <li>Оценка состава тела</li>
-                        <li>Диетотерапия и физическая активность</li>
-                        <li>Медикаментозное лечение и бариатрия</li>
+                        <li><strong>Глюкоза крови натощак</strong> ≥ 7.0 ммоль/л</li>
+                        <li><strong>Глюкоза через 2 часа ПГТТ</strong> ≥ 11.1 ммоль/л</li>
+                        <li><strong>HbA1c</strong> ≥ 6.5%</li>
+                        <li><strong>С-пептид</strong> - оценка функции β-клеток</li>
+                        <li><strong>Антитела GAD, IA-2</strong> - СД 1 типа</li>
+                        <li><strong>Инсулин</strong> - оценка инсулинорезистентности</li>
                     </ul>
-                    <a href="obesity.html" class="btn">📖 Подробнее</a>
                 </div>
 
-                <div class="disease-card">
-                    <h3><div class="disease-icon">🔄</div> Метаболический синдром</h3>
-                    <p>Комплекс метаболических нарушений:</p>
+                <div class="info-card">
+                    <h3><i class="fas fa-bullseye"></i> Критерии диагностики</h3>
                     <ul>
-                        <li>Абдоминальное ожирение</li>
-                        <li>Инсулинорезистентность</li>
-                        <li>Дислипидемия</li>
-                        <li>Артериальная гипертензия</li>
+                        <li><strong>СД 1 типа:</strong><br>Острое начало, кетоз, антитела</li>
+                        <li><strong>СД 2 типа:</strong><br>Постепенное начало, ожирение, инсулинорезистентность</li>
+                        <li><strong>Предиабет:</strong><br>НТГ или НГН</li>
+                        <li><strong>Гестационный диабет:</strong><br>Диабет беременных</li>
                     </ul>
-                    <a href="syndrome.html" class="btn">📖 Подробнее</a>
                 </div>
 
-                <div class="disease-card">
-                    <h3><div class="disease-icon">🩸</div> Дислипидемия</h3>
-                    <p>Нарушения липидного обмена:</p>
+                <div class="info-card">
+                    <h3><i class="fas fa-search-plus"></i> Дополнительные исследования</h3>
                     <ul>
-                        <li>Повышение холестерина ЛПНП</li>
-                        <li>Снижение холестерина ЛПВП</li>
-                        <li>Повышение триглицеридов</li>
-                        <li>Статины и другие гиполипидемические средства</li>
+                        <li><strong>Липидный профиль</strong></li>
+                        <li><strong>Функция почек (креатинин, СКФ)</strong></li>
+                        <li><strong>Микроальбуминурия</strong></li>
+                        <li><strong>Осмотр офтальмолога</strong></li>
+                        <li><strong>ЭКГ, УЗИ сосудов</strong></li>
                     </ul>
-                    <a href="dyslipidemia.html" class="btn">📖 Подробнее</a>
                 </div>
             </div>
 
-            <!-- Калькуляторы для метаболических нарушений -->
-            <div class="info-section">
-                <h3>🧮 Калькуляторы метаболических показателей</h3>
-                <p class="section-subtitle">Инструменты для оценки рисков и коррекции нарушений</p>
+            <!-- ДИАГНОСТИКА И ЛЕЧЕНИЕ -->
+            <div class="diagnostic-section">
+                <h2 class="section-title"><i class="fas fa-stethoscope"></i> Диагностика и лечение</h2>
+                <p class="section-subtitle">Комплексная оценка и персонализированные рекомендации</p>
                 
-                <div class="calculator-grid">
-                    <!-- Калькулятор ИМТ -->
-                    <div class="calculator-card">
-                        <h3>⚖️ Индекс массы тела</h3>
-                        <div class="form-group">
-                            <label for="height">Рост (см)</label>
-                            <input type="number" id="height" placeholder="Например: 175">
-                        </div>
-                        <div class="form-group">
-                            <label for="bmiWeight">Вес (кг)</label>
-                            <input type="number" id="bmiWeight" placeholder="Например: 70">
-                        </div>
-                        <button class="btn" onclick="calculateBMI()">📊 Рассчитать ИМТ</button>
-                        <div id="bmiResult" class="result-box"></div>
-                    </div>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="diagnosis-tab">
+                        <i class="fas fa-diagnoses"></i> Диагностика
+                    </button>
+                    <button class="tab-btn" data-tab="treatment-tab">
+                        <i class="fas fa-capsules"></i> Лечение
+                    </button>
+                    <button class="tab-btn" data-tab="insulin-tab">
+                        <i class="fas fa-syringe"></i> Инсулинотерапия
+                    </button>
+                    <button class="tab-btn" data-tab="complications-tab">
+                        <i class="fas fa-heartbeat"></i> Осложнения
+                    </button>
+                </div>
 
-                    <!-- Калькулятор основного обмена -->
-                    <div class="calculator-card">
-                        <h3>🔥 Основной обмен</h3>
-                        <div class="form-group">
-                            <label for="bmrWeight">Вес (кг)</label>
-                            <input type="number" id="bmrWeight" placeholder="Например: 70">
+                <!-- ВКЛАДКА ДИАГНОСТИКА -->
+                <div id="diagnosis-tab" class="tab-content active">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-diagnoses"></i> Диагностика диабета</h3>
+                            <div class="form-group">
+                                <label for="fastingGlucose">Глюкоза натощак (ммоль/л)</label>
+                                <input type="number" step="0.1" id="fastingGlucose" placeholder="5.6" value="8.5">
+                                <div class="range-info">Норма: < 6.1 ммоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="hba1c">HbA1c (%)</label>
+                                <input type="number" step="0.1" id="hba1c" placeholder="5.6" value="7.8">
+                                <div class="range-info">Норма: < 6.0%</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="glucose2h">Глюкоза через 2 часа ПГТТ (ммоль/л)</label>
+                                <input type="number" step="0.1" id="glucose2h" placeholder="7.8" value="12.5">
+                                <div class="range-info">Норма: < 7.8 ммоль/л</div>
+                            </div>
+                            <button class="btn" onclick="diagnoseDiabetes()">
+                                <i class="fas fa-search"></i> Диагностировать
+                            </button>
+                            <div id="diagnosisResult" class="result-box"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="bmrHeight">Рост (см)</label>
-                            <input type="number" id="bmrHeight" placeholder="Например: 175">
-                        </div>
-                        <div class="form-group">
-                            <label for="bmrAge">Возраст (лет)</label>
-                            <input type="number" id="bmrAge" placeholder="Например: 35">
-                        </div>
-                        <div class="form-group">
-                            <label for="bmrGender">Пол</label>
-                            <select id="bmrGender">
-                                <option value="male">Мужской</option>
-                                <option value="female">Женский</option>
-                            </select>
-                        </div>
-                        <button class="btn" onclick="calculateBMR()">🔥 Рассчитать ОО</button>
-                        <div id="bmrResult" class="result-box"></div>
-                    </div>
 
-                    <!-- Калькулятор риска метаболического синдрома -->
-                    <div class="calculator-card">
-                        <h3>🔄 Риск метаболического синдрома</h3>
-                        <div class="form-group">
-                            <label for="waist">Окружность талии (см)</label>
-                            <input type="number" id="waist" placeholder="Например: 95">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-calculator"></i> Расчет индексов</h3>
+                            <div class="form-group">
+                                <label for="height">Рост (см)</label>
+                                <input type="number" id="height" placeholder="175" value="175">
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Вес (кг)</label>
+                                <input type="number" id="weight" placeholder="70" value="85">
+                            </div>
+                            <div class="form-group">
+                                <label for="waist">Окружность талии (см)</label>
+                                <input type="number" id="waist" placeholder="80" value="102">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Пол</label>
+                                <select id="gender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="calculateIndices()">
+                                <i class="fas fa-calculator"></i> Рассчитать индексы
+                            </button>
+                            <div id="indicesResult" class="result-box"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="gender">Пол</label>
-                            <select id="gender">
-                                <option value="male">Мужской</option>
-                                <option value="female">Женский</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="fastingGlucose">Глюкоза натощак (ммоль/л)</label>
-                            <input type="number" step="0.1" id="fastingGlucose" placeholder="Например: 5.5">
-                        </div>
-                        <div class="form-group">
-                            <label for="triglycerides">Триглицериды (ммоль/л)</label>
-                            <input type="number" step="0.1" id="triglycerides" placeholder="Например: 1.8">
-                        </div>
-                        <button class="btn" onclick="calculateMetabolicRisk()">🔄 Оценить риск</button>
-                        <div id="metabolicResult" class="result-box"></div>
                     </div>
+                </div>
 
-                    <!-- Калькулятор липидного профиля -->
-                    <div class="calculator-card">
-                        <h3>🩸 Оценка липидного профиля</h3>
-                        <div class="form-group">
-                            <label for="totalCholesterol">Общий холестерин (ммоль/л)</label>
-                            <input type="number" step="0.1" id="totalCholesterol" placeholder="Например: 5.2">
+                <!-- ВКЛАДКА ЛЕЧЕНИЕ -->
+                <div id="treatment-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-capsules"></i> Подбор терапии СД 2 типа</h3>
+                            <div class="form-group">
+                                <label for="treatmentHbA1c">HbA1c (%)</label>
+                                <input type="number" step="0.1" id="treatmentHbA1c" placeholder="7.5" value="8.2">
+                            </div>
+                            <div class="form-group">
+                                <label for="treatmentAge">Возраст пациента</label>
+                                <input type="number" id="treatmentAge" placeholder="55" value="55">
+                            </div>
+                            <div class="form-group">
+                                <label for="treatmentComplications">Наличие осложнений</label>
+                                <select id="treatmentComplications">
+                                    <option value="none">Нет</option>
+                                    <option value="cvd">ССЗ</option>
+                                    <option value="ckd">ХБП</option>
+                                    <option value="both">ССЗ + ХБП</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="calculateTreatment()">
+                                <i class="fas fa-calculator"></i> Подобрать терапию
+                            </button>
+                            <div id="treatmentResult" class="result-box"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="ldlCholesterol">Холестерин ЛПНП (ммоль/л)</label>
-                            <input type="number" step="0.1" id="ldlCholesterol" placeholder="Например: 3.3">
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-exchange-alt"></i> Коррекция терапии</h3>
+                            <div class="form-group">
+                                <label for="currentHbA1c">Текущий HbA1c (%)</label>
+                                <input type="number" step="0.1" id="currentHbA1c" placeholder="7.8" value="7.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetHbA1c">Целевой HbA1c (%)</label>
+                                <select id="targetHbA1c">
+                                    <option value="6.5">6.5% (молодые)</option>
+                                    <option value="7.0" selected>7.0% (взрослые)</option>
+                                    <option value="7.5">7.5% (пожилые)</option>
+                                    <option value="8.0">8.0% (с осложнениями)</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="adjustTreatment()">
+                                <i class="fas fa-adjust"></i> Рассчитать коррекцию
+                            </button>
+                            <div id="adjustmentResult" class="result-box"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="hdlCholesterol">Холестерин ЛПВП (ммоль/л)</label>
-                            <input type="number" step="0.1" id="hdlCholesterol" placeholder="Например: 1.2">
+                    </div>
+                </div>
+
+                <!-- ВКЛАДКА ИНСУЛИНОТЕРАПИЯ -->
+                <div id="insulin-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-syringe"></i> Расчет дозы инсулина</h3>
+                            <div class="form-group">
+                                <label for="insulinWeight">Вес пациента (кг)</label>
+                                <input type="number" id="insulinWeight" placeholder="70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="insulinType">Тип диабета</label>
+                                <select id="insulinType">
+                                    <option value="type1">СД 1 типа</option>
+                                    <option value="type2">СД 2 типа</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="insulinResistance">Инсулинорезистентность</label>
+                                <select id="insulinResistance">
+                                    <option value="low">Низкая</option>
+                                    <option value="medium" selected>Средняя</option>
+                                    <option value="high">Высокая</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="calculateInsulinDose()">
+                                <i class="fas fa-calculator"></i> Рассчитать дозу
+                            </button>
+                            <div id="insulinResult" class="result-box"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="patientRisk">Группа риска пациента</label>
-                            <select id="patientRisk">
-                                <option value="low">Низкий риск</option>
-                                <option value="medium">Умеренный риск</option>
-                                <option value="high">Высокий риск</option>
-                                <option value="veryHigh">Очень высокий риск</option>
-                            </select>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-calculator"></i> Коррекция дозы инсулина</h3>
+                            <div class="form-group">
+                                <label for="currentInsulin">Текущая доза инсулина (ЕД/сут)</label>
+                                <input type="number" id="currentInsulin" placeholder="40" value="40">
+                            </div>
+                            <div class="form-group">
+                                <label for="avgGlucose">Средняя глюкоза (ммоль/л)</label>
+                                <input type="number" step="0.1" id="avgGlucose" placeholder="8.5" value="8.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetGlucose">Целевая глюкоза (ммоль/л)</label>
+                                <select id="targetGlucose">
+                                    <option value="6.5">6.5 ммоль/л</option>
+                                    <option value="7.0" selected>7.0 ммоль/л</option>
+                                    <option value="7.5">7.5 ммоль/л</option>
+                                    <option value="8.0">8.0 ммоль/л</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="adjustInsulinDose()">
+                                <i class="fas fa-adjust"></i> Корректировать дозу
+                            </button>
+                            <div id="insulinAdjustmentResult" class="result-box"></div>
                         </div>
-                        <button class="btn" onclick="calculateLipidProfile()">🩸 Оценить профиль</button>
-                        <div id="lipidResult" class="result-box"></div>
+                    </div>
+                </div>
+
+                <!-- ВКЛАДКА ОСЛОЖНЕНИЯ -->
+                <div id="complications-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-heartbeat"></i> Оценка риска осложнений</h3>
+                            <div class="form-group">
+                                <label for="complicationHbA1c">HbA1c (%)</label>
+                                <input type="number" step="0.1" id="complicationHbA1c" placeholder="7.0" value="7.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="complicationDuration">Длительность диабета (лет)</label>
+                                <input type="number" id="complicationDuration" placeholder="5" value="8">
+                            </div>
+                            <div class="form-group">
+                                <label for="complicationBP">Артериальное давление (мм рт.ст.)</label>
+                                <input type="text" id="complicationBP" placeholder="130/80" value="145/85">
+                            </div>
+                            <div class="form-group">
+                                <label for="complicationCholesterol">Холестерин ЛПНП (ммоль/л)</label>
+                                <input type="number" step="0.1" id="complicationCholesterol" placeholder="2.6" value="3.2">
+                            </div>
+                            <button class="btn" onclick="assessComplicationRisk()">
+                                <i class="fas fa-calculator"></i> Оценить риск
+                            </button>
+                            <div id="complicationResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-kidneys"></i> Расчет СКФ</h3>
+                            <div class="form-group">
+                                <label for="gfrCreatinine">Креатинин (мкмоль/л)</label>
+                                <input type="number" id="gfrCreatinine" placeholder="80" value="95">
+                            </div>
+                            <div class="form-group">
+                                <label for="gfrAge">Возраст (лет)</label>
+                                <input type="number" id="gfrAge" placeholder="55" value="55">
+                            </div>
+                            <div class="form-group">
+                                <label for="gfrGender">Пол</label>
+                                <select id="gfrGender">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="calculateGFR()">
+                                <i class="fas fa-calculator"></i> Рассчитать СКФ
+                            </button>
+                            <div id="gfrResult" class="result-box"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Критерии метаболического синдрома -->
-            <div class="info-section">
-                <h3>📊 Критерии метаболического синдрома</h3>
-                <table>
-                    <tr>
-                        <th>Критерий</th>
-                        <th>Пороговое значение</th>
-                        <th>Клиническое значение</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Абдоминальное ожирение</strong></td>
-                        <td>ОТ > 94 см (муж), > 80 см (жен)</td>
-                        <td>Основной критерий метаболического синдрома</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Артериальное давление</strong></td>
-                        <td>≥ 130/85 мм рт.ст.</td>
-                        <td>или прием антигипертензивных препаратов</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Глюкоза натощак</strong></td>
-                        <td>≥ 6.1 ммоль/л</td>
-                        <td>или ранее диагностированный диабет 2 типа</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Триглицериды</strong></td>
-                        <td>≥ 1.7 ммоль/л</td>
-                        <td>или прием гиполипидемических препаратов</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Холестерин ЛПВП</strong></td>
-                        <td>&lt; 1.0 ммоль/л (муж), &lt; 1.2 ммоль/л (жен)</td>
-                        <td>Снижение "хорошего" холестерина</td>
-                    </tr>
-                </table>
-                <p style="margin-top: 15px; font-style: italic; color: var(--text-light);">
-                    💡 Диагноз метаболического синдрома устанавливается при наличии 3 из 5 критериев
-                </p>
-            </div>
+            <!-- КЛИНИЧЕСКИЕ РЕКОМЕНДАЦИИ -->
+            <div class="clinical-guide">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Ведение сахарного диабета: ключевые принципы</h2>
+                <p class="section-subtitle">Индивидуальный подход для разных клинических ситуаций</p>
 
-            <!-- Целевые значения липидов -->
-            <div class="info-section">
-                <h3>🎯 Целевые значения липидов по группам риска</h3>
-                <table>
-                    <tr>
-                        <th>Группа сердечно-сосудистого риска</th>
-                        <th>Холестерин ЛПНП</th>
-                        <th>НедиЛПНП</th>
-                        <th>АпоВ</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Очень высокий риск</strong></td>
-                        <td>&lt; 1.4 ммоль/л</td>
-                        <td>&lt; 2.0 ммоль/л</td>
-                        <td>&lt; 0.65 г/л</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Высокий риск</strong></td>
-                        <td>&lt; 1.8 ммоль/л</td>
-                        <td>&lt; 2.6 ммоль/л</td>
-                        <td>&lt; 0.80 г/л</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Умеренный риск</strong></td>
-                        <td>&lt; 2.6 ммоль/л</td>
-                        <td>&lt; 3.4 ммоль/л</td>
-                        <td>&lt; 1.0 г/л</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Низкий риск</strong></td>
-                        <td>&lt; 3.0 ммоль/л</td>
-                        <td>&lt; 3.8 ммоль/л</td>
-                        <td>&lt; 1.2 г/л</td>
-                    </tr>
-                </table>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-baby"></i> Беременность и диабет</h3>
+                        <div class="motto danger">Девиз: "Жесткий контроль - здоровый ребенок"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Целевые значения при беременности:</h4>
+                            <ul>
+                                <li><strong>Глюкоза натощак:</strong> < 5.3 ммоль/л</li>
+                                <li><strong>Глюкоза через 1 час после еды:</strong> < 7.8 ммоль/л</li>
+                                <li><strong>Глюкоза через 2 часа после еды:</strong> < 6.7 ммоль/л</li>
+                                <li><strong>HbA1c:</strong> < 6.0%</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Инсулинотерапия</strong> - препарат выбора при беременности</li>
+                            <li>Частый самоконтроль гликемии <strong>6-8 раз в сутки</strong></li>
+                            <li>Контроль веса, АД, функции почек</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-user-friends"></i> Пожилые пациенты</h3>
+                        <div class="motto warning">Девиз: "Безопасность прежде всего"</div>
+                        
+                        <div class="target-values">
+                            <h4>🎯 Целевой HbA1c:</h4>
+                            <ul>
+                                <li><strong>Здоровые:</strong> < 7.5%</li>
+                                <li><strong>С осложнениями:</strong> < 8.0%</li>
+                                <li><strong>Хрупкие:</strong> < 8.5%</li>
+                            </ul>
+                        </div>
+                        
+                        <ul>
+                            <li>Избегать гипогликемий</li>
+                            <li>Упрощенные схемы лечения</li>
+                            <li>Контроль когнитивных функций</li>
+                            <li>Регулярная оценка риска падений</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-bullseye"></i> Целевые значения</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-light); font-style: italic;">Индивидуальные цели для каждого пациента</p>
+                        
+                        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="display: grid; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Молодые без осложнений</span>
+                                    <span style="color: var(--success); font-weight: 700;">HbA1c < 6.5%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Взрослые</span>
+                                    <span style="color: var(--warning); font-weight: 700;">HbA1c < 7.0%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border);">
+                                    <span style="font-weight: 600;">Пожилые</span>
+                                    <span style="color: var(--warning); font-weight: 700;">HbA1c < 7.5-8.0%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+                                    <span style="font-weight: 600;">Беременность</span>
+                                    <span style="color: var(--danger); font-weight: 700;">HbA1c < 6.0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        function calculateBMI() {
-            const height = parseFloat(document.getElementById('height').value);
-            const weight = parseFloat(document.getElementById('bmiWeight').value);
+        // БАЗА ЗНАНИЙ ПО ДИАБЕТУ
+        const DIABETES_KNOWLEDGE = {
+            diagnoseDiabetes: function(fastingGlucose, hba1c, glucose2h) {
+                let diagnosis = "";
+                let severity = "";
+                let recommendations = [];
+
+                if (fastingGlucose >= 7.0 || glucose2h >= 11.1 || hba1c >= 6.5) {
+                    diagnosis = "🔴 САХАРНЫЙ ДИАБЕТ";
+                    severity = "danger";
+                    recommendations = [
+                        "Немедленное начало лечения",
+                        "Обучение в школе диабета",
+                        "Самоконтроль гликемии",
+                        "Консультация диетолога"
+                    ];
+                } else if (fastingGlucose >= 6.1 || glucose2h >= 7.8 || hba1c >= 5.7) {
+                    diagnosis = "🟡 ПРЕДИАБЕТ";
+                    severity = "warning";
+                    recommendations = [
+                        "Коррекция образа жизни",
+                        "Снижение веса на 5-7%",
+                        "Физическая активность 150 мин/неделю",
+                        "Контроль через 6-12 месяцев"
+                    ];
+                } else {
+                    diagnosis = "🟢 НОРМА";
+                    severity = "success";
+                    recommendations = ["Профилактические мероприятия"];
+                }
+
+                return { diagnosis, severity, recommendations };
+            },
+
+            calculateIndices: function(height, weight, waist, gender) {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+                const waistThreshold = gender === 'male' ? 94 : 80;
+                
+                let bmiCategory, waistCategory;
+                
+                if (bmi < 18.5) bmiCategory = "Дефицит";
+                else if (bmi < 25) bmiCategory = "Норма";
+                else if (bmi < 30) bmiCategory = "Избыток";
+                else bmiCategory = "Ожирение";
+                
+                waistCategory = waist > waistThreshold ? "Абдоминальное ожирение" : "Норма";
+                
+                return { bmi, bmiCategory, waist, waistCategory, waistThreshold };
+            },
+
+            calculateTreatment: function(hba1c, age, complications) {
+                let treatment = [];
+                let monitoring = [];
+                
+                if (hba1c > 9.0) {
+                    treatment.push("Рассмотреть инсулинотерапию");
+                    treatment.push("Метформин 1000-2000 мг/сут");
+                } else if (hba1c > 7.5) {
+                    treatment.push("Метформин 1000-2000 мг/сут");
+                    treatment.push("Добавить второй препарат: иНГЛТ-2, аГПП-1");
+                } else {
+                    treatment.push("Метформин 500-1000 мг/сут");
+                    treatment.push("Модификация образа жизни");
+                }
+                
+                if (complications === "cvd") {
+                    treatment.push("Препараты с кардиопротекцией: иНГЛТ-2, аГПП-1");
+                }
+                if (complications === "ckd") {
+                    treatment.push("Коррекция доз по СКФ");
+                    treatment.push("Предпочтение иНГЛТ-2, аГПП-1");
+                }
+                
+                monitoring.push("Контроль HbA1c через 3 месяца");
+                monitoring.push("Самоконтроль гликемии");
+                
+                return { treatment, monitoring };
+            },
+
+            calculateInsulinDose: function(weight, diabetesType, resistance) {
+                let totalDose = 0;
+                let basalDose = 0;
+                let bolusDose = 0;
+                
+                if (diabetesType === "type1") {
+                    totalDose = weight * 0.5;
+                } else {
+                    totalDose = weight * (resistance === "high" ? 1.0 : resistance === "medium" ? 0.7 : 0.5);
+                }
+                
+                basalDose = totalDose * 0.5;
+                bolusDose = totalDose * 0.5;
+                
+                return { total: Math.round(totalDose), basal: Math.round(basalDose), bolus: Math.round(bolusDose) };
+            },
+
+            assessComplicationRisk: function(hba1c, duration, bp, cholesterol) {
+                let riskScore = 0;
+                let riskLevel = "";
+                let recommendations = [];
+                
+                // HbA1c
+                if (hba1c > 8.0) riskScore += 3;
+                else if (hba1c > 7.0) riskScore += 2;
+                else if (hba1c > 6.5) riskScore += 1;
+                
+                // Длительность
+                if (duration > 10) riskScore += 3;
+                else if (duration > 5) riskScore += 2;
+                else riskScore += 1;
+                
+                // Артериальное давление
+                const [systolic, diastolic] = bp.split('/').map(Number);
+                if (systolic > 140 || diastolic > 90) riskScore += 2;
+                
+                // Холестерин
+                if (cholesterol > 3.0) riskScore += 2;
+                
+                if (riskScore >= 8) {
+                    riskLevel = "🔴 Высокий риск";
+                    recommendations = ["Интенсивный контроль гликемии", "Статины", "ИАПФ/БРА", "Регулярный скрининг осложнений"];
+                } else if (riskScore >= 5) {
+                    riskLevel = "🟡 Умеренный риск";
+                    recommendations = ["Оптимизация терапии", "Контроль АД и липидов", "Ежегодный скрининг"];
+                } else {
+                    riskLevel = "🟢 Низкий риск";
+                    recommendations = ["Профилактические мероприятия", "Регулярный контроль"];
+                }
+                
+                return { riskScore, riskLevel, recommendations };
+            },
+
+            calculateGFR: function(creatinine, age, gender) {
+                const k = gender === 'male' ? 0.9 : 0.7;
+                const a = gender === 'male' ? -0.302 : -0.241;
+                
+                let gfr = 142 * Math.min(creatinine/k, 1) ** a * Math.max(creatinine/k, 1) ** -1.2 * 0.9938 ** age;
+                if (gender === 'female') gfr *= 1.012;
+                
+                gfr = Math.round(gfr);
+                
+                let stage = "";
+                if (gfr >= 90) stage = "1 стадия";
+                else if (gfr >= 60) stage = "2 стадия";
+                else if (gfr >= 45) stage = "3а стадия";
+                else if (gfr >= 30) stage = "3б стадия";
+                else if (gfr >= 15) stage = "4 стадия";
+                else stage = "5 стадия";
+                
+                return { gfr, stage };
+            }
+        };
+
+        // ФУНКЦИИ ДЛЯ ЧЕК-ЛИСТА СИМПТОМОВ
+        function getSelectedSymptoms() {
+            const selectedSymptoms = {};
+            const checkboxes = document.querySelectorAll('.symptom-item input[type="checkbox"]:checked');
             
-            if (!height || !weight) {
-                alert('Введите рост и вес');
+            checkboxes.forEach(checkbox => {
+                const system = checkbox.getAttribute('data-system');
+                const symptom = checkbox.getAttribute('data-symptom');
+                
+                if (!selectedSymptoms[system]) {
+                    selectedSymptoms[system] = [];
+                }
+                selectedSymptoms[system].push(symptom);
+            });
+            
+            return selectedSymptoms;
+        }
+
+        function showSelectedSymptoms() {
+            const selectedSymptoms = getSelectedSymptoms();
+            const resultDiv = document.getElementById('selectedSymptomsList');
+            const resultBox = document.getElementById('symptomsResult');
+            
+            if (Object.keys(selectedSymptoms).length === 0) {
+                resultDiv.innerHTML = '<p style="color: var(--text-light); text-align: center;">Нет выбранных симптомов</p>';
+            } else {
+                let html = '';
+                for (const [system, symptoms] of Object.entries(selectedSymptoms)) {
+                    html += `<div class="system-group">`;
+                    html += `<div class="system-group-title">${system}</div>`;
+                    symptoms.forEach(symptom => {
+                        html += `<div class="symptom-line">${symptom}</div>`;
+                    });
+                    html += `</div>`;
+                }
+                resultDiv.innerHTML = html;
+            }
+            
+            resultBox.style.display = 'block';
+        }
+
+        function copySelectedSymptoms() {
+            const selectedSymptoms = getSelectedSymptoms();
+            
+            if (Object.keys(selectedSymptoms).length === 0) {
+                alert('Нет выбранных симптомов для копирования');
                 return;
             }
             
-            const heightM = height / 100;
-            const bmi = (weight / (heightM * heightM)).toFixed(1);
+            let text = 'ВЫБРАННЫЕ СИМПТОМЫ ДИАБЕТА:\n\n';
             
-            let category, color, risk, recommendations = [];
-            
-            if (bmi < 18.5) {
-                category = "Дефицит массы тела";
-                color = "#dbeafe";
-                risk = "risk-low";
-                recommendations.push("Повысить калорийность питания");
-                recommendations.push("Консультация диетолога");
-                recommendations.push("Исключить патологию ЖКТ");
-            } else if (bmi < 25) {
-                category = "Нормальная масса тела";
-                color = "#dcfce7";
-                risk = "risk-low";
-                recommendations.push("Поддерживать текущий вес");
-                recommendations.push("Сбалансированное питание");
-                recommendations.push("Регулярная физическая активность");
-            } else if (bmi < 30) {
-                category = "Избыточная масса тела";
-                color = "#fef3c7";
-                risk = "risk-medium";
-                recommendations.push("Снизить вес на 5-10% от текущего");
-                recommendations.push("Увеличить физическую активность");
-                recommendations.push("Ограничить простые углеводы");
-            } else if (bmi < 35) {
-                category = "Ожирение I степени";
-                color = "#fed7aa";
-                risk = "risk-high";
-                recommendations.push("Снизить вес на 10-15% от текущего");
-                recommendations.push("Консультация эндокринолога");
-                recommendations.push("Медикаментозная терапия при необходимости");
-            } else if (bmi < 40) {
-                category = "Ожирение II степени";
-                color = "#fecaca";
-                risk = "risk-high";
-                recommendations.push("Снизить вес на 15-20% от текущего");
-                recommendations.push("Обследование на коморбидные состояния");
-                recommendations.push("Рассмотреть медикаментозную терапию");
-            } else {
-                category = "Ожирение III степени";
-                color = "#fca5a5";
-                risk = "risk-high";
-                recommendations.push("Снизить вес на 20-25% от текущего");
-                recommendations.push("Консультация бариатрического хирурга");
-                recommendations.push("Комплексная мультидисциплинарная терапия");
+            for (const [system, symptoms] of Object.entries(selectedSymptoms)) {
+                text += `▸ ${system}:\n`;
+                symptoms.forEach(symptom => {
+                    text += `  • ${symptom}\n`;
+                });
+                text += '\n';
             }
             
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Симптомы скопированы в буфер обмена!');
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Симптомы скопированы в буфер обмена!');
+            });
+        }
+
+        function clearAllSymptoms() {
+            const checkboxes = document.querySelectorAll('.symptom-item input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('symptomsResult').style.display = 'none';
+        }
+
+        // ВАЛИДАЦИЯ ВВОДА
+        function validateInputs(inputs) {
+            const errors = [];
+            
+            for (const [key, value] of Object.entries(inputs)) {
+                if (!value && value !== 0) {
+                    errors.push(`Поле "${key}" не заполнено`);
+                    continue;
+                }
+                
+                switch(key) {
+                    case 'weight':
+                        if (value < 20 || value > 300) errors.push("Вес должен быть от 20 до 300 кг");
+                        break;
+                    case 'age':
+                        if (value < 1 || value > 120) errors.push("Возраст должен быть от 1 до 120 лет");
+                        break;
+                    case 'hba1c':
+                        if (value < 3 || value > 20) errors.push("HbA1c должен быть от 3 до 20%");
+                        break;
+                    case 'glucose':
+                        if (value < 1 || value > 50) errors.push("Глюкоза должна быть от 1 до 50 ммоль/л");
+                        break;
+                }
+            }
+            
+            return errors;
+        }
+
+        // ОСНОВНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
+        function diagnoseDiabetes() {
+            const fastingGlucose = parseFloat(document.getElementById('fastingGlucose').value);
+            const hba1c = parseFloat(document.getElementById('hba1c').value);
+            const glucose2h = parseFloat(document.getElementById('glucose2h').value);
+            
+            const errors = validateInputs({ fastingGlucose, hba1c, glucose2h });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = DIABETES_KNOWLEDGE.diagnoseDiabetes(fastingGlucose, hba1c, glucose2h);
+            
             let resultHTML = `
-                <div class="calculator-value">${bmi}</div>
-                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
-                    Индекс массы тела
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.5em; font-weight: 800; color: ${
+                        result.severity === 'danger' ? '#ef4444' : 
+                        result.severity === 'warning' ? '#f59e0b' : '#10b981'
+                    };">${result.diagnosis}</div>
                 </div>
                 
-                <div style="background: ${color}; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4 style="display: flex; align-items: center; justify-content: space-between;">
-                        ${category}
-                        <span class="risk-indicator ${risk}">${risk === 'risk-low' ? 'Низкий риск' : risk === 'risk-medium' ? 'Умеренный риск' : 'Высокий риск'}</span>
-                    </h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Лабораторные показатели:</h4>
                     <div style="display: grid; gap: 8px;">
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Рост:</span>
-                            <strong>${height} см</strong>
+                            <span>Глюкоза натощак:</span>
+                            <strong>${fastingGlucose} ммоль/л</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Вес:</span>
-                            <strong>${weight} кг</strong>
+                            <span>HbA1c:</span>
+                            <strong>${hba1c}%</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Формула:</span>
-                            <strong>${weight} ÷ (${heightM} × ${heightM})</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
-                    <h4>📊 Классификация ИМТ (ВОЗ):</h4>
-                    <ul>
-                        <li>Менее 18.5 - Дефицит массы тела</li>
-                        <li>18.5 - 24.9 - Нормальная масса тела</li>
-                        <li>25.0 - 29.9 - Избыточная масса тела</li>
-                        <li>30.0 - 34.9 - Ожирение I степени</li>
-                        <li>35.0 - 39.9 - Ожирение II степени</li>
-                        <li>40.0 и более - Ожирение III степени</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('bmiResult').innerHTML = resultHTML;
-            document.getElementById('bmiResult').style.display = 'block';
-        }
-
-        function calculateBMR() {
-            const weight = parseFloat(document.getElementById('bmrWeight').value);
-            const height = parseFloat(document.getElementById('bmrHeight').value);
-            const age = parseInt(document.getElementById('bmrAge').value);
-            const gender = document.getElementById('bmrGender').value;
-            
-            if (!weight || !height || !age) {
-                alert('Заполните все поля');
-                return;
-            }
-            
-            let bmr;
-            if (gender === 'male') {
-                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-            } else {
-                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-            }
-            
-            const maintenance = bmr * 1.2;
-            const weightLoss = bmr * 0.8;
-            const weightGain = bmr * 1.4;
-            
-            let resultHTML = `
-                <div class="calculator-value">${Math.round(bmr)} ккал</div>
-                <div style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
-                    Основной обмен веществ
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Энергетические потребности:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Поддержание веса:</span>
-                            <strong>${Math.round(maintenance)} ккал/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Снижение веса:</span>
-                            <strong>${Math.round(weightLoss)} ккал/сут</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Набор веса:</span>
-                            <strong>${Math.round(weightGain)} ккал/сут</strong>
+                            <span>Глюкоза через 2 часа ПГТТ:</span>
+                            <strong>${glucose2h} ммоль/л</strong>
                         </div>
                     </div>
                 </div>
                 
                 <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации по питанию:</h4>
+                    <h4>💡 Рекомендации:</h4>
                     <ul>
-                        <li>Основной обмен - минимальная энергия для поддержания жизнедеятельности</li>
-                        <li>Для снижения веса создайте дефицит 500 ккал/сут</li>
-                        <li>Распределение БЖУ: 30% белки, 30% жиры, 40% углеводы</li>
-                        <li>Пейте 30-35 мл воды на 1 кг идеальной массы тела</li>
+                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
                     </ul>
                 </div>
             `;
             
-            document.getElementById('bmrResult').innerHTML = resultHTML;
-            document.getElementById('bmrResult').style.display = 'block';
+            document.getElementById('diagnosisResult').innerHTML = resultHTML;
+            document.getElementById('diagnosisResult').style.display = 'block';
         }
 
-        function calculateMetabolicRisk() {
+        function calculateIndices() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
             const waist = parseFloat(document.getElementById('waist').value);
             const gender = document.getElementById('gender').value;
-            const glucose = parseFloat(document.getElementById('fastingGlucose').value);
-            const triglycerides = parseFloat(document.getElementById('triglycerides').value);
             
-            if (!waist || !glucose || !triglycerides) {
-                alert('Заполните все поля');
+            const errors = validateInputs({ height, weight, waist });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
             
-            let criteria = 0;
-            let riskDetails = [];
+            const result = DIABETES_KNOWLEDGE.calculateIndices(height, weight, waist, gender);
             
-            // Критерий 1: Абдоминальное ожирение
-            const waistThreshold = gender === 'male' ? 94 : 80;
-            if (waist > waistThreshold) {
-                criteria++;
-                riskDetails.push("✅ Абдоминальное ожирение");
-            } else {
-                riskDetails.push("❌ Абдоминальное ожирение отсутствует");
-            }
-            
-            // Критерий 2: Глюкоза натощак
-            if (glucose >= 6.1) {
-                criteria++;
-                riskDetails.push("✅ Повышена глюкоза натощак");
-            } else {
-                riskDetails.push("❌ Глюкоза натощак в норме");
-            }
-            
-            // Критерий 3: Триглицериды
-            if (triglycerides >= 1.7) {
-                criteria++;
-                riskDetails.push("✅ Повышены триглицериды");
-            } else {
-                riskDetails.push("❌ Триглицериды в норме");
-            }
-            
-            let riskLevel, riskColor, recommendations = [];
-            
-            if (criteria >= 3) {
-                riskLevel = "Высокий риск метаболического синдрома";
-                riskColor = "#fecaca";
-                recommendations.push("Консультация эндокринолога");
-                recommendations.push("Коррекция диеты и физической активности");
-                recommendations.push("Мониторинг артериального давления");
-                recommendations.push("Контроль липидного профиля");
-            } else if (criteria >= 2) {
-                riskLevel = "Умеренный риск";
-                riskColor = "#fef3c7";
-                recommendations.push("Коррекция образа жизни");
-                recommendations.push("Контроль веса и окружности талии");
-                recommendations.push("Профилактические мероприятия");
-            } else {
-                riskLevel = "Низкий риск";
-                riskColor = "#dcfce7";
-                recommendations.push("Поддерживать здоровый образ жизни");
-                recommendations.push("Регулярные профилактические осмотры");
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 2em; font-weight: 800; color: ${criteria >= 3 ? '#dc2626' : criteria >= 2 ? '#d97706' : '#059669'};">
-                        ${criteria} из 5 критериев
-                    </div>
-                    <div style="color: var(--text-light);">критериев метаболического синдрома</div>
-                </div>
+            document.getElementById('indicesResult').innerHTML = `
+                <h4>📊 Антропометрические индексы</h4>
                 
-                <div style="background: ${riskColor}; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>${riskLevel}</h4>
-                    <div style="display: grid; gap: 8px; margin-top: 10px;">
-                        ${riskDetails.map(detail => `<div>${detail}</div>`).join('')}
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px;">
-                    <h4>📋 Отсутствующие критерии для полной оценки:</h4>
-                    <ul>
-                        <li>Артериальное давление (≥ 130/85 мм рт.ст.)</li>
-                        <li>Холестерин ЛПВП (< 1.0 ммоль/л муж, < 1.2 ммоль/л жен)</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <h4>💡 Рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            
-            document.getElementById('metabolicResult').innerHTML = resultHTML;
-            document.getElementById('metabolicResult').style.display = 'block';
-        }
-
-        function calculateLipidProfile() {
-            const totalChol = parseFloat(document.getElementById('totalCholesterol').value);
-            const ldl = parseFloat(document.getElementById('ldlCholesterol').value);
-            const hdl = parseFloat(document.getElementById('hdlCholesterol').value);
-            const riskGroup = document.getElementById('patientRisk').value;
-            
-            if (!totalChol || !ldl || !hdl) {
-                alert('Заполните все поля липидного профиля');
-                return;
-            }
-            
-            const nonHDL = totalChol - hdl;
-            
-            let ldlTarget, nonHDLTarget, recommendations = [];
-            let ldlStatus, hdlStatus, overallStatus;
-            
-            // Определение целевых значений по группе риска
-            switch(riskGroup) {
-                case 'veryHigh':
-                    ldlTarget = 1.4;
-                    nonHDLTarget = 2.0;
-                    recommendations.push("Интенсивная гиполипидемическая терапия");
-                    recommendations.push("Статины в высоких дозах");
-                    recommendations.push("Рассмотреть комбинацию с эзетимибом");
-                    break;
-                case 'high':
-                    ldlTarget = 1.8;
-                    nonHDLTarget = 2.6;
-                    recommendations.push("Гиполипидемическая терапия");
-                    recommendations.push("Статины в средних дозах");
-                    break;
-                case 'medium':
-                    ldlTarget = 2.6;
-                    nonHDLTarget = 3.4;
-                    recommendations.push("Коррекция образа жизни");
-                    recommendations.push("Рассмотреть статины при неэффективности");
-                    break;
-                case 'low':
-                    ldlTarget = 3.0;
-                    nonHDLTarget = 3.8;
-                    recommendations.push("Коррекция питания и физическая активность");
-                    recommendations.push("Контроль через 3-6 месяцев");
-                    break;
-            }
-            
-            // Оценка показателей
-            if (ldl <= ldlTarget) {
-                ldlStatus = "✅ В пределах целевых значений";
-            } else {
-                ldlStatus = "❌ Выше целевых значений";
-            }
-            
-            if (hdl >= (riskGroup === 'male' ? 1.0 : 1.2)) {
-                hdlStatus = "✅ В пределах нормы";
-            } else {
-                hdlStatus = "❌ Ниже нормы";
-            }
-            
-            if (ldl <= ldlTarget && hdl >= (riskGroup === 'male' ? 1.0 : 1.2)) {
-                overallStatus = "Оптимальный липидный профиль";
-            } else {
-                overallStatus = "Требуется коррекция";
-            }
-            
-            let resultHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: var(--primary);">
-                        ${overallStatus}
-                    </div>
-                    <div style="color: var(--text-light);">Оценка липидного профиля</div>
-                </div>
-                
-                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Результаты анализа:</h4>
-                    <div style="display: grid; gap: 10px;">
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Холестерин ЛПНП:</span>
-                            <strong>${ldl} ммоль/л ${ldl <= ldlTarget ? '✅' : '❌'}</strong>
+                            <span>Индекс массы тела (ИМТ):</span>
+                            <strong>${result.bmi} кг/м² <span class="risk-badge ${result.bmiCategory === 'Норма' ? 'risk-low' : result.bmiCategory === 'Избыток' ? 'risk-moderate' : 'risk-high'}">${result.bmiCategory}</span></strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Целевое значение ЛПНП:</span>
-                            <strong>&lt; ${ldlTarget} ммоль/л</strong>
+                            <span>Окружность талии:</span>
+                            <strong>${result.waist} см <span class="risk-badge ${result.waistCategory === 'Норма' ? 'risk-low' : 'risk-high'}">${result.waistCategory}</span></strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
-                            <span>Холестерин ЛПВП:</span>
-                            <strong>${hdl} ммоль/л ${hdl >= (riskGroup === 'male' ? 1.0 : 1.2) ? '✅' : '❌'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>НедиЛПНП:</span>
-                            <strong>${nonHDL.toFixed(1)} ммоль/л</strong>
+                            <span>Порог для ${gender === 'male' ? 'мужчин' : 'женщин'}:</span>
+                            <strong>${result.waistThreshold} см</strong>
                         </div>
                     </div>
                 </div>
                 
                 <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации по коррекции:</h4>
+                    <h4>💡 Интерпретация:</h4>
                     <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        ${ldl > ldlTarget ? '<li>Ограничить насыщенные жиры и трансжиры</li>' : ''}
-                        ${hdl < (riskGroup === 'male' ? 1.0 : 1.2) ? '<li>Увеличить потребление омега-3 жирных кислот</li>' : ''}
-                        <li>Регулярная аэробная физическая активность</li>
+                        <li><strong>ИМТ ≥ 25</strong> - фактор риска СД 2 типа</li>
+                        <li><strong>ОТ > ${result.waistThreshold} см</strong> - абдоминальное ожирение</li>
+                        <li>Сочетание факторов увеличивает риск в 3-5 раз</li>
                     </ul>
                 </div>
             `;
-            
-            document.getElementById('lipidResult').innerHTML = resultHTML;
-            document.getElementById('lipidResult').style.display = 'block';
+            document.getElementById('indicesResult').style.display = 'block';
         }
 
+        function calculateTreatment() {
+            const hba1c = parseFloat(document.getElementById('treatmentHbA1c').value);
+            const age = parseInt(document.getElementById('treatmentAge').value);
+            const complications = document.getElementById('treatmentComplications').value;
+            
+            const errors = validateInputs({ hba1c, age });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = DIABETES_KNOWLEDGE.calculateTreatment(hba1c, age, complications);
+            
+            document.getElementById('treatmentResult').innerHTML = `
+                <h4>💊 Рекомендации по терапии</h4>
+                
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📋 Схема лечения:</h4>
+                    <ul>
+                        ${result.treatment.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Мониторинг:</h4>
+                    <ul>
+                        ${result.monitoring.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('treatmentResult').style.display = 'block';
+        }
+
+        function calculateInsulinDose() {
+            const weight = parseFloat(document.getElementById('insulinWeight').value);
+            const diabetesType = document.getElementById('insulinType').value;
+            const resistance = document.getElementById('insulinResistance').value;
+            
+            const errors = validateInputs({ weight });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = DIABETES_KNOWLEDGE.calculateInsulinDose(weight, diabetesType, resistance);
+            
+            document.getElementById('insulinResult').innerHTML = `
+                <h4>💉 Расчет инсулинотерапии</h4>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Общая суточная доза:</span>
+                            <strong>${result.total} ЕД/сут</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Базисный инсулин:</span>
+                            <strong>${result.basal} ЕД/сут</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Болюсный инсулин:</span>
+                            <strong>${result.bolus} ЕД/сут</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        <li>Базисный инсулин - 1-2 инъекции в сутки</li>
+                        <li>Болюсный инсулин - перед основными приемами пищи</li>
+                        <li>Коррекция дозы по уровню гликемии</li>
+                        <li>Обучение технике инъекций</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('insulinResult').style.display = 'block';
+        }
+
+        function assessComplicationRisk() {
+            const hba1c = parseFloat(document.getElementById('complicationHbA1c').value);
+            const duration = parseInt(document.getElementById('complicationDuration').value);
+            const bp = document.getElementById('complicationBP').value;
+            const cholesterol = parseFloat(document.getElementById('complicationCholesterol').value);
+            
+            const errors = validateInputs({ hba1c, duration, cholesterol });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = DIABETES_KNOWLEDGE.assessComplicationRisk(hba1c, duration, bp, cholesterol);
+            
+            document.getElementById('complicationResult').innerHTML = `
+                <h4>❤️ Оценка риска осложнений</h4>
+                
+                <div class="score-display ${result.riskScore >= 8 ? 'score-high' : result.riskScore >= 5 ? 'score-moderate' : 'score-low'}">
+                    ${result.riskScore}
+                    <div style="font-size: 0.5em;">Баллы риска</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Уровень риска:</span>
+                            <strong>${result.riskLevel}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>HbA1c:</span>
+                            <strong>${hba1c}%</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Длительность диабета:</span>
+                            <strong>${duration} лет</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('complicationResult').style.display = 'block';
+        }
+
+        function calculateGFR() {
+            const creatinine = parseFloat(document.getElementById('gfrCreatinine').value);
+            const age = parseInt(document.getElementById('gfrAge').value);
+            const gender = document.getElementById('gfrGender').value;
+            
+            const errors = validateInputs({ creatinine, age });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+            
+            const result = DIABETES_KNOWLEDGE.calculateGFR(creatinine, age, gender);
+            
+            document.getElementById('gfrResult').innerHTML = `
+                <h4>🧮 Расчет скорости клубочковой фильтрации</h4>
+                
+                <div class="score-display ${result.gfr >= 90 ? 'score-low' : result.gfr >= 60 ? 'score-moderate' : 'score-high'}">
+                    ${result.gfr} мл/мин/1.73м²
+                    <div style="font-size: 0.5em;">СКФ</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Стадия ХБП:</span>
+                            <strong>${result.stage}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Креатинин:</span>
+                            <strong>${creatinine} мкмоль/л</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Интерпретация:</h4>
+                    <ul>
+                        <li><strong>СКФ < 60 мл/мин</strong> - хроническая болезнь почек</li>
+                        <li>Коррекция доз препаратов при СКФ < 45 мл/мин</li>
+                        <li>Консультация нефролога при СКФ < 30 мл/мин</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('gfrResult').style.display = 'block';
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница метаболических нарушений загружена');
+            initTabs();
         });
+
+        function initTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeTab = document.getElementById(tabName);
+            if (activeTab) activeTab.classList.add('active');
+            
+            const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeButton) activeButton.classList.add('active');
+        }
     </script>
 </body>
 </html>
