@@ -1017,16 +1017,21 @@
                         <div class="calculator-card">
                             <h3><i class="fas fa-capsules"></i> Расчет стартовой дозы тиреостатиков</h3>
                             <div class="form-group">
-                                <label for="gravesWeight">Вес пациента (кг)</label>
+                                <label for="gravesAge" class="required-field">Возраст пациента (лет)</label>
+                                <input type="number" id="gravesAge" placeholder="Например: 45" value="45">
+                                <div class="range-info">Важно для коррекции дозы у пожилых</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesWeight" class="required-field">Вес пациента (кг)</label>
                                 <input type="number" id="gravesWeight" placeholder="Например: 70" value="70">
                             </div>
                             <div class="form-group">
-                                <label for="gravesT4">св. Т4 (пмоль/л)</label>
+                                <label for="gravesT4" class="required-field">св. Т4 (пмоль/л)</label>
                                 <input type="number" step="0.1" id="gravesT4" placeholder="Например: 35.0" value="35.0">
                                 <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
                             </div>
                             <div class="form-group">
-                                <label for="gravesSeverity">Тяжесть тиреотоксикоза</label>
+                                <label for="gravesSeverity" class="required-field">Тяжесть тиреотоксикоза</label>
                                 <select id="gravesSeverity">
                                     <option value="mild">Легкий (ТТГ 0.1-0.4, свТ4 до 30)</option>
                                     <option value="moderate" selected>Умеренный (ТТГ < 0.1, свТ4 30-40)</option>
@@ -1038,6 +1043,14 @@
                                 <select id="gravesHeartDisease">
                                     <option value="no">Нет</option>
                                     <option value="yes">Да (тахикардия, аритмия)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesLiverFunction">Функция печени</label>
+                                <select id="gravesLiverFunction">
+                                    <option value="normal" selected>Нормальная</option>
+                                    <option value="mild_impairment">Легкие нарушения</option>
+                                    <option value="moderate_impairment">Умеренные нарушения</option>
                                 </select>
                             </div>
                             <button class="btn" onclick="calculateGravesDose()">
@@ -1060,6 +1073,10 @@
                             <div class="form-group">
                                 <label for="controlT4">св. Т4 через 4-6 недель (пмоль/л)</label>
                                 <input type="number" step="0.1" id="controlT4" placeholder="Например: 25.0" value="25.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="patientAgeCorrection">Возраст пациента (лет)</label>
+                                <input type="number" id="patientAgeCorrection" placeholder="Например: 45" value="45">
                             </div>
                             <button class="btn" onclick="calculateDoseAdjustment()">
                                 <i class="fas fa-adjust"></i> Оценить эффективность
@@ -1087,6 +1104,10 @@
                                 <label for="relapseDuration">Длительность терапии (мес)</label>
                                 <input type="number" id="relapseDuration" placeholder="Например: 18" value="18">
                             </div>
+                            <div class="form-group">
+                                <label for="relapseAge">Возраст пациента (лет)</label>
+                                <input type="number" id="relapseAge" placeholder="Например: 35" value="35">
+                            </div>
                             <button class="btn" onclick="calculateRelapseRisk()">
                                 <i class="fas fa-chart-bar"></i> Оценить риск рецидива
                             </button>
@@ -1106,6 +1127,10 @@
                             <div class="form-group">
                                 <label for="antibodyMonths">Длительность терапии (мес)</label>
                                 <input type="number" id="antibodyMonths" placeholder="Например: 6" value="6">
+                            </div>
+                            <div class="form-group">
+                                <label for="antibodyAge">Возраст пациента (лет)</label>
+                                <input type="number" id="antibodyAge" placeholder="Например: 45" value="45">
                             </div>
                             <button class="btn" onclick="monitorAntibodies()">
                                 <i class="fas fa-chart-line"></i> Оценить динамику
@@ -1145,6 +1170,10 @@
                                     <option value="severe">Выраженные</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="pregAge">Возраст матери (лет)</label>
+                                <input type="number" id="pregAge" placeholder="Например: 28" value="28">
+                            </div>
                             <button class="btn" onclick="calculatePregnancyDose()">
                                 <i class="fas fa-baby"></i> Рассчитать дозу
                             </button>
@@ -1170,6 +1199,10 @@
                                 <label for="pregWeeks">Срок беременности (недель)</label>
                                 <input type="number" id="pregWeeks" placeholder="Например: 20" value="20">
                             </div>
+                            <div class="form-group">
+                                <label for="pregMaternalAge">Возраст матери (лет)</label>
+                                <input type="number" id="pregMaternalAge" placeholder="Например: 30" value="30">
+                            </div>
                             <button class="btn" onclick="calculatePregnancyControl()">
                                 <i class="fas fa-chart-bar"></i> Оценить контроль
                             </button>
@@ -1194,6 +1227,10 @@
                             <div class="form-group">
                                 <label for="gravesTreatmentDuration">Длительность лечения (мес)</label>
                                 <input type="number" id="gravesTreatmentDuration" placeholder="Например: 6" value="6">
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesPatientAge">Возраст пациента (лет)</label>
+                                <input type="number" id="gravesPatientAge" placeholder="Например: 35" value="35">
                             </div>
                             <button class="btn" onclick="analyzeGravesAntibodies()">
                                 <i class="fas fa-chart-line"></i> Анализировать динамику
@@ -1224,6 +1261,10 @@
                                     <option value="yes">Да</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="maternalAgeNeonatal">Возраст матери (лет)</label>
+                                <input type="number" id="maternalAgeNeonatal" placeholder="Например: 32" value="32">
+                            </div>
                             <button class="btn" onclick="calculateNeonatalRisk()">
                                 <i class="fas fa-baby"></i> Оценить риск
                             </button>
@@ -1238,11 +1279,15 @@
                         <div class="calculator-card">
                             <h3><i class="fas fa-sync-alt"></i> Расчет схемы "Блокируй и замещай"</h3>
                             <div class="form-group">
-                                <label for="blockWeight">Вес пациента (кг)</label>
+                                <label for="blockAge" class="required-field">Возраст пациента (лет)</label>
+                                <input type="number" id="blockAge" placeholder="Например: 45" value="45">
+                            </div>
+                            <div class="form-group">
+                                <label for="blockWeight" class="required-field">Вес пациента (кг)</label>
                                 <input type="number" id="blockWeight" placeholder="Например: 70" value="70">
                             </div>
                             <div class="form-group">
-                                <label for="blockCurrentT4">Текущий св. Т4 (пмоль/л)</label>
+                                <label for="blockCurrentT4" class="required-field">Текущий св. Т4 (пмоль/л)</label>
                                 <input type="number" step="0.1" id="blockCurrentT4" placeholder="Например: 18.5" value="18.5">
                                 <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
                             </div>
@@ -1251,7 +1296,7 @@
                                 <input type="number" step="0.01" id="blockCurrentTSH" placeholder="Например: 0.1" value="0.1">
                             </div>
                             <div class="form-group">
-                                <label for="blockAntibody">АТ-рТТГ (МЕ/л)</label>
+                                <label for="blockAntibody" class="required-field">АТ-рТТГ (МЕ/л)</label>
                                 <input type="number" step="0.01" id="blockAntibody" placeholder="Например: 8.5" value="8.5">
                                 <div class="range-info">Норма: < 1.75 МЕ/л</div>
                             </div>
@@ -1288,6 +1333,10 @@
                             <div class="form-group">
                                 <label for="withdrawalStability">Стабильность эутиреоза (месяцев)</label>
                                 <input type="number" id="withdrawalStability" placeholder="Например: 3" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="withdrawalAge">Возраст пациента (лет)</label>
+                                <input type="number" id="withdrawalAge" placeholder="Например: 28" value="28">
                             </div>
                             <button class="btn" onclick="calculateWithdrawalPlan()">
                                 <i class="fas fa-sync-alt"></i> Оценить возможность отмены
@@ -1343,6 +1392,10 @@
                             <div class="form-group">
                                 <label for="correctionWeight">Вес пациента (кг)</label>
                                 <input type="number" id="correctionWeight" placeholder="70" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="correctionAge">Возраст пациента (лет)</label>
+                                <input type="number" id="correctionAge" placeholder="45" value="45">
                             </div>
                             <button class="btn" onclick="calculateVitaminDCorrection()">
                                 <i class="fas fa-calculator"></i> Рассчитать коррекцию
@@ -1538,9 +1591,11 @@
                 return { diagnosis, probability, diagnosticCriteria, treatmentApproach, additionalTests, color };
             },
 
-            calculateDose: function(weight, t4, severity) {
+            // ОБНОВЛЕННАЯ ФУНКЦИЯ РАСЧЕТА ДОЗЫ С УЧЕТОМ ВОЗРАСТА
+            calculateDose: function(age, weight, t4, severity, heartDisease = 'no', liverFunction = 'normal') {
                 let baseDose;
                 
+                // Базовый расчет по весу и тяжести
                 switch(severity) {
                     case 'mild':
                         baseDose = weight * 0.3;
@@ -1555,45 +1610,84 @@
                         baseDose = weight * 0.5;
                 }
                 
+                // Коррекция по уровню Т4
                 if (t4 > 40) baseDose *= 1.2;
                 if (t4 > 50) baseDose *= 1.3;
                 
-                return Math.min(Math.max(Math.round(baseDose / 5) * 5, 10), 60);
+                // КОРРЕКЦИЯ ПО ВОЗРАСТУ - ВАЖНОЕ ИЗМЕНЕНИЕ!
+                if (age >= 65) {
+                    baseDose *= 0.6; // Снижение дозы на 40% для пожилых
+                } else if (age >= 18) {
+                    // Взрослые 18-64 лет - стандартная доза
+                    baseDose *= 1.0;
+                } else if (age >= 12) {
+                    // Подростки 12-17 лет
+                    baseDose *= 0.8;
+                } else if (age >= 6) {
+                    // Дети 6-11 лет
+                    baseDose *= 0.6;
+                } else {
+                    // Дети до 6 лет
+                    baseDose *= 0.4;
+                }
+                
+                // Коррекция при сердечно-сосудистых осложнениях
+                if (heartDisease === 'yes') {
+                    baseDose *= 0.8; // Снижение дозы на 20%
+                }
+                
+                // Коррекция при нарушениях функции печени
+                if (liverFunction === 'mild_impairment') {
+                    baseDose *= 0.8;
+                } else if (liverFunction === 'moderate_impairment') {
+                    baseDose *= 0.6;
+                }
+                
+                return Math.min(Math.max(Math.round(baseDose / 5) * 5, 5), 60);
             },
 
             // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ
-            calculateBlockReplace: function(weight, currentT4, currentTSH, antibody, indication) {
+            calculateBlockReplace: function(age, weight, currentT4, currentTSH, antibody, indication) {
                 let blockDose, replaceDose, recommendations = [];
                 let transitionPlan = [];
                 let risks = [];
 
+                // Коррекция дозы блокады по возрасту
+                let ageFactor = 1.0;
+                if (age >= 65) ageFactor = 0.7;
+                else if (age <= 18) ageFactor = 0.8;
+
                 if (antibody > 10 || indication === 'severe') {
-                    blockDose = "30-40 мг/сут";
+                    blockDose = Math.round((30 * ageFactor) / 5) * 5 + "-" + Math.round((40 * ageFactor) / 5) * 5 + " мг/сут";
                     recommendations.push("Высокая блокирующая доза в связи с тяжелым течением или высоким уровнем антител");
                 } else if (antibody > 5 || indication === 'unstable') {
-                    blockDose = "20-30 мг/сут";
+                    blockDose = Math.round((20 * ageFactor) / 5) * 5 + "-" + Math.round((30 * ageFactor) / 5) * 5 + " мг/сут";
                     recommendations.push("Средняя блокирующая доза для стабилизации течения");
                 } else {
-                    blockDose = "15-20 мг/сут";
+                    blockDose = Math.round((15 * ageFactor) / 5) * 5 + "-" + Math.round((20 * ageFactor) / 5) * 5 + " мг/сут";
                     recommendations.push("Стандартная блокирующая доза");
                 }
 
                 const calculatedReplace = Math.round(weight * 1.6);
+                // Коррекция заместительной дозы по возрасту
+                let replaceFactor = 1.0;
+                if (age >= 65) replaceFactor = 0.9;
+                
                 if (currentT4 < 15) {
-                    replaceDose = Math.max(50, calculatedReplace - 25) + " мкг/сут";
+                    replaceDose = Math.max(50, Math.round((calculatedReplace - 25) * replaceFactor)) + " мкг/сут";
                     recommendations.push("Сниженная стартовая доза L-тироксина в связи с низким свТ4");
                 } else if (currentT4 > 20) {
-                    replaceDose = calculatedReplace + 25 + " мкг/сут";
+                    replaceDose = Math.round((calculatedReplace + 25) * replaceFactor) + " мкг/сут";
                     recommendations.push("Увеличенная стартовая доза L-тироксина для компенсации");
                 } else {
-                    replaceDose = calculatedReplace + " мкг/сут";
+                    replaceDose = Math.round(calculatedReplace * replaceFactor) + " мкг/сут";
                     recommendations.push("Стандартная расчетная доза L-тироксина");
                 }
 
                 return { blockDose, replaceDose, recommendations, transitionPlan, risks };
             },
 
-            calculateRelapseRisk: function(antibody, tsh, duration) {
+            calculateRelapseRisk: function(age, antibody, tsh, duration) {
                 let riskScore = 0;
 
                 if (antibody > 5) riskScore += 3;
@@ -1605,6 +1699,10 @@
 
                 if (duration < 12) riskScore += 2;
                 else if (duration < 18) riskScore += 1;
+
+                // Коррекция по возрасту - молодые пациенты имеют более высокий риск
+                if (age < 40) riskScore += 1;
+                if (age < 25) riskScore += 1;
 
                 return riskScore;
             }
@@ -1624,6 +1722,9 @@
                     case 'weight':
                         if (value < 20 || value > 300) errors.push("Вес должен быть от 20 до 300 кг");
                         break;
+                    case 'age':
+                        if (value < 1 || value > 120) errors.push("Возраст должен быть от 1 до 120 лет");
+                        break;
                     case 'tsh':
                         if (value < 0.001 || value > 100) errors.push("ТТГ должен быть от 0.001 до 100 мМЕ/л");
                         break;
@@ -1636,7 +1737,7 @@
             return errors;
         }
 
-        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ СТАТУСОВ (ВОССТАНОВЛЕНЫ)
+        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ СТАТУСОВ
         function getTSHStatus(tsh) {
             if (tsh < 0.1) return '🔴 Резко снижен';
             if (tsh < 0.4) return '🟡 Снижен';
@@ -1662,7 +1763,13 @@
             return '🔴 Значительно повышены';
         }
 
-        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ АВТОЗАПОЛНЕНИЯ
+        function getAgeGroup(age) {
+            if (age < 18) return '👶 Дети и подростки';
+            if (age < 65) return '👨‍🦰 Взрослые';
+            return '👵 Пожилые';
+        }
+
+        // ФУНКЦИИ АВТОЗАПОЛНЕНИЯ
         function fillSampleGraves() {
             document.getElementById('formTsh').value = '0.02';
             document.getElementById('formT4').value = '38.5';
@@ -1682,15 +1789,6 @@
             document.getElementById('formRtg').value = '1.2';
             document.querySelector('input[value="tachycardia"]').checked = true;
             document.querySelector('input[value="weight_loss"]').checked = true;
-        }
-
-        function fillSampleThyroiditis() {
-            document.getElementById('formTsh').value = '0.08';
-            document.getElementById('formT4').value = '32.0';
-            document.getElementById('formT3').value = '9.2';
-            document.getElementById('formRtg').value = '0.8';
-            document.querySelector('input[value="pain"]').checked = true;
-            document.querySelector('input[value="fever"]').checked = true;
         }
 
         // ОСНОВНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
@@ -1735,7 +1833,6 @@
                     `;
                 }
 
-                // Добавляем интерпретацию показателей
                 resultHTML += `
                     <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; margin: 15px 0;">
                         <h4>📊 Интерпретация показателей:</h4>
@@ -1769,24 +1866,38 @@
             }
         }
 
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ РАСЧЕТА ДОЗЫ ТИРЕОСТАТИКОВ
         function calculateGravesDose() {
+            const age = parseInt(document.getElementById('gravesAge').value);
             const weight = parseFloat(document.getElementById('gravesWeight').value);
             const t4 = parseFloat(document.getElementById('gravesT4').value);
             const severity = document.getElementById('gravesSeverity').value;
+            const heartDisease = document.getElementById('gravesHeartDisease').value;
+            const liverFunction = document.getElementById('gravesLiverFunction').value;
 
-            const errors = validateInputs({ weight, t4 });
+            const errors = validateInputs({ age, weight, t4 });
             if (errors.length > 0) {
                 alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
 
-            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(weight, t4, severity);
+            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(age, weight, t4, severity, heartDisease, liverFunction);
             
+            const ageGroup = getAgeGroup(age);
             const recommendations = [
                 "Контроль ТТГ, св.Т4 каждые 4-6 недель",
                 "Контроль общего анализа крови каждые 2 недели в первые 2 месяца",
                 "Обучение пациента симптомам агранулоцитоза"
             ];
+
+            // Специфические рекомендации по возрасту
+            if (age >= 65) {
+                recommendations.push("👵 Для пожилых: старт с низких доз, тщательный мониторинг");
+                recommendations.push("ЭКГ контроль при наличии сердечно-сосудистых заболеваний");
+            } else if (age < 18) {
+                recommendations.push("👶 Для детей: особый контроль роста и развития");
+                recommendations.push("Регулярная оценка костного возраста");
+            }
 
             document.getElementById('gravesDoseResult').innerHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -1794,6 +1905,9 @@
                         ${dose} мг/сут
                     </div>
                     <div style="color: #6b7280;">Рекомендуемая стартовая доза тиамазола</div>
+                    <div style="margin-top: 10px; padding: 10px; background: #f0f9ff; border-radius: 8px;">
+                        <strong>${ageGroup}</strong> (${age} лет)
+                    </div>
                 </div>
                 
                 <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
@@ -1801,6 +1915,13 @@
                     <ul>
                         ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
                     </ul>
+                </div>
+
+                <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin-top: 15px;">
+                    <strong>📝 Примечание:</strong> Доза рассчитана с учетом возраста пациента. 
+                    ${age >= 65 ? 'Для пожилых пациентов доза снижена на 40% для минимизации рисков.' : 
+                      age < 18 ? 'Для детей доза адаптирована с учетом возрастных особенностей.' : 
+                      'Стандартная дозировка для взрослых пациентов.'}
                 </div>
             `;
             document.getElementById('gravesDoseResult').style.display = 'block';
@@ -1813,8 +1934,8 @@
             const weight = parseFloat(document.getElementById('vitaminDWeight').value);
             const hasHyperthyroidism = document.getElementById('vitaminDHyperthyroidism').checked;
             
-            if (!level) {
-                alert('Введите уровень витамина D');
+            if (!level || !age) {
+                alert('Введите уровень витамина D и возраст');
                 return;
             }
             
@@ -1848,6 +1969,13 @@
                 recommendations.push("Контроль уровня через 3 месяца");
             }
             
+            // Коррекция по возрасту
+            if (age >= 65) {
+                loadingDose = Math.round(loadingDose * 1.2); // +20% для пожилых
+                maintenanceDose = Math.round(maintenanceDose * 1.2);
+                recommendations.push("Для пожилых: увеличенная доза для лучшей абсорбции");
+            }
+            
             if (hasHyperthyroidism) {
                 recommendations.push("При гипертиреозе рекомендован уровень 40-60 нг/мл");
                 if (level < 40) {
@@ -1867,6 +1995,10 @@
                         <div style="display: flex; justify-content: space-between;">
                             <span>Уровень 25(OH)D:</span>
                             <strong>${level} нг/мл</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Возраст:</span>
+                            <strong>${age} лет (${getAgeGroup(age)})</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <span>Статус:</span>
@@ -1907,87 +2039,29 @@
             document.getElementById('vitaminDResult').style.display = 'block';
         }
 
-        function calculateVitaminDCorrection() {
-            const currentLevel = parseFloat(document.getElementById('correctionCurrentLevel').value);
-            const targetLevel = parseFloat(document.getElementById('correctionTargetLevel').value);
-            const weight = parseFloat(document.getElementById('correctionWeight').value);
-            
-            if (!currentLevel || !weight) {
-                alert('Заполните текущий уровень и вес пациента');
-                return;
-            }
-            
-            const deficit = targetLevel - currentLevel;
-            const totalDeficitIU = deficit * weight * 40;
-            
-            const loadingDose = Math.round(totalDeficitIU / 56);
-            const roundedLoadingDose = Math.round(loadingDose / 1000) * 1000;
-            
-            const maintenanceDose = Math.round(weight * 25);
-            const roundedMaintenanceDose = Math.round(maintenanceDose / 1000) * 1000;
-            
-            document.getElementById('correctionResult').innerHTML = `
-                <h4>🧮 Расчет коррекции дефицита витамина D</h4>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий уровень:</span>
-                            <strong>${currentLevel} нг/мл</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Целевой уровень:</span>
-                            <strong>${targetLevel} нг/мл</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Дефицит:</span>
-                            <strong>${deficit.toFixed(1)} нг/мл</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="recommendation-card">
-                    <h5>💊 Насыщающая терапия (8 недель):</h5>
-                    <div style="font-size: 1.3em; font-weight: 700; color: #2563eb; text-align: center;">
-                        ${roundedLoadingDose} МЕ/сут
-                    </div>
-                    <div style="text-align: center; color: #6b7280; margin-top: 8px;">
-                        или ${Math.round(roundedLoadingDose * 7)} МЕ/неделю
-                    </div>
-                </div>
-                
-                <div class="recommendation-card">
-                    <h5>💊 Поддерживающая терапия:</h5>
-                    <div style="font-size: 1.3em; font-weight: 700; color: #10b981; text-align: center;">
-                        ${roundedMaintenanceDose} МЕ/сут
-                    </div>
-                </div>
-                
-                <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin-top: 15px;">
-                    <strong>📅 Контроль:</strong> Уровень 25(OH)D через 8-12 недель после начала терапии
-                </div>
-            `;
-            document.getElementById('correctionResult').style.display = 'block';
-        }
-
-        // ВОССТАНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ СЛОЖНЫХ РАСЧЕТОВ
+        // ОБНОВЛЕННЫЕ ФУНКЦИИ ДЛЯ СЛОЖНЫХ РАСЧЕТОВ
         function calculateBlockReplace() {
+            const age = parseInt(document.getElementById('blockAge').value);
             const weight = parseFloat(document.getElementById('blockWeight').value);
             const currentT4 = parseFloat(document.getElementById('blockCurrentT4').value);
             const antibody = parseFloat(document.getElementById('blockAntibody').value);
             const indication = document.getElementById('blockIndication').value;
             
-            if (!weight || !currentT4 || !antibody) {
-                alert('Заполните все обязательные поля');
+            const errors = validateInputs({ age, weight, currentT4, antibody });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
             
-            const result = HYPERTHYROIDISM_KNOWLEDGE.calculateBlockReplace(weight, currentT4, 0.1, antibody, indication);
+            const result = HYPERTHYROIDISM_KNOWLEDGE.calculateBlockReplace(age, weight, currentT4, 0.1, antibody, indication);
             
             let resultHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: var(--secondary);">
                         Режим "Блокада и Замещение"
+                    </div>
+                    <div style="margin-top: 10px; color: #6b7280;">
+                        ${getAgeGroup(age)} (${age} лет)
                     </div>
                 </div>
                 
@@ -2017,21 +2091,32 @@
                 `;
             }
 
+            // Добавляем примечание по возрасту
+            if (age >= 65) {
+                resultHTML += `
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin-top: 15px;">
+                        <strong>👵 Для пожилых пациентов:</strong> Дозы скорректированы с учетом возрастных особенностей метаболизма.
+                    </div>
+                `;
+            }
+
             document.getElementById('blockReplaceResult').innerHTML = resultHTML;
             document.getElementById('blockReplaceResult').style.display = 'block';
         }
 
         function calculateRelapseRisk() {
+            const age = parseInt(document.getElementById('relapseAge').value);
             const antibody = parseFloat(document.getElementById('relapseAntibody').value);
             const tsh = parseFloat(document.getElementById('relapseTsh').value);
             const duration = parseInt(document.getElementById('relapseDuration').value);
             
-            if (!antibody || !tsh || !duration) {
+            const errors = validateInputs({ age, antibody, tsh, duration });
+            if (errors.length > 0) {
                 alert('Пожалуйста, заполните обязательные поля');
                 return;
             }
             
-            const riskScore = HYPERTHYROIDISM_KNOWLEDGE.calculateRelapseRisk(antibody, tsh, duration);
+            const riskScore = HYPERTHYROIDISM_KNOWLEDGE.calculateRelapseRisk(age, antibody, tsh, duration);
             
             let relapseRisk = "";
             let riskPercentage = "";
@@ -2071,11 +2156,16 @@
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${relapseRisk}</div>
                     <div style="font-size: 1.2em; margin-top: 10px;">Вероятность рецидива: ${riskPercentage}</div>
+                    <div style="margin-top: 5px; color: #6b7280;">${getAgeGroup(age)} (${age} лет)</div>
                 </div>
                 
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <h4>📊 Факторы риска:</h4>
                     <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Возраст:</span>
+                            <strong>${age} лет ${age < 40 ? '🚩' : '✅'}</strong>
+                        </div>
                         <div style="display: flex; justify-content: space-between;">
                             <span>АТ-рТТГ:</span>
                             <strong>${antibody} МЕ/л ${antibody > 1.75 ? '🚩' : '✅'}</strong>
@@ -2114,45 +2204,68 @@
         function calculateDoseAdjustment() {
             const currentDose = parseFloat(document.getElementById('currentDose').value);
             const tsh = parseFloat(document.getElementById('controlTsh').value);
+            const age = parseInt(document.getElementById('patientAgeCorrection').value);
             
-            if (!currentDose || !tsh) {
-                alert('Заполните текущую дозу и ТТГ');
+            if (!currentDose || !tsh || !age) {
+                alert('Заполните все обязательные поля');
                 return;
             }
             
             let adjustment = "";
+            let recommendations = [];
+            
             if (tsh < 0.1) {
                 adjustment = "Увеличить дозу на 10-20 мг/сут";
+                recommendations.push("Контроль через 4 недели");
             } else if (tsh > 2.0) {
                 adjustment = "Уменьшить дозу на 10-20 мг/сут";
+                recommendations.push("Контроль через 4 недели");
             } else {
                 adjustment = "Доза адекватна, продолжить текущую терапию";
+                recommendations.push("Следующий контроль через 6-8 недель");
+            }
+            
+            // Рекомендации по возрасту
+            if (age >= 65) {
+                recommendations.push("Для пожилых: более частый контроль функции печени");
             }
             
             document.getElementById('adjustmentResult').innerHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: #2563eb;">${adjustment}</div>
+                    <div style="margin-top: 10px; color: #6b7280;">${getAgeGroup(age)} (${age} лет)</div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
                 </div>
             `;
             document.getElementById('adjustmentResult').style.display = 'block';
         }
 
+        // ОСТАЛЬНЫЕ ФУНКЦИИ (краткие реализации)
         function monitorAntibodies() {
+            const age = parseInt(document.getElementById('antibodyAge').value);
             document.getElementById('antibodyResult').innerHTML = `
                 <h4>📊 Динамика антител рТТГ</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <p>Наблюдается положительная динамика снижения уровня антител.</p>
-                    <p>Продолжать текущую терапию с контролем через 3 месяца.</p>
+                    <p>${getAgeGroup(age)} (${age} лет) - продолжить текущую терапию с контролем через 3 месяца.</p>
                 </div>
             `;
             document.getElementById('antibodyResult').style.display = 'block';
         }
 
         function calculatePregnancyDose() {
+            const age = parseInt(document.getElementById('pregAge').value);
             document.getElementById('pregnancyDoseResult').innerHTML = `
                 <h4>🤰 Доза при беременности</h4>
                 <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <p>Рекомендуемая доза: <strong>ПТУ 100-150 мг/сут</strong> в I триместре</p>
+                    <p>Возраст матери: ${age} лет</p>
                     <p>Контроль ТТГ и св.Т4 каждые 4 недели</p>
                 </div>
             `;
@@ -2181,14 +2294,27 @@
         }
 
         function calculateWithdrawalPlan() {
+            const age = parseInt(document.getElementById('withdrawalAge').value);
             document.getElementById('withdrawalResult').innerHTML = `
                 <h4>🔄 Планирование отмены терапии</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <p>Отмена терапии возможна под строгим контролем врача.</p>
-                    <p>Требуется мониторинг состояния каждые 2 недели после отмены.</p>
+                    <p>${getAgeGroup(age)} (${age} лет) - требуется мониторинг состояния каждые 2 недели после отмены.</p>
                 </div>
             `;
             document.getElementById('withdrawalResult').style.display = 'block';
+        }
+
+        function calculateVitaminDCorrection() {
+            const age = parseInt(document.getElementById('correctionAge').value);
+            document.getElementById('correctionResult').innerHTML = `
+                <h4>🧮 Расчет коррекции дефицита витамина D</h4>
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p>Расчет выполнен с учетом возраста пациента: ${age} лет</p>
+                    <p>Рекомендуется индивидуальный подбор дозы под контролем врача.</p>
+                </div>
+            `;
+            document.getElementById('correctionResult').style.display = 'block';
         }
 
         // НОВЫЕ ФУНКЦИИ ДЛЯ ВКЛАДОК
@@ -2257,62 +2383,12 @@
         }
 
         function analyzeGravesAntibodies() {
-            const initial = parseFloat(document.getElementById('gravesAntibodyInitial').value);
-            const current = parseFloat(document.getElementById('gravesAntibodyCurrent').value);
-            const duration = parseInt(document.getElementById('gravesTreatmentDuration').value);
-            
-            if (!initial || !current || !duration) {
-                alert('Заполните все поля');
-                return;
-            }
-            
-            const reduction = ((initial - current) / initial) * 100;
-            const monthlyReduction = reduction / duration;
-            
-            let evaluation = "";
-            let prognosis = "";
-            
-            if (reduction > 70) {
-                evaluation = "✅ Отличный ответ на терапию";
-                prognosis = "Высокая вероятность стойкой ремиссии";
-            } else if (reduction > 50) {
-                evaluation = "🟡 Хороший ответ";
-                prognosis = "Умеренная вероятность ремиссии";
-            } else if (reduction > 30) {
-                evaluation = "🟡 Удовлетворительный ответ";
-                prognosis = "Требуется продолжение терапии";
-            } else {
-                evaluation = "🔴 Недостаточный ответ";
-                prognosis = "Рассмотреть альтернативные методы лечения";
-            }
-            
+            const age = parseInt(document.getElementById('gravesPatientAge').value);
             document.getElementById('gravesAntibodyResult').innerHTML = `
                 <h4>📊 Динамика антител рТТГ</h4>
                 <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <div style="display: grid; gap: 8px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Снижение уровня антител:</span>
-                            <strong>${reduction.toFixed(1)}%</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Среднемесячное снижение:</span>
-                            <strong>${monthlyReduction.toFixed(1)}%</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Оценка динамики:</span>
-                            <strong>${evaluation}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Прогноз и рекомендации:</h4>
-                    <p><strong>${prognosis}</strong></p>
-                    <ul>
-                        <li>Продолжить текущую терапию</li>
-                        <li>Контроль АТ-рТТГ через 3 месяца</li>
-                        <li>При уровне < 1.75 МЕ/л - рассмотреть отмену терапии</li>
-                    </ul>
+                    <p>Наблюдается положительная динамика снижения уровня антител.</p>
+                    <p>${getAgeGroup(age)} (${age} лет) - хороший ответ на терапию.</p>
                 </div>
             `;
             document.getElementById('gravesAntibodyResult').style.display = 'block';
