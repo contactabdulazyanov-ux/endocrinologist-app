@@ -448,99 +448,6 @@
             font-size: 1.2em;
         }
 
-        /* НОВЫЕ СТИЛИ ДЛЯ СЕКЦИИ АЛЬТЕРНАТИВНЫХ МЕТОДОВ ЛЕЧЕНИЯ */
-        .treatment-comparison {
-            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 2px solid #e9d5ff;
-            box-shadow: var(--shadow);
-        }
-
-        .comparison-table {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin: 30px 0;
-            overflow-x: auto;
-        }
-
-        .comparison-table table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
-
-        .comparison-table th {
-            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-
-        .comparison-table td {
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-            text-align: center;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        .criteria-cell {
-            text-align: left !important;
-            font-weight: 600;
-            background: #f8fafc;
-            color: var(--dark);
-        }
-
-        .method-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        }
-
-        .important-notes {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin: 30px 0;
-            border: 2px solid #fcd34d;
-            box-shadow: var(--shadow);
-        }
-
-        .decision-guide {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin: 30px 0;
-            border: 2px solid #a7f3d0;
-            box-shadow: var(--shadow);
-        }
-
-        .note-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent);
-            box-shadow: var(--shadow);
-        }
-
-        .note-card h4 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         /* СТИЛИ ДЛЯ КАЛЬКУЛЯТОРА КАЛЬЦИТОНИНА */
         .calcitonin-calculator {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
@@ -675,6 +582,107 @@
             font-weight: 700;
         }
 
+        .stimulated-info {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px solid #a7f3d0;
+        }
+
+        /* СЕКЦИЯ АЛЬТЕРНАТИВНЫХ МЕТОДОВ ЛЕЧЕНИЯ */
+        .treatment-comparison {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #e9d5ff;
+            box-shadow: var(--shadow);
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .criteria-cell {
+            text-align: left !important;
+            font-weight: 600;
+            background: #f8fafc;
+            color: var(--dark);
+        }
+
+        .method-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .important-notes {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 2px solid #fcd34d;
+            box-shadow: var(--shadow);
+        }
+
+        .decision-guide {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 2px solid #a7f3d0;
+            box-shadow: var(--shadow);
+        }
+
+        .note-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow);
+        }
+
+        .note-card h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .content {
@@ -807,6 +815,25 @@
                     </div>
                 </div>
 
+                <!-- ИНФОРМАЦИЯ О СТИМУЛИРОВАННОМ КАЛЬЦИТОНИНЕ -->
+                <div class="stimulated-info">
+                    <h4><i class="fas fa-flask"></i> Критерии оценки стимулированного кальцитонина</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
+                        <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #bbf7d0;">
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--success);">≤ 60 пг/мл</div>
+                            <div style="font-size: 0.9em; margin-top: 5px;">НОРМА</div>
+                        </div>
+                        <div style="background: #fffbeb; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fcd34d;">
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--warning);">60-100 пг/мл</div>
+                            <div style="font-size: 0.9em; margin-top: 5px;">ПОВТОРНЫЙ ТЕСТ через 6 месяцев</div>
+                        </div>
+                        <div style="background: #fef2f2; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fecaca;">
+                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);">> 100 пг/мл</div>
+                            <div style="font-size: 0.9em; margin-top: 5px;">ВЫСОКИЙ РИСК МРЩЖ</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- ФОРМА КАЛЬКУЛЯТОРА -->
                 <div class="calcitonin-form">
                     <div class="input-group">
@@ -907,37 +934,22 @@
                                 <td>Современные стандарты</td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Другие лаборатории</td>
+                                <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Стимулированный кальцитонин</td>
                             </tr>
                             <tr>
-                                <td>Nikolab (женщины)</td>
-                                <td>&lt; 11.5 пг/мл</td>
-                                <td>Nikolab</td>
+                                <td>Норма</td>
+                                <td>&lt; 60 пг/мл</td>
+                                <td>Клинические рекомендации</td>
                             </tr>
                             <tr>
-                                <td>Nikolab (мужчины)</td>
-                                <td>&lt; 18.2 пг/мл</td>
-                                <td>Nikolab</td>
+                                <td>Пограничные значения</td>
+                                <td>60-100 пг/мл</td>
+                                <td>Требует повторного теста</td>
                             </tr>
                             <tr>
-                                <td>Newlab (женщины)</td>
-                                <td>&lt; 4.8 пг/мл</td>
-                                <td>Newlab</td>
-                            </tr>
-                            <tr>
-                                <td>Newlab (мужчины)</td>
-                                <td>&lt; 11.8 пг/мл</td>
-                                <td>Newlab</td>
-                            </tr>
-                            <tr>
-                                <td>Дети (до 3 лет)</td>
-                                <td>0 - 15 пг/мл</td>
-                                <td>Педиатрические нормы</td>
-                            </tr>
-                            <tr>
-                                <td>Новорожденные</td>
-                                <td>0 - 40 пг/мл</td>
-                                <td>Неонатальные нормы</td>
+                                <td>Высокий риск МРЩЖ</td>
+                                <td>&gt; 100 пг/мл</td>
+                                <td>Крайне подозрителен</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1543,18 +1555,19 @@
                     ${result.additionalInfo ? `<p style="margin-top: 10px;">${result.additionalInfo}</p>` : ''}
                 </div>
                 
-                ${result.showStimulatedTest ? `
+                ${result.showAdditionalTests ? `
                 <div style="background: rgba(245, 158, 11, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
                     <h5>🔄 Рекомендуется дополнительное обследование:</h5>
                     <ul style="margin-left: 20px;">
-                        <li>Стимуляционный тест с пентагастрином</li>
-                        <li>Повторный анализ через 3-6 месяцев</li>
+                        ${result.showStimulatedTest ? '<li>Стимуляционный тест с пентагастрином</li>' : ''}
+                        ${result.showRepeatTest ? '<li>Повторный анализ через 6 месяцев</li>' : ''}
                         <li>Консультация эндокринолога</li>
+                        <li>УЗИ щитовидной железы</li>
                     </ul>
                 </div>
                 ` : ''}
                 
-                ${calcitoninValue >= 100 ? `
+                ${result.showUrgentMeasures ? `
                 <div style="background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px; border: 2px solid #fecaca;">
                     <h5>🚨 СРОЧНЫЕ МЕРЫ:</h5>
                     <ul style="margin-left: 20px;">
@@ -1571,56 +1584,81 @@
         }
 
         function evaluateCalcitoninLevel(value, method, gender, testType) {
-            // Определяем верхнюю границу нормы в зависимости от метода и пола
-            let upperLimit;
+            let assessment, interpretation, recommendation, color, additionalInfo;
+            let showStimulatedTest = false;
+            let showRepeatTest = false;
+            let showAdditionalTests = false;
+            let showUrgentMeasures = false;
             
-            if (method === 'ifа') {
-                // Иммуноферментный анализ
-                if (gender === 'female') upperLimit = 5.2;
-                else if (gender === 'male') upperLimit = 8.4;
-                else upperLimit = 6.4; // дети
-            } else if (method === 'icl') {
-                // Иммунохемилюминесцентный метод
-                if (gender === 'female') upperLimit = 1.46;
-                else if (gender === 'male') upperLimit = 2.46;
-                else upperLimit = 1.5; // дети (примерно)
-            } else {
-                // Другой метод - используем усредненные значения
-                if (gender === 'female') upperLimit = 5.0;
-                else if (gender === 'male') upperLimit = 10.0;
-                else upperLimit = 6.0;
-            }
-            
-            // Для стимулированного теста нормы выше
             if (testType === 'stimulated') {
-                upperLimit *= 2; // Упрощенное правило для стимулированного теста
-            }
-            
-            let assessment, interpretation, recommendation, color, additionalInfo, showStimulatedTest;
-            
-            if (value <= upperLimit) {
-                assessment = "НОРМАЛЬНЫЙ УРОВЕНЬ";
-                interpretation = `Уровень кальцитонина находится в пределах референсных значений для выбранного метода исследования (${method === 'icl' ? 'иммунохемилюминесцентного' : 'иммуноферментного'}) и пола пациента.`;
-                recommendation = "Плановое наблюдение согласно клиническим показаниям.";
-                color = "risk-low";
-            } else if (value <= upperLimit * 2) {
-                assessment = "УМЕРЕННО ПОВЫШЕН";
-                interpretation = `Уровень кальцитонина незначительно превышает верхнюю границу нормы. Может быть связан с различными факторами, включая прием препаратов или неонкологические заболевания.`;
-                recommendation = "Рекомендовано исключение факторов влияния и повторный анализ через 3-6 месяцев.";
-                color = "risk-moderate";
-                additionalInfo = "Исключить прием препаратов кальция, гормональных средств за 1 месяц до повторного исследования.";
-                showStimulatedTest = true;
-            } else if (value <= 100) {
-                assessment = "ЗНАЧИТЕЛЬНО ПОВЫШЕН";
-                interpretation = "Уровень кальцитонина значительно превышает норму. Высокий риск медуллярного рака щитовидной железы или С-клеточной гиперплазии.";
-                recommendation = "Срочная консультация эндокринолога, проведение стимуляционного теста, УЗИ щитовидной железы.";
-                color = "risk-high";
-                showStimulatedTest = true;
+                // Оценка стимулированного кальцитонина
+                if (value <= 60) {
+                    assessment = "НОРМАЛЬНЫЙ УРОВЕНЬ";
+                    interpretation = "Уровень стимулированного кальцитонина в пределах нормы. Риск медуллярного рака щитовидной железы минимален.";
+                    recommendation = "Плановое наблюдение согласно клиническим показаниям.";
+                    color = "risk-low";
+                } else if (value > 60 && value <= 100) {
+                    assessment = "ПОГРАНИЧНЫЕ ЗНАЧЕНИЯ";
+                    interpretation = "Уровень стимулированного кальцитонина в пограничной зоне. Требуется динамическое наблюдение.";
+                    recommendation = "Повторный стимуляционный тест через 6 месяцев.";
+                    color = "risk-moderate";
+                    showRepeatTest = true;
+                    showAdditionalTests = true;
+                    additionalInfo = "Рекомендовано исключить прием препаратов, влияющих на уровень кальцитонина, перед повторным исследованием.";
+                } else {
+                    assessment = "ВЫСОКИЙ РИСК МРЩЖ";
+                    interpretation = "Уровень стимулированного кальцитонина значительно повышен. Крайне подозрителен в отношении медуллярного рака щитовидной железы.";
+                    recommendation = "СРОЧНАЯ консультация эндокринолога-хирурга, обследование для исключения МРЩЖ.";
+                    color = "risk-high";
+                    showUrgentMeasures = true;
+                    showAdditionalTests = true;
+                }
             } else {
-                assessment = "КРИТИЧЕСКИ ПОВЫШЕН";
-                interpretation = "Уровень кальцитонина критически повышен. Очень высокая вероятность медуллярного рака щитовидной железы, возможны метастазы.";
-                recommendation = "НЕМЕДЛЕННАЯ консультация эндокринолога-хирурга, обследование на метастазы, рассмотрение тотальной тиреоидэктомии.";
-                color = "risk-high";
+                // Оценка базального кальцитонина
+                let upperLimit;
+                
+                if (method === 'ifа') {
+                    if (gender === 'female') upperLimit = 5.2;
+                    else if (gender === 'male') upperLimit = 8.4;
+                    else upperLimit = 6.4;
+                } else if (method === 'icl') {
+                    if (gender === 'female') upperLimit = 1.46;
+                    else if (gender === 'male') upperLimit = 2.46;
+                    else upperLimit = 1.5;
+                } else {
+                    if (gender === 'female') upperLimit = 5.0;
+                    else if (gender === 'male') upperLimit = 10.0;
+                    else upperLimit = 6.0;
+                }
+                
+                if (value <= upperLimit) {
+                    assessment = "НОРМАЛЬНЫЙ УРОВЕНЬ";
+                    interpretation = `Уровень базального кальцитонина находится в пределах референсных значений для выбранного метода исследования.`;
+                    recommendation = "Плановое наблюдение согласно клиническим показаниям.";
+                    color = "risk-low";
+                } else if (value <= upperLimit * 2) {
+                    assessment = "УМЕРЕННО ПОВЫШЕН";
+                    interpretation = `Уровень базального кальцитонина незначительно превышает норму. Может быть связан с различными факторами.`;
+                    recommendation = "Рекомендовано проведение стимуляционного теста для уточнения диагноза.";
+                    color = "risk-moderate";
+                    showStimulatedTest = true;
+                    showAdditionalTests = true;
+                    additionalInfo = "Исключить прием препаратов кальция, гормональных средств за 1 месяц до исследования.";
+                } else if (value <= 100) {
+                    assessment = "ЗНАЧИТЕЛЬНО ПОВЫШЕН";
+                    interpretation = "Уровень базального кальцитонина значительно превышает норму. Высокий риск медуллярного рака щитовидной железы.";
+                    recommendation = "Срочная консультация эндокринолога, проведение стимуляционного теста.";
+                    color = "risk-high";
+                    showStimulatedTest = true;
+                    showAdditionalTests = true;
+                } else {
+                    assessment = "КРИТИЧЕСКИ ПОВЫШЕН";
+                    interpretation = "Уровень базального кальцитонина критически повышен. Очень высокая вероятность медуллярного рака щитовидной железы.";
+                    recommendation = "НЕМЕДЛЕННАЯ консультация эндокринолога-хирурга.";
+                    color = "risk-high";
+                    showUrgentMeasures = true;
+                    showAdditionalTests = true;
+                }
             }
             
             return {
@@ -1630,7 +1668,9 @@
                 color,
                 additionalInfo,
                 showStimulatedTest,
-                upperLimit
+                showRepeatTest,
+                showAdditionalTests,
+                showUrgentMeasures
             };
         }
 
