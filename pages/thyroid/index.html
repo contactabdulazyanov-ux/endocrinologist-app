@@ -948,6 +948,94 @@
                 </div>
             </div>
 
+            <!-- РАСШИРЕННЫЙ КАЛЬКУЛЯТОР -->
+            <div class="advanced-calculator" id="advancedCalculator">
+                <h2 class="calculator-title">🔍 Расширенный калькулятор МКБ-10</h2>
+                <p class="calculator-subtitle">Подбор кода на основе клинической картины и симптомов</p>
+
+                <div class="form-group">
+                    <label>Основной диагноз:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diagnosis" value="hypothyroidism">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Гипотиреоз</div>
+                                <div class="checkbox-description">Снижение функции щитовидной железы</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diagnosis" value="hyperthyroidism">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Гипертиреоз</div>
+                                <div class="checkbox-description">Повышение функции щитовидной железы</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diagnosis" value="thyroiditis">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Тиреоидит</div>
+                                <div class="checkbox-description">Воспаление щитовидной железы</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diagnosis" value="goiter">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Зоб</div>
+                                <div class="checkbox-description">Увеличение щитовидной железы</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Особые условия:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="conditions" value="pregnancy">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Беременность</div>
+                                <div class="checkbox-description">Заболевание возникло во время беременности</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="conditions" value="congenital">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Врожденный</div>
+                                <div class="checkbox-description">Заболевание присутствует с рождения</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="conditions" value="autoimmune">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Аутоиммунный</div>
+                                <div class="checkbox-description">Аутоиммунная природа заболевания</div>
+                            </div>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="conditions" value="postprocedural">
+                            <div class="checkbox-text">
+                                <div class="checkbox-title">Постпроцедурный</div>
+                                <div class="checkbox-description">Возник после медицинских вмешательств</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="calculator-buttons">
+                    <button class="btn" onclick="calculateAdvancedCode()">
+                        🎯 Подобрать код МКБ-10
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeAdvancedCalculator()">
+                        ❌ Закрыть
+                    </button>
+                </div>
+
+                <div class="result-box" id="advancedResult">
+                    <div class="result-title">Результат подбора кода</div>
+                    <div id="resultContent"></div>
+                </div>
+            </div>
+
             <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
             <div class="info-cards-grid">
                 <div class="info-card">
@@ -1072,7 +1160,7 @@
     </div>
 
     <script>
-        // База знаний МКБ-10
+        // Полная база знаний МКБ-10 для щитовидной железы
         const ICD10_CODES = {
             // Гипотиреоз
             "E03.0": {
@@ -1083,7 +1171,116 @@
                 description: "Приобретенный гипотиреоз",
                 details: "Гипотиреоз вследствие медицинских мероприятий. Исключает: постпроцедурный гипотиреоз (E89.0)"
             },
-            // ... остальной код JavaScript остается без изменений ...
+            "E03.2": {
+                description: "Гипотиреоз, вызванный лекарственными средствами",
+                details: "При необходимости идентифицировать лекарственное средство используют дополнительный код внешних причин (класс XX)."
+            },
+            "E03.3": {
+                description: "Постинфекционный гипотиреоз",
+                details: "Гипотиреоз как следствие перенесенной инфекции"
+            },
+            "E03.4": {
+                description: "Атрофия щитовидной железы (приобретенная)",
+                details: "Исключает: врожденную атрофию щитовидной железы (E03.0)"
+            },
+            "E03.5": {
+                description: "Микседематозная кома",
+                details: "Критическое состояние, требующее неотложной помощи"
+            },
+            "E03.8": {
+                description: "Другие уточненные гипотиреозы",
+                details: "Иные специфические формы гипотиреоза"
+            },
+            "E03.9": {
+                description: "Гипотиреоз неуточненный",
+                details: "Наиболее часто используемый код при недостаточной специфике диагноза"
+            },
+            
+            // Гипертиреоз
+            "E05.0": {
+                description: "Тиреотоксикоз с диффузным зобом",
+                details: "Болезнь Грейвса. Диффузный токсический зоб"
+            },
+            "E05.1": {
+                description: "Тиреотоксикоз с токсическим одноузловым зобом",
+                details: "Токсический узловой зоб"
+            },
+            "E05.2": {
+                description: "Тиреотоксикоз с токсическим многоузловым зобом",
+                details: "Многоузловой токсический зоб"
+            },
+            "E05.3": {
+                description: "Тиреотоксикоз с эктопией тиреоидной ткани",
+                details: "Тиреотоксикоз при эктопированной ткани щитовидной железы"
+            },
+            "E05.4": {
+                description: "Тиреотоксикоз искусственный",
+                details: "Передозировка тиреоидных гормонов"
+            },
+            "E05.5": {
+                description: "Тиреоидный криз или кома",
+                details: "Угрожающее жизни осложнение тиреотоксикоза"
+            },
+            "E05.8": {
+                description: "Другие формы тиреотоксикоза",
+                details: "Иные специфические формы тиреотоксикоза"
+            },
+            "E05.9": {
+                description: "Тиреотоксикоз неуточненный",
+                details: "Тиреотоксикоз без уточнения формы"
+            },
+
+            // Тиреоидиты
+            "E06.0": {
+                description: "Острый тиреоидит",
+                details: "Острое воспаление щитовидной железы"
+            },
+            "E06.1": {
+                description: "Подострый тиреоидит",
+                details: "Подострое воспаление (тиреоидит де Кервена)"
+            },
+            "E06.2": {
+                description: "Хронический тиреоидит с преходящим тиреотоксикозом",
+                details: "Хронический тиреоидит с временным повышением функции"
+            },
+            "E06.3": {
+                description: "Аутоиммунный тиреоидит",
+                details: "Хронический лимфоцитарный тиреоидит (Хашимото)"
+            },
+            "E06.4": {
+                description: "Лекарственный тиреоидит",
+                details: "Тиреоидит, вызванный лекарственными средствами"
+            },
+            "E06.5": {
+                description: "Другие хронические тиреоидиты",
+                details: "Иные формы хронического воспаления"
+            },
+            "E06.9": {
+                description: "Тиреоидит неуточненный",
+                details: "Тиреоидит без уточнения формы"
+            },
+
+            // Зоб
+            "E04.0": {
+                description: "Нетоксический диффузный зоб",
+                details: "Диффузное увеличение щитовидной железы без нарушения функции"
+            },
+            "E04.1": {
+                description: "Нетоксический одноузловой зоб",
+                details: "Узловое образование щитовидной железы без нарушения функции"
+            },
+            "E04.2": {
+                description: "Нетоксический многоузловой зоб",
+                details: "Множественные узловые образования без нарушения функции"
+            },
+            "E04.8": {
+                description: "Другие уточненные формы нетоксического зоба",
+                details: "Иные специфические формы зоба"
+            },
+            "E04.9": {
+                description: "Нетоксический зоб неуточненный",
+                details: "Зоб без уточнения формы и без нарушения функции"
+            }
         };
 
         // Функции для простого калькулятора
@@ -1105,7 +1302,213 @@
             });
         }
 
-        // ... остальные функции JavaScript остаются без изменений ...
+        function showNotification(message, type = 'success') {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#059669' : '#dc2626'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Анимация появления
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Автоматическое скрытие
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Функция для показа всех кодов
+        function showAllCodes() {
+            const allCodesHtml = Object.entries(ICD10_CODES).map(([code, info]) => `
+                <div class="code-card">
+                    <div class="code-header">
+                        <div>
+                            <div class="code-number">${code}</div>
+                            <div class="code-desc">${info.description}</div>
+                        </div>
+                        <button class="code-copy" onclick="copyCode('${code}')">Копировать</button>
+                    </div>
+                    <div class="code-details">${info.details}</div>
+                </div>
+            `).join('');
+
+            const modalHtml = `
+                <div id="allCodesModal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                ">
+                    <div style="
+                        background: white;
+                        border-radius: 20px;
+                        padding: 40px;
+                        max-width: 90%;
+                        max-height: 90%;
+                        overflow-y: auto;
+                        position: relative;
+                    ">
+                        <button onclick="closeAllCodesModal()" style="
+                            position: absolute;
+                            top: 15px;
+                            right: 15px;
+                            background: #dc2626;
+                            color: white;
+                            border: none;
+                            border-radius: 50%;
+                            width: 30px;
+                            height: 30px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        ">×</button>
+                        <h2 style="margin-bottom: 30px; text-align: center;">Все коды МКБ-10 заболеваний щитовидной железы</h2>
+                        <div class="code-grid">
+                            ${allCodesHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        function closeAllCodesModal() {
+            const modal = document.getElementById('allCodesModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Функции для расширенного калькулятора
+        function openAdvancedCalculator() {
+            document.getElementById('advancedCalculator').classList.add('active');
+        }
+
+        function closeAdvancedCalculator() {
+            document.getElementById('advancedCalculator').classList.remove('active');
+            document.getElementById('advancedResult').classList.remove('active');
+        }
+
+        function calculateAdvancedCode() {
+            const diagnosis = Array.from(document.querySelectorAll('input[name="diagnosis"]:checked')).map(cb => cb.value);
+            const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value);
+            
+            let resultCodes = [];
+            let clinicalCriteria = [];
+
+            // Логика подбора кодов на основе выбранных опций
+            if (diagnosis.includes('hypothyroidism')) {
+                if (conditions.includes('congenital')) {
+                    resultCodes.push({ code: 'E03.0', description: 'Врожденный гипотиреоз' });
+                    clinicalCriteria.push('• Наличие с рождения<br>• Задержка развития<br>• Повышенный ТТГ');
+                } else if (conditions.includes('pregnancy')) {
+                    resultCodes.push({ code: 'E03.9 + O99.2', description: 'Гипотиреоз при беременности' });
+                    clinicalCriteria.push('• Повышенный ТТГ при беременности<br>• Может потребоваться коррекция дозы левотироксина');
+                } else {
+                    resultCodes.push({ code: 'E03.9', description: 'Гипотиреоз неуточненный' });
+                    clinicalCriteria.push('• Повышенный ТТГ<br>• Сниженный свТ4<br>• Симптомы гипотиреоза');
+                }
+            }
+
+            if (diagnosis.includes('hyperthyroidism')) {
+                if (conditions.includes('autoimmune')) {
+                    resultCodes.push({ code: 'E05.0', description: 'Болезнь Грейвса' });
+                    clinicalCriteria.push('• Диффузный зоб<br>• Аутоантитела к рецептору ТТГ<br>• Возможна офтальмопатия');
+                } else if (conditions.includes('pregnancy')) {
+                    resultCodes.push({ code: 'E05.9 + O99.2', description: 'Тиреотоксикоз при беременности' });
+                    clinicalCriteria.push('• Сниженный ТТГ при беременности<br>• Повышенные свТ4/свТ3<br>• Требует контроля тиреостатиков');
+                } else {
+                    resultCodes.push({ code: 'E05.9', description: 'Тиреотоксикоз неуточненный' });
+                    clinicalCriteria.push('• Сниженный ТТГ<br>• Повышенные свТ4/свТ3<br>• Симптомы тиреотоксикоза');
+                }
+            }
+
+            if (diagnosis.includes('thyroiditis')) {
+                if (conditions.includes('autoimmune')) {
+                    resultCodes.push({ code: 'E06.3', description: 'Аутоиммунный тиреоидит' });
+                    clinicalCriteria.push('• Антитела к ТПО/ТГ<br>• Возможна разная функциональная активность ЩЖ<br>• Характерные УЗИ-признаки');
+                } else if (conditions.includes('pregnancy')) {
+                    resultCodes.push({ code: 'E06.3 + O99.2', description: 'Аутоиммунный тиреоидит при беременности' });
+                    clinicalCriteria.push('• Наличие антител<br>• Требует контроля функции ЩЖ во время беременности');
+                }
+            }
+
+            if (diagnosis.includes('goiter')) {
+                if (conditions.includes('pregnancy')) {
+                    resultCodes.push({ code: 'E04.9 + O99.2', description: 'Зоб при беременности' });
+                    clinicalCriteria.push('• Увеличение ЩЖ при беременности<br>• Нормальная функция ЩЖ');
+                } else {
+                    resultCodes.push({ code: 'E04.9', description: 'Нетоксический зоб неуточненный' });
+                    clinicalCriteria.push('• Увеличение ЩЖ<br>• Нормальная функция ЩЖ<br>• Отсутствие тиреотоксикоза');
+                }
+            }
+
+            // Если ничего не выбрано
+            if (resultCodes.length === 0) {
+                resultCodes.push({ code: 'Не выбран', description: 'Выберите хотя бы один диагноз для подбора кода' });
+            }
+
+            // Формируем HTML результата
+            const resultHtml = `
+                <div class="code-grid">
+                    ${resultCodes.map(item => `
+                        <div class="code-card">
+                            <div class="code-header">
+                                <div>
+                                    <div class="code-number">${item.code}</div>
+                                    <div class="code-desc">${item.description}</div>
+                                </div>
+                                ${item.code !== 'Не выбран' ? `<button class="code-copy" onclick="copyCode('${item.code}')">Копировать</button>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                ${clinicalCriteria.length > 0 ? `
+                    <div class="clinical-criteria">
+                        <div class="criteria-title">📋 Клинические критерии для выбранных кодов:</div>
+                        ${clinicalCriteria.join('<br><br>')}
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('resultContent').innerHTML = resultHtml;
+            document.getElementById('advancedResult').classList.add('active');
+        }
+
+        // Закрытие модальных окон при клике вне их области
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('allCodesModal');
+            if (modal && event.target === modal) {
+                closeAllCodesModal();
+            }
+        });
     </script>
 </body>
 </html>
