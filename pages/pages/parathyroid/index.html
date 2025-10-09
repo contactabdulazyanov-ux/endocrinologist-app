@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Паращитовидные железы - Эндокринолог PRO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --secondary-dark: #6d28d9;
+            --accent: #06b6d4;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --danger-dark: #b91c1c;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            background: var(--dark);
+            padding: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .main-menu a {
+            padding: 14px 28px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-menu a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .main-menu a.active {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.3em;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bae6fd;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .info-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1em;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+            .header {
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .page-title {
+                font-size: 2em;
+            }
+            .info-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-menu {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .main-menu a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦴 ПАРАЩИТОВИДНЫЕ ЖЕЛЕЗЫ</h1>
+            <p>Диагностика и лечение нарушений кальциевого обмена</p>
+        </div>
+
+        <div id="main-nav"></div>
+
+        <div class="content">
+            <h1 class="page-title">Заболевания паращитовидных желез</h1>
+            <p class="page-subtitle">Комплексная диагностика и лечение нарушений кальциево-фосфорного обмена</p>
+
+            <!-- СТАТИСТИКА -->
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-number">0.1%</div>
+                    <div class="stat-label">распространенность гиперпаратиреоза</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3:1</div>
+                    <div class="stat-label">соотношение женщин и мужчин</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">случаев - одиночная аденома</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">эффективность хирургического лечения</div>
+                </div>
+            </div>
+
+            <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
+            <div class="info-cards-grid">
+                <div class="info-card">
+                    <h3>📈 Гиперпаратиреоз</h3>
+                    <p>Повышенная продукция паратгормона с развитием гиперкальциемии и поражением костей, почек</p>
+                    <ul class="feature-list">
+                        <li>Первичный, вторичный и третичный формы</li>
+                        <li>Диагностические критерии</li>
+                        <li>Показания к операции</li>
+                        <li>Медикаментозное лечение</li>
+                    </ul>
+                    <a href="hyperparathyroidism.html" class="btn">📈 Перейти к диагностике</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>📉 Гипопаратиреоз</h3>
+                    <p>Снижение или отсутствие паратгормона с развитием гипокальциемии, чаще послеоперационный</p>
+                    <ul class="feature-list">
+                        <li>Послеоперационный гипопаратиреоз</li>
+                        <li>Врожденные формы</li>
+                        <li>Заместительная терапия</li>
+                        <li>Мониторинг осложнений</li>
+                    </ul>
+                    <a href="hypoparathyroidism.html" class="btn">📉 Перейти к диагностике</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>🧮 Калькуляторы</h3>
+                    <p>Профессиональные инструменты для расчета терапии и диагностики заболеваний паращитовидных желез</p>
+                    <ul class="feature-list">
+                        <li>Коррекция кальция по альбумину</li>
+                        <li>Расчет доз витамина D</li>
+                        <li>Интерпретация ПТГ и кальция</li>
+                        <li>Ведение гипопаратиреоза</li>
+                    </ul>
+                    <a href="parathyroid.html" class="btn">🧮 Перейти к калькуляторам</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../navigation.js"></script>
+</body>
+</html>
