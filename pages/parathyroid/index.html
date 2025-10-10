@@ -140,7 +140,8 @@
             font-weight: 400;
         }
 
-        .quick-stats {
+        /* СТАТИСТИКА */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
@@ -176,6 +177,142 @@
             font-size: 1em;
         }
 
+        /* КАЛЬКУЛЯТОРЫ */
+        .calculator-section {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #a7f3d0;
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-title {
+            font-size: 2em;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .calculator-subtitle {
+            font-size: 1.2em;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .calculator-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .calculator-icon {
+            font-size: 2.5em;
+        }
+
+        .calculator-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .result-box {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #bbf7d0;
+            display: none;
+        }
+
+        .result-box.active {
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        /* ИНФОРМАЦИОННЫЕ КАРТОЧКИ */
         .info-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -225,28 +362,6 @@
             font-size: 1.1em;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1em;
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
-        }
-
         .feature-list {
             list-style: none;
             padding: 0;
@@ -271,7 +386,62 @@
             font-size: 1.2em;
         }
 
+        /* ДИАГНОСТИЧЕСКИЕ КРИТЕРИИ */
+        .criteria-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #bae6fd;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .criteria-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .criteria-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .criteria-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .criteria-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .criteria-list li:before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+        }
+
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
             .content {
                 padding: 30px 20px;
             }
@@ -284,7 +454,13 @@
             .page-title {
                 font-size: 2em;
             }
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
             .info-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .criteria-grid {
                 grid-template-columns: 1fr;
             }
             .main-menu {
@@ -305,14 +481,20 @@
             <p>Диагностика и лечение нарушений кальциевого обмена</p>
         </div>
 
-        <div id="main-nav"></div>
+        <nav class="main-menu">
+            <a href="../../index.html">🏠 Главная</a>
+            <a href="../thyroid/index.html">🦋 Щитовидная железа</a>
+            <a href="index.html" class="active">🦴 Паращитовидные железы</a>
+            <a href="../diabetes/index.html">💉 Сахарный диабет</a>
+            <a href="../adrenal/index.html">🧠 Надпочечники</a>
+        </nav>
 
         <div class="content">
             <h1 class="page-title">Заболевания паращитовидных желез</h1>
             <p class="page-subtitle">Комплексная диагностика и лечение нарушений кальциево-фосфорного обмена</p>
 
             <!-- СТАТИСТИКА -->
-            <div class="quick-stats">
+            <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">0.1%</div>
                     <div class="stat-label">распространенность гиперпаратиреоза</div>
@@ -331,47 +513,405 @@
                 </div>
             </div>
 
+            <!-- ОСНОВНЫЕ КАЛЬКУЛЯТОРЫ -->
+            <div class="calculator-section">
+                <h2 class="calculator-title">🧮 Профессиональные калькуляторы</h2>
+                <p class="calculator-subtitle">Точные расчеты для диагностики и лечения заболеваний паращитовидных желез</p>
+
+                <div class="calculator-grid">
+                    <!-- Калькулятор коррекции кальция -->
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <div class="calculator-icon">📊</div>
+                            <div class="calculator-name">Коррекция кальция по альбумину</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Общий кальций (ммоль/л):</label>
+                            <input type="number" id="totalCalcium" step="0.01" placeholder="2.15">
+                        </div>
+                        <div class="input-group">
+                            <label>Альбумин (г/л):</label>
+                            <input type="number" id="albumin" step="0.1" placeholder="40.0">
+                        </div>
+                        <button class="btn btn-full" onclick="calculateCorrectedCalcium()">
+                            📈 Рассчитать скорректированный кальций
+                        </button>
+                        <div class="result-box" id="calciumResult">
+                            <div class="result-title">Результат расчета:</div>
+                            <div id="calciumValue"></div>
+                        </div>
+                    </div>
+
+                    <!-- Калькулятор ПТГ -->
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <div class="calculator-icon">🔬</div>
+                            <div class="calculator-name">Интерпретация ПТГ и кальция</div>
+                        </div>
+                        <div class="input-group">
+                            <label>ПТГ (пг/мл):</label>
+                            <input type="number" id="pth" step="0.1" placeholder="65.0">
+                        </div>
+                        <div class="input-group">
+                            <label>Кальций общий (ммоль/л):</label>
+                            <input type="number" id="calciumForPTH" step="0.01" placeholder="2.50">
+                        </div>
+                        <button class="btn btn-full" onclick="interpretPTH()">
+                            🎯 Интерпретировать результаты
+                        </button>
+                        <div class="result-box" id="pthResult">
+                            <div class="result-title">Диагностическая оценка:</div>
+                            <div id="pthInterpretation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Калькулятор доз витамина D -->
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <div class="calculator-icon">💊</div>
+                            <div class="calculator-name">Расчет дозы витамина D</div>
+                        </div>
+                        <div class="input-group">
+                            <label>25(OH)D (нг/мл):</label>
+                            <input type="number" id="vitaminD" step="0.1" placeholder="15.0">
+                        </div>
+                        <div class="input-group">
+                            <label>Вес пациента (кг):</label>
+                            <input type="number" id="weight" step="1" placeholder="70">
+                        </div>
+                        <button class="btn btn-full" onclick="calculateVitaminD()">
+                            💡 Рассчитать схему лечения
+                        </button>
+                        <div class="result-box" id="vitaminDResult">
+                            <div class="result-title">Рекомендации по лечению:</div>
+                            <div id="vitaminDRecommendation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Калькулятор послеоперационного гипопаратиреоза -->
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <div class="calculator-icon">⚕️</div>
+                            <div class="calculator-name">Ведение гипопаратиреоза</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Кальций сыворотки (ммоль/л):</label>
+                            <input type="number" id="postopCalcium" step="0.01" placeholder="1.80">
+                        </div>
+                        <div class="input-group">
+                            <label>Симптомы гипокальциемии:</label>
+                            <select id="symptoms">
+                                <option value="none">Отсутствуют</option>
+                                <option value="mild">Легкие (парестезии)</option>
+                                <option value="severe">Тяжелые (тетания, судороги)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-full" onclick="manageHypoparathyroidism()">
+                            🏥 Определить тактику
+                        </button>
+                        <div class="result-box" id="hypoparaResult">
+                            <div class="result-title">Тактика ведения:</div>
+                            <div id="hypoparaManagement"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- ИНФОРМАЦИОННЫЕ КАРТОЧКИ -->
             <div class="info-cards-grid">
                 <div class="info-card">
-                    <h3>📈 Гиперпаратиреоз</h3>
-                    <p>Повышенная продукция паратгормона с развитием гиперкальциемии и поражением костей, почек</p>
+                    <h3>📈 Первичный гиперпаратиреоз</h3>
+                    <p>Автономная гиперпродукция ПТГ паращитовидными железами с развитием гиперкальциемии</p>
                     <ul class="feature-list">
-                        <li>Первичный, вторичный и третичный формы</li>
-                        <li>Диагностические критерии</li>
+                        <li>Диагностика по критериям</li>
                         <li>Показания к операции</li>
-                        <li>Медикаментозное лечение</li>
+                        <li>Дифференциальная диагностика</li>
+                        <li>Наблюдение при отказе от операции</li>
                     </ul>
-                    <a href="hyperparathyroidism.html" class="btn">📈 Перейти к диагностике</a>
+                    <button class="btn" onclick="showPrimaryHyperpara()">📋 Диагностические критерии</button>
                 </div>
 
                 <div class="info-card">
-                    <h3>📉 Гипопаратиреоз</h3>
-                    <p>Снижение или отсутствие паратгормона с развитием гипокальциемии, чаще послеоперационный</p>
+                    <h3>📉 Вторичный гиперпаратиреоз</h3>
+                    <p>Компенсаторное увеличение ПТГ в ответ на гипокальциемию при ХБП и других состояниях</p>
                     <ul class="feature-list">
-                        <li>Послеоперационный гипопаратиреоз</li>
-                        <li>Врожденные формы</li>
-                        <li>Заместительная терапия</li>
+                        <li>Связь с ХБП</li>
+                        <li>Коррекция витамина D</li>
+                        <li>Фосфат-биндеры</li>
+                        <li>Кальцимиметики</li>
+                    </ul>
+                    <button class="btn" onclick="showSecondaryHyperpara()">💊 Протоколы лечения</button>
+                </div>
+
+                <div class="info-card">
+                    <h3>⚡ Гипопаратиреоз</h3>
+                    <p>Снижение или отсутствие ПТГ с развитием гипокальциемии, чаще послеоперационный</p>
+                    <ul class="feature-list">
+                        <li>Посттиреоидэктомический</li>
+                        <li>Кальций и витамин D</li>
+                        <li>Рекомбинантный ПТГ</li>
                         <li>Мониторинг осложнений</li>
                     </ul>
-                    <a href="hypoparathyroidism.html" class="btn">📉 Перейти к диагностике</a>
+                    <button class="btn" onclick="showHypoparathyroidism()">🏥 Тактика ведения</button>
                 </div>
+            </div>
 
-                <div class="info-card">
-                    <h3>🧮 Калькуляторы</h3>
-                    <p>Профессиональные инструменты для расчета терапии и диагностики заболеваний паращитовидных желез</p>
-                    <ul class="feature-list">
-                        <li>Коррекция кальция по альбумину</li>
-                        <li>Расчет доз витамина D</li>
-                        <li>Интерпретация ПТГ и кальция</li>
-                        <li>Ведение гипопаратиреоза</li>
-                    </ul>
-                    <a href="parathyroid.html" class="btn">🧮 Перейти к калькуляторам</a>
+            <!-- ДИАГНОСТИЧЕСКИЕ КРИТЕРИИ -->
+            <div class="criteria-section">
+                <h2 class="calculator-title">🔍 Диагностические критерии</h2>
+                <p class="calculator-subtitle">Клинические и лабораторные критерии заболеваний паращитовидных желез</p>
+
+                <div class="criteria-grid">
+                    <div class="criteria-card">
+                        <h4>📈 Первичный гиперпаратиреоз</h4>
+                        <ul class="criteria-list">
+                            <li>Гиперкальциемия (ионизированный Ca²⁺ > 1.32 ммоль/л)</li>
+                            <li>Повышенный или неадекватно нормальный ПТГ</li>
+                            <li>Нормальная или повышенная экскреция кальция с мочой</li>
+                            <li>Исключение других причин гиперкальциемии</li>
+                        </ul>
+                    </div>
+
+                    <div class="criteria-card">
+                        <h4>📉 Вторичный гиперпаратиреоз</h4>
+                        <ul class="criteria-list">
+                            <li>Гипокальциемия или нормокальциемия</li>
+                            <li>Повышенный ПТГ</li>
+                            <li>Снижение 25(OH)D < 20 нг/мл</li>
+                            <li>ХБП (СКФ < 60 мл/мин)</li>
+                        </ul>
+                    </div>
+
+                    <div class="criteria-card">
+                        <h4>⚡ Гипопаратиреоз</h4>
+                        <ul class="criteria-list">
+                            <li>Гипокальциемия (ионизированный Ca²⁺ < 1.12 ммоль/л)</li>
+                            <li>Низкий или неопределяемый ПТГ</li>
+                            <li>Гиперфосфатемия</li>
+                            <li>В анамнезе - операции на шее</li>
+                        </ul>
+                    </div>
+
+                    <div class="criteria-card">
+                        <h4>🎯 Показания к операции при ПГПТ</h4>
+                        <ul class="criteria-list">
+                            <li>Кальций сыворотки > 0.25 ммоль/л выше нормы</li>
+                            <li>СКФ < 60 мл/мин</li>
+                            <li>Плотность кости T-score < -2.5</li>
+                            <li>Возраст < 50 лет</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../../navigation.js"></script>
+    <script>
+        // База знаний по паращитовидным железам
+        const PARATHYROID_KNOWLEDGE = {
+            // Коррекция кальция по альбумину
+            calculateCorrectedCalcium: function(totalCalcium, albumin) {
+                // Формула: скорректированный Ca = общий Ca + 0.02 * (40 - альбумин)
+                const corrected = totalCalcium + 0.02 * (40 - albumin);
+                return corrected.toFixed(2);
+            },
+
+            // Интерпретация ПТГ и кальция
+            interpretPTHCalcium: function(pth, calcium) {
+                const normalPTH = { min: 15, max: 65 };
+                const normalCalcium = { min: 2.15, max: 2.55 };
+
+                if (calcium > normalCalcium.max && pth > normalPTH.max) {
+                    return {
+                        diagnosis: "🔴 Первичный гиперпаратиреоз",
+                        details: "Сочетание гиперкальциемии и повышенного ПТГ. Требуется дообследование для выявления аденомы паращитовидных желез."
+                    };
+                } else if (calcium > normalCalcium.max && pth <= normalPTH.max) {
+                    return {
+                        diagnosis: "🟡 ПТГ-независимая гиперкальциемия",
+                        details: "Гиперкальциемия при нормальном ПТГ. Исключить злокачественные новообразования, саркоидоз, передозировку витамина D."
+                    };
+                } else if (calcium < normalCalcium.min && pth > normalPTH.max) {
+                    return {
+                        diagnosis: "🟢 Вторичный гиперпаратиреоз",
+                        details: "Адекватный ответ ПТГ на гипокальциемию. Искать причины: дефицит витамина D, ХБП, мальабсорбция."
+                    };
+                } else if (calcium < normalCalcium.min && pth < normalPTH.min) {
+                    return {
+                        diagnosis: "🔴 Гипопаратиреоз",
+                        details: "Гипокальциемия при низком ПТГ. Чаще всего послеоперационный. Требуется заместительная терапия."
+                    };
+                } else {
+                    return {
+                        diagnosis: "🟢 Нормальное соотношение",
+                        details: "Параметры в пределах нормы. Продолжать наблюдение по показаниям."
+                    };
+                }
+            },
+
+            // Расчет дозы витамина D
+            calculateVitaminDDose: function(vitaminDLevel, weight) {
+                let loadingDose, maintenanceDose, duration;
+                
+                if (vitaminDLevel < 10) {
+                    loadingDose = "50 000 МЕ 1 раз в неделю × 8 недель";
+                    maintenanceDose = "1 500-2 000 МЕ/сут или 10 000 МЕ/нед";
+                    duration = "Контроль через 3 месяца";
+                } else if (vitaminDLevel < 20) {
+                    loadingDose = "50 000 МЕ 1 раз в неделю × 4 недели";
+                    maintenanceDose = "1 500-2 000 МЕ/сут или 10 000 МЕ/нед";
+                    duration = "Контроль через 3 месяца";
+                } else if (vitaminDLevel < 30) {
+                    loadingDose = "Не требуется";
+                    maintenanceDose = "1 500-2 000 МЕ/сут";
+                    duration = "Контроль через 6 месяцев";
+                } else {
+                    loadingDose = "Не требуется";
+                    maintenanceDose = "800-1 000 МЕ/сут";
+                    duration = "Профилактическая доза";
+                }
+
+                return { loadingDose, maintenanceDose, duration };
+            },
+
+            // Ведение гипопаратиреоза
+            manageHypoparathyroidism: function(calcium, symptoms) {
+                let treatment, monitoring, urgency;
+                
+                if (symptoms === 'severe' || calcium < 1.6) {
+                    treatment = "🚨 НЕОТЛОЖНАЯ ПОМОЩЬ: Кальций глюконат 1-2 г в/в медленно + госпитализация";
+                    monitoring = "Контроль кальция каждые 4-6 часов, ЭКГ-мониторинг";
+                    urgency = "danger";
+                } else if (symptoms === 'mild' || calcium < 1.9) {
+                    treatment = "💊 Кальция карбонат 1-2 г 3 раза/сут + Кальцитриол 0.25-0.5 мкг 2 раза/сут";
+                    monitoring = "Контроль кальция 2 раза в неделю до стабилизации";
+                    urgency = "warning";
+                } else {
+                    treatment = "💊 Кальция карбонат 500-1000 мг 3 раза/сут + Кальцитриол 0.25 мкг/сут";
+                    monitoring = "Контроль кальция 1 раз в 1-2 недели";
+                    urgency = "info";
+                }
+
+                return { treatment, monitoring, urgency };
+            }
+        };
+
+        // Функции калькуляторов
+        function calculateCorrectedCalcium() {
+            const totalCalcium = parseFloat(document.getElementById('totalCalcium').value);
+            const albumin = parseFloat(document.getElementById('albumin').value);
+            
+            if (!totalCalcium || !albumin) {
+                alert('Введите значения кальция и альбумина');
+                return;
+            }
+
+            const corrected = PARATHYROID_KNOWLEDGE.calculateCorrectedCalcium(totalCalcium, albumin);
+            const normalRange = "2.15 - 2.55 ммоль/л";
+            
+            let status = "🟢 В пределах нормы";
+            if (corrected < 2.15) status = "🔴 Гипокальциемия";
+            if (corrected > 2.55) status = "🔴 Гиперкальциемия";
+
+            document.getElementById('calciumValue').innerHTML = `
+                <strong>Скорректированный кальций:</strong> ${corrected} ммоль/л<br>
+                <strong>Референс:</strong> ${normalRange}<br>
+                <strong>Статус:</strong> ${status}
+            `;
+            
+            document.getElementById('calciumResult').classList.add('active');
+        }
+
+        function interpretPTH() {
+            const pth = parseFloat(document.getElementById('pth').value);
+            const calcium = parseFloat(document.getElementById('calciumForPTH').value);
+            
+            if (!pth || !calcium) {
+                alert('Введите значения ПТГ и кальция');
+                return;
+            }
+
+            const result = PARATHYROID_KNOWLEDGE.interpretPTHCalcium(pth, calcium);
+            
+            document.getElementById('pthInterpretation').innerHTML = `
+                <strong>Диагноз:</strong> ${result.diagnosis}<br><br>
+                <strong>Рекомендации:</strong> ${result.details}
+            `;
+            
+            document.getElementById('pthResult').classList.add('active');
+        }
+
+        function calculateVitaminD() {
+            const vitaminD = parseFloat(document.getElementById('vitaminD').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (!vitaminD) {
+                alert('Введите уровень витамина D');
+                return;
+            }
+
+            const result = PARATHYROID_KNOWLEDGE.calculateVitaminDDose(vitaminD, weight);
+            
+            document.getElementById('vitaminDRecommendation').innerHTML = `
+                <strong>Уровень 25(OH)D:</strong> ${vitaminD} нг/мл<br><br>
+                <strong>Насыщающая доза:</strong> ${result.loadingDose}<br><br>
+                <strong>Поддерживающая доза:</strong> ${result.maintenanceDose}<br><br>
+                <strong>Контроль:</strong> ${result.duration}
+            `;
+            
+            document.getElementById('vitaminDResult').classList.add('active');
+        }
+
+        function manageHypoparathyroidism() {
+            const calcium = parseFloat(document.getElementById('postopCalcium').value);
+            const symptoms = document.getElementById('symptoms').value;
+            
+            if (!calcium) {
+                alert('Введите уровень кальция');
+                return;
+            }
+
+            const result = PARATHYROID_KNOWLEDGE.manageHypoparathyroidism(calcium, symptoms);
+            
+            let urgencyClass = "color: #059669;";
+            if (result.urgency === 'warning') urgencyClass = "color: #d97706;";
+            if (result.urgency === 'danger') urgencyClass = "color: #dc2626; font-weight: bold;";
+            
+            document.getElementById('hypoparaManagement').innerHTML = `
+                <div style="${urgencyClass}">
+                    <strong>Кальций сыворотки:</strong> ${calcium} ммоль/л<br><br>
+                    <strong>Лечение:</strong> ${result.treatment}<br><br>
+                    <strong>Мониторинг:</strong> ${result.monitoring}
+                </div>
+            `;
+            
+            document.getElementById('hypoparaResult').classList.add('active');
+        }
+
+        // Функции для информационных карточек
+        function showPrimaryHyperpara() {
+            alert('Первичный гиперпаратиреоз:\n\n• Гиперкальциемия + повышенный ПТГ\n• 85% - одиночная аденома\n• Показания к операции по рекомендациям\n• Наблюдение при отсутствии показаний к операции');
+        }
+
+        function showSecondaryHyperpara() {
+            alert('Вторичный гиперпаратиреоз:\n\n• Компенсаторное повышение ПТГ\n• Основная причина - ХБП\n• Коррекция фосфора и витамина D\n• При неэффективности - кальцимиметики');
+        }
+
+        function showHypoparathyroidism() {
+            alert('Гипопаратиреоз:\n\n• Чаще послеоперационный\n• Заместительная терапия кальцием и витамином D\n• Целевой кальций 2.0-2.2 ммоль/л\n• Мониторинг нефрокальциноза');
+        }
+
+        // Автозаполнение для демонстрации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Демо-значения для калькуляторов
+            document.getElementById('totalCalcium').value = '2.10';
+            document.getElementById('albumin').value = '30.0';
+            document.getElementById('pth').value = '120.0';
+            document.getElementById('calciumForPTH').value = '2.80';
+            document.getElementById('vitaminD').value = '12.5';
+            document.getElementById('weight').value = '70';
+            document.getElementById('postopCalcium').value = '1.75';
+        });
+    </script>
 </body>
 </html>
