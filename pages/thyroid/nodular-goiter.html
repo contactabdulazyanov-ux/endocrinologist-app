@@ -257,7 +257,7 @@
             color: var(--danger);
         }
 
-        /* НОВЫЕ СТИЛИ ДЛЯ ВЫПАДАЮЩИХ РАЗДЕЛОВ */
+        /* ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ ВЫПАДАЮЩИХ РАЗДЕЛОВ */
         .section-toggle {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -299,11 +299,13 @@
             border-radius: 0 0 15px 15px;
         }
 
+        /* ИСПРАВЛЕНИЕ: Убрал ограничение max-height */
         .collapsible-section.active {
-            max-height: 5000px;
+            max-height: none;
             padding: 30px;
             border: 2px solid var(--border);
             border-top: none;
+            overflow: visible;
         }
 
         /* КАЛЬКУЛЯТОРЫ */
