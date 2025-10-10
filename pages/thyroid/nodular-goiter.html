@@ -257,6 +257,55 @@
             color: var(--danger);
         }
 
+        /* НОВЫЕ СТИЛИ ДЛЯ ВЫПАДАЮЩИХ РАЗДЕЛОВ */
+        .section-toggle {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: left;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .section-toggle:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .section-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            background: var(--light);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .collapsible-section.active {
+            max-height: 5000px;
+            padding: 30px;
+            border: 2px solid var(--border);
+            border-top: none;
+        }
+
         /* КАЛЬКУЛЯТОРЫ */
         .calculators-section {
             background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
@@ -769,6 +818,9 @@
             .scintigraphy-types {
                 grid-template-columns: 1fr;
             }
+            .collapsible-section.active {
+                padding: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -790,6 +842,10 @@
             }
             .calcitonin-calculator {
                 padding: 25px 15px;
+            }
+            .section-toggle {
+                padding: 15px 20px;
+                font-size: 1.1em;
             }
         }
     </style>
@@ -833,877 +889,913 @@
                 </div>
             </div>
 
-            <!-- ОБНОВЛЕННЫЙ КАЛЬКУЛЯТОР КАЛЬЦИТОНИНА -->
-            <div class="calcitonin-calculator">
-                <h2 class="page-title">🧪 Калькулятор кальцитонина</h2>
-                <p class="page-subtitle">Оценка уровня кальцитонина с учетом метода исследования и факторов влияния</p>
+            <!-- КНОПКА ДЛЯ КАЛЬКУЛЯТОРОВ -->
+            <button class="section-toggle" onclick="toggleSection('calculators-section')">
+                🧮 ИНСТРУМЕНТЫ И КАЛЬКУЛЯТОРЫ
+                <i class="fas fa-chevron-down"></i>
+            </button>
 
-                <!-- ИНФОРМАЦИЯ О МЕТОДАХ ИССЛЕДОВАНИЯ -->
-                <div class="method-comparison">
-                    <div class="method-card">
-                        <h4><i class="fas fa-microscope"></i> Иммуноферментный анализ (ИФА)</h4>
+            <!-- ВЫПАДАЮЩИЙ РАЗДЕЛ С КАЛЬКУЛЯТОРАМИ -->
+            <div id="calculators-section" class="collapsible-section">
+                <!-- ОБНОВЛЕННЫЙ КАЛЬКУЛЯТОР КАЛЬЦИТОНИНА -->
+                <div class="calcitonin-calculator">
+                    <h2 class="page-title">🧪 Калькулятор кальцитонина</h2>
+                    <p class="page-subtitle">Оценка уровня кальцитонина с учетом метода исследования и факторов влияния</p>
+
+                    <!-- ИНФОРМАЦИЯ О МЕТОДАХ ИССЛЕДОВАНИЯ -->
+                    <div class="method-comparison">
+                        <div class="method-card">
+                            <h4><i class="fas fa-microscope"></i> Иммуноферментный анализ (ИФА)</h4>
+                            <ul class="feature-list">
+                                <li><strong>Женщины:</strong> до 6.4 пг/мл</li>
+                                <li><strong>Мужчины:</strong> до 9.52 пг/мл</li>
+                                <li><strong>Дети:</strong> до 6.4 пг/мл</li>
+                            </ul>
+                        </div>
+
+                        <div class="method-card">
+                            <h4><i class="fas fa-vial"></i> Иммунохемилюминесцентный метод</h4>
+                            <ul class="feature-list">
+                                <li><strong>Женщины:</strong> до 1.46 пг/мл</li>
+                                <li><strong>Мужчины:</strong> до 2.46 пг/мл</li>
+                                <li>Более современный и точный</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ИНФОРМАЦИЯ О СТИМУЛИРОВАННОМ КАЛЬЦИТОНИНЕ -->
+                    <div class="stimulated-info">
+                        <h4><i class="fas fa-flask"></i> Критерии оценки стимулированного кальцитонина</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
+                            <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #bbf7d0;">
+                                <div style="font-size: 1.1em; font-weight: 700; color: var(--success);">≤ 30 пг/мл</div>
+                                <div style="font-size: 0.9em; margin-top: 5px;">НОРМА</div>
+                            </div>
+                            <div style="background: #fffbeb; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fcd34d;">
+                                <div style="font-size: 1.1em; font-weight: 700; color: var(--warning);">30-100 пг/мл</div>
+                                <div style="font-size: 0.9em; margin-top: 5px;">ПОВТОРНЫЙ ТЕСТ через 3-6 месяцев</div>
+                            </div>
+                            <div style="background: #fef2f2; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fecaca;">
+                                <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);">> 100 пг/мл</div>
+                                <div style="font-size: 0.9em; margin-top: 5px;">ВЫСОКИЙ РИСК МРЩЖ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ФОРМА КАЛЬКУЛЯТОРА -->
+                    <div class="calcitonin-form">
+                        <div class="input-group">
+                            <label for="calcitoninValue">Уровень кальцитонина (пг/мл)</label>
+                            <input type="number" id="calcitoninValue" placeholder="Введите значение" step="0.1" min="0" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="researchMethod">Метод исследования</label>
+                            <select id="researchMethod">
+                                <option value="ifа">Иммуноферментный анализ (ИФА)</option>
+                                <option value="icl">Иммунохемилюминесцентный метод</option>
+                                <option value="other">Другой метод / Неизвестно</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="patientGender">Пол пациента</label>
+                            <select id="patientGender">
+                                <option value="female">Женский</option>
+                                <option value="male">Мужской</option>
+                                <option value="child">Ребенок</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="stimulatedTest">Тип анализа</label>
+                            <select id="stimulatedTest">
+                                <option value="basal">Базальный кальцитонин</option>
+                                <option value="stimulated">Стимулированный кальцитонин</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ИНФОРМАЦИЯ О ПРЕПАРАТАХ -->
+                    <div class="medication-info">
+                        <h4><i class="fas fa-pills"></i> Важная информация о подготовке к анализу</h4>
+                        <p><strong>Условия подготовки к исследованию:</strong></p>
                         <ul class="feature-list">
-                            <li><strong>Женщины:</strong> до 6.4 пг/мл</li>
-                            <li><strong>Мужчины:</strong> до 9.52 пг/мл</li>
-                            <li><strong>Дети:</strong> до 6.4 пг/мл</li>
+                            <li><strong>Кровь сдается</strong> строго натощак (8-12 часов голода)</li>
+                            <li><strong>Препараты кальция:</strong> отменить за 48 часов до исследования</li>
+                            <li><strong>Гормональные средства:</strong> отменить за 1 месяц (эстрогены, прогестерон)</li>
+                            <li><strong>Оральные контрацептивы:</strong> отменить за 1 месяц</li>
+                            <li><strong>Исключить физические нагрузки</strong> за 24 часа до исследования</li>
+                            <li><strong>Исключить алкоголь</strong> за 24 часа до исследования</li>
+                            <li><strong>Не курить</strong> за 3 часа до исследования</li>
                         </ul>
+                        <p style="margin-top: 10px; font-size: 0.9em; color: var(--warning);">
+                            <i class="fas fa-exclamation-triangle"></i> Если отмена препаратов невозможна, сообщите об этом в лаборатории
+                        </p>
                     </div>
 
-                    <div class="method-card">
-                        <h4><i class="fas fa-vial"></i> Иммунохемилюминесцентный метод</h4>
-                        <ul class="feature-list">
-                            <li><strong>Женщины:</strong> до 1.46 пг/мл</li>
-                            <li><strong>Мужчины:</strong> до 2.46 пг/мл</li>
-                            <li>Более современный и точный</li>
-                        </ul>
-                    </div>
-                </div>
+                    <button class="btn" onclick="calculateCalcitonin()" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-calculator"></i> Оценить результат
+                    </button>
 
-                <!-- ИНФОРМАЦИЯ О СТИМУЛИРОВАННОМ КАЛЬЦИТОНИНЕ -->
-                <div class="stimulated-info">
-                    <h4><i class="fas fa-flask"></i> Критерии оценки стимулированного кальцитонина</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
-                        <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #bbf7d0;">
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--success);">≤ 30 пг/мл</div>
-                            <div style="font-size: 0.9em; margin-top: 5px;">НОРМА</div>
+                    <div id="calcitoninResult" class="calcitonin-result"></div>
+
+                    <!-- ТАБЛИЦА НОРМ -->
+                    <div class="norms-table">
+                        <h4 style="text-align: center; margin-bottom: 20px; color: var(--dark);">
+                            <i class="fas fa-table"></i> Референсные значения кальцитонина
+                        </h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод исследования / Категория</th>
+                                    <th>Референсные значения</th>
+                                    <th>Примечания</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Иммуноферментный анализ (ИФА)</td>
+                                </tr>
+                                <tr>
+                                    <td>Женщины</td>
+                                    <td>< 6.4 пг/мл</td>
+                                    <td>Стандартные референсы</td>
+                                </tr>
+                                <tr>
+                                    <td>Мужчины</td>
+                                    <td>< 9.52 пг/мл</td>
+                                    <td>Стандартные референсы</td>
+                                </tr>
+                                <tr>
+                                    <td>Дети</td>
+                                    <td>< 6.4 пг/мл</td>
+                                    <td>Стандартные референсы</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Иммунохемилюминесцентный метод</td>
+                                </tr>
+                                <tr>
+                                    <td>Женщины</td>
+                                    <td>&lt; 1.46 пг/мл</td>
+                                    <td>Современные стандарты</td>
+                                </tr>
+                                <tr>
+                                    <td>Мужчины</td>
+                                    <td>&lt; 2.46 пг/мл</td>
+                                    <td>Современные стандарты</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Стимулированный кальцитонин</td>
+                                </tr>
+                                <tr>
+                                    <td>Норма</td>
+                                    <td>&lt; 30 пг/мл</td>
+                                    <td>После стимуляции пентагастрином</td>
+                                </tr>
+                                <tr>
+                                    <td>Пограничные значения</td>
+                                    <td>30-100 пг/мл</td>
+                                    <td>Требует повторного теста через 3-6 месяцев</td>
+                                </tr>
+                                <tr>
+                                    <td>Высокий риск МРЩЖ</td>
+                                    <td>&gt; 100 пг/мл</td>
+                                    <td>Крайне подозрителен</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ИНФОРМАЦИЯ О ДРУГИХ ПРИЧИНАХ ПОВЫШЕНИЯ -->
+                    <div class="important-notes">
+                        <h4><i class="fas fa-info-circle"></i> Другие причины повышения кальцитонина</h4>
+                        <div class="note-card">
+                            <h5><i class="fas fa-clipboard-list"></i> Неонкологические причины:</h5>
+                            <ul class="feature-list">
+                                <li>Хроническая болезнь почек</li>
+                                <li>Панкреатит</li>
+                                <li>Гиперплазия С-клеток</li>
+                                <li>Беременность (третий триместр)</li>
+                                <li>Прием препаратов кальция</li>
+                                <li>Прием эстрогенов и прогестерона</li>
+                                <li>Аутоиммунный тиреоидит</li>
+                                <li>Злокачественная анемия</li>
+                                <li>Хроническая почечная недостаточность</li>
+                                <li>Пернициозная анемия</li>
+                                <li>Синдром Золлингера-Эллисона</li>
+                            </ul>
                         </div>
-                        <div style="background: #fffbeb; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fcd34d;">
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--warning);">30-100 пг/мл</div>
-                            <div style="font-size: 0.9em; margin-top: 5px;">ПОВТОРНЫЙ ТЕСТ через 3-6 месяцев</div>
+                    </div>
+                </div>
+
+                <!-- КАЛЬКУЛЯТОР TI-RADS -->
+                <div class="calculators-section">
+                    <h2 class="page-title">🧮 Калькулятор TI-RADS</h2>
+                    <p class="page-subtitle">Оценка риска злокачественности узлов щитовидной железы по системе ACR TI-RADS</p>
+
+                    <div class="calculators-grid">
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-calculator"></i> Оценка узла по TI-RADS</h3>
+                            
+                            <div class="form-group">
+                                <label for="composition">Структура узла</label>
+                                <select id="composition">
+                                    <option value="0">Кистозный или почти полностью кистозный</option>
+                                    <option value="0">Губчатый</option>
+                                    <option value="1" selected>Смешанный кистозно-солидный (25-50% солидный)</option>
+                                    <option value="2">Солидный или почти полностью солидный (>50% солидный)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="echogenicity">Эхогенность</label>
+                                <select id="echogenicity">
+                                    <option value="0">Гиперэхогенный</option>
+                                    <option value="0">Изоэхогенный</option>
+                                    <option value="1" selected>Гипоэхогенный</option>
+                                    <option value="2">Очень гипоэхогенный</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="shape">Форма</label>
+                                <select id="shape">
+                                    <option value="0" selected>Шире, чем выше</option>
+                                    <option value="3">Выше, чем шире</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="margin">Контуры</label>
+                                <select id="margin">
+                                    <option value="0" selected>Четкие</option>
+                                    <option value="0">Нечеткие</option>
+                                    <option value="2">Лобулированные/неровные</option>
+                                    <option value="3">Экстратиреоидное распространение</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="echogenicFoci">Эхогенные включения</label>
+                                <select id="echogenicFoci">
+                                    <option value="0" selected>Нет или крупные кометохвосты</option>
+                                    <option value="1">Макрокальцинаты</option>
+                                    <option value="2">Периферические (ободковые) кальцинаты</option>
+                                    <option value="3">Точечные эхогенные очаги</option>
+                                </select>
+                            </div>
+
+                            <button class="btn" onclick="calculateTiRads()">
+                                <i class="fas fa-calculator"></i> Рассчитать TI-RADS
+                            </button>
+                            <div id="tiradsResult" class="result-box"></div>
                         </div>
-                        <div style="background: #fef2f2; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fecaca;">
-                            <div style="font-size: 1.1em; font-weight: 700; color: var(--danger);">> 100 пг/мл</div>
-                            <div style="font-size: 0.9em; margin-top: 5px;">ВЫСОКИЙ РИСК МРЩЖ</div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-syringe"></i> Показания к ТАБ</h3>
+                            
+                            <div class="form-group">
+                                <label for="nodeSizeTAB">Размер узла (см)</label>
+                                <input type="number" step="0.1" id="nodeSizeTAB" placeholder="Например: 1.5" value="1.5">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="riskFactors">Факторы риска агрессивного РЩЖ</label>
+                                <select id="riskFactors">
+                                    <option value="no">Нет факторов риска</option>
+                                    <option value="yes">Есть факторы риска</option>
+                                </select>
+                                <div class="range-info">Кальцитонин > 100 пг/мл, облучение, семейный анамнез МРЩЖ и др.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ultrasoundSuspicion">Подозрительные УЗИ-признаки</label>
+                                <select id="ultrasoundSuspicion">
+                                    <option value="no">Нет подозрительных признаков</option>
+                                    <option value="yes">Есть подозрительные признаки</option>
+                                </select>
+                            </div>
+
+                            <button class="btn" onclick="evaluateTABIndications()">
+                                <i class="fas fa-clipboard-check"></i> Оценить показания к ТАБ
+                            </button>
+                            <div id="tabResult" class="result-box"></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- ФОРМА КАЛЬКУЛЯТОРА -->
-                <div class="calcitonin-form">
-                    <div class="input-group">
-                        <label for="calcitoninValue">Уровень кальцитонина (пг/мл)</label>
-                        <input type="number" id="calcitoninValue" placeholder="Введите значение" step="0.1" min="0" required>
-                    </div>
+            <!-- КНОПКА ДЛЯ ТАБЛИЦ -->
+            <button class="section-toggle" onclick="toggleSection('tables-section')">
+                📊 ТАБЛИЦЫ И КЛАССИФИКАЦИИ
+                <i class="fas fa-chevron-down"></i>
+            </button>
 
-                    <div class="input-group">
-                        <label for="researchMethod">Метод исследования</label>
-                        <select id="researchMethod">
-                            <option value="ifа">Иммуноферментный анализ (ИФА)</option>
-                            <option value="icl">Иммунохемилюминесцентный метод</option>
-                            <option value="other">Другой метод / Неизвестно</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="patientGender">Пол пациента</label>
-                        <select id="patientGender">
-                            <option value="female">Женский</option>
-                            <option value="male">Мужской</option>
-                            <option value="child">Ребенок</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="stimulatedTest">Тип анализа</label>
-                        <select id="stimulatedTest">
-                            <option value="basal">Базальный кальцитонин</option>
-                            <option value="stimulated">Стимулированный кальцитонин</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- ИНФОРМАЦИЯ О ПРЕПАРАТАХ -->
-                <div class="medication-info">
-                    <h4><i class="fas fa-pills"></i> Важная информация о подготовке к анализу</h4>
-                    <p><strong>Условия подготовки к исследованию:</strong></p>
-                    <ul class="feature-list">
-                        <li><strong>Кровь сдается</strong> строго натощак (8-12 часов голода)</li>
-                        <li><strong>Препараты кальция:</strong> отменить за 48 часов до исследования</li>
-                        <li><strong>Гормональные средства:</strong> отменить за 1 месяц (эстрогены, прогестерон)</li>
-                        <li><strong>Оральные контрацептивы:</strong> отменить за 1 месяц</li>
-                        <li><strong>Исключить физические нагрузки</strong> за 24 часа до исследования</li>
-                        <li><strong>Исключить алкоголь</strong> за 24 часа до исследования</li>
-                        <li><strong>Не курить</strong> за 3 часа до исследования</li>
-                    </ul>
-                    <p style="margin-top: 10px; font-size: 0.9em; color: var(--warning);">
-                        <i class="fas fa-exclamation-triangle"></i> Если отмена препаратов невозможна, сообщите об этом в лаборатории
-                    </p>
-                </div>
-
-                <button class="btn" onclick="calculateCalcitonin()" style="width: 100%; justify-content: center;">
-                    <i class="fas fa-calculator"></i> Оценить результат
-                </button>
-
-                <div id="calcitoninResult" class="calcitonin-result"></div>
-
-                <!-- ТАБЛИЦА НОРМ -->
-                <div class="norms-table">
-                    <h4 style="text-align: center; margin-bottom: 20px; color: var(--dark);">
-                        <i class="fas fa-table"></i> Референсные значения кальцитонина
-                    </h4>
+            <!-- ВЫПАДАЮЩИЙ РАЗДЕЛ С ТАБЛИЦАМИ -->
+            <div id="tables-section" class="collapsible-section">
+                <!-- ТАБЛИЦА TI-RADS -->
+                <div class="tirads-table">
+                    <h3 style="text-align: center; margin-bottom: 30px; color: var(--dark);">📊 Классификация ACR TI-RADS</h3>
                     <table>
                         <thead>
                             <tr>
-                                <th>Метод исследования / Категория</th>
-                                <th>Референсные значения</th>
-                                <th>Примечания</th>
+                                <th>Категория TI-RADS</th>
+                                <th>Баллы</th>
+                                <th>Риск злокачественности</th>
+                                <th>Рекомендации по ТАБ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Иммуноферментный анализ (ИФА)</td>
+                                <td class="risk-low">TR1 - Доброкачественный</td>
+                                <td>0 баллов</td>
+                                <td>< 2%</td>
+                                <td>ТАБ не показана</td>
                             </tr>
                             <tr>
-                                <td>Женщины</td>
-                                <td>< 6.4 пг/мл</td>
-                                <td>Стандартные референсы</td>
+                                <td class="risk-low">TR2 - Не подозрительный</td>
+                                <td>2 балла</td>
+                                <td>< 2%</td>
+                                <td>ТАБ не показана</td>
                             </tr>
                             <tr>
-                                <td>Мужчины</td>
-                                <td>< 9.52 пг/мл</td>
-                                <td>Стандартные референсы</td>
+                                <td class="risk-moderate">TR3 - Слабоподозрительный</td>
+                                <td>3 балла</td>
+                                <td>5%</td>
+                                <td>ТАБ при размере ≥ 2.5 см</td>
                             </tr>
                             <tr>
-                                <td>Дети</td>
-                                <td>< 6.4 пг/мл</td>
-                                <td>Стандартные референсы</td>
+                                <td class="risk-moderate">TR4 - Умеренноподозрительный</td>
+                                <td>4-6 баллов</td>
+                                <td>5-20%</td>
+                                <td>ТАБ при размере ≥ 1.5 см</td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Иммунохемилюминесцентный метод</td>
-                            </tr>
-                            <tr>
-                                <td>Женщины</td>
-                                <td>&lt; 1.46 пг/мл</td>
-                                <td>Современные стандарты</td>
-                            </tr>
-                            <tr>
-                                <td>Мужчины</td>
-                                <td>&lt; 2.46 пг/мл</td>
-                                <td>Современные стандарты</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" style="background: #e0f2fe; font-weight: 600;">Стимулированный кальцитонин</td>
-                            </tr>
-                            <tr>
-                                <td>Норма</td>
-                                <td>&lt; 30 пг/мл</td>
-                                <td>После стимуляции пентагастрином</td>
-                            </tr>
-                            <tr>
-                                <td>Пограничные значения</td>
-                                <td>30-100 пг/мл</td>
-                                <td>Требует повторного теста через 3-6 месяцев</td>
-                            </tr>
-                            <tr>
-                                <td>Высокий риск МРЩЖ</td>
-                                <td>&gt; 100 пг/мл</td>
-                                <td>Крайне подозрителен</td>
+                                <td class="risk-high">TR5 - Высокоподозрительный</td>
+                                <td>≥ 7 баллов</td>
+                                <td>≥ 20%</td>
+                                <td>ТАБ при размере ≥ 1.0 см</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- ИНФОРМАЦИЯ О ДРУГИХ ПРИЧИНАХ ПОВЫШЕНИЯ -->
-                <div class="important-notes">
-                    <h4><i class="fas fa-info-circle"></i> Другие причины повышения кальцитонина</h4>
-                    <div class="note-card">
-                        <h5><i class="fas fa-clipboard-list"></i> Неонкологические причины:</h5>
-                        <ul class="feature-list">
-                            <li>Хроническая болезнь почек</li>
-                            <li>Панкреатит</li>
-                            <li>Гиперплазия С-клеток</li>
-                            <li>Беременность (третий триместр)</li>
-                            <li>Прием препаратов кальция</li>
-                            <li>Прием эстрогенов и прогестерона</li>
-                            <li>Аутоиммунный тиреоидит</li>
-                            <li>Злокачественная анемия</li>
-                            <li>Хроническая почечная недостаточность</li>
-                            <li>Пернициозная анемия</li>
-                            <li>Синдром Золлингера-Эллисона</li>
-                        </ul>
+                <!-- ЦИТОЛОГИЧЕСКАЯ КЛАССИФИКАЦИЯ -->
+                <div class="diagnostic-section">
+                    <h2 class="page-title">🔬 Цитологическая классификация Bethesda</h2>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-microscope"></i> Категории Bethesda</h3>
+                            <ul class="feature-list">
+                                <li><strong>I:</strong> Неинформативная пункция (1-4% риск)</li>
+                                <li><strong>II:</strong> Доброкачественное образование (0-4% риск)</li>
+                                <li><strong>III:</strong> Атипия неопределенного значения (5-15% риск)</li>
+                                <li><strong>IV:</strong> Фолликулярная неоплазия (15-30% риск)</li>
+                                <li><strong>V:</strong> Подозрение на злокачественную опухоль (60-75% риск)</li>
+                                <li><strong>VI:</strong> Злокачественная опухоль (97-99% риск)</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-procedures"></i> Тактика лечения</h3>
+                            <ul class="feature-list">
+                                <li><strong>Bethesda I-III:</strong> Повторная ТАБ или наблюдение</li>
+                                <li><strong>Bethesda IV:</strong> Гемитиреоидэктомия</li>
+                                <li><strong>Bethesda V-VI:</strong> Тиреоидэктомия</li>
+                                <li><strong>Доброкачественные:</strong> Наблюдение 1 раз в 1-2 года: УЗИ ЩЖ, ТТГ, базальный кальцитонин</li>
+                                <li><strong>Альтернативы:</strong> Радиойодтерапия, малоинвазивная деструкция</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- НОВАЯ СЕКЦИЯ: СРАВНИТЕЛЬНАЯ ТАБЛИЦА ВИДОВ РАКА ЩЖ -->
+                <div class="treatment-comparison">
+                    <h2 class="page-title">🦠 Сравнительная таблица: Основные виды рака щитовидной железы</h2>
+                    <p class="page-subtitle">Характеристики, диагностика и лечение различных типов рака щитовидной железы</p>
+
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="criteria-cell">Характеристика</th>
+                                    <th class="method-header">Папиллярный рак (80-85%)</th>
+                                    <th class="method-header">Фолликулярный рак (10-15%)</th>
+                                    <th class="method-header">Медуллярный рак (5-8%)</th>
+                                    <th class="method-header">Анапластический рак (<1-2%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="criteria-cell">Происхождение</td>
+                                    <td>Тиреоциты (А-клетки)</td>
+                                    <td>Тиреоциты (А-клетки)</td>
+                                    <td>Парафолликулярные С-клетки</td>
+                                    <td>Тиреоциты (как правило)</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Возраст</td>
+                                    <td>30-50 лет</td>
+                                    <td>40-60 лет</td>
+                                    <td>40-50 лет (спорадический), моложе (семейный)</td>
+                                    <td>> 65 лет</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Пол</td>
+                                    <td>Женщины в 3 раза чаще</td>
+                                    <td>Женщины в 3 раза чаще</td>
+                                    <td>Равномерно</td>
+                                    <td>Женщины немного чаще</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Поведение</td>
+                                    <td>Медленный рост, хороший прогноз</td>
+                                    <td>Более агрессивный, гематогенное метастазирование (в кости, легкие)</td>
+                                    <td>Агрессивный, лимфогенное и гематогенное метастазирование</td>
+                                    <td>Чрезвычайно агрессивный, быстрый инвазивный рост</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Ключевая диагностика</td>
+                                    <td>ТАБ (+смыв на Тг), УЗИ</td>
+                                    <td>ТАБ (цитология часто неотличима от аденомы), гистология после операции</td>
+                                    <td>ТАБ (+смыв на кальцитонин), анализ крови на кальцитонин и РЭА, генетический тест на мутацию RET</td>
+                                    <td>ТАБ, КТ шеи/грудной клетки для оценки распространенности</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Основное лечение</td>
+                                    <td>Хирургия: Тиреоидэктомия ± лимфодиссекция. РЙТ (после операции).</td>
+                                    <td>Хирургия: Тиреоидэктомия. РЙТ (обязательно после операции).</td>
+                                    <td>Хирургия: Тотальная тиреоидэктомия + центральная лимфодиссекция. РЙТ НЕ ЭФФЕКТИВНА.</td>
+                                    <td>Комбинированное: При возможности — операция + ЛТ. Часто — паллиативное лечение.</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Доп. терапия</td>
+                                    <td>Супрессивная терапия L-тироксином (ТТГ < 0.1-0.5)</td>
+                                    <td>Супрессивная терапия L-тироксином</td>
+                                    <td>Заместительная терапия L-тироксином (супрессия не нужна). При метастазах — ингибиторы RET.</td>
+                                    <td>Лучевая терапия, химиотерапия, таргетная терапия</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Наблюдение/Маркеры</td>
+                                    <td>Тиреоглобулин (Тг), УЗИ шеи</td>
+                                    <td>Тиреоглобулин (Тг), УЗИ шеи</td>
+                                    <td>Кальцитонин, РЭА, УЗИ/КТ</td>
+                                    <td>КТ, ПЭТ-КТ, клиническая оценка</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- КЛЮЧЕВЫЕ ВЫВОДЫ ПО ТАКТИКЕ -->
+                    <div class="important-notes">
+                        <h3><i class="fas fa-lightbulb"></i> Ключевые выводы по тактике лечения</h3>
+                        
+                        <div class="note-card">
+                            <h4><i class="fas fa-dna"></i> Дифференцированный рак (Папиллярный и Фолликулярный)</h4>
+                            <p><strong>Тактика едина:</strong> Хирургия → РЙТ (при необходимости) → Супрессивная терапия L-тироксином → Наблюдение по Тг и УЗИ</p>
+                            <ul class="feature-list">
+                                <li><strong>Главное различие:</strong> Фолликулярный рак чаще метастазирует гематогенно (в легкие и кости), а папиллярный — лимфогенно (в лимфоузлы шеи)</li>
+                                <li>Оба типа хорошо отвечают на радиойодтерапию</li>
+                                <li>Прогноз в целом благоприятный при своевременной диагностике</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-card">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Медуллярный рак (МРЩЖ)</h4>
+                            <p><strong>Тактика принципиально иная:</strong> Это не просто "другой рак", это другая болезнь</p>
+                            <ul class="feature-list warning-list">
+                                <li><strong>Диагностика:</strong> Ключевую роль играет кальцитонин (скрининг и мониторинг) и генетический тест (исключение МЭН 2 типа)</li>
+                                <li><strong>Лечение:</strong> РЙТ неэффективна, так как С-клетки не захватывают йод. Нужна более агрессивная начальная операция</li>
+                                <li><strong>Прогноз:</strong> Хуже, чем у дифференцированных форм рака</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-card">
+                            <h4><i class="fas fa-radiation"></i> Анапластический рак</h4>
+                            <p><strong>Тактика пессимистичная:</strong> Прогноз крайне неблагоприятный</p>
+                            <ul class="feature-list danger-list">
+                                <li><strong>Лечение:</strong> Радикальное (редко) или паллиативное (чаще)</li>
+                                <li><strong>Цель:</strong> Продлить жизнь и облегчить симптомы (удушье, дисфагия)</li>
+                                <li>Быстро прогрессирующее течение, низкая выживаемость</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ДИАГНОСТИЧЕСКИЙ АЛГОРИТМ -->
-            <div class="diagnostic-section">
-                <h2 class="page-title">🔍 Алгоритм диагностики</h2>
-                
-                <div class="step-indicator">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h3>Первичная диагностика</h3>
-                        <p>Пальпация ЩЖ и регионарных лимфоузлов, сбор анамнеза для оценки факторов риска</p>
-                    </div>
-                </div>
+            <!-- КНОПКА ДЛЯ ДИАГНОСТИКИ -->
+            <button class="section-toggle" onclick="toggleSection('diagnostics-section')">
+                🔍 ДИАГНОСТИЧЕСКИЙ АЛГОРИТМ
+                <i class="fas fa-chevron-down"></i>
+            </button>
 
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Факторы риска агрессивных форм РЩЖ</h3>
-                        <ul class="feature-list danger-list">
-                            <li>Уровень базального/стимулированного кальцитонина более 100 пг/мл</li>
-                            <li>Наличие увеличенных регионарных лимфоузлов</li>
-                            <li>Облучение головы и шеи в анамнезе</li>
-                            <li>Семейный анамнез МРЩЖ</li>
-                            <li>Паралич голосовой складки</li>
-                            <li>Узловые образования ЩЖ, случайно выявленные при ПЭТ</li>
-                            <li>Пациенты моложе 20 лет</li>
-                        </ul>
+            <!-- ВЫПАДАЮЩИЙ РАЗДЕЛ С ДИАГНОСТИКОЙ -->
+            <div id="diagnostics-section" class="collapsible-section">
+                <!-- ДИАГНОСТИЧЕСКИЙ АЛГОРИТМ -->
+                <div class="diagnostic-section">
+                    <h2 class="page-title">🔍 Алгоритм диагностики</h2>
+                    
+                    <div class="step-indicator">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3>Первичная диагностика</h3>
+                            <p>Пальпация ЩЖ и регионарных лимфоузлов, сбор анамнеза для оценки факторов риска</p>
+                        </div>
                     </div>
 
-                    <div class="info-card">
-                        <h3><i class="fas fa-vial"></i> Лабораторная диагностика</h3>
-                        <ul class="feature-list">
-                            <li><strong>Обязательно:</strong> ТТГ, кальцитонин базальный</li>
-                            <li><strong>При сниженном ТТГ:</strong> свободный Т4, свободный Т3</li>
-                            <li><strong>При повышенном ТТГ:</strong> свободный Т4</li>
-                            <li><strong>Стимуляционный тест:</strong> при кальцитонине < 100 пг/мл</li>
-                            <li><strong>Не показано:</strong> тиреоглобулин, антитела к ЩЖ</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="step-indicator">
-                    <div class="step-number">2</div>
-                    <div>
-                        <h3>УЗИ щитовидной железы и лимфоузлов</h3>
-                        <p>Основной метод визуализации для определения показаний к ТАБ и оценки регионарных лимфоузлов</p>
-                    </div>
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-ultrasound"></i> Показания к УЗИ</h3>
-                        <ul class="feature-list">
-                            <li>Пальпируемое образование на шее</li>
-                            <li>Увеличенные шейные лимфоузлы</li>
-                            <li>Семейный анамнез МРЩЖ</li>
-                            <li>Облучение головы и шеи в анамнезе</li>
-                            <li>Паралич голосовой складки</li>
-                            <li>Узлы, выявленные при ПЭТ/КТ/МРТ</li>
-                            <li>Операции на ЩЖ в анамнезе</li>
-                            <li>Изменение уровня ТТГ</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-search"></i> Подозрительные УЗИ-признаки узлов</h3>
-                        <ul class="feature-list warning-list">
-                            <li>Гипоэхогенная солидная структура</li>
-                            <li>Неровный, нечеткий или полициклический контур</li>
-                            <li>Точечные гиперэхогенные включения (микрокальцинаты)</li>
-                            <li>Преобладание высоты над шириной ("выше/чем/шире")</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- НОВАЯ СЕКЦИЯ: ОЦЕНКА ЛИМФАТИЧЕСКИХ УЗЛОВ -->
-                <div class="step-indicator">
-                    <div class="step-number">3</div>
-                    <div>
-                        <h3>Оценка регионарных лимфоузлов</h3>
-                        <p>Критерии нормальных и патологически измененных лимфоузлов</p>
-                    </div>
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-ruler"></i> Нормальные размеры шейных лимфоузлов</h3>
-                        <ul class="feature-list">
-                            <li><strong>II уровень:</strong> не более 7-8 мм</li>
-                            <li><strong>Все остальные уровни:</strong> не более 6 мм</li>
-                            <li>Овальная или бобовидная форма</li>
-                            <li>Четкие ровные контуры</li>
-                            <li>Наличие эхогенного воротка</li>
-                            <li>Однородная структура</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Признаки метастатического поражения</h3>
-                        <ul class="feature-list danger-list">
-                            <li><strong>Микрокальцинаты</strong> - наиболее специфичный признак</li>
-                            <li><strong>Кистозный компонент</strong> в структуре лимфоузла</li>
-                            <li><strong>Периферическая васкуляризация</strong></li>
-                            <li><strong>Сходство ткани</strong> лимфоузла с тканью ЩЖ</li>
-                            <li>Округлая форма</li>
-                            <li>Нечеткие контуры</li>
-                            <li>Отсутствие эхогенного воротка</li>
-                            <li>Неоднородная структура</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- НОВАЯ СЕКЦИЯ: ДЕТАЛЬНЫЕ ПОКАЗАНИЯ К ТАБ -->
-                <div class="step-indicator">
-                    <div class="step-number">4</div>
-                    <div>
-                        <h3>Показания к тонкоигольной аспирационной биопсии (ТАБ)</h3>
-                        <p>Критерии для проведения пункционной биопсии узлов щитовидной железы и лимфоузлов</p>
-                    </div>
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-syringe"></i> Основные показания к ТАБ узлов ЩЖ</h3>
-                        <ul class="feature-list">
-                            <li><strong>Узловые образования ≥ 1 см</strong> в диаметре</li>
-                            <li><strong>Узлы < 1 см</strong> при наличии факторов риска агрессивных форм РЩЖ:</li>
-                            <ul class="feature-list" style="margin-left: 20px;">
-                                <li>Уровень базального/стимулированного кальцитонина > 100 пг/мл</li>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Факторы риска агрессивных форм РЩЖ</h3>
+                            <ul class="feature-list danger-list">
+                                <li>Уровень базального/стимулированного кальцитонина более 100 пг/мл</li>
                                 <li>Наличие увеличенных регионарных лимфоузлов</li>
                                 <li>Облучение головы и шеи в анамнезе</li>
                                 <li>Семейный анамнез МРЩЖ</li>
                                 <li>Паралич голосовой складки</li>
-                                <li>Узлы, выявленные при ПЭТ</li>
+                                <li>Узловые образования ЩЖ, случайно выявленные при ПЭТ</li>
                                 <li>Пациенты моложе 20 лет</li>
                             </ul>
-                            <li>При изменении УЗИ-структуры доброкачественных узлов в процессе динамического наблюдения</li>
-                            <li>При появлении увеличенных или измененных шейных лимфоузлов</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-info-circle"></i> Особые случаи и ограничения</h3>
-                        <ul class="feature-list warning-list">
-                            <li><strong>Узлы < 1 см без факторов риска:</strong> ТАБ нецелесообразна (кроме пациентов моложе 20 лет)</li>
-                            <li><strong>Увеличение размеров</strong> доброкачественного узла само по себе не является показанием к повторной ТАБ</li>
-                            <li><strong>ТАБ - метод первичной диагностики,</strong> а не динамического наблюдения при верифицированных доброкачественных узлах</li>
-                            <li><strong>При несоответствии</strong> цитологического заключения и УЗИ-признаков - повторная ТАБ в ближайшее время</li>
-                            <li><strong>Кистозные анэхогенные узлы:</strong> ТАБ диагностического значения не имеет, но может выполняться с лечебной целью</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- СЕКЦИЯ ТАБ ЛИМФОУЗЛОВ -->
-                <div class="info-card">
-                    <h3><i class="fas fa-microscope"></i> ТАБ измененных регионарных лимфоузлов</h3>
-                    <ul class="feature-list">
-                        <li><strong>Показана при обнаружении</strong> измененных лимфоузлов при УЗИ</li>
-                        <li><strong>Диагностическая точность повышается</strong> при исследовании смыва из иглы:</li>
-                        <ul class="feature-list" style="margin-left: 20px;">
-                            <li><strong>На тиреоглобулин</strong> - при подозрении на папиллярный/фолликулярный РЩЖ</li>
-                            <li><strong>На кальцитонин</strong> - при подозрении на медуллярный РЩЖ</li>
-                        </ul>
-                        <li><strong>Методика:</strong> после пункции лимфоузла игла промывается физиологическим раствором</li>
-                        <li><strong>Пробирка с смывом</strong> отправляется в лабораторию для определения тиреоглобулина/кальцитонина</li>
-                        <li><strong>Характерно:</strong> очень высокая концентрация гормонов в смыве (> 1000 нг/мл или пг/мл)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- КАЛЬКУЛЯТОР TI-RADS -->
-            <div class="calculators-section">
-                <h2 class="page-title">🧮 Калькулятор TI-RADS</h2>
-                <p class="page-subtitle">Оценка риска злокачественности узлов щитовидной железы по системе ACR TI-RADS</p>
-
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <h3><i class="fas fa-calculator"></i> Оценка узла по TI-RADS</h3>
-                        
-                        <div class="form-group">
-                            <label for="composition">Структура узла</label>
-                            <select id="composition">
-                                <option value="0">Кистозный или почти полностью кистозный</option>
-                                <option value="0">Губчатый</option>
-                                <option value="1" selected>Смешанный кистозно-солидный (25-50% солидный)</option>
-                                <option value="2">Солидный или почти полностью солидный (>50% солидный)</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="echogenicity">Эхогенность</label>
-                            <select id="echogenicity">
-                                <option value="0">Гиперэхогенный</option>
-                                <option value="0">Изоэхогенный</option>
-                                <option value="1" selected>Гипоэхогенный</option>
-                                <option value="2">Очень гипоэхогенный</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="shape">Форма</label>
-                            <select id="shape">
-                                <option value="0" selected>Шире, чем выше</option>
-                                <option value="3">Выше, чем шире</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="margin">Контуры</label>
-                            <select id="margin">
-                                <option value="0" selected>Четкие</option>
-                                <option value="0">Нечеткие</option>
-                                <option value="2">Лобулированные/неровные</option>
-                                <option value="3">Экстратиреоидное распространение</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="echogenicFoci">Эхогенные включения</label>
-                            <select id="echogenicFoci">
-                                <option value="0" selected>Нет или крупные кометохвосты</option>
-                                <option value="1">Макрокальцинаты</option>
-                                <option value="2">Периферические (ободковые) кальцинаты</option>
-                                <option value="3">Точечные эхогенные очаги</option>
-                            </select>
-                        </div>
-
-                        <button class="btn" onclick="calculateTiRads()">
-                            <i class="fas fa-calculator"></i> Рассчитать TI-RADS
-                        </button>
-                        <div id="tiradsResult" class="result-box"></div>
-                    </div>
-
-                    <div class="calculator-card">
-                        <h3><i class="fas fa-syringe"></i> Показания к ТАБ</h3>
-                        
-                        <div class="form-group">
-                            <label for="nodeSizeTAB">Размер узла (см)</label>
-                            <input type="number" step="0.1" id="nodeSizeTAB" placeholder="Например: 1.5" value="1.5">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="riskFactors">Факторы риска агрессивного РЩЖ</label>
-                            <select id="riskFactors">
-                                <option value="no">Нет факторов риска</option>
-                                <option value="yes">Есть факторы риска</option>
-                            </select>
-                            <div class="range-info">Кальцитонин > 100 пг/мл, облучение, семейный анамнез МРЩЖ и др.</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ultrasoundSuspicion">Подозрительные УЗИ-признаки</label>
-                            <select id="ultrasoundSuspicion">
-                                <option value="no">Нет подозрительных признаков</option>
-                                <option value="yes">Есть подозрительные признаки</option>
-                            </select>
-                        </div>
-
-                        <button class="btn" onclick="evaluateTABIndications()">
-                            <i class="fas fa-clipboard-check"></i> Оценить показания к ТАБ
-                        </button>
-                        <div id="tabResult" class="result-box"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ТАБЛИЦА TI-RADS -->
-            <div class="tirads-table">
-                <h3 style="text-align: center; margin-bottom: 30px; color: var(--dark);">📊 Классификация ACR TI-RADS</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Категория TI-RADS</th>
-                            <th>Баллы</th>
-                            <th>Риск злокачественности</th>
-                            <th>Рекомендации по ТАБ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="risk-low">TR1 - Доброкачественный</td>
-                            <td>0 баллов</td>
-                            <td>< 2%</td>
-                            <td>ТАБ не показана</td>
-                        </tr>
-                        <tr>
-                            <td class="risk-low">TR2 - Не подозрительный</td>
-                            <td>2 балла</td>
-                            <td>< 2%</td>
-                            <td>ТАБ не показана</td>
-                        </tr>
-                        <tr>
-                            <td class="risk-moderate">TR3 - Слабоподозрительный</td>
-                            <td>3 балла</td>
-                            <td>5%</td>
-                            <td>ТАБ при размере ≥ 2.5 см</td>
-                        </tr>
-                        <tr>
-                            <td class="risk-moderate">TR4 - Умеренноподозрительный</td>
-                            <td>4-6 баллов</td>
-                            <td>5-20%</td>
-                            <td>ТАБ при размере ≥ 1.5 см</td>
-                        </tr>
-                        <tr>
-                            <td class="risk-high">TR5 - Высокоподозрительный</td>
-                            <td>≥ 7 баллов</td>
-                            <td>≥ 20%</td>
-                            <td>ТАБ при размере ≥ 1.0 см</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- ЦИТОЛОГИЧЕСКАЯ КЛАССИФИКАЦИЯ -->
-            <div class="diagnostic-section">
-                <h2 class="page-title">🔬 Цитологическая классификация Bethesda</h2>
-                
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-microscope"></i> Категории Bethesda</h3>
-                        <ul class="feature-list">
-                            <li><strong>I:</strong> Неинформативная пункция (1-4% риск)</li>
-                            <li><strong>II:</strong> Доброкачественное образование (0-4% риск)</li>
-                            <li><strong>III:</strong> Атипия неопределенного значения (5-15% риск)</li>
-                            <li><strong>IV:</strong> Фолликулярная неоплазия (15-30% риск)</li>
-                            <li><strong>V:</strong> Подозрение на злокачественную опухоль (60-75% риск)</li>
-                            <li><strong>VI:</strong> Злокачественная опухоль (97-99% риск)</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-procedures"></i> Тактика лечения</h3>
-                        <ul class="feature-list">
-                            <li><strong>Bethesda I-III:</strong> Повторная ТАБ или наблюдение</li>
-                            <li><strong>Bethesda IV:</strong> Гемитиреоидэктомия</li>
-                            <li><strong>Bethesda V-VI:</strong> Тиреоидэктомия</li>
-                            <li><strong>Доброкачественные:</strong> Наблюдение 1 раз в 1-2 года: УЗИ ЩЖ, ТТГ, базальный кальцитонин</li>
-                            <li><strong>Альтернативы:</strong> Радиойодтерапия, малоинвазивная деструкция</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- НОВАЯ СЕКЦИЯ: СРАВНИТЕЛЬНАЯ ТАБЛИЦА ВИДОВ РАКА ЩЖ -->
-            <div class="treatment-comparison">
-                <h2 class="page-title">🦠 Сравнительная таблица: Основные виды рака щитовидной железы</h2>
-                <p class="page-subtitle">Характеристики, диагностика и лечение различных типов рака щитовидной железы</p>
-
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="criteria-cell">Характеристика</th>
-                                <th class="method-header">Папиллярный рак (80-85%)</th>
-                                <th class="method-header">Фолликулярный рак (10-15%)</th>
-                                <th class="method-header">Медуллярный рак (5-8%)</th>
-                                <th class="method-header">Анапластический рак (<1-2%)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="criteria-cell">Происхождение</td>
-                                <td>Тиреоциты (А-клетки)</td>
-                                <td>Тиреоциты (А-клетки)</td>
-                                <td>Парафолликулярные С-клетки</td>
-                                <td>Тиреоциты (как правило)</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Возраст</td>
-                                <td>30-50 лет</td>
-                                <td>40-60 лет</td>
-                                <td>40-50 лет (спорадический), моложе (семейный)</td>
-                                <td>> 65 лет</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Пол</td>
-                                <td>Женщины в 3 раза чаще</td>
-                                <td>Женщины в 3 раза чаще</td>
-                                <td>Равномерно</td>
-                                <td>Женщины немного чаще</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Поведение</td>
-                                <td>Медленный рост, хороший прогноз</td>
-                                <td>Более агрессивный, гематогенное метастазирование (в кости, легкие)</td>
-                                <td>Агрессивный, лимфогенное и гематогенное метастазирование</td>
-                                <td>Чрезвычайно агрессивный, быстрый инвазивный рост</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Ключевая диагностика</td>
-                                <td>ТАБ (+смыв на Тг), УЗИ</td>
-                                <td>ТАБ (цитология часто неотличима от аденомы), гистология после операции</td>
-                                <td>ТАБ (+смыв на кальцитонин), анализ крови на кальцитонин и РЭА, генетический тест на мутацию RET</td>
-                                <td>ТАБ, КТ шеи/грудной клетки для оценки распространенности</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Основное лечение</td>
-                                <td>Хирургия: Тиреоидэктомия ± лимфодиссекция. РЙТ (после операции).</td>
-                                <td>Хирургия: Тиреоидэктомия. РЙТ (обязательно после операции).</td>
-                                <td>Хирургия: Тотальная тиреоидэктомия + центральная лимфодиссекция. РЙТ НЕ ЭФФЕКТИВНА.</td>
-                                <td>Комбинированное: При возможности — операция + ЛТ. Часто — паллиативное лечение.</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Доп. терапия</td>
-                                <td>Супрессивная терапия L-тироксином (ТТГ < 0.1-0.5)</td>
-                                <td>Супрессивная терапия L-тироксином</td>
-                                <td>Заместительная терапия L-тироксином (супрессия не нужна). При метастазах — ингибиторы RET.</td>
-                                <td>Лучевая терапия, химиотерапия, таргетная терапия</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Наблюдение/Маркеры</td>
-                                <td>Тиреоглобулин (Тг), УЗИ шеи</td>
-                                <td>Тиреоглобулин (Тг), УЗИ шеи</td>
-                                <td>Кальцитонин, РЭА, УЗИ/КТ</td>
-                                <td>КТ, ПЭТ-КТ, клиническая оценка</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- КЛЮЧЕВЫЕ ВЫВОДЫ ПО ТАКТИКЕ -->
-                <div class="important-notes">
-                    <h3><i class="fas fa-lightbulb"></i> Ключевые выводы по тактике лечения</h3>
-                    
-                    <div class="note-card">
-                        <h4><i class="fas fa-dna"></i> Дифференцированный рак (Папиллярный и Фолликулярный)</h4>
-                        <p><strong>Тактика едина:</strong> Хирургия → РЙТ (при необходимости) → Супрессивная терапия L-тироксином → Наблюдение по Тг и УЗИ</p>
-                        <ul class="feature-list">
-                            <li><strong>Главное различие:</strong> Фолликулярный рак чаще метастазирует гематогенно (в легкие и кости), а папиллярный — лимфогенно (в лимфоузлы шеи)</li>
-                            <li>Оба типа хорошо отвечают на радиойодтерапию</li>
-                            <li>Прогноз в целом благоприятный при своевременной диагностике</li>
-                        </ul>
-                    </div>
-
-                    <div class="note-card">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Медуллярный рак (МРЩЖ)</h4>
-                        <p><strong>Тактика принципиально иная:</strong> Это не просто "другой рак", это другая болезнь</p>
-                        <ul class="feature-list warning-list">
-                            <li><strong>Диагностика:</strong> Ключевую роль играет кальцитонин (скрининг и мониторинг) и генетический тест (исключение МЭН 2 типа)</li>
-                            <li><strong>Лечение:</strong> РЙТ неэффективна, так как С-клетки не захватывают йод. Нужна более агрессивная начальная операция</li>
-                            <li><strong>Прогноз:</strong> Хуже, чем у дифференцированных форм рака</li>
-                        </ul>
-                    </div>
-
-                    <div class="note-card">
-                        <h4><i class="fas fa-radiation"></i> Анапластический рак</h4>
-                        <p><strong>Тактика пессимистичная:</strong> Прогноз крайне неблагоприятный</p>
-                        <ul class="feature-list danger-list">
-                            <li><strong>Лечение:</strong> Радикальное (редко) или паллиативное (чаще)</li>
-                            <li><strong>Цель:</strong> Продлить жизнь и облегчить симптомы (удушье, дисфагия)</li>
-                            <li>Быстро прогрессирующее течение, низкая выживаемость</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- СЕКЦИЯ СЦИНТИГРАФИИ -->
-            <div class="diagnostic-section">
-                <h2 class="page-title">📡 Сцинтиграфия щитовидной железы</h2>
-                <p class="page-subtitle">Оценка функциональной активности узлов при подозрении на автономию</p>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-vial"></i> Основные показания для сцинтиграфии</h3>
-                        <ul class="feature-list">
-                            <li><strong>Сниженный уровень ТТГ</strong> - основное показание для выявления "горячих" узлов</li>
-                            <li><strong>Клинические признаки тиреотоксикоза</strong> на фоне узлового зоба</li>
-                            <li><strong>Многоузловой зоб</strong> - для выбора узлов для ТАБ</li>
-                            <li><strong>Загрудинный зоб</strong> - оценка анатомии и функциональной активности</li>
-                            <li><strong>Атипичное расположение</strong> ткани щитовидной железы</li>
-                            <li><strong>Оценка результатов лечения</strong> после радиойодтерапии</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Клиническая значимость</h3>
-                        <ul class="feature-list warning-list">
-                            <li><strong>"Горячие" узлы</strong> практически всегда доброкачественные (риск рака < 1%)</li>
-                            <li>При "горячих" узлах <strong>ТАБ часто не требуется</strong></li>
-                            <li>Тактика лечения меняется при выявлении функциональной автономии</li>
-                            <li>При многоузловом зобе биопсии подлежат в первую очередь "холодные" узлы</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="scintigraphy-types">
-                    <div class="type-card hot">
-                        <div class="type-icon">🔥</div>
-                        <h4>"Горячий" узел</h4>
-                        <p><strong>Поглощает больше радиофармпрепарата</strong>, чем окружающая ткань</p>
-                        <p><strong>Риск рака:</strong> < 1%</p>
-                        <p><strong>Тактика:</strong> ТАБ обычно не требуется</p>
-                    </div>
-
-                    <div class="type-card warm">
-                        <div class="type-icon">🌡️</div>
-                        <h4>"Теплый" узел</h4>
-                        <p><strong>Поглощает столько же радиофармпрепарата</strong>, как окружающая ткань</p>
-                        <p><strong>Риск рака:</strong> 5-10%</p>
-                        <p><strong>Тактика:</strong> ТАБ по стандартным показаниям</p>
-                    </div>
-
-                    <div class="type-card cold">
-                        <div class="type-icon">❄️</div>
-                        <h4>"Холодный" узел</h4>
-                        <p><strong>Не поглощает радиофармпрепарат</strong> или поглощает меньше окружающей ткани</p>
-                        <p><strong>Риск рака:</strong> 5-15%</p>
-                        <p><strong>Тактика:</strong> Приоритет для ТАБ</p>
-                    </div>
-                </div>
-
-                <div class="note-card">
-                    <h4><i class="fas fa-lightbulb"></i> Важные замечания</h4>
-                    <p><strong>Сцинтиграфия не заменяет УЗИ!</strong> Эти методы дополняют друг друга:</p>
-                    <ul class="feature-list">
-                        <li><strong>УЗИ</strong> оценивает структуру узла и выявляет подозрительные признаки</li>
-                        <li><strong>Сцинтиграфия</strong> оценивает функциональную активность узла</li>
-                        <li>При нормальном ТТГ сцинтиграфия обычно не показана</li>
-                        <li>"Холодный" узел требует особенно тщательной оценки по УЗИ</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- ОБНОВЛЕННАЯ СЕКЦИЯ: АЛЬТЕРНАТИВНЫЕ МЕТОДЫ ЛЕЧЕНИЯ -->
-            <div class="treatment-comparison">
-                <h2 class="page-title">💊 Альтернативные методы лечения</h2>
-                <p class="page-subtitle">Сравнение радиойодтерапии и малоинвазивных методов деструкции</p>
-
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="criteria-cell">Критерий</th>
-                                <th class="method-header">Радиойодтерапия</th>
-                                <th class="method-header">Малоинвазивная деструкция</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="criteria-cell">Основной принцип</td>
-                                <td>Прием капсулы/жидкости с радиоактивным йодом (I-131), который разрушает клетки щитовидной железы</td>
-                                <td>Локальное разрушение узла через физическое воздействие (лазер, этиловый спирт) под контролем УЗИ</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Основные показания</td>
-                                <td>Диффузный токсический зоб (Базедова болезнь), токсическая аденома, многоузловой токсический зоб</td>
-                                <td>Доброкачественные узлы (коллоидные, аденомы), кисты, вызывающие дискомфорт, сдавление или косметический дефект</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Вмешательство</td>
-                                <td>Неинвазивно (прием препарата внутрь)</td>
-                                <td>Малоинвазивно (пункция через кожу)</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Требует госпитализации</td>
-                                <td>Да (кратковременная изоляция в стационаре на 1-4 дня)</td>
-                                <td>Нет/Амбулаторно (клинику можно покинуть через несколько часов)</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Влияние на функцию щитовидной железы</td>
-                                <td>Часто приводит к гипотиреозу, требующему пожизненной заместительной гормональной терапии</td>
-                                <td>Сохраняет функцию железы; цель — разрушение узла, а не всей ткани</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Эффективность</td>
-                                <td>Высокая при токсических формах (85-95%)</td>
-                                <td>Уменьшение объема узла на 50-80% за 6-12 месяцев</td>
-                            </tr>
-                            <tr>
-                                <td class="criteria-cell">Противопоказания</td>
-                                <td>Беременность, лактация, планирование беременности в ближайшие 6-12 месяцев</td>
-                                <td>Злокачественные узлы, нарушения свертываемости крови, острые воспаления</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="important-notes">
-                    <h3><i class="fas fa-lightbulb"></i> Что важно учитывать при выборе</h3>
-                    
-                    <div class="note-card">
-                        <h4><i class="fas fa-radiation"></i> Подготовка к радиойодтерапии</h4>
-                        <p><strong>Цель отмены:</strong> Повысить уровень эндогенного ТТГ до значения > 30 мЕд/л</p>
-                        <p><strong>Механизм:</strong> Высокий ТТГ заставляет оставшиеся (и злокачественные!) клетки щитовидной железы "жадно" захватывать йод из крови, что гарантирует попадание радиоактивного йода (I-131) именно в эти клетки</p>
-                        
-                        <h5 style="margin-top: 20px; color: var(--dark);">Методы подготовки:</h5>
-                        
-                        <div class="method-comparison">
-                            <div class="method-card">
-                                <h4><i class="fas fa-pills"></i> Полная отмена левотироксина</h4>
-                                <ul class="feature-list">
-                                    <li><strong>Сроки:</strong> 4-6 недель до процедуры</li>
-                                    <li><strong>Результат:</strong> ТТГ > 30 мЕд/л</li>
-                                    <li><strong>Недостаток:</strong> Тяжелые симптомы гипотиреоза</li>
-                                </ul>
-                            </div>
-
-                            <div class="method-card">
-                                <h4><i class="fas fa-exchange-alt"></i> Переход на Трийодтиронин (Т3)</h4>
-                                <ul class="feature-list">
-                                    <li><strong>Схема:</strong> За 4 недели переходят на Т3, отменяют за 2 недели до I-131</li>
-                                    <li><strong>Преимущество:</strong> Период тяжелого гипотиреоза сокращается до 2 недель</li>
-                                    <li><strong>Недостаток:</strong> Все равно развиваются симптомы гипотиреоза</li>
-                                </ul>
-                            </div>
-
-                            <div class="method-card">
-                                <h4><i class="fas fa-syringe"></i> Рекомбинантный ТТГ (рчТТГ)</h4>
-                                <ul class="feature-list">
-                                    <li><strong>Схема:</strong> 2 инъекции за 2 и 1 день до введения I-131</li>
-                                    <li><strong>Преимущества:</strong> Нет симптомов гипотиреоза, высокое качество жизни</li>
-                                    <li><strong>Особенность:</strong> Пациент НЕ прекращает прием левотироксина</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="medication-info">
-                            <h4><i class="fas fa-info-circle"></i> Дополнительные требования подготовки</h4>
-                            <ul class="feature-list">
-                                <li><strong>Безыодовая диета</strong> за 2-4 недели до процедуры</li>
-                                <li><strong>Исключить:</strong> рыбу, морепродукты, йодированную соль</li>
-                                <li><strong>Отмена тиреостатиков</strong> по указанию врача</li>
-                                <li><strong>Исключение беременности</strong> у женщин репродуктивного возраста</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="note-card">
-                        <h4><i class="fas fa-syringe"></i> Виды малоинвазивной деструкции</h4>
-                        <p>Это общее название для нескольких методик:</p>
-                        <ul class="feature-list">
-                            <li><strong>Этаноловая деструкция (склеротерапия):</strong> наиболее эффективна для узлов с жидким содержимым (кист)</li>
-                            <li><strong>Лазерная деструкция (ЛАД):</strong> лучше подходит для разрушения плотных (солидных) узлов</li>
-                            <li><strong>Радиочастотная абляция (РЧА):</strong> эффективна для узлов среднего размера</li>
-                            <li><strong>Микроволновая абляция:</strong> современный метод с хорошими перспективами</li>
-                        </ul>
-                    </div>
-
-                    <div class="note-card">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Обязательные условия</h4>
-                        <p>Для проведения любого малоинвазивного метода необходимо:</p>
-                        <ul class="feature-list danger-list">
-                            <li>Доброкачественность узла, подтвержденная с помощью тонкоигольной биопсии (ТАБ)</li>
-                            <li>Отсутствие признаков злокачественности по УЗИ</li>
-                            <li>Нормальные показатели функции щитовидной железы</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="decision-guide">
-                    <h3><i class="fas fa-gem"></i> Какой метод может быть вам полезен</h3>
-                    <p>Окончательное решение всегда остается за врачом-эндокринологом на основе полного обследования. Общая логика выбора такова:</p>
-                    
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <h3><i class="fas fa-radiation"></i> Радиойодтерапия рекомендуется если:</h3>
-                            <ul class="feature-list">
-                                <li>У вас токсический зоб (узел вырабатывает избыток гормонов)</li>
-                                <li>Имеются противопоказания к операции</li>
-                                <li>Рецидив тиреотоксикоза после хирургического лечения</li>
-                                <li>Пациент предпочитает нехирургический метод</li>
-                                <li>Дифференцированный рак щитовидной железы после операции</li>
-                            </ul>
                         </div>
 
                         <div class="info-card">
-                            <h3><i class="fas fa-syringe"></i> Малоинвазивная деструкция рекомендуется если:</h3>
+                            <h3><i class="fas fa-vial"></i> Лабораторная диагностика</h3>
                             <ul class="feature-list">
-                                <li>У вас доброкачественный узел, вызывающий дискомфорт</li>
-                                <li>Есть чувство давления, затруднение глотания</li>
-                                <li>Заметный косметический дефект</li>
-                                <li>Желание избежать операции и сохранить функцию железы</li>
-                                <li>Рецидив кистозных образований после предыдущего лечения</li>
+                                <li><strong>Обязательно:</strong> ТТГ, кальцитонин базальный</li>
+                                <li><strong>При сниженном ТТГ:</strong> свободный Т4, свободный Т3</li>
+                                <li><strong>При повышенном ТТГ:</strong> свободный Т4</li>
+                                <li><strong>Стимуляционный тест:</strong> при кальцитонине < 100 пг/мл</li>
+                                <li><strong>Не показано:</strong> тиреоглобулин, антитела к ЩЖ</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="step-indicator">
-                        <div class="step-number">!</div>
+                        <div class="step-number">2</div>
                         <div>
-                            <h3>Важно помнить</h3>
-                            <p>Выбор метода лечения зависит от многих факторов: размера и типа узла, возраста пациента, сопутствующих заболеваний и личных предпочтений. Обсудите все варианты с вашим эндокринологом.</p>
+                            <h3>УЗИ щитовидной железы и лимфоузлов</h3>
+                            <p>Основной метод визуализации для определения показаний к ТАБ и оценки регионарных лимфоузлов</p>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-ultrasound"></i> Показания к УЗИ</h3>
+                            <ul class="feature-list">
+                                <li>Пальпируемое образование на шее</li>
+                                <li>Увеличенные шейные лимфоузлы</li>
+                                <li>Семейный анамнез МРЩЖ</li>
+                                <li>Облучение головы и шеи в анамнезе</li>
+                                <li>Паралич голосовой складки</li>
+                                <li>Узлы, выявленные при ПЭТ/КТ/МРТ</li>
+                                <li>Операции на ЩЖ в анамнезе</li>
+                                <li>Изменение уровня ТТГ</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-search"></i> Подозрительные УЗИ-признаки узлов</h3>
+                            <ul class="feature-list warning-list">
+                                <li>Гипоэхогенная солидная структура</li>
+                                <li>Неровный, нечеткий или полициклический контур</li>
+                                <li>Точечные гиперэхогенные включения (микрокальцинаты)</li>
+                                <li>Преобладание высоты над шириной ("выше/чем/шире")</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- НОВАЯ СЕКЦИЯ: ОЦЕНКА ЛИМФАТИЧЕСКИХ УЗЛОВ -->
+                    <div class="step-indicator">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3>Оценка регионарных лимфоузлов</h3>
+                            <p>Критерии нормальных и патологически измененных лимфоузлов</p>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-ruler"></i> Нормальные размеры шейных лимфоузлов</h3>
+                            <ul class="feature-list">
+                                <li><strong>II уровень:</strong> не более 7-8 мм</li>
+                                <li><strong>Все остальные уровни:</strong> не более 6 мм</li>
+                                <li>Овальная или бобовидная форма</li>
+                                <li>Четкие ровные контуры</li>
+                                <li>Наличие эхогенного воротка</li>
+                                <li>Однородная структура</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Признаки метастатического поражения</h3>
+                            <ul class="feature-list danger-list">
+                                <li><strong>Микрокальцинаты</strong> - наиболее специфичный признак</li>
+                                <li><strong>Кистозный компонент</strong> в структуре лимфоузла</li>
+                                <li><strong>Периферическая васкуляризация</strong></li>
+                                <li><strong>Сходство ткани</strong> лимфоузла с тканью ЩЖ</li>
+                                <li>Округлая форма</li>
+                                <li>Нечеткие контуры</li>
+                                <li>Отсутствие эхогенного воротка</li>
+                                <li>Неоднородная структура</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- НОВАЯ СЕКЦИЯ: ДЕТАЛЬНЫЕ ПОКАЗАНИЯ К ТАБ -->
+                    <div class="step-indicator">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3>Показания к тонкоигольной аспирационной биопсии (ТАБ)</h3>
+                            <p>Критерии для проведения пункционной биопсии узлов щитовидной железы и лимфоузлов</p>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-syringe"></i> Основные показания к ТАБ узлов ЩЖ</h3>
+                            <ul class="feature-list">
+                                <li><strong>Узловые образования ≥ 1 см</strong> в диаметре</li>
+                                <li><strong>Узлы < 1 см</strong> при наличии факторов риска агрессивных форм РЩЖ:</li>
+                                <ul class="feature-list" style="margin-left: 20px;">
+                                    <li>Уровень базального/стимулированного кальцитонина > 100 пг/мл</li>
+                                    <li>Наличие увеличенных регионарных лимфоузлов</li>
+                                    <li>Облучение головы и шеи в анамнезе</li>
+                                    <li>Семейный анамнез МРЩЖ</li>
+                                    <li>Паралич голосовой складки</li>
+                                    <li>Узлы, выявленные при ПЭТ</li>
+                                    <li>Пациенты моложе 20 лет</li>
+                                </ul>
+                                <li>При изменении УЗИ-структуры доброкачественных узлов в процессе динамического наблюдения</li>
+                                <li>При появлении увеличенных или измененных шейных лимфоузлов</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> Особые случаи и ограничения</h3>
+                            <ul class="feature-list warning-list">
+                                <li><strong>Узлы < 1 см без факторов риска:</strong> ТАБ нецелесообразна (кроме пациентов моложе 20 лет)</li>
+                                <li><strong>Увеличение размеров</strong> доброкачественного узла само по себе не является показанием к повторной ТАБ</li>
+                                <li><strong>ТАБ - метод первичной диагностики,</strong> а не динамического наблюдения при верифицированных доброкачественных узлах</li>
+                                <li><strong>При несоответствии</strong> цитологического заключения и УЗИ-признаков - повторная ТАБ в ближайшее время</li>
+                                <li><strong>Кистозные анэхогенные узлы:</strong> ТАБ диагностического значения не имеет, но может выполняться с лечебной целью</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- СЕКЦИЯ ТАБ ЛИМФОУЗЛОВ -->
+                    <div class="info-card">
+                        <h3><i class="fas fa-microscope"></i> ТАБ измененных регионарных лимфоузлов</h3>
+                        <ul class="feature-list">
+                            <li><strong>Показана при обнаружении</strong> измененных лимфоузлов при УЗИ</li>
+                            <li><strong>Диагностическая точность повышается</strong> при исследовании смыва из иглы:</li>
+                            <ul class="feature-list" style="margin-left: 20px;">
+                                <li><strong>На тиреоглобулин</strong> - при подозрении на папиллярный/фолликулярный РЩЖ</li>
+                                <li><strong>На кальцитонин</strong> - при подозрении на медуллярный РЩЖ</li>
+                            </ul>
+                            <li><strong>Методика:</strong> после пункции лимфоузла игла промывается физиологическим раствором</li>
+                            <li><strong>Пробирка с смывом</strong> отправляется в лабораторию для определения тиреоглобулина/кальцитонина</li>
+                            <li><strong>Характерно:</strong> очень высокая концентрация гормонов в смыве (> 1000 нг/мл или пг/мл)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КНОПКА ДЛЯ ЛЕЧЕНИЯ -->
+            <button class="section-toggle" onclick="toggleSection('treatment-section')">
+                💊 МЕТОДЫ ЛЕЧЕНИЯ И СЦИНТИГРАФИЯ
+                <i class="fas fa-chevron-down"></i>
+            </button>
+
+            <!-- ВЫПАДАЮЩИЙ РАЗДЕЛ С ЛЕЧЕНИЕМ -->
+            <div id="treatment-section" class="collapsible-section">
+                <!-- СЕКЦИЯ СЦИНТИГРАФИИ -->
+                <div class="diagnostic-section">
+                    <h2 class="page-title">📡 Сцинтиграфия щитовидной железы</h2>
+                    <p class="page-subtitle">Оценка функциональной активности узлов при подозрении на автономию</p>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-vial"></i> Основные показания для сцинтиграфии</h3>
+                            <ul class="feature-list">
+                                <li><strong>Сниженный уровень ТТГ</strong> - основное показание для выявления "горячих" узлов</li>
+                                <li><strong>Клинические признаки тиреотоксикоза</strong> на фоне узлового зоба</li>
+                                <li><strong>Многоузловой зоб</strong> - для выбора узлов для ТАБ</li>
+                                <li><strong>Загрудинный зоб</strong> - оценка анатомии и функциональной активности</li>
+                                <li><strong>Атипичное расположение</strong> ткани щитовидной железы</li>
+                                <li><strong>Оценка результатов лечения</strong> после радиойодтерапии</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Клиническая значимость</h3>
+                            <ul class="feature-list warning-list">
+                                <li><strong>"Горячие" узлы</strong> практически всегда доброкачественные (риск рака < 1%)</li>
+                                <li>При "горячих" узлах <strong>ТАБ часто не требуется</strong></li>
+                                <li>Тактика лечения меняется при выявлении функциональной автономии</li>
+                                <li>При многоузловом зобе биопсии подлежат в первую очередь "холодные" узлы</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="scintigraphy-types">
+                        <div class="type-card hot">
+                            <div class="type-icon">🔥</div>
+                            <h4>"Горячий" узел</h4>
+                            <p><strong>Поглощает больше радиофармпрепарата</strong>, чем окружающая ткань</p>
+                            <p><strong>Риск рака:</strong> < 1%</p>
+                            <p><strong>Тактика:</strong> ТАБ обычно не требуется</p>
+                        </div>
+
+                        <div class="type-card warm">
+                            <div class="type-icon">🌡️</div>
+                            <h4>"Теплый" узел</h4>
+                            <p><strong>Поглощает столько же радиофармпрепарата</strong>, как окружающая ткань</p>
+                            <p><strong>Риск рака:</strong> 5-10%</p>
+                            <p><strong>Тактика:</strong> ТАБ по стандартным показаниям</p>
+                        </div>
+
+                        <div class="type-card cold">
+                            <div class="type-icon">❄️</div>
+                            <h4>"Холодный" узел</h4>
+                            <p><strong>Не поглощает радиофармпрепарат</strong> или поглощает меньше окружающей ткани</p>
+                            <p><strong>Риск рака:</strong> 5-15%</p>
+                            <p><strong>Тактика:</strong> Приоритет для ТАБ</p>
+                        </div>
+                    </div>
+
+                    <div class="note-card">
+                        <h4><i class="fas fa-lightbulb"></i> Важные замечания</h4>
+                        <p><strong>Сцинтиграфия не заменяет УЗИ!</strong> Эти методы дополняют друг друга:</p>
+                        <ul class="feature-list">
+                            <li><strong>УЗИ</strong> оценивает структуру узла и выявляет подозрительные признаки</li>
+                            <li><strong>Сцинтиграфия</strong> оценивает функциональную активность узла</li>
+                            <li>При нормальном ТТГ сцинтиграфия обычно не показана</li>
+                            <li>"Холодный" узел требует особенно тщательной оценки по УЗИ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ОБНОВЛЕННАЯ СЕКЦИЯ: АЛЬТЕРНАТИВНЫЕ МЕТОДЫ ЛЕЧЕНИЯ -->
+                <div class="treatment-comparison">
+                    <h2 class="page-title">💊 Альтернативные методы лечения</h2>
+                    <p class="page-subtitle">Сравнение радиойодтерапии и малоинвазивных методов деструкции</p>
+
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="criteria-cell">Критерий</th>
+                                    <th class="method-header">Радиойодтерапия</th>
+                                    <th class="method-header">Малоинвазивная деструкция</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="criteria-cell">Основной принцип</td>
+                                    <td>Прием капсулы/жидкости с радиоактивным йодом (I-131), который разрушает клетки щитовидной железы</td>
+                                    <td>Локальное разрушение узла через физическое воздействие (лазер, этиловый спирт) под контролем УЗИ</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Основные показания</td>
+                                    <td>Диффузный токсический зоб (Базедова болезнь), токсическая аденома, многоузловой токсический зоб</td>
+                                    <td>Доброкачественные узлы (коллоидные, аденомы), кисты, вызывающие дискомфорт, сдавление или косметический дефект</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Вмешательство</td>
+                                    <td>Неинвазивно (прием препарата внутрь)</td>
+                                    <td>Малоинвазивно (пункция через кожу)</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Требует госпитализации</td>
+                                    <td>Да (кратковременная изоляция в стационаре на 1-4 дня)</td>
+                                    <td>Нет/Амбулаторно (клинику можно покинуть через несколько часов)</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Влияние на функцию щитовидной железы</td>
+                                    <td>Часто приводит к гипотиреозу, требующему пожизненной заместительной гормональной терапии</td>
+                                    <td>Сохраняет функцию железы; цель — разрушение узла, а не всей ткани</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Эффективность</td>
+                                    <td>Высокая при токсических формах (85-95%)</td>
+                                    <td>Уменьшение объема узла на 50-80% за 6-12 месяцев</td>
+                                </tr>
+                                <tr>
+                                    <td class="criteria-cell">Противопоказания</td>
+                                    <td>Беременность, лактация, планирование беременности в ближайшие 6-12 месяцев</td>
+                                    <td>Злокачественные узлы, нарушения свертываемости крови, острые воспаления</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="important-notes">
+                        <h3><i class="fas fa-lightbulb"></i> Что важно учитывать при выборе</h3>
+                        
+                        <div class="note-card">
+                            <h4><i class="fas fa-radiation"></i> Подготовка к радиойодтерапии</h4>
+                            <p><strong>Цель отмены:</strong> Повысить уровень эндогенного ТТГ до значения > 30 мЕд/л</p>
+                            <p><strong>Механизм:</strong> Высокий ТТГ заставляет оставшиеся (и злокачественные!) клетки щитовидной железы "жадно" захватывать йод из крови, что гарантирует попадание радиоактивного йода (I-131) именно в эти клетки</p>
+                            
+                            <h5 style="margin-top: 20px; color: var(--dark);">Методы подготовки:</h5>
+                            
+                            <div class="method-comparison">
+                                <div class="method-card">
+                                    <h4><i class="fas fa-pills"></i> Полная отмена левотироксина</h4>
+                                    <ul class="feature-list">
+                                        <li><strong>Сроки:</strong> 4-6 недель до процедуры</li>
+                                        <li><strong>Результат:</strong> ТТГ > 30 мЕд/л</li>
+                                        <li><strong>Недостаток:</strong> Тяжелые симптомы гипотиреоза</li>
+                                    </ul>
+                                </div>
+
+                                <div class="method-card">
+                                    <h4><i class="fas fa-exchange-alt"></i> Переход на Трийодтиронин (Т3)</h4>
+                                    <ul class="feature-list">
+                                        <li><strong>Схема:</strong> За 4 недели переходят на Т3, отменяют за 2 недели до I-131</li>
+                                        <li><strong>Преимущество:</strong> Период тяжелого гипотиреоза сокращается до 2 недель</li>
+                                        <li><strong>Недостаток:</strong> Все равно развиваются симптомы гипотиреоза</li>
+                                    </ul>
+                                </div>
+
+                                <div class="method-card">
+                                    <h4><i class="fas fa-syringe"></i> Рекомбинантный ТТГ (рчТТГ)</h4>
+                                    <ul class="feature-list">
+                                        <li><strong>Схема:</strong> 2 инъекции за 2 и 1 день до введения I-131</li>
+                                        <li><strong>Преимущества:</strong> Нет симптомов гипотиреоза, высокое качество жизни</li>
+                                        <li><strong>Особенность:</strong> Пациент НЕ прекращает прием левотироксина</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="medication-info">
+                                <h4><i class="fas fa-info-circle"></i> Дополнительные требования подготовки</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Безыодовая диета</strong> за 2-4 недели до процедуры</li>
+                                    <li><strong>Исключить:</strong> рыбу, морепродукты, йодированную соль</li>
+                                    <li><strong>Отмена тиреостатиков</strong> по указанию врача</li>
+                                    <li><strong>Исключение беременности</strong> у женщин репродуктивного возраста</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="note-card">
+                            <h4><i class="fas fa-syringe"></i> Виды малоинвазивной деструкции</h4>
+                            <p>Это общее название для нескольких методик:</p>
+                            <ul class="feature-list">
+                                <li><strong>Этаноловая деструкция (склеротерапия):</strong> наиболее эффективна для узлов с жидким содержимым (кист)</li>
+                                <li><strong>Лазерная деструкция (ЛАД):</strong> лучше подходит для разрушения плотных (солидных) узлов</li>
+                                <li><strong>Радиочастотная абляция (РЧА):</strong> эффективна для узлов среднего размера</li>
+                                <li><strong>Микроволновая абляция:</strong> современный метод с хорошими перспективами</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-card">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Обязательные условия</h4>
+                            <p>Для проведения любого малоинвазивного метода необходимо:</p>
+                            <ul class="feature-list danger-list">
+                                <li>Доброкачественность узла, подтвержденная с помощью тонкоигольной биопсии (ТАБ)</li>
+                                <li>Отсутствие признаков злокачественности по УЗИ</li>
+                                <li>Нормальные показатели функции щитовидной железы</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="decision-guide">
+                        <h3><i class="fas fa-gem"></i> Какой метод может быть вам полезен</h3>
+                        <p>Окончательное решение всегда остается за врачом-эндокринологом на основе полного обследования. Общая логика выбора такова:</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h3><i class="fas fa-radiation"></i> Радиойодтерапия рекомендуется если:</h3>
+                                <ul class="feature-list">
+                                    <li>У вас токсический зоб (узел вырабатывает избыток гормонов)</li>
+                                    <li>Имеются противопоказания к операции</li>
+                                    <li>Рецидив тиреотоксикоза после хирургического лечения</li>
+                                    <li>Пациент предпочитает нехирургический метод</li>
+                                    <li>Дифференцированный рак щитовидной железы после операции</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-card">
+                                <h3><i class="fas fa-syringe"></i> Малоинвазивная деструкция рекомендуется если:</h3>
+                                <ul class="feature-list">
+                                    <li>У вас доброкачественный узел, вызывающий дискомфорт</li>
+                                    <li>Есть чувство давления, затруднение глотания</li>
+                                    <li>Заметный косметический дефект</li>
+                                    <li>Желание избежать операции и сохранить функцию железы</li>
+                                    <li>Рецидив кистозных образований после предыдущего лечения</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step-indicator">
+                            <div class="step-number">!</div>
+                            <div>
+                                <h3>Важно помнить</h3>
+                                <p>Выбор метода лечения зависит от многих факторов: размера и типа узла, возраста пациента, сопутствующих заболеваний и личных предпочтений. Обсудите все варианты с вашим эндокринологом.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1712,6 +1804,15 @@
     </div>
 
     <script>
+        // Функция для переключения разделов
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const button = event.currentTarget;
+            
+            section.classList.toggle('active');
+            button.classList.toggle('active');
+        }
+
         // База знаний по узловому зобу
         const NODULAR_GOITER_KNOWLEDGE = {
             calculateTiRads: function(composition, echogenicity, shape, margin, echogenicFoci) {
