@@ -537,6 +537,15 @@
             font-size: 1.2em;
         }
 
+        /* НАВИГАЦИОННЫЕ ССЫЛКИ */
+        .navigation-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
         /* ЭКСТРЕННЫЕ СОСТОЯНИЯ */
         .emergency-section {
             background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
@@ -712,6 +721,13 @@
                 width: 100%;
                 justify-content: center;
             }
+            .navigation-links {
+                flex-direction: column;
+            }
+            .navigation-links .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -750,6 +766,15 @@
         <div class="content">
             <h1 class="page-title">Заболевания щитовидной железы</h1>
             <p class="page-subtitle">Комплексная диагностика, калькуляторы терапии и мониторинг лечения</p>
+
+            <!-- Навигационные ссылки для быстрого перехода -->
+            <div class="navigation-links">
+                <a href="../../index.html" class="btn">🏠 На главную</a>
+                <a href="hypothyroidism.html" class="btn btn-secondary">📉 Гипотиреоз</a>
+                <a href="hyperthyroidism.html" class="btn btn-secondary">📈 Гипертиреоз</a>
+                <a href="nodular-goiter.html" class="btn btn-secondary">🎯 Узловой зоб</a>
+                <a href="thyroiditis.html" class="btn btn-secondary">🦋 Тиреоидиты</a>
+            </div>
 
             <!-- СТАТИСТИКА -->
             <div class="stats-grid">
@@ -1220,7 +1245,7 @@
                 details: "Исключает: врожденную атрофию щитовидной железы (E03.0)"
             },
             "E03.5": {
-                description: "Микседематозная кома",
+                description: "Микседематозная комa",
                 details: "Критическое состояние, требующее неотложной помощи"
             },
             "E03.8": {
