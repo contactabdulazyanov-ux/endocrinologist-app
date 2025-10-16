@@ -192,7 +192,7 @@
             margin: 40px 0;
             border: 2px solid #e9d5ff;
             box-shadow: var(--shadow);
-            display: none; /* Скрыт по умолчанию */
+            display: none;
         }
 
         .symptoms-header {
@@ -530,7 +530,7 @@
             margin: 40px 0;
             border: 2px solid #fecaca;
             box-shadow: var(--shadow);
-            display: none; /* Скрыт по умолчанию */
+            display: none;
         }
 
         .section-title {
@@ -2008,16 +2008,25 @@
 
         // ФУНКЦИЯ ДЛЯ ПОКАЗА/СКРЫТИЯ СЕКЦИЙ БОЛЕЗНИ ГРЕЙВСА
         function toggleGravesSections() {
-            const symptomsSection = document.getElementById('symptoms-section');
-            const antibodySection = document.getElementById('antibody-dynamics');
-            
-            if (symptomsSection.style.display === 'none' || symptomsSection.style.display === '') {
-                symptomsSection.style.display = 'block';
-                antibodySection.style.display = 'block';
-                scrollToSection('symptoms-section');
-            } else {
-                symptomsSection.style.display = 'none';
-                antibodySection.style.display = 'none';
+            try {
+                const symptomsSection = document.getElementById('symptoms-section');
+                const antibodySection = document.getElementById('antibody-dynamics');
+                
+                if (!symptomsSection || !antibodySection) {
+                    console.error('Элементы не найдены');
+                    return;
+                }
+                
+                if (symptomsSection.style.display === 'none' || symptomsSection.style.display === '') {
+                    symptomsSection.style.display = 'block';
+                    antibodySection.style.display = 'block';
+                    scrollToSection('symptoms-section');
+                } else {
+                    symptomsSection.style.display = 'none';
+                    antibodySection.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Ошибка в toggleGravesSections:', error);
             }
         }
 
@@ -2045,36 +2054,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeSymptoms();
             initTabs();
-            
-            // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
-            initializeExtendedContent();
         });
-
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
-        function initializeExtendedContent() {
-            // Инициализация дополнительного контента
-            console.log("Расширенный контент инициализирован");
-            
-            // Дополнительные функции для работы с расширенным контентом
-            setupExtendedCalculators();
-            setupAdvancedMonitoring();
-            setupComprehensiveAnalysis();
-        }
-
-        function setupExtendedCalculators() {
-            // Дополнительные калькуляторы для расширенного функционала
-            console.log("Расширенные калькуляторы настроены");
-        }
-
-        function setupAdvancedMonitoring() {
-            // Расширенный мониторинг и аналитика
-            console.log("Расширенный мониторинг активирован");
-        }
-
-        function setupComprehensiveAnalysis() {
-            // Комплексный анализ данных пациента
-            console.log("Комплексный анализ настроен");
-        }
 
         // БАЗА ЗНАНИЙ ПО ГИПЕРТИРЕОЗУ
         const HYPERTHYROIDISM_KNOWLEDGE = {
@@ -2298,24 +2278,9 @@
             const errors = [];
             
             for (const [key, value] of Object.entries(inputs)) {
-                if (value === null || value === undefined || value === '') {
-                    errors.push(`Поле "${key}" не заполнено`);
+                if (value === null || value === undefined || value === '' || isNaN(value)) {
+                    errors.push(`Поле "${key}" не заполнено или содержит ошибку`);
                     continue;
-                }
-                
-                switch(key) {
-                    case 'weight':
-                        if (value < 20 || value > 300) errors.push("Вес должен быть от 20 до 300 кг");
-                        break;
-                    case 'age':
-                        if (value < 1 || value > 120) errors.push("Возраст должен быть от 1 до 120 лет");
-                        break;
-                    case 'tsh':
-                        if (value < 0.001 || value > 100) errors.push("ТТГ должен быть от 0.001 до 100 мМЕ/л");
-                        break;
-                    case 't4':
-                        if (value < 1 || value > 100) errors.push("св. Т4 должен быть от 1 до 100 пмоль/л");
-                        break;
                 }
             }
             
@@ -2596,9 +2561,7 @@
             document.getElementById('gravesDoseResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
         function calculateDoseAdjustment() {
-            // Полная реализация функции коррекции дозы
             const currentDose = parseFloat(document.getElementById('currentDose').value);
             const initialTsh = parseFloat(document.getElementById('initialTsh').value);
             const initialT4 = parseFloat(document.getElementById('initialT4').value);
@@ -2687,9 +2650,7 @@
             document.getElementById('adjustmentResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
         function calculateRelapseRisk() {
-            // Полная реализация функции оценки риска рецидива
             const antibody = parseFloat(document.getElementById('relapseAntibody').value);
             const tsh = parseFloat(document.getElementById('relapseTsh').value);
             const duration = parseInt(document.getElementById('relapseDuration').value);
@@ -2769,9 +2730,7 @@
             document.getElementById('relapseResult').style.display = 'block';
         }
 
-        // ОСТАЛЬНЫЕ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
         function monitorAntibodies() {
-            // Полная реализация функции мониторинга антител
             const initial = parseFloat(document.getElementById('antibodyInitial').value);
             const current = parseFloat(document.getElementById('antibodyCurrent').value);
             const months = parseInt(document.getElementById('antibodyMonths').value);
@@ -2824,9 +2783,7 @@
             document.getElementById('antibodyResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
         function calculatePregnancyDose() {
-            // Полная реализация функции расчета дозы при беременности
             const trimester = document.getElementById('pregTrimester').value;
             const t4 = parseFloat(document.getElementById('pregT4').value);
             const antibody = parseFloat(document.getElementById('pregAntibody').value);
@@ -2879,9 +2836,7 @@
             document.getElementById('pregnancyDoseResult').style.display = 'block';
         }
 
-        // ОСТАВШИЕСЯ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
         function calculatePregnancyControl() {
-            // Полная реализация функции контроля при беременности
             const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
             const initialTsh = parseFloat(document.getElementById('pregInitialTsh').value);
             const initialT4 = parseFloat(document.getElementById('pregInitialT4').value);
@@ -2982,9 +2937,7 @@
             document.getElementById('pregnancyControlResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
         function analyzeGravesAntibodies() {
-            // Полная реализация функции анализа антител при болезни Грейвса
             const initial = parseFloat(document.getElementById('gravesAntibodyInitial').value);
             const current = parseFloat(document.getElementById('gravesAntibodyCurrent').value);
             const duration = parseInt(document.getElementById('gravesTreatmentDuration').value);
@@ -3068,9 +3021,7 @@
             document.getElementById('gravesAntibodyResult').style.display = 'block';
         }
 
-        // ОСТАВШИЕСЯ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
         function calculateNeonatalRisk() {
-            // Полная реализация функции оценки риска неонатального тиреотоксикоза
             const antibody = parseFloat(document.getElementById('neonatalAntibody').value);
             const maternalHistory = document.getElementById('maternalHistory').value;
             const previousNeonatal = document.getElementById('previousNeonatal').value;
@@ -3162,9 +3113,7 @@
             document.getElementById('neonatalRiskResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
         function calculateBlockReplace() {
-            // Полная реализация функции расчета схемы "Блокируй и замещай"
             const age = parseInt(document.getElementById('blockAge').value);
             const weight = parseFloat(document.getElementById('blockWeight').value);
             const currentT4 = parseFloat(document.getElementById('blockCurrentT4').value);
@@ -3232,9 +3181,7 @@
             document.getElementById('blockReplaceResult').style.display = 'block';
         }
 
-        // ОСТАВШИЕСЯ ФУНКЦИИ КАЛЬКУЛЯТОРОВ
         function calculateWithdrawalPlan() {
-            // Полная реализация функции планирования отмены терапии
             const weeks = parseInt(document.getElementById('withdrawalWeeks').value);
             const dose = parseFloat(document.getElementById('withdrawalDose').value);
             const initialTsh = parseFloat(document.getElementById('withdrawalInitialTsh').value);
@@ -3319,9 +3266,7 @@
             document.getElementById('withdrawalResult').style.display = 'block';
         }
 
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
         function evaluateVitaminD() {
-            // Полная реализация функции оценки витамина D
             const level = parseFloat(document.getElementById('vitaminDLevel').value);
             const age = parseInt(document.getElementById('vitaminDAge').value);
             const weight = parseFloat(document.getElementById('vitaminDWeight').value);
@@ -3424,7 +3369,6 @@
         }
 
         function calculateVitaminDCorrection() {
-            // Полная реализация функции коррекции витамина D
             const initial = parseFloat(document.getElementById('correctionInitialLevel').value);
             const current = parseFloat(document.getElementById('correctionCurrentLevel').value);
             const target = parseInt(document.getElementById('correctionTargetLevel').value);
@@ -3539,46 +3483,6 @@
             `;
             document.getElementById('correctionResult').style.display = 'block';
         }
-
-        // ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВОССТАНОВЛЕНИЯ ДЛИНЫ
-        function setupAdvancedFeatures() {
-            // Дополнительные функции для расширенного функционала
-            console.log("Расширенные функции активированы");
-            
-            // Инициализация дополнительных обработчиков событий
-            setupEventHandlers();
-            setupAdvancedCalculations();
-            setupComprehensiveReports();
-        }
-
-        function setupEventHandlers() {
-            // Дополнительные обработчики событий
-            document.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    // Обработка нажатия Enter в формах
-                    const activeElement = document.activeElement;
-                    if (activeElement && activeElement.type === 'number') {
-                        activeElement.blur();
-                    }
-                }
-            });
-        }
-
-        function setupAdvancedCalculations() {
-            // Дополнительные расчеты и аналитика
-            console.log("Расширенные расчеты настроены");
-        }
-
-        function setupComprehensiveReports() {
-            // Генерация комплексных отчетов
-            console.log("Система отчетов инициализирована");
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ ДОПОЛНИТЕЛЬНЫХ ФУНКЦИЙ ПРИ ЗАГРУЗКЕ
-        document.addEventListener('DOMContentLoaded', function() {
-            setupAdvancedFeatures();
-        });
-
     </script>
 </body>
 </html>
