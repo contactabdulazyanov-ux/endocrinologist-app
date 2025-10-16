@@ -1207,8 +1207,13 @@
                             </button>
                             <div id="diagnosisResult" class="result-box"></div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- УДАЛЕН КАЛЬКУЛЯТОР РАСЧЕТА СТАРТОВОЙ ДОЗЫ -->
+                <!-- ВКЛАДКА ЛЕЧЕНИЕ -->
+                <div id="treatment-tab" class="tab-content">
+                    <div class="calculators-grid">
+                        <!-- ПОДБОР ТЕРАПИИ L-ТИРОКСИНОМ (перемещен из диагностики) -->
                         <div class="calculator-card">
                             <h3><i class="fas fa-calculator"></i> Подбор терапии L-тироксином</h3>
                             <div class="form-group">
@@ -1247,12 +1252,8 @@
                             </button>
                             <div id="treatmentResult" class="result-box"></div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- ВКЛАДКА ЛЕЧЕНИЕ -->
-                <div id="treatment-tab" class="tab-content">
-                    <div class="calculators-grid">
+                        <!-- КОРРЕКЦИЯ ДОЗЫ L-ТИРОКСИНА -->
                         <div class="calculator-card">
                             <h3><i class="fas fa-exchange-alt"></i> Коррекция дозы L-тироксина</h3>
                             <div class="form-group">
@@ -1408,40 +1409,7 @@
                 <!-- ВКЛАДКА БЕРЕМЕННОСТЬ -->
                 <div id="pregnancy-tab" class="tab-content">
                     <div class="calculators-grid">
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-baby"></i> Калькулятор коррекции дозы при беременности</h3>
-                            <div class="form-group">
-                                <label for="pregCurrentDose">Текущая доза L-T4 (мкг/сут)</label>
-                                <input type="number" id="pregCurrentDose" placeholder="Например: 75" value="75">
-                            </div>
-                            <div class="form-group">
-                                <label for="pregTrimester">Триместр беременности</label>
-                                <select id="pregTrimester">
-                                    <option value="1">1-й триместр</option>
-                                    <option value="2">2-й триместр</option>
-                                    <option value="3">3-й триместр</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="pregTsh">Текущий ТТГ (мМЕ/л)</label>
-                                <input type="number" step="0.01" id="pregTsh" placeholder="Например: 2.8" value="2.8">
-                            </div>
-                            <div class="form-group">
-                                <label for="pregT4">Текущий св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="pregT4" placeholder="Например: 14.5" value="14.5">
-                            </div>
-                            <div class="form-group">
-                                <label for="pregT3">Текущий св. Т3 (пмоль/л) - опционально</label>
-                                <input type="number" step="0.1" id="pregT3" placeholder="Например: 4.0">
-                                <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
-                            </div>
-                            <button class="btn" onclick="calculatePregnancyDose()">
-                                <i class="fas fa-calculator"></i> Рассчитать коррекцию
-                            </button>
-                            <div id="pregnancyDoseResult" class="result-box"></div>
-                        </div>
-
-                        <!-- ЗАМЕНЕН КАЛЬКУЛЯТОР НА ПОДБОР ДОЗЫ ДЛЯ БЕРЕМЕННЫХ -->
+                        <!-- ПОДБОР ДОЗЫ L-ТИРОКСИНА ДЛЯ БЕРЕМЕННЫХ (поменяли местами - теперь первый) -->
                         <div class="calculator-card">
                             <h3><i class="fas fa-capsules"></i> Подбор дозы L-тироксина для беременных</h3>
                             <div class="form-group">
@@ -1482,6 +1450,40 @@
                                 <i class="fas fa-calculator"></i> Рассчитать дозу
                             </button>
                             <div id="pregnancyLThyroxineResult" class="result-box"></div>
+                        </div>
+
+                        <!-- КАЛЬКУЛЯТОР КОРРЕКЦИИ ДОЗЫ ПРИ БЕРЕМЕННОСТИ (поменяли местами - теперь второй) -->
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-baby"></i> Калькулятор коррекции дозы при беременности</h3>
+                            <div class="form-group">
+                                <label for="pregCurrentDose">Текущая доза L-T4 (мкг/сут)</label>
+                                <input type="number" id="pregCurrentDose" placeholder="Например: 75" value="75">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregTrimester">Триместр беременности</label>
+                                <select id="pregTrimester">
+                                    <option value="1">1-й триместр</option>
+                                    <option value="2">2-й триместр</option>
+                                    <option value="3">3-й триместр</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pregTsh">Текущий ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="pregTsh" placeholder="Например: 2.8" value="2.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregT4">Текущий св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregT4" placeholder="Например: 14.5" value="14.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregT3">Текущий св. Т3 (пмоль/л) - опционально</label>
+                                <input type="number" step="0.1" id="pregT3" placeholder="Например: 4.0">
+                                <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+                            </div>
+                            <button class="btn" onclick="calculatePregnancyDose()">
+                                <i class="fas fa-calculator"></i> Рассчитать коррекцию
+                            </button>
+                            <div id="pregnancyDoseResult" class="result-box"></div>
                         </div>
                     </div>
                 </div>
