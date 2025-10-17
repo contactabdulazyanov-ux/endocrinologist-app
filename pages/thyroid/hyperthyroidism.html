@@ -1265,6 +1265,11 @@
                                 <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
                             </div>
                             <div class="form-group">
+                                <label for="gravesT3">св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="gravesT3" placeholder="Например: 12.0" value="12.0">
+                                <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
                                 <label for="gravesSeverity" class="required-field">Тяжесть тиреотоксикоза</label>
                                 <select id="gravesSeverity">
                                     <option value="mild">Легкий (ТТГ 0.1-0.4, свТ4 до 30)</option>
@@ -1308,6 +1313,10 @@
                                 <input type="number" step="0.1" id="initialT4" placeholder="35.0" value="35.0">
                             </div>
                             <div class="form-group">
+                                <label for="initialT3">Исходный св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="initialT3" placeholder="12.0" value="12.0">
+                            </div>
+                            <div class="form-group">
                                 <label for="controlTsh">ТТГ через 4-6 недель (мМЕ/л)</label>
                                 <input type="number" step="0.01" id="controlTsh" placeholder="Например: 0.1" value="0.1">
                                 <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
@@ -1315,6 +1324,10 @@
                             <div class="form-group">
                                 <label for="controlT4">св. Т4 через 4-6 недель (пмоль/л)</label>
                                 <input type="number" step="0.1" id="controlT4" placeholder="Например: 25.0" value="25.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="controlT3">св. Т3 через 4-6 недель (пмоль/л)</label>
+                                <input type="number" step="0.1" id="controlT3" placeholder="Например: 8.0" value="8.0">
                             </div>
                             <div class="form-group">
                                 <label for="patientAgeCorrection">Возраст пациента (лет)</label>
@@ -1396,9 +1409,19 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="pregTsh">ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.001" id="pregTsh" placeholder="0.02" value="0.02">
+                                <div class="range-info">Цель: 0.2-2.5 мМЕ/л</div>
+                            </div>
+                            <div class="form-group">
                                 <label for="pregT4">св. Т4 (пмоль/л)</label>
                                 <input type="number" step="0.1" id="pregT4" placeholder="Например: 28.0" value="28.0">
                                 <div class="range-info">Цель: верхняя граница нормы</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pregT3">св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregT3" placeholder="Например: 8.5" value="8.5">
+                                <div class="range-info">Норма: 3.5-6.5 пмоль/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="pregAntibody">АТ-рТТГ (МЕ/л)</label>
@@ -1437,9 +1460,18 @@
                                 <input type="number" step="0.1" id="pregInitialT4" placeholder="35.0" value="35.0">
                             </div>
                             <div class="form-group">
+                                <label for="pregInitialT3">Исходный св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregInitialT3" placeholder="12.0" value="12.0">
+                            </div>
+                            <div class="form-group">
                                 <label for="pregCurrentT4">Текущий св. Т4 (пмоль/л)</label>
                                 <input type="number" step="0.1" id="pregCurrentT4" placeholder="Например: 20.5" value="20.5">
                                 <div class="range-info">Целевой уровень: 18-22 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pregCurrentT3">Текущий св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregCurrentT3" placeholder="Например: 6.0" value="6.0">
+                                <div class="range-info">Целевой уровень: 3.5-6.5 пмоль/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="pregCurrentTSH">Текущий ТТГ (мМЕ/л)</label>
@@ -1457,6 +1489,39 @@
                                 <i class="fas fa-chart-bar"></i> Оценить контроль
                             </button>
                             <div id="pregnancyControlResult" class="result-box"></div>
+                        </div>
+
+                        <div class="calculator-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Оценка риска неонатального тиреотоксикоза</h3>
+                            <div class="form-group">
+                                <label for="neonatalAntibody">АТ-рТТГ на 18-22 неделе (МЕ/л)</label>
+                                <input type="number" step="0.01" id="neonatalAntibody" placeholder="Например: 8.5" value="8.5">
+                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="maternalHistory">Анамнез болезни Грейвса у матери</label>
+                                <select id="maternalHistory">
+                                    <option value="active">Активная болезнь</option>
+                                    <option value="remission" selected>Ремиссия</option>
+                                    <option value="postop">После операции</option>
+                                    <option value="postRIT">После РЙТ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="previousNeonatal">Предыдущие случаи неонатального тиреотоксикоза</label>
+                                <select id="previousNeonatal">
+                                    <option value="no" selected>Нет</option>
+                                    <option value="yes">Да</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="maternalAgeNeonatal">Возраст матери (лет)</label>
+                                <input type="number" id="maternalAgeNeonatal" placeholder="Например: 32" value="32">
+                            </div>
+                            <button class="btn" onclick="calculateNeonatalRisk()">
+                                <i class="fas fa-baby"></i> Оценить риск
+                            </button>
+                            <div id="neonatalRiskResult" class="result-box"></div>
                         </div>
                     </div>
                 </div>
@@ -2086,7 +2151,7 @@
                 return { diagnosis, probability, diagnosticCriteria, treatmentApproach, additionalTests, color };
             },
 
-            calculateDose: function(age, weight, t4, severity, heartDisease = 'no', liverFunction = 'normal') {
+            calculateDose: function(age, weight, t4, t3 = null, severity, heartDisease = 'no', liverFunction = 'normal') {
                 let baseDose;
                 
                 switch(severity) {
@@ -2105,6 +2170,10 @@
                 
                 if (t4 > 40) baseDose *= 1.2;
                 if (t4 > 50) baseDose *= 1.3;
+                
+                // Учет Т3 при Т3-тиреотоксикозе
+                if (t3 && t3 > 10) baseDose *= 1.1;
+                if (t3 && t3 > 15) baseDose *= 1.2;
                 
                 if (age >= 65) {
                     baseDose *= 0.6;
@@ -2131,12 +2200,16 @@
                 return Math.min(Math.max(Math.round(baseDose / 5) * 5, 5), 60);
             },
 
-            calculatePregnancyDose: function(trimester, t4, antibody, symptoms, age) {
+            calculatePregnancyDose: function(trimester, tsh, t4, t3 = null, antibody, symptoms, age) {
                 let baseDose;
                 
                 if (t4 > 30) baseDose = 20;
                 else if (t4 > 25) baseDose = 15;
                 else baseDose = 10;
+                
+                // Учет Т3
+                if (t3 && t3 > 8) baseDose += 2;
+                if (t3 && t3 > 10) baseDose += 3;
                 
                 if (antibody > 5) baseDose += 5;
                 if (symptoms === 'severe') baseDose += 5;
@@ -2486,6 +2559,7 @@
             const age = parseInt(document.getElementById('gravesAge').value);
             const weight = parseFloat(document.getElementById('gravesWeight').value);
             const t4 = parseFloat(document.getElementById('gravesT4').value);
+            const t3 = parseFloat(document.getElementById('gravesT3').value) || null;
             const severity = document.getElementById('gravesSeverity').value;
             const heartDisease = document.getElementById('gravesHeartDisease').value;
             const liverFunction = document.getElementById('gravesLiverFunction').value;
@@ -2496,7 +2570,7 @@
                 return;
             }
 
-            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(age, weight, t4, severity, heartDisease, liverFunction);
+            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(age, weight, t4, t3, severity, heartDisease, liverFunction);
             
             const ageGroup = getAgeGroup(age);
             const recommendations = [
@@ -2504,6 +2578,10 @@
                 "Контроль общего анализа крови каждые 2 недели в первые 2 месяца",
                 "Обучение пациента симптомам агранулоцитоза"
             ];
+
+            if (t3 && t3 > 10) {
+                recommendations.push("⚠️ Т3-тиреотоксикоз: может потребоваться более высокая доза");
+            }
 
             if (age >= 65) {
                 recommendations.push("👵 Для пожилых: старт с низких доз, тщательный мониторинг");
@@ -2538,8 +2616,10 @@
             const currentDose = parseFloat(document.getElementById('currentDose').value);
             const initialTsh = parseFloat(document.getElementById('initialTsh').value);
             const initialT4 = parseFloat(document.getElementById('initialT4').value);
+            const initialT3 = parseFloat(document.getElementById('initialT3').value);
             const controlTsh = parseFloat(document.getElementById('controlTsh').value);
             const controlT4 = parseFloat(document.getElementById('controlT4').value);
+            const controlT3 = parseFloat(document.getElementById('controlT3').value);
             const age = parseInt(document.getElementById('patientAgeCorrection').value);
 
             const errors = validateInputs({ currentDose, initialTsh, initialT4, controlTsh, controlT4 });
@@ -2554,6 +2634,7 @@
             let color = '';
 
             const t4Reduction = ((initialT4 - controlT4) / initialT4 * 100).toFixed(1);
+            const t3Reduction = initialT3 ? ((initialT3 - controlT3) / initialT3 * 100).toFixed(1) : null;
             const tshChange = ((controlTsh - initialTsh) / Math.abs(initialTsh) * 100).toFixed(1);
 
             if (controlT4 <= 22.0 && controlTsh >= 0.4) {
@@ -2594,6 +2675,11 @@
                 color = '#d97706';
             }
 
+            // Учет динамики Т3
+            if (t3Reduction && t3Reduction < 50) {
+                recommendations.push("⚠️ Медленное снижение св.Т3: рассмотреть Т3-тиреотоксикоз");
+            }
+
             document.getElementById('adjustmentResult').innerHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${adjustment}</div>
@@ -2606,6 +2692,12 @@
                             <span>св.Т4 снизился на:</span>
                             <strong>${t4Reduction}%</strong>
                         </div>
+                        ${t3Reduction ? `
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>св.Т3 снизился на:</span>
+                            <strong>${t3Reduction}%</strong>
+                        </div>
+                        ` : ''}
                         <div style="display: flex; justify-content: space-between;">
                             <span>ТТГ изменился на:</span>
                             <strong>${tshChange}%</strong>
@@ -2758,18 +2850,20 @@
 
         function calculatePregnancyDose() {
             const trimester = document.getElementById('pregTrimester').value;
+            const tsh = parseFloat(document.getElementById('pregTsh').value);
             const t4 = parseFloat(document.getElementById('pregT4').value);
+            const t3 = parseFloat(document.getElementById('pregT3').value) || null;
             const antibody = parseFloat(document.getElementById('pregAntibody').value);
             const symptoms = document.getElementById('pregSymptoms').value;
             const age = parseInt(document.getElementById('pregAge').value);
 
-            const errors = validateInputs({ t4, antibody, age });
+            const errors = validateInputs({ tsh, t4, antibody, age });
             if (errors.length > 0) {
                 alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
 
-            const result = HYPERTHYROIDISM_KNOWLEDGE.calculatePregnancyDose(trimester, t4, antibody, symptoms, age);
+            const result = HYPERTHYROIDISM_KNOWLEDGE.calculatePregnancyDose(trimester, tsh, t4, t3, antibody, symptoms, age);
             
             let trimesterText = '';
             switch(trimester) {
@@ -2813,7 +2907,9 @@
             const currentDose = parseFloat(document.getElementById('pregCurrentDose').value);
             const initialTsh = parseFloat(document.getElementById('pregInitialTsh').value);
             const initialT4 = parseFloat(document.getElementById('pregInitialT4').value);
+            const initialT3 = parseFloat(document.getElementById('pregInitialT3').value);
             const currentT4 = parseFloat(document.getElementById('pregCurrentT4').value);
+            const currentT3 = parseFloat(document.getElementById('pregCurrentT3').value);
             const currentTSH = parseFloat(document.getElementById('pregCurrentTSH').value);
             const weeks = parseInt(document.getElementById('pregWeeks').value);
             const age = parseInt(document.getElementById('pregMaternalAge').value);
@@ -2831,10 +2927,14 @@
             // Целевые значения при беременности
             const targetT4Min = 18;
             const targetT4Max = 22;
+            const targetT3Min = 3.5;
+            const targetT3Max = 6.5;
             const targetTSHMin = 0.2;
             const targetTSHMax = 2.5;
 
-            if (currentT4 >= targetT4Min && currentT4 <= targetT4Max && currentTSH >= targetTSHMin && currentTSH <= targetTSHMax) {
+            if (currentT4 >= targetT4Min && currentT4 <= targetT4Max && 
+                currentT3 >= targetT3Min && currentT3 <= targetT3Max &&
+                currentTSH >= targetTSHMin && currentTSH <= targetTSHMax) {
                 assessment = '🟢 Отличный контроль';
                 color = '#10b981';
                 recommendations = [
@@ -2886,6 +2986,13 @@
                             </strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
+                            <span>св.Т3:</span>
+                            <strong>${currentT3} пмоль/л 
+                                ${currentT3 >= targetT3Min && currentT3 <= targetT3Max ? '🟢' : 
+                                  currentT3 > targetT3Max ? '🔴' : '🔵'}
+                            </strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
                             <span>ТТГ:</span>
                             <strong>${currentTSH} мМЕ/л 
                                 ${currentTSH >= targetTSHMin && currentTSH <= targetTSHMax ? '🟢' : 
@@ -2903,95 +3010,11 @@
                     <h4>💡 Рекомендации:</h4>
                     <ul>
                         ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Целевые значения при беременности: ТТГ 0.2-2.5 мМЕ/л, св.Т4 18-22 пмоль/л</li>
+                        <li>Целевые значения при беременности: ТТГ 0.2-2.5 мМЕ/л, св.Т4 18-22 пмоль/л, св.Т3 3.5-6.5 пмоль/л</li>
                     </ul>
                 </div>
             `;
             document.getElementById('pregnancyControlResult').style.display = 'block';
-        }
-
-        function analyzeGravesAntibodies() {
-            const initial = parseFloat(document.getElementById('gravesAntibodyInitial').value);
-            const current = parseFloat(document.getElementById('gravesAntibodyCurrent').value);
-            const duration = parseInt(document.getElementById('gravesTreatmentDuration').value);
-            const age = parseInt(document.getElementById('gravesPatientAge').value);
-
-            const errors = validateInputs({ initial, current, duration, age });
-            if (errors.length > 0) {
-                alert('Ошибки ввода:\n' + errors.join('\n'));
-                return;
-            }
-
-            const reduction = ((initial - current) / initial * 100).toFixed(1);
-            const monthlyReduction = (reduction / duration).toFixed(1);
-            
-            let prognosis = '';
-            let color = '';
-            let recommendations = [];
-
-            if (reduction >= 70 && current <= 2.0) {
-                prognosis = '🟢 Отличный прогноз';
-                color = '#10b981';
-                recommendations = [
-                    'Продолжать текущую терапию',
-                    'Рассмотреть отмену через 6-12 месяцев при стабильном состоянии',
-                    'Вероятность ремиссии: 60-70%'
-                ];
-            } else if (reduction >= 50 && current <= 5.0) {
-                prognosis = '🟡 Удовлетворительный прогноз';
-                color = '#f59e0b';
-                recommendations = [
-                    'Продолжать терапию еще 6-12 месяцев',
-                    'Контроль АТ-рТТГ через 3 месяца',
-                    'Вероятность ремиссии: 40-50%'
-                ];
-            } else {
-                prognosis = '🔴 Неблагоприятный прогноз';
-                color = '#ef4444';
-                recommendations = [
-                    'Рассмотреть увеличение дозы тиреостатиков',
-                    'Обсудить радикальное лечение (РЙТ или операцию)',
-                    'Вероятность ремиссии: 20-30%'
-                ];
-            }
-
-            document.getElementById('gravesAntibodyResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${prognosis}</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Динамика антител при болезни Грейвса:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Исходный АТ-рТТГ:</span>
-                            <strong>${initial} МЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий АТ-рТТГ:</span>
-                            <strong>${current} МЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Общее снижение:</span>
-                            <strong style="color: ${color};">${reduction}%</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Среднее снижение в месяц:</span>
-                            <strong>${monthlyReduction}%</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Прогноз и рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Целевой уровень перед отменой: АТ-рТТГ < 1.75 МЕ/л</li>
-                        <li>Длительность терапии: оптимально 12-18 месяцев</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('gravesAntibodyResult').style.display = 'block';
         }
 
         function calculateNeonatalRisk() {
@@ -3084,6 +3107,90 @@
                 </div>
             `;
             document.getElementById('neonatalRiskResult').style.display = 'block';
+        }
+
+        function analyzeGravesAntibodies() {
+            const initial = parseFloat(document.getElementById('gravesAntibodyInitial').value);
+            const current = parseFloat(document.getElementById('gravesAntibodyCurrent').value);
+            const duration = parseInt(document.getElementById('gravesTreatmentDuration').value);
+            const age = parseInt(document.getElementById('gravesPatientAge').value);
+
+            const errors = validateInputs({ initial, current, duration, age });
+            if (errors.length > 0) {
+                alert('Ошибки ввода:\n' + errors.join('\n'));
+                return;
+            }
+
+            const reduction = ((initial - current) / initial * 100).toFixed(1);
+            const monthlyReduction = (reduction / duration).toFixed(1);
+            
+            let prognosis = '';
+            let color = '';
+            let recommendations = [];
+
+            if (reduction >= 70 && current <= 2.0) {
+                prognosis = '🟢 Отличный прогноз';
+                color = '#10b981';
+                recommendations = [
+                    'Продолжать текущую терапию',
+                    'Рассмотреть отмену через 6-12 месяцев при стабильном состоянии',
+                    'Вероятность ремиссии: 60-70%'
+                ];
+            } else if (reduction >= 50 && current <= 5.0) {
+                prognosis = '🟡 Удовлетворительный прогноз';
+                color = '#f59e0b';
+                recommendations = [
+                    'Продолжать терапию еще 6-12 месяцев',
+                    'Контроль АТ-рТТГ через 3 месяца',
+                    'Вероятность ремиссии: 40-50%'
+                ];
+            } else {
+                prognosis = '🔴 Неблагоприятный прогноз';
+                color = '#ef4444';
+                recommendations = [
+                    'Рассмотреть увеличение дозы тиреостатиков',
+                    'Обсудить радикальное лечение (РЙТ или операцию)',
+                    'Вероятность ремиссии: 20-30%'
+                ];
+            }
+
+            document.getElementById('gravesAntibodyResult').innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${prognosis}</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Динамика антител при болезни Грейвса:</h4>
+                    <div style="display: grid; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Исходный АТ-рТТГ:</span>
+                            <strong>${initial} МЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Текущий АТ-рТТГ:</span>
+                            <strong>${current} МЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Общее снижение:</span>
+                            <strong style="color: ${color};">${reduction}%</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Среднее снижение в месяц:</span>
+                            <strong>${monthlyReduction}%</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
+                    <h4>💡 Прогноз и рекомендации:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        <li>Целевой уровень перед отменой: АТ-рТТГ < 1.75 МЕ/л</li>
+                        <li>Длительность терапии: оптимально 12-18 месяцев</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('gravesAntibodyResult').style.display = 'block';
         }
 
         function calculateBlockReplace() {
