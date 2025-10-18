@@ -937,11 +937,11 @@
                 <button class="copy-btn" onclick="scrollToSection('symptoms-section')">
                     <i class="fas fa-clipboard-list"></i> Симптомы гипертиреоза
                 </button>
-                <button class="copy-btn" onclick="scrollToSection('antibody-dynamics')">
-                    <i class="fas fa-chart-line"></i> Динамика антител рТТГ
+                <button class="copy-btn" onclick="scrollToSection('diagnostic-tools')">
+                    <i class="fas fa-calculator"></i> Диагностические калькуляторы
                 </button>
-                <button class="copy-btn" onclick="scrollToSection('graves-disease')">
-                    <i class="fas fa-butterfly"></i> Болезнь Грейвса
+                <button class="copy-btn" onclick="scrollToSection('clinical-guide')">
+                    <i class="fas fa-graduation-cap"></i> Клинические рекомендации
                 </button>
             </div>
 
@@ -990,7 +990,6 @@
                     <ul>
                         <li><strong>Манифестный тиреотоксикоз:</strong><br>ТТГ < 0.1 мМЕ/л + св.Т4 > 22.0 пмоль/л</li>
                         <li><strong>Субклинический тиреотоксикоз:</strong><br>ТТГ < 0.4 мМЕ/л + св.Т4 в норме</li>
-                        <li><strong>Болезнь Грейвса:</strong><br>ТТГ ↓ + АТ-рТТГ > 1.75 МЕ/л</li>
                         <li><strong>Токсический узловой зоб:</strong><br>ТТГ ↓ + узлы по УЗИ</li>
                     </ul>
                 </div>
@@ -1007,116 +1006,8 @@
                 </div>
             </div>
 
-            <!-- ВОССТАНОВЛЕННАЯ СЕКЦИЯ: ДИНАМИКА АНТИТЕЛ рТТГ -->
-            <section id="antibody-dynamics" class="diagnostic-section">
-                <h2 class="section-title"><i class="fas fa-chart-line"></i> Динамика антител к рецептору ТТГ (рТТГ) в ходе лечения</h2>
-                <p class="section-subtitle">Мониторинг уровня антител для оценки эффективности терапии и прогноза ремиссии</p>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-bullseye"></i> Целевые значения антител рТТГ</h3>
-                        <ul>
-                            <li><strong>Норма:</strong> < 1.75 МЕ/л</li>
-                            <li><strong>Цель терапии:</strong> < 1.0 МЕ/л</li>
-                            <li><strong>Высокий риск рецидива:</strong> > 5.0 МЕ/л</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-chart-line"></i> Ожидаемая динамика</h3>
-                        <ul>
-                            <li><strong>Через 3-6 месяцев:</strong> Снижение на 50-70% от исходного уровня</li>
-                            <li><strong>Через 12 месяцев:</strong> Достижение уровня < 2.0 МЕ/л</li>
-                            <li><strong>Перед отменой терапии:</strong> Обязательно < 1.75 МЕ/л</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Факторы риска</h3>
-                        <ul>
-                            <li>Медленное снижение антител</li>
-                            <li>Повторное повышение в ходе лечения</li>
-                            <li>Уровень > 10 МЕ/л перед отменой</li>
-                            <li>Молодой возраст пациента</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="warning-box">
-                    <h4><i class="fas fa-lightbulb"></i> Клиническая значимость</h4>
-                    <p><strong>Уровень антител к рТТГ перед отменой терапии - самый важный прогностический фактор рецидива!</strong></p>
-                    <p>При уровне > 5 МЕ/л вероятность рецидива составляет 70-80%, при уровне < 1.75 МЕ/л - 20-30%.</p>
-                </div>
-            </section>
-
-            <!-- ВОССТАНОВЛЕННАЯ СЕКЦИЯ: БОЛЕЗНЬ ГРЕЙВСА -->
-            <section id="graves-disease" class="diagnostic-section">
-                <h2 class="section-title"><i class="fas fa-butterfly"></i> Болезнь Грейвса (Диффузный токсический зоб)</h2>
-                <p class="section-subtitle">Аутоиммунное заболевание с выработкой антител к рецептору ТТГ</p>
-
-                <!-- ВОССТАНОВЛЕННАЯ КЛАССИФИКАЦИЯ ТЯЖЕСТИ -->
-                <h3 style="margin: 30px 0 20px 0; color: var(--dark);"><i class="fas fa-list-alt"></i> Классификация степени тяжести тиреотоксикоза</h3>
-                <div class="classification-grid">
-                    <div class="classification-card">
-                        <h4>Субклинический тиреотоксикоз</h4>
-                        <ul>
-                            <li><strong>Клиника:</strong> Стертая, неявная</li>
-                            <li><strong>Гормоны:</strong> Сниженный ТТГ при нормальных свТ4 и свТ3</li>
-                        </ul>
-                    </div>
-                    <div class="classification-card">
-                        <h4>Манифестный тиреотоксикоз</h4>
-                        <ul>
-                            <li><strong>Клиника:</strong> Развернутая, характерная</li>
-                            <li><strong>Гормоны:</strong> Сниженный ТТГ при повышенных свТ4 и/или свТ3</li>
-                        </ul>
-                    </div>
-                    <div class="classification-card">
-                        <h4>Осложненный тиреотоксикоз</h4>
-                        <ul>
-                            <li><strong>Критерий:</strong> Наличие тяжелых осложнений</li>
-                            <li><strong>Примеры:</strong> Фибрилляция предсердий, сердечная недостаточность, тромбоэмболии, токсический гепатит, психоз, кахексия</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ВОССТАНОВЛЕННЫЕ СПЕЦИАЛЬНЫЕ СЛУЧАИ -->
-                <div class="special-cases">
-                    <h3><i class="fas fa-user-md"></i> Особые клинические ситуации</h3>
-                    <div class="case-grid">
-                        <div class="case-card">
-                            <h4>👵 Гипертиреоз у пожилых</h4>
-                            <ul>
-                                <li>Атипичное течение ("апатичный тиреотоксикоз")</li>
-                                <li>Преобладание сердечно-сосудистых симптомов</li>
-                                <li>Высокий риск фибрилляции предсердий</li>
-                                <li>Старт с низких доз тиреостатиков</li>
-                            </ul>
-                        </div>
-                        <div class="case-card">
-                            <h4>🤰 Гипертиреоз и беременность</h4>
-                            <ul>
-                                <li>ПТУ в I триместре, затем переход на тиамазол</li>
-                                <li>Целевой ТТГ: 0.2-2.5 мМЕ/л</li>
-                                <li>Контроль каждые 4 недели</li>
-                                <li>Риск неонатального тиреотоксикоза</li>
-                            </ul>
-                        </div>
-                        <div class="case-card">
-                            <h4>👶 Тиреотоксикоз у детей</h4>
-                            <ul>
-                                <li>Более агрессивное течение</li>
-                                <li>Высокий риск рецидивов</li>
-                                <li>Влияние на рост и развитие</li>
-                                <li>Рассмотреть радикальное лечение</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- ДИАГНОСТИКА И ЛЕЧЕНИЕ -->
-            <div class="diagnostic-section">
+            <div id="diagnostic-tools" class="diagnostic-section">
                 <h2 class="section-title"><i class="fas fa-stethoscope"></i> Диагностика и лечение</h2>
                 <p class="section-subtitle">Комплексная оценка и персонализированные рекомендации</p>
                 
@@ -1132,12 +1023,6 @@
                     </button>
                     <button class="tab-btn" data-tab="pregnancy-tab">
                         <i class="fas fa-baby"></i> Беременность
-                    </button>
-                    <button class="tab-btn" data-tab="graves-tab">
-                        <i class="fas fa-butterfly"></i> Болезнь Грейвса
-                    </button>
-                    <button class="tab-btn" data-tab="block-replace-tab">
-                        <i class="fas fa-sync-alt"></i> Блокируй и замещай
                     </button>
                     <button class="tab-btn" data-tab="vitamin-d-tab">
                         <i class="fas fa-sun"></i> Витамин D
@@ -1189,9 +1074,6 @@
                                     </label>
                                     <label class="checkbox-label">
                                         <input type="checkbox" name="formSymptoms" value="sweating" checked> Потливость
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="formSymptoms" value="eye" checked> Симптомы со стороны глаз
                                     </label>
                                 </div>
                             </div>
@@ -1490,190 +1372,6 @@
                             </button>
                             <div id="pregnancyControlResult" class="result-box"></div>
                         </div>
-
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-exclamation-triangle"></i> Оценка риска неонатального тиреотоксикоза</h3>
-                            <div class="form-group">
-                                <label for="neonatalAntibody">АТ-рТТГ на 18-22 неделе (МЕ/л)</label>
-                                <input type="number" step="0.01" id="neonatalAntibody" placeholder="Например: 8.5" value="8.5">
-                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="maternalHistory">Анамнез болезни Грейвса у матери</label>
-                                <select id="maternalHistory">
-                                    <option value="active">Активная болезнь</option>
-                                    <option value="remission" selected>Ремиссия</option>
-                                    <option value="postop">После операции</option>
-                                    <option value="postRIT">После РЙТ</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="previousNeonatal">Предыдущие случаи неонатального тиреотоксикоза</label>
-                                <select id="previousNeonatal">
-                                    <option value="no" selected>Нет</option>
-                                    <option value="yes">Да</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="maternalAgeNeonatal">Возраст матери (лет)</label>
-                                <input type="number" id="maternalAgeNeonatal" placeholder="Например: 32" value="32">
-                            </div>
-                            <button class="btn" onclick="calculateNeonatalRisk()">
-                                <i class="fas fa-baby"></i> Оценить риск
-                            </button>
-                            <div id="neonatalRiskResult" class="result-box"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ВКЛАДКА БОЛЕЗНИ ГРЕЙВСА -->
-                <div id="graves-tab" class="tab-content">
-                    <div class="calculators-grid">
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-butterfly"></i> Динамика антител рТТГ</h3>
-                            <div class="form-group">
-                                <label for="gravesAntibodyInitial">Исходный АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="gravesAntibodyInitial" placeholder="Например: 25.0" value="25.0">
-                            </div>
-                            <div class="form-group">
-                                <label for="gravesAntibodyCurrent">Текущий АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="gravesAntibodyCurrent" placeholder="Например: 8.5" value="8.5">
-                            </div>
-                            <div class="form-group">
-                                <label for="gravesTreatmentDuration">Длительность лечения (мес)</label>
-                                <input type="number" id="gravesTreatmentDuration" placeholder="Например: 6" value="6">
-                            </div>
-                            <div class="form-group">
-                                <label for="gravesPatientAge">Возраст пациента (лет)</label>
-                                <input type="number" id="gravesPatientAge" placeholder="Например: 35" value="35">
-                            </div>
-                            <button class="btn" onclick="analyzeGravesAntibodies()">
-                                <i class="fas fa-chart-line"></i> Анализировать динамику
-                            </button>
-                            <div id="gravesAntibodyResult" class="result-box"></div>
-                        </div>
-
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-exclamation-triangle"></i> Оценка риска неонатального тиреотоксикоза</h3>
-                            <div class="form-group">
-                                <label for="neonatalAntibody">АТ-рТТГ на 18-22 неделе (МЕ/л)</label>
-                                <input type="number" step="0.01" id="neonatalAntibody" placeholder="Например: 8.5" value="8.5">
-                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="maternalHistory">Анамнез болезни Грейвса у матери</label>
-                                <select id="maternalHistory">
-                                    <option value="active">Активная болезнь</option>
-                                    <option value="remission" selected>Ремиссия</option>
-                                    <option value="postop">После операции</option>
-                                    <option value="postRIT">После РЙТ</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="previousNeonatal">Предыдущие случаи неонатального тиреотоксикоза</label>
-                                <select id="previousNeonatal">
-                                    <option value="no" selected>Нет</option>
-                                    <option value="yes">Да</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="maternalAgeNeonatal">Возраст матери (лет)</label>
-                                <input type="number" id="maternalAgeNeonatal" placeholder="Например: 32" value="32">
-                            </div>
-                            <button class="btn" onclick="calculateNeonatalRisk()">
-                                <i class="fas fa-baby"></i> Оценить риск
-                            </button>
-                            <div id="neonatalRiskResult" class="result-box"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ВКЛАДКА РЕЖИМА "БЛОКИРУЙ И ЗАМЕЩАЙ" -->
-                <div id="block-replace-tab" class="tab-content">
-                    <div class="calculators-grid">
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-sync-alt"></i> Расчет схемы "Блокируй и замещай"</h3>
-                            <div class="form-group">
-                                <label for="blockAge" class="required-field">Возраст пациента (лет)</label>
-                                <input type="number" id="blockAge" placeholder="Например: 45" value="45">
-                            </div>
-                            <div class="form-group">
-                                <label for="blockWeight" class="required-field">Вес пациента (кг)</label>
-                                <input type="number" id="blockWeight" placeholder="Например: 70" value="70">
-                            </div>
-                            <div class="form-group">
-                                <label for="blockInitialTsh" class="required-field">Исходный ТТГ (мМЕ/л)</label>
-                                <input type="number" step="0.001" id="blockInitialTsh" placeholder="0.02" value="0.02">
-                            </div>
-                            <div class="form-group">
-                                <label for="blockInitialT4" class="required-field">Исходный св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="blockInitialT4" placeholder="35.0" value="35.0">
-                            </div>
-                            <div class="form-group">
-                                <label for="blockCurrentT4" class="required-field">Текущий св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="blockCurrentT4" placeholder="Например: 18.5" value="18.5">
-                                <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="blockCurrentTSH">Текущий ТТГ (мМЕ/л)</label>
-                                <input type="number" step="0.01" id="blockCurrentTSH" placeholder="Например: 0.1" value="0.1">
-                            </div>
-                            <div class="form-group">
-                                <label for="blockAntibody" class="required-field">АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="blockAntibody" placeholder="Например: 8.5" value="8.5">
-                                <div class="range-info">Норма: < 1.75 МЕ/л</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="blockIndication">Показание для перехода</label>
-                                <select id="blockIndication">
-                                    <option value="unstable">Нестабильное течение</option>
-                                    <option value="preparation">Подготовка к РЙТ/операции</option>
-                                    <option value="severe">Тяжелое течение БГ</option>
-                                    <option value="antibodies">Высокий уровень антител</option>
-                                </select>
-                            </div>
-                            <button class="btn" onclick="calculateBlockReplace()">
-                                <i class="fas fa-calculator"></i> Рассчитать схему
-                            </button>
-                            <div id="blockReplaceResult" class="result-box"></div>
-                        </div>
-
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-sync-alt"></i> Планирование отмены терапии</h3>
-                            <div class="form-group">
-                                <label for="withdrawalWeeks">Срок беременности (недель)</label>
-                                <input type="number" id="withdrawalWeeks" placeholder="Например: 8" value="8">
-                                <div class="range-info">Оптимально: 6-10 недель или III триместр</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalDose">Текущая доза тиреостатика (мг/сут)</label>
-                                <input type="number" id="withdrawalDose" placeholder="Например: 7.5" value="7.5">
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalInitialTsh" class="required-field">Исходный ТТГ (мМЕ/л)</label>
-                                <input type="number" step="0.001" id="withdrawalInitialTsh" placeholder="0.02" value="0.02">
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalInitialT4" class="required-field">Исходный св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="withdrawalInitialT4" placeholder="35.0" value="35.0">
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalAntibody">АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="withdrawalAntibody" placeholder="Например: 1.2" value="1.2">
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalStability">Стабильность эутиреоза (месяцев)</label>
-                                <input type="number" id="withdrawalStability" placeholder="Например: 3" value="3">
-                            </div>
-                            <div class="form-group">
-                                <label for="withdrawalAge">Возраст пациента (лет)</label>
-                                <input type="number" id="withdrawalAge" placeholder="Например: 28" value="28">
-                            </div>
-                            <button class="btn" onclick="calculateWithdrawalPlan()">
-                                <i class="fas fa-sync-alt"></i> Оценить возможность отмены
-                            </button>
-                            <div id="withdrawalResult" class="result-box"></div>
-                        </div>
                     </div>
                 </div>
 
@@ -1765,7 +1463,7 @@
             </div>
 
             <!-- КЛИНИЧЕСКИЕ РЕКОМЕНДАЦИИ -->
-            <div class="clinical-guide">
+            <div id="clinical-guide" class="clinical-guide">
                 <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Ведение гипертиреоза: ключевые принципы</h2>
                 <p class="section-subtitle">Индивидуальный подход для разных клинических ситуаций</p>
 
@@ -2222,42 +1920,6 @@
                 }
             },
 
-            calculateBlockReplace: function(age, weight, currentT4, currentTSH, antibody, indication) {
-                let blockDose, replaceDose, recommendations = [];
-
-                let ageFactor = 1.0;
-                if (age >= 65) ageFactor = 0.7;
-                else if (age <= 18) ageFactor = 0.8;
-
-                if (antibody > 10 || indication === 'severe') {
-                    blockDose = Math.round((30 * ageFactor) / 5) * 5 + "-" + Math.round((40 * ageFactor) / 5) * 5 + " мг/сут";
-                    recommendations.push("Высокая блокирующая доза в связи с тяжелым течением или высоким уровнем антител");
-                } else if (antibody > 5 || indication === 'unstable') {
-                    blockDose = Math.round((20 * ageFactor) / 5) * 5 + "-" + Math.round((30 * ageFactor) / 5) * 5 + " мг/сут";
-                    recommendations.push("Средняя блокирующая доза для стабилизации течения");
-                } else {
-                    blockDose = Math.round((15 * ageFactor) / 5) * 5 + "-" + Math.round((20 * ageFactor) / 5) * 5 + " мг/сут";
-                    recommendations.push("Стандартная блокирующая доза");
-                }
-
-                const calculatedReplace = Math.round(weight * 1.6);
-                let replaceFactor = 1.0;
-                if (age >= 65) replaceFactor = 0.9;
-                
-                if (currentT4 < 15) {
-                    replaceDose = Math.max(50, Math.round((calculatedReplace - 25) * replaceFactor)) + " мкг/сут";
-                    recommendations.push("Сниженная стартовая доза L-тироксина в связи с низким свТ4");
-                } else if (currentT4 > 20) {
-                    replaceDose = Math.round((calculatedReplace + 25) * replaceFactor) + " мкг/сут";
-                    recommendations.push("Увеличенная стартовая доза L-тироксина для компенсации");
-                } else {
-                    replaceDose = Math.round(calculatedReplace * replaceFactor) + " мкг/сут";
-                    recommendations.push("Стандартная расчетная доза L-тироксина");
-                }
-
-                return { blockDose, replaceDose, recommendations };
-            },
-
             calculateRelapseRisk: function(age, antibody, tsh, duration) {
                 let riskScore = 0;
 
@@ -2375,7 +2037,6 @@
             document.querySelector('input[value="weight_loss"]').checked = true;
             document.querySelector('input[value="tremor"]').checked = true;
             document.querySelector('input[value="nervousness"]').checked = true;
-            document.querySelector('input[value="eye"]').checked = true;
         }
 
         function fillSampleToxicNodule() {
@@ -2761,7 +2422,7 @@
                 recommendations = [
                     'Можно рассмотреть отмену терапии',
                     'Постепенное снижение дозы в течение 4-8 недель',
-                    'Контроль ТТГ, св.Т4 через 2, 4, 8 недель после отмены',
+                    'Контроль ТТГ, св.Т4 через 2, 4, 8 недель после отмену',
                     'Информировать о симптомах рецидива'
                 ];
             }
@@ -3015,335 +2676,6 @@
                 </div>
             `;
             document.getElementById('pregnancyControlResult').style.display = 'block';
-        }
-
-        function calculateNeonatalRisk() {
-            const antibody = parseFloat(document.getElementById('neonatalAntibody').value);
-            const maternalHistory = document.getElementById('maternalHistory').value;
-            const previousNeonatal = document.getElementById('previousNeonatal').value;
-            const age = parseInt(document.getElementById('maternalAgeNeonatal').value);
-
-            const errors = validateInputs({ antibody, age });
-            if (errors.length > 0) {
-                alert('Ошибки ввода:\n' + errors.join('\n'));
-                return;
-            }
-
-            let riskScore = 0;
-            
-            // Оценка риска по уровню антител
-            if (antibody > 10) riskScore += 3;
-            else if (antibody > 5) riskScore += 2;
-            else if (antibody > 3) riskScore += 1;
-
-            // Оценка риска по анамнезу матери
-            if (maternalHistory === 'active') riskScore += 2;
-            else if (maternalHistory === 'remission') riskScore += 1;
-
-            // Предыдущие случаи
-            if (previousNeonatal === 'yes') riskScore += 2;
-
-            let riskLevel = '';
-            let riskPercentage = '';
-            let color = '';
-            let recommendations = [];
-
-            if (riskScore >= 5) {
-                riskLevel = '🔴 ВЫСОКИЙ РИСК';
-                riskPercentage = '30-50%';
-                color = '#ef4444';
-                recommendations = [
-                    'УЗИ плода с оценкой щитовидной железы',
-                    'Контроль АТ-рТТГ каждый триместр',
-                    'Родоразрешение в специализированном стационаре',
-                    'Обследование новорожденного в первые 24 часа',
-                    'Готовность к лечению неонатального тиреотоксикоза'
-                ];
-            } else if (riskScore >= 3) {
-                riskLevel = '🟡 УМЕРЕННЫЙ РИСК';
-                riskPercentage = '10-20%';
-                color = '#f59e0b';
-                recommendations = [
-                    'Контроль АТ-рТТГ каждый триместр',
-                    'Обследование новорожденного в первые 3 дня',
-                    'Информировать неонатологов о риске',
-                    'Наблюдение за новорожденным в течение 2 недель'
-                ];
-            } else {
-                riskLevel = '🟢 НИЗКИЙ РИСК';
-                riskPercentage = '1-5%';
-                color = '#10b981';
-                recommendations = [
-                    'Стандартное наблюдение',
-                    'Обследование новорожденного в плановом порядке',
-                    'Информировать о возможных симптомах'
-                ];
-            }
-
-            document.getElementById('neonatalRiskResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${riskLevel}</div>
-                    <div style="font-size: 1.2em; margin-top: 10px;">Вероятность неонатального тиреотоксикоза: <strong>${riskPercentage}</strong></div>
-                    <div style="margin-top: 10px; padding: 10px; background: ${color}20; border-radius: 8px;">
-                        <strong>Балл риска: ${riskScore}/7</strong>
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Факторы риска:</h4>
-                    <ul>
-                        <li>АТ-рТТГ: ${antibody} МЕ/л ${antibody > 5 ? '🔴' : antibody > 3 ? '🟡' : '🟢'}</li>
-                        <li>Анамнез матери: ${maternalHistory} ${maternalHistory === 'active' ? '🔴' : '🟡'}</li>
-                        <li>Предыдущие случаи: ${previousNeonatal} ${previousNeonatal === 'yes' ? '🔴' : '🟢'}</li>
-                        <li>Возраст матери: ${age} лет</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Рекомендации по ведению:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            document.getElementById('neonatalRiskResult').style.display = 'block';
-        }
-
-        function analyzeGravesAntibodies() {
-            const initial = parseFloat(document.getElementById('gravesAntibodyInitial').value);
-            const current = parseFloat(document.getElementById('gravesAntibodyCurrent').value);
-            const duration = parseInt(document.getElementById('gravesTreatmentDuration').value);
-            const age = parseInt(document.getElementById('gravesPatientAge').value);
-
-            const errors = validateInputs({ initial, current, duration, age });
-            if (errors.length > 0) {
-                alert('Ошибки ввода:\n' + errors.join('\n'));
-                return;
-            }
-
-            const reduction = ((initial - current) / initial * 100).toFixed(1);
-            const monthlyReduction = (reduction / duration).toFixed(1);
-            
-            let prognosis = '';
-            let color = '';
-            let recommendations = [];
-
-            if (reduction >= 70 && current <= 2.0) {
-                prognosis = '🟢 Отличный прогноз';
-                color = '#10b981';
-                recommendations = [
-                    'Продолжать текущую терапию',
-                    'Рассмотреть отмену через 6-12 месяцев при стабильном состоянии',
-                    'Вероятность ремиссии: 60-70%'
-                ];
-            } else if (reduction >= 50 && current <= 5.0) {
-                prognosis = '🟡 Удовлетворительный прогноз';
-                color = '#f59e0b';
-                recommendations = [
-                    'Продолжать терапию еще 6-12 месяцев',
-                    'Контроль АТ-рТТГ через 3 месяца',
-                    'Вероятность ремиссии: 40-50%'
-                ];
-            } else {
-                prognosis = '🔴 Неблагоприятный прогноз';
-                color = '#ef4444';
-                recommendations = [
-                    'Рассмотреть увеличение дозы тиреостатиков',
-                    'Обсудить радикальное лечение (РЙТ или операцию)',
-                    'Вероятность ремиссии: 20-30%'
-                ];
-            }
-
-            document.getElementById('gravesAntibodyResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${prognosis}</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Динамика антител при болезни Грейвса:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Исходный АТ-рТТГ:</span>
-                            <strong>${initial} МЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущий АТ-рТТГ:</span>
-                            <strong>${current} МЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Общее снижение:</span>
-                            <strong style="color: ${color};">${reduction}%</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Среднее снижение в месяц:</span>
-                            <strong>${monthlyReduction}%</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Прогноз и рекомендации:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Целевой уровень перед отменой: АТ-рТТГ < 1.75 МЕ/л</li>
-                        <li>Длительность терапии: оптимально 12-18 месяцев</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('gravesAntibodyResult').style.display = 'block';
-        }
-
-        function calculateBlockReplace() {
-            const age = parseInt(document.getElementById('blockAge').value);
-            const weight = parseFloat(document.getElementById('blockWeight').value);
-            const currentT4 = parseFloat(document.getElementById('blockCurrentT4').value);
-            const currentTSH = parseFloat(document.getElementById('blockCurrentTSH').value);
-            const antibody = parseFloat(document.getElementById('blockAntibody').value);
-            const indication = document.getElementById('blockIndication').value;
-
-            const errors = validateInputs({ age, weight, currentT4, currentTSH, antibody });
-            if (errors.length > 0) {
-                alert('Ошибки ввода:\n' + errors.join('\n'));
-                return;
-            }
-
-            const result = HYPERTHYROIDISM_KNOWLEDGE.calculateBlockReplace(age, weight, currentT4, currentTSH, antibody, indication);
-
-            document.getElementById('blockReplaceResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: var(--primary);">
-                        Схема "Блокируй и замещай"
-                    </div>
-                </div>
-                
-                <div style="background: #fef3f2; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>💊 Рекомендуемая схема:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Тиамазол (блокирующая доза):</span>
-                            <strong>${result.blockDose}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>L-тироксин (замещающая доза):</span>
-                            <strong>${result.replaceDose}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Текущие показатели:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>св.Т4:</span>
-                            <strong>${currentT4} пмоль/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ:</span>
-                            <strong>${currentTSH} мМЕ/л</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>АТ-рТТГ:</span>
-                            <strong>${antibody} МЕ/л</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 Особенности схемы:</h4>
-                    <ul>
-                        ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        <li>Контроль ТТГ, св.Т4 через 4-6 недель</li>
-                        <li>Коррекция доз по результатам контроля</li>
-                        <li>Длительность терапии: 12-18 месяцев</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('blockReplaceResult').style.display = 'block';
-        }
-
-        function calculateWithdrawalPlan() {
-            const weeks = parseInt(document.getElementById('withdrawalWeeks').value);
-            const dose = parseFloat(document.getElementById('withdrawalDose').value);
-            const initialTsh = parseFloat(document.getElementById('withdrawalInitialTsh').value);
-            const initialT4 = parseFloat(document.getElementById('withdrawalInitialT4').value);
-            const antibody = parseFloat(document.getElementById('withdrawalAntibody').value);
-            const stability = parseInt(document.getElementById('withdrawalStability').value);
-            const age = parseInt(document.getElementById('withdrawalAge').value);
-
-            const errors = validateInputs({ weeks, dose, initialTsh, initialT4, antibody, stability, age });
-            if (errors.length > 0) {
-                alert('Ошибки ввода:\n' + errors.join('\n'));
-                return;
-            }
-
-            let decision = '';
-            let recommendations = [];
-            let color = '';
-
-            // Критерии для отмены при беременности
-            const canWithdraw = dose <= 7.5 && antibody <= 2.0 && stability >= 2 && (weeks >= 6 && weeks <= 10 || weeks >= 28);
-
-            if (canWithdraw) {
-                decision = '🟢 ОТМЕНА ВОЗМОЖНА';
-                color = '#10b981';
-                recommendations = [
-                    'Постепенная отмена в течение 2-4 недель',
-                    'Контроль ТТГ, св.Т4 через 2, 4, 8 недель после отмены',
-                    'Наблюдение за симптомами тиреотоксикоза',
-                    'Повторный контроль АТ-рТТГ в III триместре'
-                ];
-            } else {
-                decision = '🔴 ОТМЕНА НЕ РЕКОМЕНДУЕТСЯ';
-                color = '#ef4444';
-                recommendations = [
-                    'Продолжить текущую дозу',
-                    'Рассмотреть отмену в III триместре при улучшении показателей',
-                    'Минимальная эффективная доза',
-                    'Контроль каждые 4 недели'
-                ];
-            }
-
-            let trimester = '';
-            if (weeks <= 12) trimester = 'I триместр';
-            else if (weeks <= 27) trimester = 'II триместр';
-            else trimester = 'III триместр';
-
-            document.getElementById('withdrawalResult').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 1.5em; font-weight: 800; color: ${color};">${decision}</div>
-                    <div style="color: #6b7280;">${trimester} (${weeks} недель)</div>
-                </div>
-                
-                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4>📊 Критерии оценки:</h4>
-                    <div style="display: grid; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Текущая доза:</span>
-                            <strong>${dose} мг/сут ${dose <= 7.5 ? '🟢' : '🔴'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>АТ-рТТГ:</span>
-                            <strong>${antibody} МЕ/л ${antibody <= 2.0 ? '🟢' : '🔴'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Стабильность эутиреоза:</span>
-                            <strong>${stability} мес ${stability >= 2 ? '🟢' : '🔴'}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Срок беременности:</span>
-                            <strong>${weeks} нед ${(weeks >= 6 && weeks <= 10) || weeks >= 28 ? '🟢' : '🟡'}</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: #f0fdf4; padding: 15px; border-radius: 8px;">
-                    <h4>💡 План действий:</h4>
-                    <ul>
-                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            document.getElementById('withdrawalResult').style.display = 'block';
         }
 
         function evaluateVitaminD() {
