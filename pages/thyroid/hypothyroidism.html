@@ -6,6 +6,7 @@
 <title>Гипотиреоз | Эндокринолог PRO - Современная диагностика и лечение</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+/* СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ */
 * {
 margin: 0;
 padding: 0;
@@ -935,7 +936,7 @@ min-width: auto;
 <label class="symptom-item">
 <input type="checkbox" data-system="Сердечно-сосудистая система" data-symptom="Кардиалгия: Неприятные ощущения, дискомфорт или неинтенсивные боли в области сердца">
 <span class="checkmark"></span>
-<span class="symptom-text">Кардиалгия: Неприятные ощущения, дискомфорт или неинтенсивные боли в области сердца</span>
+<span class="symptom-text">Кардиалгия: Неприятные ощущения, дикомфорт или неинтенсивные боли в области сердца</span>
 </label>
 
 <label class="symptom-item">
@@ -1255,7 +1256,7 @@ min-width: auto;
 <!-- ВКЛАДКА ЛЕЧЕНИЕ -->
 <div id="treatment-tab" class="tab-content">
 <div class="calculators-grid">
-<!-- ПОДБОР ТЕРАПИИ L-ТИРОКСИНОМ (перемещен из диагностики) -->
+<!-- ПОДБОР ТЕРАПИИ L-ТИРОКСИНОМ -->
 <div class="calculator-card">
 <h3><i class="fas fa-calculator"></i> Подбор терапии L-тироксином</h3>
 
@@ -1272,6 +1273,7 @@ min-width: auto;
 <div class="form-group">
 <label for="treatmentTsh">ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="treatmentTsh" placeholder="Например: 25.0" value="25.0">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
@@ -1314,6 +1316,7 @@ min-width: auto;
 <div class="form-group">
 <label for="adjustmentCurrentTsh">Текущий ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="adjustmentCurrentTsh" placeholder="Например: 6.5" value="6.5">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
@@ -1331,16 +1334,19 @@ min-width: auto;
 <div class="form-group">
 <label for="adjustmentOriginalTsh">Исходный ТТГ (мМЕ/л) - опционально</label>
 <input type="number" step="0.01" id="adjustmentOriginalTsh" placeholder="Например: 25.0">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="adjustmentOriginalT4">Исходный св. Т4 (пмоль/л) - опционально</label>
 <input type="number" step="0.1" id="adjustmentOriginalT4" placeholder="Например: 8.0">
+<div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
 <label for="adjustmentOriginalT3">Исходный св. Т3 (пмоль/л) - опционально</label>
 <input type="number" step="0.1" id="adjustmentOriginalT3" placeholder="Например: 2.8">
+<div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
 </div>
 
 <div class="form-group">
@@ -1371,15 +1377,16 @@ min-width: auto;
 <input type="number" id="monitorCurrentDose" placeholder="Например: 100" value="100">
 </div>
 
-<!-- ДОБАВЛЕНЫ ПОЛЯ ДЛЯ ИСХОДНЫХ ЗНАЧЕНИЙ -->
 <div class="form-group">
 <label for="monitorOriginalTsh">Исходный ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="monitorOriginalTsh" placeholder="Например: 25.0" value="25.0">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="monitorOriginalT4">Исходный св. Т4 (пмоль/л)</label>
 <input type="number" step="0.1" id="monitorOriginalT4" placeholder="Например: 8.5" value="8.5">
+<div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
@@ -1388,16 +1395,16 @@ min-width: auto;
 <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
 </div>
 
-<!-- КОНЕЦ ДОБАВЛЕННЫХ ПОЛЕЙ -->
-
 <div class="form-group">
 <label for="monitorCurrentTsh">ТТГ через 6-8 недель (мМЕ/л)</label>
 <input type="number" step="0.01" id="monitorCurrentTsh" placeholder="Например: 3.5" value="3.5">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="monitorCurrentT4">св. Т4 через 6-8 недель (пмоль/л)</label>
 <input type="number" step="0.1" id="monitorCurrentT4" placeholder="Например: 16.5" value="16.5">
+<div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
@@ -1416,15 +1423,13 @@ min-width: auto;
 </button>
 <div id="monitorResult" class="result-box"></div>
 </div>
-
-<!-- УДАЛЕН: Калькулятор "План наблюдения при гипотиреозе" -->
 </div>
 </div>
 
 <!-- ВКЛАДКА БЕРЕМЕННОСТЬ -->
 <div id="pregnancy-tab" class="tab-content">
 <div class="calculators-grid">
-<!-- ПОДБОР ДОЗЫ L-ТИРОКСИНА ДЛЯ БЕРЕМЕННЫХ (поменяли местами - теперь первый) -->
+<!-- ПОДБОР ДОЗЫ L-ТИРОКСИНА ДЛЯ БЕРЕМЕННЫХ -->
 <div class="calculator-card">
 <h3><i class="fas fa-capsules"></i> Подбор дозы L-тироксина для беременных</h3>
 
@@ -1445,17 +1450,19 @@ min-width: auto;
 <div class="form-group">
 <label for="pregDoseTsh">ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="pregDoseTsh" placeholder="Например: 3.5" value="3.5">
+<div class="range-info">Норма при беременности: 1-й триместр < 2.5, 2-3 триместр < 3.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="pregDoseT4">св. Т4 (пмоль/л)</label>
 <input type="number" step="0.1" id="pregDoseT4" placeholder="Например: 12.5" value="12.5">
+<div class="range-info">Норма при беременности: 12.0 - 23.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
 <label for="pregDoseT3">св. Т3 (пмоль/л) - опционально</label>
 <input type="number" step="0.1" id="pregDoseT3" placeholder="Например: 3.8">
-<div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+<div class="range-info">Норма при беременности: 3.5 - 6.5 пмоль/л</div>
 </div>
 
 <div class="form-group">
@@ -1474,7 +1481,7 @@ min-width: auto;
 <div id="pregnancyLThyroxineResult" class="result-box"></div>
 </div>
 
-<!-- КАЛЬКУЛЯТОР КОРРЕКЦИИ ДОЗЫ ПРИ БЕРЕМЕННОСТИ (поменяли местами - теперь второй) -->
+<!-- КАЛЬКУЛЯТОР КОРРЕКЦИИ ДОЗЫ ПРИ БЕРЕМЕННОСТИ -->
 <div class="calculator-card">
 <h3><i class="fas fa-baby"></i> Калькулятор коррекции дозы при беременности</h3>
 
@@ -1495,17 +1502,19 @@ min-width: auto;
 <div class="form-group">
 <label for="pregTsh">Текущий ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="pregTsh" placeholder="Например: 2.8" value="2.8">
+<div class="range-info">Норма при беременности: 1-й триместр < 2.5, 2-3 триместр < 3.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="pregT4">Текущий св. Т4 (пмоль/л)</label>
 <input type="number" step="0.1" id="pregT4" placeholder="Например: 14.5" value="14.5">
+<div class="range-info">Норма при беременности: 12.0 - 23.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
 <label for="pregT3">Текущий св. Т3 (пмоль/л) - опционально</label>
 <input type="number" step="0.1" id="pregT3" placeholder="Например: 4.0">
-<div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+<div class="range-info">Норма при беременности: 3.5 - 6.5 пмоль/л</div>
 </div>
 
 <button class="btn" onclick="calculatePregnancyDose()">
@@ -1732,21 +1741,25 @@ min-width: auto;
 <div class="form-group">
 <label for="advTsh">ТТГ (мМЕ/л)</label>
 <input type="number" step="0.01" id="advTsh" placeholder="2.5" value="3.2">
+<div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
 </div>
 
 <div class="form-group">
 <label for="advFT4">св. Т4 (пмоль/л)</label>
 <input type="number" step="0.1" id="advFT4" placeholder="15.0" value="13.5">
+<div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
 </div>
 
 <div class="form-group">
 <label for="advFT3">св. Т3 (пмоль/л)</label>
 <input type="number" step="0.1" id="advFT3" placeholder="5.0" value="4.2">
+<div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
 </div>
 
 <div class="form-group">
 <label for="advRT3">обр. Т3 (нг/дл)</label>
 <input type="number" step="0.1" id="advRT3" placeholder="20.0" value="25.0">
+<div class="range-info">Норма: 10 - 24 нг/дл</div>
 </div>
 
 <button class="btn" onclick="calculateThyroidIndices()">
