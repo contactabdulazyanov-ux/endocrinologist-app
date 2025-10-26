@@ -854,6 +854,38 @@
             border: 2px solid #bae6fd;
         }
 
+        /* НОВЫЕ СТИЛИ ДЛЯ КНОПКИ ПОКАЗА СИМПТОМОВ */
+        .show-symptoms-btn {
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            margin: 0 auto 30px auto;
+        }
+
+        .show-symptoms-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+        }
+
+        .symptoms-hidden {
+            display: none;
+        }
+
+        .symptoms-visible {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 30px;
@@ -896,6 +928,10 @@
             .symptoms-controls {
                 width: 100%;
                 justify-content: space-between;
+            }
+            .show-symptoms-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -945,8 +981,15 @@
                 </button>
             </div>
 
-            <!-- НОВЫЙ БЛОК: СИМПТОМЫ ГИПЕРТИРЕОЗА -->
-            <section id="symptoms-section" class="symptoms-section">
+            <!-- КНОПКА ДЛЯ ПОКАЗА СИМПТОМОВ -->
+            <div style="text-align: center; margin: 40px 0;">
+                <button id="showSymptomsBtn" class="show-symptoms-btn" onclick="toggleSymptoms()">
+                    <i class="fas fa-eye"></i> Показать симптомы гипертиреоза
+                </button>
+            </div>
+
+            <!-- НОВЫЙ БЛОК: СИМПТОМЫ ГИПЕРТИРЕОЗА (СКРЫТЫЙ ПО УМОЛЧАНИЮ) -->
+            <section id="symptoms-section" class="symptoms-section symptoms-hidden">
                 <div class="symptoms-header">
                     <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Симптомы гипертиреоза</h2>
                     <div class="symptoms-controls">
@@ -960,7 +1003,7 @@
                 </div>
 
                 <div class="symptoms-grid" id="symptomsGrid">
-                    <!-- Симптомы будут добавлены через JavaScript -->
+                    <!-- Симптомы будут добавлены через JavaScript при нажатии кнопки -->
                 </div>
             </section>
 
@@ -1093,8 +1136,6 @@
                             </div>
                             <div id="formResult" class="result-box"></div>
                         </div>
-
-                        <!-- УДАЛЕН КАЛЬКУЛЯТОР ДИФФЕРЕНЦИАЛЬНОЙ ДИАГНОСТИКИ -->
                     </div>
                 </div>
 
@@ -1619,9 +1660,37 @@
             }
         ];
 
+        // ФЛАГ ДЛЯ ОТСЛЕЖИВАНИЯ СОСТОЯНИЯ СИМПТОМОВ
+        let symptomsInitialized = false;
+
+        // ФУНКЦИЯ ДЛЯ ПОКАЗА/СКРЫТИЯ СИМПТОМОВ
+        function toggleSymptoms() {
+            const symptomsSection = document.getElementById('symptoms-section');
+            const showSymptomsBtn = document.getElementById('showSymptomsBtn');
+            
+            if (symptomsSection.classList.contains('symptoms-hidden')) {
+                // Если симптомы скрыты - показываем их
+                if (!symptomsInitialized) {
+                    initializeSymptoms();
+                    symptomsInitialized = true;
+                }
+                
+                symptomsSection.classList.remove('symptoms-hidden');
+                symptomsSection.classList.add('symptoms-visible');
+                showSymptomsBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Скрыть симптомы гипертиреоза';
+                showNotification('Симптомы гипертиреоза загружены');
+            } else {
+                // Если симптомы показаны - скрываем их
+                symptomsSection.classList.remove('symptoms-visible');
+                symptomsSection.classList.add('symptoms-hidden');
+                showSymptomsBtn.innerHTML = '<i class="fas fa-eye"></i> Показать симптомы гипертиреоза';
+            }
+        }
+
         // ИНИЦИАЛИЗАЦИЯ СИМПТОМОВ
         function initializeSymptoms() {
             const grid = document.getElementById('symptomsGrid');
+            grid.innerHTML = ''; // Очищаем grid перед добавлением
             
             HYPERTHYROIDISM_SYMPTOMS.forEach((system, systemIndex) => {
                 const systemCard = document.createElement('div');
@@ -1653,6 +1722,11 @@
 
         // ВЫБРАТЬ ВСЕ СИМПТОМЫ
         function selectAllSymptoms() {
+            if (!symptomsInitialized) {
+                showNotification('Сначала загрузите симптомы');
+                return;
+            }
+            
             const checkboxes = document.querySelectorAll('.symptom-checkbox');
             const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
             
@@ -1665,6 +1739,11 @@
 
         // КОПИРОВАТЬ ВЫБРАННЫЕ СИМПТОМЫ
         function copySelectedSymptoms() {
+            if (!symptomsInitialized) {
+                showNotification('Сначала загрузите симптомы');
+                return;
+            }
+            
             const selectedSymptoms = [];
             const checkboxes = document.querySelectorAll('.symptom-checkbox:checked');
             
@@ -1749,8 +1828,8 @@
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
         document.addEventListener('DOMContentLoaded', function() {
-            initializeSymptoms();
             initTabs();
+            // Симптомы НЕ инициализируем автоматически - только по кнопке
         });
 
         // БАЗА ЗНАНИЙ ПО ГИПЕРТИРЕОЗУ
