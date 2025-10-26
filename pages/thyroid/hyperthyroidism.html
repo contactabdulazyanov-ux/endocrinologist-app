@@ -1094,36 +1094,7 @@
                             <div id="formResult" class="result-box"></div>
                         </div>
 
-                        <div class="calculator-card">
-                            <h3><i class="fas fa-search-plus"></i> Дифференциальная диагностика</h3>
-                            <div class="form-group">
-                                <label for="diffDiagnosis">Тип заболевания:</label>
-                                <select id="diffDiagnosis">
-                                    <option value="graves">Болезнь Грейвса</option>
-                                    <option value="toxic_nodule">Токсический узловой зоб</option>
-                                    <option value="thyroiditis">Тиреоидит</option>
-                                    <option value="iodine">Йод-индуцированный</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>УЗИ признаки:</label>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="usgSigns" value="diffuse"> Диффузные изменения
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="usgSigns" value="nodules" checked> Узлы
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="usgSigns" value="vascularization"> Усиление васкуляризации
-                                    </label>
-                                </div>
-                            </div>
-                            <button class="btn" onclick="performDiffDiagnosis()">
-                                <i class="fas fa-diagnoses"></i> Провести диагностику
-                            </button>
-                            <div id="diffResult" class="result-box"></div>
-                        </div>
+                        <!-- УДАЛЕН КАЛЬКУЛЯТОР ДИФФЕРЕНЦИАЛЬНОЙ ДИАГНОСТИКИ -->
                     </div>
                 </div>
 
@@ -1133,23 +1104,28 @@
                         <div class="calculator-card">
                             <h3><i class="fas fa-capsules"></i> Расчет стартовой дозы тиреостатиков</h3>
                             <div class="form-group">
-                                <label for="gravesAge" class="required-field">Возраст пациента (лет)</label>
-                                <input type="number" id="gravesAge" placeholder="Например: 45" value="45">
-                                <div class="range-info">Важно для коррекции дозы у пожилых</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="gravesWeight" class="required-field">Вес пациента (кг)</label>
-                                <input type="number" id="gravesWeight" placeholder="Например: 70" value="70">
+                                <label for="gravesTsh" class="required-field">ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.001" id="gravesTsh" placeholder="0.02" value="0.02">
+                                <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="gravesT4" class="required-field">св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="gravesT4" placeholder="Например: 35.0" value="35.0">
+                                <input type="number" step="0.1" id="gravesT4" placeholder="35.0" value="35.0">
                                 <div class="range-info">Норма: 11.0 - 22.0 пмоль/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="gravesT3">св. Т3 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="gravesT3" placeholder="Например: 12.0" value="12.0">
+                                <input type="number" step="0.1" id="gravesT3" placeholder="12.0" value="12.0">
                                 <div class="range-info">Норма: 3.5 - 6.5 пмоль/л</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesAge" class="required-field">Возраст пациента (лет)</label>
+                                <input type="number" id="gravesAge" placeholder="45" value="45">
+                                <div class="range-info">Важно для коррекции дозы у пожилых</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gravesWeight" class="required-field">Вес пациента (кг)</label>
+                                <input type="number" id="gravesWeight" placeholder="70" value="70">
                             </div>
                             <div class="form-group">
                                 <label for="gravesSeverity" class="required-field">Тяжесть тиреотоксикоза</label>
@@ -1184,7 +1160,7 @@
                             <h3><i class="fas fa-exchange-alt"></i> Коррекция дозы тиреостатиков</h3>
                             <div class="form-group">
                                 <label for="currentDose">Текущая доза тиамазола (мг/сут)</label>
-                                <input type="number" id="currentDose" placeholder="Например: 30" value="30">
+                                <input type="number" id="currentDose" placeholder="30" value="30">
                             </div>
                             <div class="form-group">
                                 <label for="initialTsh" class="required-field">Исходный ТТГ (мМЕ/л)</label>
@@ -1199,21 +1175,21 @@
                                 <input type="number" step="0.1" id="initialT3" placeholder="12.0" value="12.0">
                             </div>
                             <div class="form-group">
-                                <label for="controlTsh">ТТГ через 4-6 недель (мМЕ/л)</label>
-                                <input type="number" step="0.01" id="controlTsh" placeholder="Например: 0.1" value="0.1">
+                                <label for="controlTsh" class="required-field">Текущий ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="controlTsh" placeholder="0.1" value="0.1">
                                 <div class="range-info">Норма: 0.4 - 4.0 мМЕ/л</div>
                             </div>
                             <div class="form-group">
-                                <label for="controlT4">св. Т4 через 4-6 недель (пмоль/л)</label>
-                                <input type="number" step="0.1" id="controlT4" placeholder="Например: 25.0" value="25.0">
+                                <label for="controlT4" class="required-field">Текущий св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="controlT4" placeholder="25.0" value="25.0">
                             </div>
                             <div class="form-group">
-                                <label for="controlT3">св. Т3 через 4-6 недель (пмоль/л)</label>
-                                <input type="number" step="0.1" id="controlT3" placeholder="Например: 8.0" value="8.0">
+                                <label for="controlT3">Текущий св. Т3 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="controlT3" placeholder="8.0" value="8.0">
                             </div>
                             <div class="form-group">
                                 <label for="patientAgeCorrection">Возраст пациента (лет)</label>
-                                <input type="number" id="patientAgeCorrection" placeholder="Например: 45" value="45">
+                                <input type="number" id="patientAgeCorrection" placeholder="45" value="45">
                             </div>
                             <button class="btn" onclick="calculateDoseAdjustment()">
                                 <i class="fas fa-adjust"></i> Оценить эффективность
@@ -1230,20 +1206,20 @@
                             <h3><i class="fas fa-chart-line"></i> Оценка риска рецидива</h3>
                             <div class="form-group">
                                 <label for="relapseAntibody">АТ-рТТГ перед отменой (МЕ/л)</label>
-                                <input type="number" step="0.01" id="relapseAntibody" placeholder="Например: 2.5" value="2.5">
+                                <input type="number" step="0.01" id="relapseAntibody" placeholder="2.5" value="2.5">
                                 <div class="range-info">Норма: < 1.75 МЕ/л</div>
                             </div>
                             <div class="form-group">
-                                <label for="relapseTsh">ТТГ перед отменой (мМЕ/л)</label>
-                                <input type="number" step="0.01" id="relapseTsh" placeholder="Например: 1.2" value="1.2">
+                                <label for="relapseTsh" class="required-field">ТТГ перед отменой (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="relapseTsh" placeholder="1.2" value="1.2">
                             </div>
                             <div class="form-group">
                                 <label for="relapseDuration">Длительность терапии (мес)</label>
-                                <input type="number" id="relapseDuration" placeholder="Например: 18" value="18">
+                                <input type="number" id="relapseDuration" placeholder="18" value="18">
                             </div>
                             <div class="form-group">
-                                <label for="relapseAge">Возраст пациента (лет)</label>
-                                <input type="number" id="relapseAge" placeholder="Например: 35" value="35">
+                                <label for="relapseAge" class="required-field">Возраст пациента (лет)</label>
+                                <input type="number" id="relapseAge" placeholder="35" value="35">
                             </div>
                             <button class="btn" onclick="calculateRelapseRisk()">
                                 <i class="fas fa-chart-bar"></i> Оценить риск рецидива
@@ -1254,20 +1230,20 @@
                         <div class="calculator-card">
                             <h3><i class="fas fa-eye"></i> Мониторинг антител рТТГ</h3>
                             <div class="form-group">
-                                <label for="antibodyInitial">Исходный уровень АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="antibodyInitial" placeholder="Например: 15.0" value="15.0">
+                                <label for="antibodyInitial" class="required-field">Исходный уровень АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="antibodyInitial" placeholder="15.0" value="15.0">
                             </div>
                             <div class="form-group">
-                                <label for="antibodyCurrent">Текущий уровень АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="antibodyCurrent" placeholder="Например: 5.0" value="5.0">
+                                <label for="antibodyCurrent" class="required-field">Текущий уровень АТ-рТТГ (МЕ/л)</label>
+                                <input type="number" step="0.01" id="antibodyCurrent" placeholder="5.0" value="5.0">
                             </div>
                             <div class="form-group">
-                                <label for="antibodyMonths">Длительность терапии (мес)</label>
-                                <input type="number" id="antibodyMonths" placeholder="Например: 6" value="6">
+                                <label for="antibodyMonths" class="required-field">Длительность терапии (мес)</label>
+                                <input type="number" id="antibodyMonths" placeholder="6" value="6">
                             </div>
                             <div class="form-group">
-                                <label for="antibodyAge">Возраст пациента (лет)</label>
-                                <input type="number" id="antibodyAge" placeholder="Например: 45" value="45">
+                                <label for="antibodyAge" class="required-field">Возраст пациента (лет)</label>
+                                <input type="number" id="antibodyAge" placeholder="45" value="45">
                             </div>
                             <button class="btn" onclick="monitorAntibodies()">
                                 <i class="fas fa-chart-line"></i> Оценить динамику
@@ -1291,23 +1267,23 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pregTsh">ТТГ (мМЕ/л)</label>
+                                <label for="pregTsh" class="required-field">ТТГ (мМЕ/л)</label>
                                 <input type="number" step="0.001" id="pregTsh" placeholder="0.02" value="0.02">
                                 <div class="range-info">Цель: 0.2-2.5 мМЕ/л</div>
                             </div>
                             <div class="form-group">
-                                <label for="pregT4">св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="pregT4" placeholder="Например: 28.0" value="28.0">
+                                <label for="pregT4" class="required-field">св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregT4" placeholder="28.0" value="28.0">
                                 <div class="range-info">Цель: верхняя граница нормы</div>
                             </div>
                             <div class="form-group">
                                 <label for="pregT3">св. Т3 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="pregT3" placeholder="Например: 8.5" value="8.5">
+                                <input type="number" step="0.1" id="pregT3" placeholder="8.5" value="8.5">
                                 <div class="range-info">Норма: 3.5-6.5 пмоль/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="pregAntibody">АТ-рТТГ (МЕ/л)</label>
-                                <input type="number" step="0.01" id="pregAntibody" placeholder="Например: 3.5" value="3.5">
+                                <input type="number" step="0.01" id="pregAntibody" placeholder="3.5" value="3.5">
                             </div>
                             <div class="form-group">
                                 <label for="pregSymptoms">Выраженность симптомов</label>
@@ -1318,8 +1294,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pregAge">Возраст матери (лет)</label>
-                                <input type="number" id="pregAge" placeholder="Например: 28" value="28">
+                                <label for="pregAge" class="required-field">Возраст матери (лет)</label>
+                                <input type="number" id="pregAge" placeholder="28" value="28">
                             </div>
                             <button class="btn" onclick="calculatePregnancyDose()">
                                 <i class="fas fa-baby"></i> Рассчитать дозу
@@ -1331,7 +1307,7 @@
                             <h3><i class="fas fa-chart-line"></i> Контроль терапии у беременных</h3>
                             <div class="form-group">
                                 <label for="pregCurrentDose">Текущая доза (мг/сут)</label>
-                                <input type="number" id="pregCurrentDose" placeholder="Например: 15" value="15">
+                                <input type="number" id="pregCurrentDose" placeholder="15" value="15">
                             </div>
                             <div class="form-group">
                                 <label for="pregInitialTsh" class="required-field">Исходный ТТГ (мМЕ/л)</label>
@@ -1346,26 +1322,26 @@
                                 <input type="number" step="0.1" id="pregInitialT3" placeholder="12.0" value="12.0">
                             </div>
                             <div class="form-group">
-                                <label for="pregCurrentT4">Текущий св. Т4 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="pregCurrentT4" placeholder="Например: 20.5" value="20.5">
+                                <label for="pregCurrentTsh" class="required-field">Текущий ТТГ (мМЕ/л)</label>
+                                <input type="number" step="0.01" id="pregCurrentTsh" placeholder="0.05" value="0.05">
+                            </div>
+                            <div class="form-group">
+                                <label for="pregCurrentT4" class="required-field">Текущий св. Т4 (пмоль/л)</label>
+                                <input type="number" step="0.1" id="pregCurrentT4" placeholder="20.5" value="20.5">
                                 <div class="range-info">Целевой уровень: 18-22 пмоль/л</div>
                             </div>
                             <div class="form-group">
                                 <label for="pregCurrentT3">Текущий св. Т3 (пмоль/л)</label>
-                                <input type="number" step="0.1" id="pregCurrentT3" placeholder="Например: 6.0" value="6.0">
+                                <input type="number" step="0.1" id="pregCurrentT3" placeholder="6.0" value="6.0">
                                 <div class="range-info">Целевой уровень: 3.5-6.5 пмоль/л</div>
                             </div>
                             <div class="form-group">
-                                <label for="pregCurrentTSH">Текущий ТТГ (мМЕ/л)</label>
-                                <input type="number" step="0.01" id="pregCurrentTSH" placeholder="Например: 0.05" value="0.05">
+                                <label for="pregWeeks" class="required-field">Срок беременности (недель)</label>
+                                <input type="number" id="pregWeeks" placeholder="20" value="20">
                             </div>
                             <div class="form-group">
-                                <label for="pregWeeks">Срок беременности (недель)</label>
-                                <input type="number" id="pregWeeks" placeholder="Например: 20" value="20">
-                            </div>
-                            <div class="form-group">
-                                <label for="pregMaternalAge">Возраст матери (лет)</label>
-                                <input type="number" id="pregMaternalAge" placeholder="Например: 30" value="30">
+                                <label for="pregMaternalAge" class="required-field">Возраст матери (лет)</label>
+                                <input type="number" id="pregMaternalAge" placeholder="30" value="30">
                             </div>
                             <button class="btn" onclick="calculatePregnancyControl()">
                                 <i class="fas fa-chart-bar"></i> Оценить контроль
@@ -1849,30 +1825,26 @@
                 return { diagnosis, probability, diagnosticCriteria, treatmentApproach, additionalTests, color };
             },
 
-            calculateDose: function(age, weight, t4, t3 = null, severity, heartDisease = 'no', liverFunction = 'normal') {
+            calculateDose: function(tsh, t4, t3 = null, age, weight, severity, heartDisease = 'no', liverFunction = 'normal') {
                 let baseDose;
                 
-                switch(severity) {
-                    case 'mild':
-                        baseDose = weight * 0.3;
-                        break;
-                    case 'moderate':
-                        baseDose = weight * 0.5;
-                        break;
-                    case 'severe':
-                        baseDose = weight * 0.7;
-                        break;
-                    default:
-                        baseDose = weight * 0.5;
-                }
+                // Учет ТТГ в расчете дозы
+                if (tsh < 0.01) baseDose = weight * 0.7;
+                else if (tsh < 0.1) baseDose = weight * 0.5;
+                else if (tsh < 0.4) baseDose = weight * 0.3;
+                else baseDose = weight * 0.2;
                 
-                if (t4 > 40) baseDose *= 1.2;
-                if (t4 > 50) baseDose *= 1.3;
+                // Учет Т4
+                if (t4 > 40) baseDose *= 1.3;
+                else if (t4 > 30) baseDose *= 1.2;
+                else if (t4 > 25) baseDose *= 1.1;
                 
                 // Учет Т3 при Т3-тиреотоксикозе
-                if (t3 && t3 > 10) baseDose *= 1.1;
-                if (t3 && t3 > 15) baseDose *= 1.2;
+                if (t3 && t3 > 15) baseDose *= 1.3;
+                else if (t3 && t3 > 10) baseDose *= 1.2;
+                else if (t3 && t3 > 8) baseDose *= 1.1;
                 
+                // Коррекция по возрасту
                 if (age >= 65) {
                     baseDose *= 0.6;
                 } else if (age >= 18) {
@@ -1883,6 +1855,19 @@
                     baseDose *= 0.6;
                 } else {
                     baseDose *= 0.4;
+                }
+                
+                // Учет тяжести
+                switch(severity) {
+                    case 'severe':
+                        baseDose *= 1.3;
+                        break;
+                    case 'moderate':
+                        baseDose *= 1.1;
+                        break;
+                    case 'mild':
+                        baseDose *= 0.9;
+                        break;
                 }
                 
                 if (heartDisease === 'yes') {
@@ -1901,9 +1886,15 @@
             calculatePregnancyDose: function(trimester, tsh, t4, t3 = null, antibody, symptoms, age) {
                 let baseDose;
                 
-                if (t4 > 30) baseDose = 20;
-                else if (t4 > 25) baseDose = 15;
+                // Учет ТТГ при беременности
+                if (tsh < 0.01) baseDose = 25;
+                else if (tsh < 0.1) baseDose = 20;
+                else if (tsh < 0.2) baseDose = 15;
                 else baseDose = 10;
+                
+                // Учет Т4
+                if (t4 > 30) baseDose += 10;
+                else if (t4 > 25) baseDose += 5;
                 
                 // Учет Т3
                 if (t3 && t3 > 8) baseDose += 2;
@@ -1914,9 +1905,9 @@
                 if (symptoms === 'mild') baseDose -= 5;
                 
                 if (trimester === '1') {
-                    return { dose: baseDose, drug: 'Пропилтиоурацил', recommendations: ['I триместр - ПТУ препарат выбора'] };
+                    return { dose: Math.min(baseDose, 30), drug: 'Пропилтиоурацил', recommendations: ['I триместр - ПТУ препарат выбора'] };
                 } else {
-                    return { dose: baseDose, drug: 'Тиамазол', recommendations: ['Со II триместра возможен переход на тиамазол'] };
+                    return { dose: Math.min(baseDose, 30), drug: 'Тиамазол', recommendations: ['Со II триместра возможен переход на тиамазол'] };
                 }
             },
 
@@ -2136,102 +2127,23 @@
             }
         }
 
-        function performDiffDiagnosis() {
-            const diagnosisType = document.getElementById('diffDiagnosis').value;
-            const usgSigns = Array.from(document.querySelectorAll('input[name="usgSigns"]:checked')).map(el => el.value);
-            
-            let result = '';
-            let color = '';
-            
-            switch(diagnosisType) {
-                case 'graves':
-                    result = `
-                        <h4 style="color: var(--primary);">🦋 Болезнь Грейвса (Диффузный токсический зоб)</h4>
-                        <p><strong>Дифференциальные признаки:</strong></p>
-                        <ul>
-                            <li>АТ-рТТГ обычно > 1.75 МЕ/л</li>
-                            <li>Диффузные изменения на УЗИ ${usgSigns.includes('diffuse') ? '✅ присутствуют' : '❌ отсутствуют'}</li>
-                            <li>Усиление васкуляризации ${usgSigns.includes('vascularization') ? '✅ присутствует' : '❌ отсутствует'}</li>
-                            <li>Возможна эндокринная офтальмопатия</li>
-                            <li>Чаще у молодых женщин</li>
-                        </ul>
-                        <p><strong>Подтверждающие исследования:</strong> УЗИ, АТ-рТТГ, офтальмологическое обследование</p>
-                    `;
-                    color = 'var(--primary)';
-                    break;
-                    
-                case 'toxic_nodule':
-                    result = `
-                        <h4 style="color: var(--secondary);">🔘 Токсический узловой зоб</h4>
-                        <p><strong>Дифференциальные признаки:</strong></p>
-                        <ul>
-                            <li>АТ-рТТГ обычно в норме</li>
-                            <li>Узловые образования на УЗИ ${usgSigns.includes('nodules') ? '✅ присутствуют' : '❌ отсутствуют'}</li>
-                            <li>Может быть "горячий" узел на сцинтиграфии</li>
-                            <li>Чаще у пожилых пациентов</li>
-                            <li>Нет эндокринной офтальмопатии</li>
-                        </ul>
-                        <p><strong>Подтверждающие исследования:</strong> УЗИ, сцинтиграфия, АТ-рТТГ</p>
-                    `;
-                    color = 'var(--secondary)';
-                    break;
-                    
-                case 'thyroiditis':
-                    result = `
-                        <h4 style="color: var(--warning);">🔥 Тиреоидит (подострый, безболевой)</h4>
-                        <p><strong>Дифференциальные признаки:</strong></p>
-                        <ul>
-                            <li>Тиреотоксикоз обычно транзиторный</li>
-                            <li>Может быть болезненность щитовидной железы</li>
-                            <li>СОЭ часто повышена при подостром тиреоидите</li>
-                            <li>АТ-ТПО могут быть повышены</li>
-                            <li>За тиреотоксикозом часто следует гипотиреоз</li>
-                        </ul>
-                        <p><strong>Подтверждающие исследования:</strong> СОЭ, АТ-ТПО, УЗИ, сцинтиграфия</p>
-                    `;
-                    color = 'var(--warning)';
-                    break;
-                    
-                case 'iodine':
-                    result = `
-                        <h4 style="color: var(--accent);">🧂 Йод-индуцированный тиреотоксикоз</h4>
-                        <p><strong>Дифференциальные признаки:</strong></p>
-                        <ul>
-                            <li>Связь с приемом йодсодержащих препаратов</li>
-                            <li>Чаще на фоне узлового зоба</li>
-                            <li>Может быть тяжелое течение</li>
-                            <li>Требует отмены йодсодержащих препаратов</li>
-                        </ul>
-                        <p><strong>Подтверждающие исследования:</strong> Анамнез, УЗИ, сцинтиграфия</p>
-                    `;
-                    color = 'var(--accent)';
-                    break;
-            }
-            
-            document.getElementById('diffResult').innerHTML = `
-                <div style="border-left: 4px solid ${color}; padding-left: 15px;">
-                    ${result}
-                </div>
-            `;
-            document.getElementById('diffResult').style.display = 'block';
-        }
-
         function calculateGravesDose() {
-            const age = parseInt(document.getElementById('gravesAge').value);
-            const weight = parseFloat(document.getElementById('gravesWeight').value);
+            const tsh = parseFloat(document.getElementById('gravesTsh').value);
             const t4 = parseFloat(document.getElementById('gravesT4').value);
             const t3 = parseFloat(document.getElementById('gravesT3').value) || null;
+            const age = parseInt(document.getElementById('gravesAge').value);
+            const weight = parseFloat(document.getElementById('gravesWeight').value);
             const severity = document.getElementById('gravesSeverity').value;
             const heartDisease = document.getElementById('gravesHeartDisease').value;
             const liverFunction = document.getElementById('gravesLiverFunction').value;
 
-            const errors = validateInputs({ age, weight, t4 });
+            const errors = validateInputs({ tsh, t4, age, weight });
             if (errors.length > 0) {
                 alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
             }
 
-            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(age, weight, t4, t3, severity, heartDisease, liverFunction);
+            const dose = HYPERTHYROIDISM_KNOWLEDGE.calculateDose(tsh, t4, t3, age, weight, severity, heartDisease, liverFunction);
             
             const ageGroup = getAgeGroup(age);
             const recommendations = [
@@ -2242,6 +2154,10 @@
 
             if (t3 && t3 > 10) {
                 recommendations.push("⚠️ Т3-тиреотоксикоз: может потребоваться более высокая доза");
+            }
+
+            if (tsh < 0.01) {
+                recommendations.push("🔴 Резко сниженный ТТГ: требуется интенсивная терапия");
             }
 
             if (age >= 65) {
@@ -2260,6 +2176,26 @@
                     <div style="color: #6b7280;">Рекомендуемая стартовая доза тиамазола</div>
                     <div style="margin-top: 10px; padding: 10px; background: #f0f9ff; border-radius: 8px;">
                         <strong>${ageGroup}</strong> (${age} лет)
+                    </div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4>📊 Учет гормонального профиля:</h4>
+                    <div style="display: grid; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>ТТГ:</span>
+                            <strong>${tsh} мМЕ/л ${getTSHStatus(tsh)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>св.Т4:</span>
+                            <strong>${t4} пмоль/л ${getT4Status(t4)}</strong>
+                        </div>
+                        ${t3 ? `
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>св.Т3:</span>
+                            <strong>${t3} пмоль/л ${getT3Status(t3)}</strong>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
                 
@@ -2350,6 +2286,10 @@
                     <h4>📊 Динамика показателей:</h4>
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between;">
+                            <span>ТТГ:</span>
+                            <strong>${initialTsh} → ${controlTsh} мМЕ/л</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
                             <span>св.Т4 снизился на:</span>
                             <strong>${t4Reduction}%</strong>
                         </div>
@@ -2359,10 +2299,6 @@
                             <strong>${t3Reduction}%</strong>
                         </div>
                         ` : ''}
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ изменился на:</span>
-                            <strong>${tshChange}%</strong>
-                        </div>
                     </div>
                 </div>
                 
@@ -2569,13 +2505,13 @@
             const initialTsh = parseFloat(document.getElementById('pregInitialTsh').value);
             const initialT4 = parseFloat(document.getElementById('pregInitialT4').value);
             const initialT3 = parseFloat(document.getElementById('pregInitialT3').value);
+            const currentTsh = parseFloat(document.getElementById('pregCurrentTsh').value);
             const currentT4 = parseFloat(document.getElementById('pregCurrentT4').value);
             const currentT3 = parseFloat(document.getElementById('pregCurrentT3').value);
-            const currentTSH = parseFloat(document.getElementById('pregCurrentTSH').value);
             const weeks = parseInt(document.getElementById('pregWeeks').value);
             const age = parseInt(document.getElementById('pregMaternalAge').value);
 
-            const errors = validateInputs({ currentDose, initialTsh, initialT4, currentT4, currentTSH, weeks, age });
+            const errors = validateInputs({ currentDose, initialTsh, initialT4, currentTsh, currentT4, weeks, age });
             if (errors.length > 0) {
                 alert('Ошибки ввода:\n' + errors.join('\n'));
                 return;
@@ -2595,7 +2531,7 @@
 
             if (currentT4 >= targetT4Min && currentT4 <= targetT4Max && 
                 currentT3 >= targetT3Min && currentT3 <= targetT3Max &&
-                currentTSH >= targetTSHMin && currentTSH <= targetTSHMax) {
+                currentTsh >= targetTSHMin && currentTsh <= targetTSHMax) {
                 assessment = '🟢 Отличный контроль';
                 color = '#10b981';
                 recommendations = [
@@ -2603,7 +2539,7 @@
                     'Контроль через 4 недели',
                     'Рассмотреть снижение дозы при стабильном состоянии'
                 ];
-            } else if ((currentT4 > targetT4Max || currentTSH < targetTSHMin) && currentT4 <= 25) {
+            } else if ((currentT4 > targetT4Max || currentTsh < targetTSHMin) && currentT4 <= 25) {
                 assessment = '🟡 Легкий тиреотоксикоз';
                 color = '#f59e0b';
                 recommendations = [
@@ -2611,7 +2547,7 @@
                     'Контроль через 2-3 недели',
                     'Оценить симптомы пациента'
                 ];
-            } else if (currentT4 > 25 || currentTSH < 0.1) {
+            } else if (currentT4 > 25 || currentTsh < 0.1) {
                 assessment = '🔴 Выраженный тиреотоксикоз';
                 color = '#ef4444';
                 recommendations = [
@@ -2620,7 +2556,7 @@
                     'Рассмотреть госпитализацию при тяжелом состоянии',
                     'Мониторинг состояния плода'
                 ];
-            } else if (currentT4 < targetT4Min || currentTSH > targetTSHMax) {
+            } else if (currentT4 < targetT4Min || currentTsh > targetTSHMax) {
                 assessment = '🔵 Риск гипотиреоза';
                 color = '#3b82f6';
                 recommendations = [
@@ -2640,6 +2576,13 @@
                     <h4>📊 Текущие показатели:</h4>
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between;">
+                            <span>ТТГ:</span>
+                            <strong>${currentTsh} мМЕ/л 
+                                ${currentTsh >= targetTSHMin && currentTsh <= targetTSHMax ? '🟢' : 
+                                  currentTsh < targetTSHMin ? '🔴' : '🔵'}
+                            </strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
                             <span>св.Т4:</span>
                             <strong>${currentT4} пмоль/л 
                                 ${currentT4 >= targetT4Min && currentT4 <= targetT4Max ? '🟢' : 
@@ -2651,13 +2594,6 @@
                             <strong>${currentT3} пмоль/л 
                                 ${currentT3 >= targetT3Min && currentT3 <= targetT3Max ? '🟢' : 
                                   currentT3 > targetT3Max ? '🔴' : '🔵'}
-                            </strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>ТТГ:</span>
-                            <strong>${currentTSH} мМЕ/л 
-                                ${currentTSH >= targetTSHMin && currentTSH <= targetTSHMax ? '🟢' : 
-                                  currentTSH < targetTSHMin ? '🔴' : '🔵'}
                             </strong>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
