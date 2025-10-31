@@ -1,72 +1,63 @@
-// navigation.js - Универсальная навигация для всех страниц
-function createNavigation(currentPage = '') {
+// navigation.js - Автономная навигация без изменений в HTML
+function createUniversalNavigation() {
     const currentPath = window.location.pathname;
-    let basePath = '';
+    const currentPage = currentPath.split('/').pop();
     
-    // Автоматическое определение базового пути
-    if (currentPath.includes('/pages/thyroid/')) {
-        // Мы находимся в папке pages/thyroid/
-        basePath = '../../';
-    } else if (currentPath.includes('/pages/')) {
-        // Мы находимся в других папках pages/
-        basePath = '../';
-    } else if (currentPath.includes('/thyroid/')) {
-        // Альтернативная структура папок
-        basePath = '../';
-    } else {
-        // Мы в корне сайта
-        basePath = './';
-    }
-
-    // Для страниц щитовидной железы - относительные пути внутри папки
-    let thyroidBasePath = '';
-    if (currentPath.includes('/thyroid/') || currentPath.includes('/pages/thyroid/')) {
-        thyroidBasePath = './'; // Текущая папка
-    } else {
-        thyroidBasePath = 'pages/thyroid/';
-    }
-
-    const navHTML = `
-        <nav class="main-menu">
-            <a href="${basePath}index.html" ${currentPage === 'home' ? 'class="active"' : ''}>🏠 Главная сайта</a>
-            <a href="${thyroidBasePath}index.html" ${currentPage === 'thyroid' ? 'class="active"' : ''}>🦋 Главная щитовидной</a>
-            <a href="${thyroidBasePath}hypothyroidism.html" ${currentPage === 'hypothyroidism' ? 'class="active"' : ''}>📉 Гипотиреоз</a>
-            <a href="${thyroidBasePath}hyperthyroidism.html" ${currentPage === 'hyperthyroidism' ? 'class="active"' : ''}>📈 Гипертиреоз</a>
-            <a href="${thyroidBasePath}nodular-goiter.html" ${currentPage === 'nodular-goiter' ? 'class="active"' : ''}>🔘 Узловой зоб</a>
-            <a href="${thyroidBasePath}thyroiditis.html" ${currentPage === 'thyroiditis' ? 'class="active"' : ''}>🔥 Тиреоидит</a>
-        </nav>
+    // Определяем где мы находимся
+    const isInThyroidFolder = currentPath.includes('/thyroid/') || currentPath.includes('/pages/thyroid/');
+    const isRoot = currentPath.endsWith('index.html') || currentPath.endsWith('/');
+    
+    // Создаем навигацию
+    const nav = document.createElement('nav');
+    nav.className = 'main-menu';
+    nav.innerHTML = `
+        ${!isInThyroidFolder ? `<a href="index.html" ${isRoot ? 'class="active"' : ''}>🏠 Главная сайта</a>` : '<a href="../../index.html">🏠 Главная сайта</a>'}
+        ${isInThyroidFolder ? 
+            `<a href="index.html" ${currentPage === 'index.html' ? 'class="active"' : ''}>🦋 Главная щитовидной</a>
+             <a href="hypothyroidism.html" ${currentPage === 'hypothyroidism.html' ? 'class="active"' : ''}>📉 Гипотиреоз</a>
+             <a href="hyperthyroidism.html" ${currentPage === 'hyperthyroidism.html' ? 'class="active"' : ''}>📈 Гипертиреоз</a>
+             <a href="nodular-goiter.html" ${currentPage === 'nodular-goiter.html' ? 'class="active"' : ''}>🔘 Узловой зоб</a>
+             <a href="thyroiditis.html" ${currentPage === 'thyroiditis.html' ? 'class="active"' : ''}>🔥 Тиреоидит</a>` :
+            `<a href="pages/thyroid/index.html">🦋 Щитовидная железа</a>`
+        }
     `;
     
-    const navElement = document.getElementById('main-nav');
-    if (navElement) {
-        navElement.innerHTML = navHTML;
-    }
-}
-
-function autoDetectPage() {
-    const path = window.location.pathname;
-    const page = path.split('/').pop();
+    // Вставляем навигацию в начало body
+    document.body.insertBefore(nav, document.body.firstChild);
     
-    // Определяем страницу по имени файла
-    switch(page) {
-        case 'index.html':
-        case '':
-            return path.includes('/thyroid/') ? 'thyroid' : 'home';
-        case 'hypothyroidism.html':
-            return 'hypothyroidism';
-        case 'hyperthyroidism.html':
-            return 'hyperthyroidism';
-        case 'nodular-goiter.html':
-            return 'nodular-goiter';
-        case 'thyroiditis.html':
-            return 'thyroiditis';
-        default:
-            return '';
+    // Добавляем базовые стили если их нет
+    if (!document.querySelector('#nav-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'nav-styles';
+        styles.textContent = `
+            .main-menu {
+                background: #f5f5f5;
+                padding: 15px;
+                border-bottom: 2px solid #ddd;
+                margin-bottom: 20px;
+            }
+            .main-menu a {
+                margin-right: 15px;
+                text-decoration: none;
+                color: #333;
+                padding: 5px 10px;
+                border-radius: 4px;
+            }
+            .main-menu a:hover {
+                background: #e0e0e0;
+            }
+            .main-menu a.active {
+                background: #007cba;
+                color: white;
+            }
+        `;
+        document.head.appendChild(styles);
     }
 }
 
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    const currentPage = autoDetectPage();
-    createNavigation(currentPage);
-});
+// Запускаем при полной загрузке страницы
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createUniversalNavigation);
+} else {
+    createUniversalNavigation();
+}
