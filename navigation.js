@@ -1,63 +1,56 @@
-// navigation.js - Автономная навигация без изменений в HTML
-function createUniversalNavigation() {
-    const currentPath = window.location.pathname;
-    const currentPage = currentPath.split('/').pop();
+// navigation.js - Единая навигация для всех страниц сайта
+function createNavigation(currentPage = '') {
+    // Определяем базовый путь в зависимости от местоположения страницы
+    let basePath = '';
     
-    // Определяем где мы находимся
-    const isInThyroidFolder = currentPath.includes('/thyroid/') || currentPath.includes('/pages/thyroid/');
-    const isRoot = currentPath.endsWith('index.html') || currentPath.endsWith('/');
+    // Если страница находится в папке thyroid/ (гипотиреоз или гипертиреоз)
+    if (window.location.pathname.includes('/thyroid/')) {
+        basePath = '../';
+    }
+    // Если страница находится в корне pages/thyroid/
+    else if (window.location.pathname.includes('/pages/thyroid/')) {
+        basePath = '../../';
+    }
     
-    // Создаем навигацию
-    const nav = document.createElement('nav');
-    nav.className = 'main-menu';
-    nav.innerHTML = `
-        ${!isInThyroidFolder ? `<a href="index.html" ${isRoot ? 'class="active"' : ''}>🏠 Главная сайта</a>` : '<a href="../../index.html">🏠 Главная сайта</a>'}
-        ${isInThyroidFolder ? 
-            `<a href="index.html" ${currentPage === 'index.html' ? 'class="active"' : ''}>🦋 Главная щитовидной</a>
-             <a href="hypothyroidism.html" ${currentPage === 'hypothyroidism.html' ? 'class="active"' : ''}>📉 Гипотиреоз</a>
-             <a href="hyperthyroidism.html" ${currentPage === 'hyperthyroidism.html' ? 'class="active"' : ''}>📈 Гипертиреоз</a>
-             <a href="nodular-goiter.html" ${currentPage === 'nodular-goiter.html' ? 'class="active"' : ''}>🔘 Узловой зоб</a>
-             <a href="thyroiditis.html" ${currentPage === 'thyroiditis.html' ? 'class="active"' : ''}>🔥 Тиреоидит</a>` :
-            `<a href="pages/thyroid/index.html">🦋 Щитовидная железа</a>`
-        }
+    const navHTML = `
+        <nav class="main-menu">
+            <a href="${basePath}index.html" ${currentPage === 'home' ? 'class="active"' : ''}>🏠 Главная</a>
+            <a href="${basePath}pages/thyroid/index.html" ${currentPage === 'thyroid' ? 'class="active"' : ''}>🦋 Щитовидная железа</a>
+            <a href="hypothyroidism.html" ${currentPage === 'hypothyroidism' ? 'class="active"' : ''}>📉 Гипотиреоз</a>
+            <a href="hyperthyroidism.html" ${currentPage === 'hyperthyroidism' ? 'class="active"' : ''}>📈 Гипертиреоз</a>
+        </nav>
     `;
     
-    // Вставляем навигацию в начало body
-    document.body.insertBefore(nav, document.body.firstChild);
-    
-    // Добавляем базовые стили если их нет
-    if (!document.querySelector('#nav-styles')) {
-        const styles = document.createElement('style');
-        styles.id = 'nav-styles';
-        styles.textContent = `
-            .main-menu {
-                background: #f5f5f5;
-                padding: 15px;
-                border-bottom: 2px solid #ddd;
-                margin-bottom: 20px;
-            }
-            .main-menu a {
-                margin-right: 15px;
-                text-decoration: none;
-                color: #333;
-                padding: 5px 10px;
-                border-radius: 4px;
-            }
-            .main-menu a:hover {
-                background: #e0e0e0;
-            }
-            .main-menu a.active {
-                background: #007cba;
-                color: white;
-            }
-        `;
-        document.head.appendChild(styles);
+    // Вставляем навигацию в элемент с id="main-nav"
+    const navElement = document.getElementById('main-nav');
+    if (navElement) {
+        navElement.innerHTML = navHTML;
     }
 }
 
-// Запускаем при полной загрузке страницы
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createUniversalNavigation);
-} else {
-    createUniversalNavigation();
+// Автоматическое определение активной страницы
+function autoDetectPage() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop();
+    
+    switch(page) {
+        case 'index.html':
+        case '':
+            return 'home';
+        case 'thyroid.html':
+        case 'index.html' && path.includes('/thyroid/'):
+            return 'thyroid';
+        case 'hypothyroidism.html':
+            return 'hypothyroidism';
+        case 'hyperthyroidism.html':
+            return 'hyperthyroidism';
+        default:
+            return '';
+    }
 }
+
+// Инициализация навигации при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = autoDetectPage();
+    createNavigation(currentPage);
+});
